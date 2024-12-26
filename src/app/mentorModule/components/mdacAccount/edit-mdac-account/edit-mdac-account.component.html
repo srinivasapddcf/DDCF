@@ -1,0 +1,201 @@
+<div class="card">
+    <div class="card-header p-2">
+        <h5 class="mb-0">EDIT MDAC BANK ACCOUNT</h5>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-12">
+                <button type="button" class="btn btn-primary btn-sm pull-right" (click)="btnMdacEditRequests()">
+                    VIEW EDIT MDAC ACCOUNT REQUESTS
+                </button>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="routeId">ROUTE <span style="color: red">*</span></label>
+                    <select id="routeId" class="form-control" [(ngModel)]="accountData.routeId" (change)="onRouteChange()">
+                        <option value="">-- SELECT ROUTE --</option>
+                        <option value="{{ obj.ROUTE_ID }}" *ngFor="let obj of routeList">
+                            {{ obj.ROUTE_NAME }}
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="rbkId">RSK <span style="color: red">*</span></label>
+                    <select id="rbkId" class="form-control" [(ngModel)]="accountData.rbkId" (change)="onRbkChange();">
+                        <option value="">-- SELECT RSK --</option>
+                        <option value="{{ obj.RBK_ID }}" *ngFor="let obj of rbkList">
+                            {{ obj.RBK_NAME }}
+                        </option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row m-0" [hidden]="
+          mdacAccountDetails === null ||
+          mdacAccountDetails === '' ||
+          mdacAccountDetails === undefined
+        ">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>MDAC Account No</label>
+                        <h5 class="text-success">{{ accountData.mpussId }}</h5>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="villageId">PROMOTER 1 <span style="color: red">*</span></label>
+                        <select id="villageId" class="form-control" [(ngModel)]="accountData.promoter1Aadhar"
+                            (change)="onPromoter1Change()">
+                            <option value="">-- SELECT PROMOTER 1 --</option>
+                            <option value="{{ obj.AADHAR }}" *ngFor="let obj of promotorDetails">
+                                {{ obj.PROMOTERS_NAME }}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-md-4" *ngIf="accountData.promoter1Name !== ''">
+                    <div class="form-group">
+                        <label>Promoter1 Name</label>
+                        <h5 class="text-success">{{ accountData.promoter1Name }}</h5>
+                    </div>
+                </div>
+
+                <div class="col-md-4" *ngIf="accountData.promoter1Aadhar !== ''">
+                    <div class="form-group">
+                        <label>Promoter1 Aadhar</label>
+                        <h5 class="text-success">
+                            XXXX-XXXX-{{ accountData.promoter1Aadhar | slice: -4 }}
+                        </h5>
+                    </div>
+                </div>
+
+                <div class="col-md-4" *ngIf="accountData.promoter1Mobile !== ''">
+                    <div class="form-group">
+                        <label>Promoter1 Mobile</label>
+                        <h5 class="text-success">{{ accountData.promoter1Mobile }}</h5>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="villageId">PROMOTER 2 <span style="color: red">*</span></label>
+                        <select id="villageId" class="form-control" [(ngModel)]="accountData.promoter2Aadhar"
+                            (change)="onPromoter2Change()">
+                            <option value="">-- SELECT PROMOTER 2 --</option>
+                            <option value="{{ obj.AADHAR }}" *ngFor="let obj of promotorDetails">
+                                {{ obj.PROMOTERS_NAME }}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-md-4" *ngIf="accountData.promoter2Name !== ''">
+                    <div class="form-group">
+                        <label>Promoter2 Name</label>
+                        <h5 class="text-success">{{ accountData.promoter2Name }}</h5>
+                    </div>
+                </div>
+
+                <div class="col-md-4" *ngIf="accountData.promoter2Aadhar !== ''">
+                    <div class="form-group">
+                        <label>Promoter2 Aadhar</label>
+                        <h5 class="text-success">
+                            XXXX-XXXX-{{ accountData.promoter2Aadhar | slice: -4 }}
+                        </h5>
+                    </div>
+                </div>
+
+                <div class="col-md-4" *ngIf="accountData.promoter2Mobile !== ''">
+                    <div class="form-group">
+                        <label>Promoter2 Mobile</label>
+                        <h5 class="text-success">{{ accountData.promoter2Mobile }}</h5>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Bank Account No <span style="color: red">*</span></label>
+                        <input type="text" class="form-control" [(ngModel)]="accountData.bankAccountNo"
+                            placeholder="Please Enter Bank Account No" maxlength="15" autocomplete="off" NumbersOnly [allowDecimals]="false"
+                            [allowSign]="false" (ngModelChange)="validateBankAccount()" />
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>IFSC Code <span style="color: red">*</span></label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" [(ngModel)]="accountData.ifscCode" placeholder="Please Enter IFSC Code"
+                                maxlength="15" autocomplete="off" />
+                            <div class="input-group-append">
+                                <button class="btn btn-primary btn-sm m-0 btn-rounded" type="submit" (click)="btnVerifyIfscCode()"
+                                    id="button-addon2">
+                                    Verify
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4" *ngIf="accountData.bankName !== ''">
+                    <div class="form-group">
+                        <label>Bank Name</label>
+                        <h5 class="text-success">{{ accountData.bankName }}</h5>
+                    </div>
+                </div>
+                <div class="col-md-4" *ngIf="accountData.branch !== ''">
+                    <div class="form-group">
+                        <label>Branch Name</label>
+                        <h5 class="text-success">{{ accountData.branch }}</h5>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Bank Account Name <span style="color: red">*</span></label>
+                        <input type="text" class="form-control" [(ngModel)]="accountData.bankAccountName"
+                            placeholder="Please Enter Bank Account Name" maxlength="40" autocomplete="off" />
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label> Pincode <span style="color: red">*</span></label>
+                        <input type="text" class="form-control" [(ngModel)]="accountData.pinCode" placeholder="Please Enter Pincode"
+                            maxlength="6" autocomplete="off" NumbersOnly [allowDecimals]="false" [allowSign]="false" />
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="isSafetyArrangementsUpload">Bank PassBook Front Page Photo Upload
+                            <span style="color: red;font-size: small;">* (JPEG and less than 100KB) </span>
+                        </label>
+
+                        <input type="file" class="form-control p-0" id="bankPassBookUpload" (change)="onBankPassBookChange($event)"
+                            accept="image/*" #bankPassBookUpload autocomplete="off" />
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="isSupportingDocumentUpload">Supporting Document Upload
+                            <span style="color: red;font-size: small;">* (pdf and less than 1MB) </span>
+                        </label>
+                        <input type="file" class="form-control p-0" id="bankPassBookUpload" (change)="onSupportingDocChange($event)"
+                            accept="application/pdf" #supportingDocumentUpload autocomplete="off" />
+                    </div>
+                </div>
+
+                <div class="col-md-12" align="center">
+                    <button type="button" class="btn btn-success btn-sm" (click)="btnSubmit()">
+                        SUBMIT
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

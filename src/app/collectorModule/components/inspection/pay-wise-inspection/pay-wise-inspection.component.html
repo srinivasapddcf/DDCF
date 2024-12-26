@@ -1,0 +1,381 @@
+<div class="card">
+  <div class="card-header p-2">
+    <h5 class="mb-0">PAYMENT INSPECTION</h5>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="mandalId">MANDAL <span style="color: red">*</span></label>
+          <select
+            id="mandalId"
+            class="form-control"
+            [(ngModel)]="inspectionData.mandalId"
+            (change)="onMandalChange()"
+          >
+            <option value="">-- SELECT MANDAL --</option>
+            <option value="{{ obj.MANDAL_ID }}" *ngFor="let obj of mandalList">
+              {{ obj.MANDAL_NAME }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="rbkId">RSK <span style="color: red">*</span></label>
+          <select
+            id="rbkId"
+            class="form-control"
+            [(ngModel)]="inspectionData.rbkId"
+            (change)="onRbkChange()"
+          >
+            <option value="">-- SELECT RSK --</option>
+            <option value="{{ obj.RBK_ID }}" *ngFor="let obj of rbkList">
+              {{ obj.RBK_NAME }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="villageId"
+            >SOCIETY <span style="color: red">*</span></label
+          >
+          <select
+            id="villageId"
+            class="form-control"
+            [(ngModel)]="inspectionData.villageData"
+            (change)="onSocietyChange()"
+          >
+            <option value="">-- SELECT SOCIETY --</option>
+            <option value="{{ obj | json }}" *ngFor="let obj of societyList">
+              {{ obj.VDCSNAME }}
+            </option>
+          </select>
+        </div>
+      </div>
+      <div class="col-md-4 pt-4">
+        <button
+          type="button"
+          class="btn btn-primary btn-sm"
+          (click)="addFarmerPopUp()"
+        >
+          Add Farmer
+        </button>
+      </div>
+      <div
+        class="col-md-12 table-responsive"
+        [hidden]="inspectionData.farmerInspectionList?.length < 1"
+      >
+        <table
+          class="table table-striped ah-table text-center"
+          datatable
+          [dtOptions]="dtOptions"
+          [dtTrigger]="dtTrigger"
+        >
+          <thead class="bg-success text-white">
+            <tr>
+              <th>FARMER NAME</th>
+              <th>PAYMENT OF CYCLE</th>
+              <th>MILK IN LITRES</th>
+              <th>FAT</th>
+              <th>SNF</th>
+              <th>AMOUNT</th>
+              <th>CREDITED AMOUNT</th>
+              <th>CANDIDATE AMOUNT PHOTO</th>
+              <th>PAYMENT SLIP IMAGE</th>
+              <th>REMOVE</th>
+            </tr>
+          </thead>
+          <tbody *ngIf="inspectionData.farmerInspectionList?.length > 0">
+            <tr
+              *ngFor="
+                let obj of inspectionData.farmerInspectionList;
+                let i = index
+              "
+            >
+              <td>
+                <b>{{ obj.farmerName }}</b>
+              </td>
+              <td>{{ obj.paymentCycle }}</td>
+              <td>{{ obj.milkQuantity }}</td>
+              <td>{{ obj.fat }}</td>
+              <td>{{ obj.SNF }}</td>
+              <td>{{ obj.amount }}</td>
+              <td>{{ obj.creditedAmount }}</td>
+              <td>
+                <button
+                  type="button"
+                  class="btn btn-link btn-sm"
+                  *ngIf="
+                    obj.candidateAmountImg !== null &&
+                    obj.candidateAmountImg !== '' &&
+                    obj.candidateAmountImg !== undefined
+                  "
+                  (click)="btnPhotoView(obj.candidateAmountImg)"
+                >
+                  VIEW
+                </button>
+                <span
+                  *ngIf="
+                    obj.candidateAmountImg === null ||
+                    obj.candidateAmountImg === '' ||
+                    obj.candidateAmountImg === undefined
+                  "
+                  >NA</span
+                >
+              </td>
+              <td>
+                <button
+                  type="button"
+                  class="btn btn-link btn-sm"
+                  *ngIf="
+                    obj.paymentSlipImg !== null &&
+                    obj.paymentSlipImg !== '' &&
+                    obj.paymentSlipImg !== undefined
+                  "
+                  (click)="btnPhotoView(obj.paymentSlipImg)"
+                >
+                  VIEW
+                </button>
+                <span
+                  *ngIf="
+                    obj.paymentSlipImg === null ||
+                    obj.paymentSlipImg === '' ||
+                    obj.paymentSlipImg === undefined
+                  "
+                  >NA</span
+                >
+              </td>
+              <td>
+                <a
+                  class="btn btn-danger"
+                  style="cursor: pointer"
+                  (click)="btnRemoveFarmer(i)"
+                >
+                  <i class="fa fa-trash fa-lg"></i>
+                </a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div
+        class="col-md-12"
+        align="center"
+        [hidden]="inspectionData.farmerInspectionList?.length < 1"
+      >
+        <button
+          type="button"
+          class="btn btn-sm btn-success"
+          (click)="btnSubmit()"
+        >
+          SUBMIT
+        </button>
+      </div>
+
+      <div class="popup-modal" *ngIf="showFarmersPopup">
+        <div class="popup-content" style="min-width: 75%">
+          <div class="popup-header">
+            <h4 class="title">ADDITION OF FARMERS</h4>
+            <a
+              type="button"
+              class="close"
+              (click)="showFarmersPopup = false"
+              style="cursor: pointer"
+            >
+              <span>×</span>
+            </a>
+          </div>
+          <div class="popup-body">
+            <div class="row justify-content-center align-items-center">
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="farmerData"
+                    >FARMER <span style="color: red">*</span></label
+                  >
+                  <select
+                    id="farmerData"
+                    class="form-control"
+                    [(ngModel)]="farmerInspectionData.farmerData"
+                    (change)="onFarmerChange()"
+                  >
+                    <option value="">-- SELECT FARMER --</option>
+                    <option
+                      value="{{ obj | json }}"
+                      *ngFor="let obj of farmerList"
+                    >
+                      {{ obj.FARMER_NAME }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="farmerData"
+                    >PAYMENT CYCLE <span style="color: red">*</span></label
+                  >
+                  <select
+                    id="paymentCycle"
+                    class="form-control"
+                    [(ngModel)]="farmerInspectionData.paymentCycle"
+                  >
+                    <option value="">-- SELECT PAYMENT --</option>
+                    <option
+                      value="{{ obj.PERIOD }}"
+                      *ngFor="let obj of paymentList"
+                    >
+                      {{ obj.PERIOD }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="milkInLtrs"
+                    >MILK IN LITRES <span style="color: red">*</span></label
+                  >
+                  <input
+                    id="milkInLtrs"
+                    type="text"
+                    class="form-control"
+                    [(ngModel)]="farmerInspectionData.milkQuantity"
+                    placeholder="Please Enter Milk Quantity"
+                    maxlength="5"
+                    autocomplete="off"
+                    NumbersOnly
+                    [allowDecimals]="true"
+                    [allowSign]="false"
+                  />
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="fat">FAT <span style="color: red">*</span></label>
+                  <input
+                    id="fat"
+                    type="text"
+                    class="form-control"
+                    [(ngModel)]="farmerInspectionData.fat"
+                    placeholder="Please Enter FAT"
+                    maxlength="5"
+                    autocomplete="off"
+                    NumbersOnly
+                    [allowDecimals]="true"
+                    [allowSign]="false"
+                  />
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="SNF">SNF <span style="color: red">*</span></label>
+                  <input
+                    id="SNF"
+                    type="text"
+                    class="form-control"
+                    [(ngModel)]="farmerInspectionData.SNF"
+                    placeholder="Please Enter SNF"
+                    maxlength="5"
+                    autocomplete="off"
+                    NumbersOnly
+                    [allowDecimals]="true"
+                    [allowSign]="false"
+                  />
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="amount"
+                    >AMOUNT <span style="color: red">*</span></label
+                  >
+                  <input
+                    id="amount"
+                    type="text"
+                    class="form-control"
+                    [(ngModel)]="farmerInspectionData.amount"
+                    placeholder="Please Enter Amount"
+                    maxlength="5"
+                    autocomplete="off"
+                    NumbersOnly
+                    [allowDecimals]="true"
+                    [allowSign]="false"
+                  />
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="amount"
+                    >CREDITED AMOUNT <span style="color: red">*</span></label
+                  >
+                  <input
+                    id="amount"
+                    type="text"
+                    class="form-control"
+                    [(ngModel)]="farmerInspectionData.creditedAmount"
+                    placeholder="Please Enter Amount"
+                    maxlength="5"
+                    autocomplete="off"
+                    NumbersOnly
+                    [allowDecimals]="true"
+                    [allowSign]="false"
+                  />
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="inspectionImg"
+                    >CANDIDATE AMOUNT PHOTO <span style="color: red">*</span>
+                  </label>
+                  <input
+                    type="file"
+                    class="form-control p-0"
+                    id="inspectionImg"
+                    (change)="onCandidateAmountImageChange($event)"
+                    accept="image/*"
+                    autocomplete="off"
+                    #candidateAmountImgUpload
+                  />
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="inspectionImg"
+                    >Payment Slip Photo <span style="color: red">*</span>
+                  </label>
+                  <input
+                    type="file"
+                    class="form-control p-0"
+                    id="inspectionImg"
+                    (change)="onPaymentSlipImageChange($event)"
+                    accept="image/*"
+                    autocomplete="off"
+                    #paymentSlipImgUpload
+                  />
+                </div>
+              </div>
+              <div class="popup-footer justify-content-center">
+                <button
+                  type="button"
+                  class="btn btn-success btn-sm btn-rounded"
+                  (click)="btnAddFarmer()"
+                >
+                  ADD FARMER
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-danger btn-sm btn-rounded"
+                  (click)="showFarmersPopup = false"
+                >
+                  Close
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

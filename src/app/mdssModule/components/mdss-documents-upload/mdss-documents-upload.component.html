@@ -1,0 +1,1764 @@
+
+<div class="row">
+  <div class="col mb-2">
+    <div
+      class="stats-card pending"
+      (click)="btnDashboardDetails('1')"
+      [ngClass]="reportType === '1' ? 'active' : ''"
+    >   
+      <div class="overlay"></div>
+
+      <div class="card-body">
+        <div class="d-flex justify-content-between">
+          <div class="stats-text">
+            <p class="text-uppercase text-muted mb-1"><small>PENDING</small></p>
+          
+          </div>
+          <div class="circle"> 
+            <i class="fas fa-hourglass-half"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+
+
+   <!-- APPROVED -->
+   <div class="col mb-2">
+    <div
+      class="stats-card success"
+      (click)="btnDashboardDetails('2')"
+      [ngClass]="reportType === '2' ? 'active' : ''"
+    >
+      <div class="overlay"></div>
+
+      <div class="card-body">
+        <div class="d-flex justify-content-between">
+          <div class="stats-text">
+            <p class="text-uppercase text-muted mb-1">
+              <small>APPROVED</small>
+            </p>
+            <h5 class="font-weight-bold mb-0">
+              
+            </h5>
+          </div>
+          <div class="circle">
+            <i class="fas fa-check-double"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+   <!-- REJECTED -->
+   <div class="col mb-2">
+    <div
+      class="stats-card pending"
+      (click)="btnDashboardDetails('3')"
+      [ngClass]="reportType === '3' ? 'active' : ''"
+    >
+      <div class="overlay"></div>
+
+      <div class="card-body">
+        <div class="d-flex justify-content-between">
+          <div class="stats-text">
+            <p class="text-uppercase text-muted mb-1"><small>ROLLBACK</small></p>
+            <h5 class="font-weight-bold mb-0">
+              
+            </h5>
+          </div>
+          <div class="circle">
+            <i class="fas fa-icicles fa-spin fa-3x"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+
+  </div>
+
+
+<div id="PENDING"   [(ngModel)]="PENDING">
+
+<div class="card">  
+  <div class="card-header p-2" style="
+  background-color: coral;color: white;
+"> 
+    <div class="row">
+      <div class="col-md-12" style="text-align: center;">
+      <h5 class="mb-0  text-uppercase text-muted mb-1"><span style="color:white;">   DOCUMENTS PENDING LIST</span></h5>
+      </div> 
+  </div>
+  </div>
+
+  <div class="card-body">
+    <div class="row"> <div class="col-md-4">
+      <div class="form-group"> </div></div>
+     
+      <div class="col-md-2">
+        <div class="form-group"> <span style="text-align:right;">  Select RSK NAME:  </span>
+        </div></div>
+
+        <div class="col-md-4">
+            <div class="form-group">   
+
+          <select
+            id="rbkId"
+            class="form-control"
+            [(ngModel)]="mdssDetailsReq.rbkId"
+            (change)="onRbkChange()"
+          >
+            <option value="">-- SELECT RSK --</option>
+            <option value="{{ obj.RBK_ID }}" *ngFor="let obj of rbkList">
+              {{ obj.RBK_NAME }}
+            </option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <hr style="border-color: red;">
+      </div></div>
+    <div *ngIf="submittedMdssDetails.IS_MDSS_DOC_SUBMITTED === '0'">
+      <h5 class="sub-heading pb-0">
+        <label>MDSS DOCUMENTS DOWNLOAD</label>
+      </h5>
+      <div class="row px-4">
+
+        <div class="col-md-3">
+          <label>FORM-A : </label>
+          <button
+            type="button"
+            class="btn btn-link btn-sm"
+            (click)="btnViewFormAfp('0')"
+          >
+          <!-- (click)="btnViewFormADoc('0')" -->
+            VIEW
+          </button>
+        </div>
+
+        <div class="col-md-3">
+          <label>SWORN STATEMENT : </label>
+          <button
+            type="button"
+            class="btn btn-link btn-sm"
+            (click)="btnViewSWORNSTATEMENTEMPTY('0')"
+          >
+          <!-- (click)="btnViewFormADoc('0')" -->
+            VIEW
+          </button>
+        </div>
+
+
+        <div class="col-md-3">
+          <label>PROCEEDINGS OF MEETING : </label>
+          <button
+            type="button"
+            class="btn btn-link btn-sm"
+            (click)="btnViewPROCEEDINGSOFTHEMEETINGDoc('0')"
+          >
+            VIEW
+          </button>
+        </div>
+
+
+        <div class="col-md-3">
+          <label>ADHOC COMMITTEE : </label>
+          <button
+            type="button"
+            class="btn btn-link btn-sm"
+            (click)="btnViewAdhocCommitteeDoc('0')"
+          >
+            VIEW
+          </button>
+        </div>
+
+        <div class="col-md-3">
+          <label>ECONOMIC VIABILITY : </label>
+          <button
+            type="button"
+            class="btn btn-link btn-sm"
+            (click)="btnViewEconomicViabilityDoc('0')"
+          >
+            VIEW
+          </button>
+        </div>
+
+        <div class="col-md-3">
+          <label>BYE LAWS DOCUMENT : </label>
+          <button
+            type="button"
+            class="btn btn-link btn-sm"
+            (click)="btnViewByLawsDoc('0')"
+          >
+            VIEW
+          </button>
+        </div>
+        <div class="col-md-3">
+          <label>FEASIBILITY REPORT : </label>
+          <button
+            type="button"
+            class="btn btn-link btn-sm"
+            (click)="btnViewFeasibility('0')"
+          >
+            VIEW
+          </button>
+        </div>
+
+        <div class="col-md-3">
+          <label>MASUDHA FORM : </label>
+          <button
+            type="button"
+            class="btn btn-link btn-sm"
+            (click)="btnViewMasudhaForm('0')"
+          >
+            VIEW
+          </button>
+        </div>
+
+        <div class="col-md-3">
+          <label>BANK REMITTANCE FORM : </label>
+          <button
+            type="button"
+            class="btn btn-link btn-sm"
+            (click)="btnDocumentDownload(bankRemittanceFormUrl)"
+          >
+            VIEW
+          </button>
+        </div>
+      </div>
+
+      <h5 class="sub-heading pb-0">
+        <label>MDSS DOCUMENTS UPLOAD</label>
+      </h5>
+
+      <div class="row px-4">
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="formASignedCopyUpload"
+              >FORM-A SIGNED DOCUMENT UPLOAD :
+              <span style="color: red"
+                >* <small class="text-danger"> (PDF,Max 2MB) </small></span
+              >
+            </label>
+            <input
+              type="file"
+              class="form-control p-0"
+              id="formASignedCopyUpload"
+              (change)="onFormASignedCopyChange($event)"
+              accept="application/pdf"
+              #formASignedCopyUpload
+              autocomplete="off"
+            />
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="swornStatementUpload"
+              >SWORN STATEMENT OF 11 INDIVIDUALS DOCUMENT UPLOAD :
+              <span style="color: red"
+                >* <small class="text-danger"> (PDF,Max 2MB) </small></span
+              >
+            </label>
+            <input
+              type="file"
+              class="form-control p-0"
+              id="swornStatementUpload"
+              (change)="onSwornStatementChange($event)"
+              accept="application/pdf"
+              #swornStatementUpload
+              autocomplete="off"
+            />
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="masudhaFormUpload"
+              >MASUDHA FORM UPLOAD :
+              <span style="color: red"
+                >* <small class="text-danger"> (PDF,Max 2MB) </small></span
+              >
+            </label>
+            <input
+              type="file"
+              class="form-control p-0"
+              id="masudhaFormUpload"
+              (change)="onMasudhaFormChange($event)"
+              accept="application/pdf"
+              #masudhaFormUpload
+              autocomplete="off"
+            />
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="meetingProceedingsUpload"
+              >MEETING PROCEEDINGS DOCUMENT UPLOAD :
+              <span style="color: red"
+                >* <small class="text-danger"> (PDF,Max 2MB) </small></span
+              >
+            </label>
+            <input
+              type="file"
+              class="form-control p-0"
+              id="meetingProceedingsUpload"
+              (change)="onMeetingProceedingsChange($event)"
+              accept="application/pdf"
+              #meetingProceedingsUpload
+              autocomplete="off"
+            />
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="adhocCommitteeUpload"
+              >REQUEST LETTER FOR ADHOC COMMITTEE DOCUMENT UPLOAD :
+              <span style="color: red"
+                >* <small class="text-danger"> (PDF,Max 2MB) </small></span
+              >
+            </label>
+            <input
+              type="file"
+              class="form-control p-0"
+              id="adhocCommitteeUpload"
+              (change)="onAdhocCommitteeChange($event)"
+              accept="application/pdf"
+              #adhocCommitteeUpload
+              autocomplete="off"
+            />
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="viabilityReportUpload"
+              >ECONOMIC VIABILITY REPORT UPLOAD :
+              <span style="color: red"
+                >* <small class="text-danger"> (PDF,Max 2MB) </small></span
+              >
+            </label>
+            <input
+              type="file"
+              class="form-control p-0"
+              id="viabilityReportUpload"
+              (change)="onViabilityReportChange($event)"
+              accept="application/pdf"
+              #viabilityReportUpload
+              autocomplete="off"
+            />
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="bankRemittanceUpload"
+              >BANK REMITTANCE CERTIFICATE UPLOAD :
+              <span style="color: red">
+                <small class="text-danger"> (PDF,Max 2MB) </small>*</span
+              >
+            </label>
+            <input
+              type="file"
+              class="form-control p-0"
+              id="bankRemittanceUpload"
+              (change)="onBankRemittanceChange($event)"
+              accept="application/pdf"
+              #bankRemittanceUpload
+              autocomplete="off"
+            />
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="byLawsUpload"
+              >BYE LAWS DOCUMENT UPLOAD :
+              <span style="color: red"
+                >* <small class="text-danger"> (PDF,Max 2MB) </small></span
+              >
+            </label>
+            <input
+              type="file"
+              class="form-control p-0"
+              id="byLawsUpload"
+              (change)="onByeLawsChange($event)"
+              accept="application/pdf"
+              #byLawsUpload
+              autocomplete="off"
+            />
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="feasibilityReportUpload"
+              >FEASIBILITY REPORT UPLOAD :
+              <span style="color: red"
+                >* <small class="text-danger"> (PDF,Max 2MB) </small></span
+              >
+            </label>
+            <input
+              type="file"
+              class="form-control p-0"
+              id="feasibilityReportUpload"
+              (change)="onFeasibilityReportChange($event)"
+              accept="application/pdf"
+              #feasibilityReportUpload
+              autocomplete="off"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="submittedMdssDetails.IS_MDSS_BANK_SUBMITTED === '0'">
+      <h5 class="sub-heading pb-0">
+        <label>BANK DETAILS</label>
+      </h5>
+      <div class="row px-4">
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="accountNo">BANK ACCOUNT NUMBER : </label>
+            <span class="text-success">
+              <b> {{ mdssDetailsReq.accountNo }}</b>
+            </span>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="form-group">
+            <label>IFSC CODE : </label>
+            <span class="text-success">
+              <b> {{ mdssDetailsReq.ifscCode }}</b>
+            </span>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="bankName">BANK NAME : </label>
+            <span class="text-success">
+              <b> {{ mdssDetailsReq.bankName }}</b>
+            </span>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="branchName">BRANCH NAME : </label>
+            <span class="text-success">
+              <b> {{ mdssDetailsReq.branchName }}</b>
+            </span>
+          </div>
+        </div>
+
+        <div class="col-md-4" *ngIf="mdssDetailsReq.pinCodeAvailable">
+          <div class="form-group">
+            <label for="bankPinCode">BANK PINCODE : </label>
+            <span class="text-success">
+              <b> {{ mdssDetailsReq.pinCode }}</b>
+            </span>
+          </div>
+        </div>
+
+        <div class="col-md-4" *ngIf="!mdssDetailsReq.pinCodeAvailable">
+          <div class="form-group">
+            <label for="bankPinCode"
+              >BANK PINCODE : <span style="color: red">*</span></label
+            >
+            <input
+              id="pinCode"
+              type="text"
+              class="form-control"
+              [(ngModel)]="mdssDetailsReq.pinCode"
+              placeholder="Please Enter Bank Pincode"
+              maxlength="6"
+              autocomplete="off"
+              NumbersOnly
+              [allowDecimals]="false"
+              [allowSign]="false"
+            />
+          </div>
+        </div>
+
+          <div class="col-md-4">
+          <div class="form-group">
+            <label for="bankPassBookUpload">PASSBOOK FRONT PAGE PHOTO : </label>
+            <img
+              [src]="'data:image/jpeg;base64,' + mdacPassBookImg"
+              style="cursor: pointer"
+              class="img-thumbnail mr-3"
+              (click)="btnImage(mdacPassBookImg)"
+            /> 
+             
+          </div>
+        </div>  
+        <!-- <div class="col-md-4">
+          <div class="form-group">
+        <button
+        type="button"
+        class="btn btn-link btn-sm"
+        (click)="btnimgView()" > 
+      
+        VIEW
+      </button>
+         
+      </div>
+    </div>   -->
+
+
+        <!-- <div class="col-md-4">
+          <div class="form-group">
+            <label for="bankPassBookUpload">PASSBOOK FRONT PAGE PHOTO : </label>
+            
+
+            <img
+              [src]="mdacPassBookImgnew"
+              style="cursor: pointer"
+              class="img-thumbnail mr-3"
+               
+            />
+
+
+          </div>
+        </div> -->
+
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="bankAccountName"
+              >BANK ACCOUNT NAME : <span style="color: red">*</span></label
+            >
+            <input
+              id="bankAccountName"
+              type="text"
+              class="form-control"
+              [(ngModel)]="mdssDetailsReq.bankAccountName"
+              placeholder="Please Enter Bank Account Name"
+              maxlength="50"
+              autocomplete="off"
+            />
+          </div>
+        </div>
+
+        <div class="col-md-12" align="center">
+          <button
+            type="button"
+            class="btn btn-success btn-sm"
+            (click)="btnSubmit()"
+          >
+            SAVE
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="submittedMdssDetails.IS_MDSS_DOC_SUBMITTED === '1'">
+      <h5 class="sub-heading pb-0">
+        <label>DOCUMENTS</label>
+      </h5>
+      <div class="row px-4">
+        <div class="col-md-4" *ngIf="submittedMdssDetails.FORM_A_PDF !== null">
+          <label>FORM-A SIGNED COPY PDF :</label>
+          <!-- <button
+            type="button"
+            class="btn btn-link btn-sm"
+            (click)="btnPdf(formAViewPdf)"
+          >
+            VIEW
+          </button> -->
+
+          <button
+            type="button"
+            class="btn btn-link btn-sm"
+            (click)="btnPdfView(submittedMdssDetails.FORM_A_PDF)"
+            
+            
+          > 
+          <!--  -->
+            VIEW
+          </button>
+
+        </div>
+        <div class="col-md-4" *ngIf="submittedMdssDetails.FORM_A_PDF === ''">
+          <label>FORM-A SIGNED COPY PDF :</label>
+          <span class="text-danger">NA</span>
+        </div>
+
+        <div
+          class="col-md-4"
+          *ngIf="submittedMdssDetails.SWORN_STATEMENT_PDF !== null"
+        >
+          <label>SWORN STATEMENTS PDF :</label>
+          <!-- <button
+            type="button"
+            class="btn btn-link btn-sm"
+            (click)="btnPdf(swornStatementViewPdf)"
+          >
+            VIEW
+          </button> --> 
+          <button
+          type="button"
+          class="btn btn-link btn-sm"
+          (click)="btnPdfView(submittedMdssDetails.SWORN_STATEMENT_PDF)"
+        >
+          VIEW
+        </button>
+
+        </div>
+        <div
+          class="col-md-4"
+          *ngIf="submittedMdssDetails.SWORN_STATEMENT_PDF === ''"
+        >
+          <label>SWORN STATEMENTS OF 11 INDIVIDUALS PDF :</label>
+          <span class="text-danger">NA</span>
+        </div>
+
+        <div
+          class="col-md-4"
+          *ngIf="submittedMdssDetails.MASUDHA_FORM_PDF !== null"
+        >
+          <label>MASUDHA FORM PDF :</label>
+          <!-- <button
+            type="button"
+            class="btn btn-link btn-sm"
+            (click)="btnPdf(masudhaFormViewPdf)"
+          >
+            VIEW
+          </button> -->
+
+          <button
+          type="button"
+          class="btn btn-link btn-sm"
+          (click)="btnPdfView(submittedMdssDetails.MASUDHA_FORM_PDF)"
+        >
+          VIEW
+        </button>
+
+
+        </div>
+        <div
+          class="col-md-4"
+          *ngIf="submittedMdssDetails.MASUDHA_FORM_PDF === ''"
+        >
+          <label>MASUDHA FORM PDF :</label>
+          <span class="text-danger">NA</span>
+        </div>
+
+        <div
+          class="col-md-4"
+          *ngIf="submittedMdssDetails.MEETING_PROCEDINGS_PDF !== null"
+        >
+          <label>MEETING PROCEEDINGS FORM PDF :</label>
+          <!-- <button
+            type="button"
+            class="btn btn-link btn-sm"
+            (click)="btnPdf(meetingProceedingsViewPdf)"
+          >
+            VIEW
+          </button> -->
+
+          <button
+          type="button"
+          class="btn btn-link btn-sm"
+          (click)="btnPdfView(submittedMdssDetails.MEETING_PROCEDINGS_PDF)"
+        >
+          VIEW
+        </button>
+
+
+        </div>
+        <div
+          class="col-md-4"
+          *ngIf="submittedMdssDetails.MEETING_PROCEDINGS_PDF === ''"
+        >
+          <label>MEETING PROCEEDINGS FORM PDF :</label>
+          <span class="text-danger">NA</span>
+        </div>
+
+        <div
+          class="col-md-4"
+          *ngIf="submittedMdssDetails.REQ_LETTER_ADHOCK_COM_PDF !== null"
+        >
+          <label>REQUEST LETTER FOR ADHOC COMMITTEE PDF :</label>
+          <!-- <button
+            type="button"
+            class="btn btn-link btn-sm"
+            (click)="btnPdf(adhocCommitteeViewPdf)"
+          >
+            VIEW
+          </button> -->
+
+          <button
+          type="button"
+          class="btn btn-link btn-sm"
+          (click)="btnPdfView(submittedMdssDetails.REQ_LETTER_ADHOCK_COM_PDF)"
+        >
+          VIEW
+        </button>
+
+        </div>
+        <div
+          class="col-md-4"
+          *ngIf="submittedMdssDetails.REQ_LETTER_ADHOCK_COM_PDF === ''"
+        >
+          <label>REQUEST LETTER FOR ADHOC COMMITTEE PDF :</label>
+          <span class="text-danger">NA</span>
+        </div>
+
+        <div
+          class="col-md-4"
+          *ngIf="submittedMdssDetails.ECONOMIC_VIABILITY_REP_PDF !== null"
+        >
+          <label>ECONOMIC VIABILITY REPORT PDF :</label>
+          <!-- <button
+            type="button"
+            class="btn btn-link btn-sm"
+            (click)="btnPdf(viabilityReportViewPdf)"
+          >
+            VIEW
+          </button> -->
+
+          <button
+          type="button"
+          class="btn btn-link btn-sm"
+          (click)="btnPdfView(submittedMdssDetails.ECONOMIC_VIABILITY_REP_PDF)"
+        >
+          VIEW
+        </button>
+
+        </div>
+        <div
+          class="col-md-4"
+          *ngIf="submittedMdssDetails.ECONOMIC_VIABILITY_REP_PDF === ''"
+        >
+          <label>ECONOMIC VIABILITY REPORT PDF :</label>
+          <span class="text-danger">NA</span>
+        </div>
+
+        <div
+          class="col-md-4"
+          *ngIf="submittedMdssDetails.BANK_REMITTANCE_CERTI_PDF !== null"
+        >
+          <label>BANK REMITTANCE CERTIFICATE PDF :</label>
+          <!-- <button
+            type="button"
+            class="btn btn-link btn-sm"
+            (click)="btnPdf(bankRemittanceViewPdf)"
+          >
+            VIEW
+          </button> -->
+
+          <button
+          type="button"
+          class="btn btn-link btn-sm"
+          (click)="btnPdfView(submittedMdssDetails.BANK_REMITTANCE_CERTI_PDF)"
+        >
+          VIEW
+        </button>
+
+
+        </div>
+        <div
+          class="col-md-4"
+          *ngIf="submittedMdssDetails.BANK_REMITTANCE_CERTI_PDF === ''"
+        >
+          <label>BANK REMITTANCE CERTIFICATE PDF :</label>
+          <span class="text-danger">NA</span>
+        </div>
+
+        <div class="col-md-4" *ngIf="submittedMdssDetails.BYE_LAW_PDF !== null">
+          <label>BYE LAWS PDF :</label>
+          <!-- <button
+            type="button"
+            class="btn btn-link btn-sm"
+            (click)="btnPdf(byeLawsViewPdf)"
+          >
+            VIEW
+          </button> -->
+
+          <button
+          type="button"
+          class="btn btn-link btn-sm"
+          (click)="btnPdfView(submittedMdssDetails.BYE_LAW_PDF)"
+        >
+          VIEW
+        </button>
+
+        </div>
+        <div class="col-md-4" *ngIf="submittedMdssDetails.BYE_LAW_PDF === ''">
+          <label>BYE LAWS PDF :</label>
+          <span class="text-danger">NA</span>
+        </div>
+
+        <div
+          class="col-md-4"
+          *ngIf="submittedMdssDetails.FESABILITY_REPORT_PDF !== null"
+        >
+          <label>FEASIBILITY REPORT PDF :</label>
+          <!-- <button
+            type="button"
+            class="btn btn-link btn-sm"
+            (click)="btnPdf(feasibilityReportViewPdf)"
+          >
+            VIEW
+          </button> -->
+
+          <button
+          type="button"
+          class="btn btn-link btn-sm"
+          (click)="btnPdfView(submittedMdssDetails.FESABILITY_REPORT_PDF)"
+        >
+          VIEW
+        </button>
+
+
+        </div>
+        <div
+          class="col-md-4"
+          *ngIf="submittedMdssDetails.FESABILITY_REPORT_PDF === ''"
+        >
+          <label>FEASIBILITY REPORT PDF :</label>
+          <span class="text-danger">NA</span>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="submittedMdssDetails.IS_MDSS_BANK_SUBMITTED === '1'">
+      <h5 class="sub-heading pb-0">
+        <label>BANK DETAILS</label>
+      </h5>
+      <div class="row px-4">
+        <div class="col-md-4">
+          <div class="form-group">
+            <label>
+              MDAC NAME :
+              <span class="text-success">
+                <b>{{ submittedMdssDetails.MDSS_NAME }}</b>
+              </span>
+            </label>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <label>
+              MDAC CODE :
+              <span class="text-success">
+                <b>{{ submittedMdssDetails.MDSS_CODE }}</b>
+              </span>
+            </label>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <label>
+              BANK :
+              <span class="text-success">
+                <b>{{ submittedMdssDetails.BANK_NAME }}</b>
+              </span>
+            </label>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <label>
+              BRANCH :
+              <span class="text-success">
+                <b>{{ submittedMdssDetails.BRANCH }}</b>
+              </span>
+            </label>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <label>
+              ACCOUNT NO :
+              <span class="text-success">
+                <b>{{ submittedMdssDetails.ACCOUNT_NUMBER }}</b>
+              </span>
+            </label>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <label>
+              ACCOUNT NAME :
+              <span class="text-success">
+                <b>{{ submittedMdssDetails.BANK_ACC_NAME }}</b>
+              </span>
+            </label>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <label>
+              IFSC CODE :
+              <span class="text-success">
+                <b>{{ submittedMdssDetails.IFSC_CODE }}</b>
+              </span>
+            </label>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <label>
+              PINCODE :
+              <span class="text-success">
+                <b>{{ submittedMdssDetails.PINCODE }}</b>
+              </span>
+            </label>
+          </div>
+        </div>
+        <div
+          class="col-md-4"
+          *ngIf="submittedMdssDetails.BANK_PASSBOOK_IMAGE !== null"
+        >
+          <label>BANK PASSBOOK IMAGE : </label>
+          <img
+            [src]="'data:image/jpeg;base64,' + passBookImg"
+            style="cursor: pointer"
+            class="img-thumbnail mr-3"
+            (click)="btnImage(passBookImg)"
+          />
+        </div>
+
+        <div class="col-md-12" align="center"  style="display: none;">
+          <button
+            type="button"
+            class="btn btn-success btn-sm"
+            (click)="btnEDITSubmit()"
+          >
+         
+            EDIT
+          </button>
+          <button
+          type="button"
+          class="btn btn-success btn-sm"
+          (click)="btnSUBMITTODLCO()"
+        >
+       
+          SUBMIT TO DLCO
+        </button>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="row p-3" *ngIf="noDataMessage !== ''">
+      <div class="col-md-12">
+        <h5 class="text-center text-danger">{{ noDataMessage }}</h5>
+      </div>
+    </div>
+  </div>
+
+</div>
+</div>
+
+
+<div id="APPROVED"   [(ngModel)]="APPROVED"> 
+  <div class="card"   >
+  <div class="card-header p-12" style="
+  background-color: mediumseagreen;color: white;">
+      <div class="row">
+          <div class="col-md-12" style="text-align: center;">
+          <h5 class="mb-0"> APPROVED LIST</h5>
+          </div> 
+      </div>
+  </div>    
+  <div class="card-body"  >   
+      
+      <div>    
+          <div>
+            <div class="row">
+              <div class="col-md-12">
+                <button
+                  type="button"
+                  class="btn btn-sm btn-success pull-right"
+                  (click)="btnApprovedExcelDownload()"
+                >
+                  <i class="fa fa-file-excel-o mr-2" aria-hidden="true"></i>
+                  DOWNLOAD EXCEL
+                </button>
+              </div>
+            </div>
+              
+            <div class=" table-responsive">
+              <table class="table table-striped ah-table text-center tabsdata" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger"
+                data-page-length='-1'>
+                <thead class="bg-success text-white table-fixed">
+                  <tr >
+                    <th  >S.No.</th>
+                    <th style="font-size: 11px;" >DISTRICT</th>
+                    <th   style="font-size: 11px;">MANDAL NAME</th>
+                    <th style="font-size: 11px;">DIVISION NAME</th>
+                    <th style="font-size: 11px;">RSK NAME</th>
+                    <th style="font-size: 11px;">RSK CODE</th>
+                    <th style="font-size: 11px;">APPLICATION  DATE</th>
+                    <th style="font-size: 11px;"> RC NO</th>
+                    <th style="font-size: 11px;"> REGISTRATION NO</th>
+                    <th style="font-size: 11px;"> REGISTRATION DATE</th>
+                    
+                    
+                    <th style="font-size: 11px;"> FORM-A</th>
+                    <th style="font-size: 11px;"> SWORN STATEMENT</th>
+                    <th style="font-size: 11px;"> MASUDHA FORM</th>
+                    <th style="font-size: 11px;"> MEETING PROCEEDINGS</th>
+                    <th style="font-size: 11px;"> REQ LETTER ADHOC</th>
+                    <th style="font-size: 11px;"> ECONOMIC VIABILITY</th>
+                    <th style="font-size: 11px;"> BANK REMITTANCE CERTIFICATE</th>
+                    <th style="font-size: 11px;"> FEASIBILITY</th>
+                    <th style="font-size: 11px;"> BYE-LAW</th>
+  
+                    <th style="font-size: 11px;"> DLCO APPROVED CERTIFICATE</th>
+                    <th style="font-size: 11px;"> DCO APPROVED CERTIFICATE</th>
+                    <th style="font-size: 11px;"> AR APPROVED CERTIFICATE</th>
+  
+                    <th style="font-size: 11px;"> REGISTRATION CERTIFICATE</th>
+                    <th style="font-size: 11px;"> BYE-LAW REGISTRATION</th>
+                    <th style="font-size: 11px;"> PROCEEDINGS ORDERS</th>
+                    <th style="font-size: 11px;"> PROCEEDINGS ADHOC</th>
+                    
+                     
+                   
+                    <!-- <th> REMARKS</th>   -->
+                  </tr>
+                </thead>
+                <tbody *ngIf="rbkapprovedList?.length > 0">
+                  <tr *ngFor="let obj of rbkapprovedList; let i = index">
+                    <td >{{ i + 1 }}</td>
+                    <td >{{ obj.DISTRICT }}</td>
+                    <td >{{ obj.MANDAL_NAME }}</td>
+                    <td >{{ obj.DIVISION_NAME }}</td>
+                    <td >{{ obj.RBK_NAME }}</td>
+                      <td >{{ obj.RBK_CODE }}</td> 
+                      <td >{{ obj.CREATED_DATE.substring(0,10) }}</td> 
+                      <td >{{ obj.RC_NO }}</td> 
+                      <td >{{ obj.REG_NO }}</td> 
+                      <td >{{ obj.REGISTERED_DATE.substring(0,10) }}</td> 
+                      
+                    <td >
+                    <button style="background-color: cornflowerblue;color: white;"
+                    type="button"
+                    class="btn btn-link btn-sm"
+                    *ngIf="
+                      obj.FORM_A_PDF !== null &&
+                      obj.FORM_A_PDF !== 'NA' &&
+                      obj.FORM_A_PDF !== undefined
+                    "
+                    (click)="btnPdfView(obj.FORM_A_PDF)"
+                  >
+                  View
+                  </button>
+                  <span
+                    *ngIf="
+                      obj.FORM_A_PDF === null ||
+                      obj.FORM_A_PDF === 'NA' ||
+                      obj.FORM_A_PDF === undefined
+                    "
+                    >NA</span
+                  >
+                </td>
+                <td >
+                  <button style="background-color: cornflowerblue;color: white;"
+                  type="button"
+                  class="btn btn-link btn-sm"
+                  *ngIf="
+                    obj.SWORN_STATEMENT_PDF !== null &&
+                    obj.SWORN_STATEMENT_PDF !== 'NA' &&
+                    obj.SWORN_STATEMENT_PDF !== undefined
+                  "
+                  (click)="btnPdfView(obj.SWORN_STATEMENT_PDF)"
+                >
+                View
+                </button>
+                <span
+                  *ngIf="
+                    obj.SWORN_STATEMENT_PDF === null ||
+                    obj.SWORN_STATEMENT_PDF === 'NA' ||
+                    obj.SWORN_STATEMENT_PDF === undefined
+                  "
+                  >NA</span
+                >
+              </td>
+                <td >
+                <button style="background-color: cornflowerblue;color: white;"
+                type="button"
+                class="btn btn-link btn-sm"
+                *ngIf="
+                  obj.MASUDHA_FORM_PDF !== null &&
+                  obj.MASUDHA_FORM_PDF !== 'NA' &&
+                  obj.MASUDHA_FORM_PDF !== undefined
+                "
+                (click)="btnPdfView(obj.MASUDHA_FORM_PDF)"
+              >
+              View
+              </button>
+              <span
+                *ngIf="
+                  obj.MASUDHA_FORM_PDF === null ||
+                  obj.MASUDHA_FORM_PDF === 'NA' ||
+                  obj.MASUDHA_FORM_PDF === undefined
+                "
+                >NA</span
+              >
+            </td>
+                
+            <td >
+              <button style="background-color: cornflowerblue;color: white;"
+              type="button"
+              class="btn btn-link btn-sm"
+              *ngIf="
+                obj.MEETING_PROCEDINGS_PDF !== null &&
+                obj.MEETING_PROCEDINGS_PDF !== 'NA' &&
+                obj.MEETING_PROCEDINGS_PDF !== undefined
+              "
+              (click)="btnPdfView(obj.MEETING_PROCEDINGS_PDF)"
+            >
+            View
+            </button>
+            <span
+              *ngIf="
+                obj.MEETING_PROCEDINGS_PDF === null ||
+                obj.MEETING_PROCEDINGS_PDF === 'NA' ||
+                obj.MEETING_PROCEDINGS_PDF === undefined
+              "
+              >NA</span
+            >
+          </td> 
+          <td >
+            <button style="background-color: cornflowerblue;color: white;"
+            type="button"
+            class="btn btn-link btn-sm"
+            *ngIf="
+              obj.REQ_LETTER_ADHOCK_COM_PDF !== null &&
+              obj.REQ_LETTER_ADHOCK_COM_PDF !== 'NA' &&
+              obj.REQ_LETTER_ADHOCK_COM_PDF !== undefined
+            "
+            (click)="btnPdfView(obj.REQ_LETTER_ADHOCK_COM_PDF)"
+          >
+          View
+          </button>
+          <span
+            *ngIf="
+              obj.REQ_LETTER_ADHOCK_COM_PDF === null ||
+              obj.REQ_LETTER_ADHOCK_COM_PDF === 'NA' ||
+              obj.REQ_LETTER_ADHOCK_COM_PDF === undefined
+            "
+            >NA</span
+          >
+        </td>  
+        <td >
+          <button style="background-color: cornflowerblue;color: white;"
+          type="button"
+          class="btn btn-link btn-sm"
+          *ngIf="
+            obj.ECONOMIC_VIABILITY_REP_PDF !== null &&
+            obj.ECONOMIC_VIABILITY_REP_PDF !== 'NA' &&
+            obj.ECONOMIC_VIABILITY_REP_PDF !== undefined
+          "
+          (click)="btnPdfView(obj.ECONOMIC_VIABILITY_REP_PDF)"
+        >
+        View
+        </button>
+        <span
+          *ngIf="
+            obj.ECONOMIC_VIABILITY_REP_PDF === null ||
+            obj.ECONOMIC_VIABILITY_REP_PDF === 'NA' ||
+            obj.ECONOMIC_VIABILITY_REP_PDF === undefined
+          "
+          >NA</span
+        >
+      </td>    
+               
+      <td >
+        <button style="background-color: cornflowerblue;color: white;"
+        type="button"
+        class="btn btn-link btn-sm"
+        *ngIf="
+          obj.BANK_REMITTANCE_CERTI_PDF !== null &&
+          obj.BANK_REMITTANCE_CERTI_PDF !== 'NA' &&
+          obj.BANK_REMITTANCE_CERTI_PDF !== undefined
+        "
+        (click)="btnPdfView(obj.BANK_REMITTANCE_CERTI_PDF)"
+      >
+      View
+      </button>
+      <span
+        *ngIf="
+          obj.BANK_REMITTANCE_CERTI_PDF === null ||
+          obj.BANK_REMITTANCE_CERTI_PDF === 'NA' ||
+          obj.BANK_REMITTANCE_CERTI_PDF === undefined
+        "
+        >NA</span
+      >
+    </td>  
+    <td >
+      <button style="background-color: cornflowerblue;color: white;"
+      type="button"
+      class="btn btn-link btn-sm"
+      *ngIf="
+        obj.FESABILITY_REPORT_PDF !== null &&
+        obj.FESABILITY_REPORT_PDF !== 'NA' &&
+        obj.FESABILITY_REPORT_PDF !== undefined
+      "
+      (click)="btnPdfView(obj.FESABILITY_REPORT_PDF)"
+    >
+    View
+    </button>
+    <span
+      *ngIf="
+        obj.FESABILITY_REPORT_PDF === null ||
+        obj.FESABILITY_REPORT_PDF === 'NA' ||
+        obj.FESABILITY_REPORT_PDF === undefined
+      "
+      >NA</span
+    >
+  </td>  
+  
+  <td >
+    <button style="background-color: cornflowerblue;color: white;"
+    type="button"
+    class="btn btn-link btn-sm"
+    *ngIf="
+      obj.BYE_LAW_PDF !== null &&
+      obj.BYE_LAW_PDF !== 'NA' &&
+      obj.BYE_LAW_PDF !== undefined
+    "
+    (click)="btnPdfView(obj.BYE_LAW_PDF)"
+  >
+  View
+  </button>
+  <span
+    *ngIf="
+      obj.BYE_LAW_PDF === null ||
+      obj.BYE_LAW_PDF === 'NA' ||
+      obj.BYE_LAW_PDF === undefined
+    "
+    >NA</span
+  >
+  </td>  
+  
+  <td >
+    <button style="background-color: cornflowerblue;color: white;"
+    type="button"
+    class="btn btn-link btn-sm"
+    *ngIf="
+      obj.DLCO_CERT !== null &&
+      obj.DLCO_CERT !== 'NA' &&
+      obj.DLCO_CERT !== undefined
+    "
+    (click)="btnPdfesign(obj.DLCO_CERT)"
+  >
+  View
+  </button>
+  <span
+    *ngIf="
+      obj.DLCO_CERT === null ||
+      obj.DLCO_CERT === 'NA' ||
+      obj.DLCO_CERT === undefined
+    "
+    >NA</span
+  >
+  </td>  
+  
+  <td >
+    <button style="background-color: cornflowerblue;color: white;"
+    type="button"
+    class="btn btn-link btn-sm"
+    *ngIf="
+      obj.DCO_CERT !== null &&
+      obj.DCO_CERT !== 'NA' &&
+      obj.DCO_CERT !== undefined
+    "
+    (click)="btnPdfesign(obj.DCO_CERT)"
+  >
+  View
+  </button>
+  <span
+    *ngIf="
+      obj.DCO_CERT === null ||
+      obj.DCO_CERT === 'NA' ||
+      obj.DCO_CERT === undefined
+    "
+    >NA</span
+  >
+  </td>  
+  
+  <td >
+    <button style="background-color: cornflowerblue;color: white;"
+    type="button"
+    class="btn btn-link btn-sm"
+    *ngIf="
+      obj.GM_CERT !== null &&
+      obj.GM_CERT !== 'NA' &&
+      obj.GM_CERT !== undefined
+    "
+    (click)="btnPdfesign(obj.GM_CERT)"
+  >
+  View
+  </button>
+  <span
+    *ngIf="
+      obj.GM_CERT === null ||
+      obj.GM_CERT === 'NA' ||
+      obj.GM_CERT === undefined
+    "
+    >NA</span
+  >
+  </td> 
+  
+  
+              <td >
+                <button style="background-color: cornflowerblue;color: white;"
+                type="button"
+                class="btn btn-link btn-sm"
+                *ngIf="
+                  obj.COMM_REG_CERT !== null &&
+                  obj.COMM_REG_CERT !== 'NA' &&
+                  obj.COMM_REG_CERT !== undefined && obj.COMM_REG_CERT !=='0'
+                "
+                (click)="btnPdfesign(obj.COMM_REG_CERT)"
+                
+  
+              >
+              View
+              </button>
+              <span
+                *ngIf="
+                  obj.COMM_REG_CERT === null ||
+                  obj.COMM_REG_CERT === 'NA' ||
+                  obj.COMM_REG_CERT === undefined || obj.COMM_REG_CERT ==='0'
+                "
+                >NA</span
+              >
+            </td>  
+  
+            <td >
+              <button style="background-color: cornflowerblue;color: white;"
+              type="button"
+              class="btn btn-link btn-sm"
+              *ngIf="
+                obj.COMM_BYLAW_CERT !== null &&
+                obj.COMM_BYLAW_CERT !== 'NA' &&
+                obj.COMM_BYLAW_CERT !== undefined && obj.COMM_BYLAW_CERT !== '0'
+              "
+              (click)="btnPdfGeneratebylaw(obj.COMM_BYLAW_CERT+','+obj.RBK_CODE+','+obj.DIST_CODE);"
+            >
+            View
+            </button>
+            <span
+              *ngIf="
+                obj.COMM_BYLAW_CERT === null ||
+                obj.COMM_BYLAW_CERT === 'NA' ||
+                obj.COMM_BYLAW_CERT === undefined || obj.COMM_BYLAW_CERT === '0'
+              "
+              >NA</span
+            >
+          </td>
+  
+          <td >
+            <button style="background-color: cornflowerblue;color: white;"
+            type="button"
+            class="btn btn-link btn-sm"
+            *ngIf="
+              obj.COMM_PROC_CERT !== null &&
+              obj.COMM_PROC_CERT !== 'NA' &&
+              obj.COMM_PROC_CERT !== undefined && obj.COMM_PROC_CERT !=='0'
+            "
+            (click)="btnPdfGenerateProcedings(obj.COMM_PROC_CERT+','+obj.RBK_CODE+','+obj.DIST_CODE)"
+          >
+          View
+          </button>
+          <span
+            *ngIf="
+              obj.COMM_PROC_CERT === null ||
+              obj.COMM_PROC_CERT === 'NA' ||
+              obj.COMM_PROC_CERT === undefined || obj.COMM_PROC_CERT === '0'
+            "
+            >NA</span
+          >
+        </td>  
+  
+        <td >
+          <button style="background-color: cornflowerblue;color: white;"
+          type="button"
+          class="btn btn-link btn-sm"
+          *ngIf="
+            obj.COMM_ADHOC_CERT !== null &&
+            obj.COMM_ADHOC_CERT !== 'NA' &&
+            obj.COMM_ADHOC_CERT !== undefined && obj.COMM_ADHOC_CERT !== '0'
+          "
+          (click)="btnPdfGenerateadhok(obj.COMM_ADHOC_CERT+','+obj.RBK_CODE+','+obj.DIST_CODE)"
+        >
+        View
+        </button>
+        <span
+          *ngIf="
+            obj.COMM_ADHOC_CERT === null ||
+            obj.COMM_ADHOC_CERT === 'NA' ||
+            obj.COMM_ADHOC_CERT === undefined ||  obj.COMM_ADHOC_CERT === '0'
+          "
+          >NA</span
+        > 
+        </td>  
+  
+      
+  
+  
+  
+     
+  
+                  </tr>
+                </tbody>
+              </table>
+          
+            </div>
+  
+            </div>
+            
+  
+      </div> 
+  
+  </div>
+  </div>
+  </div>
+
+<div id="REJECTED"   [(ngModel)]="REJECTED">
+   <div class="card">  
+    <div class="card-header p-12" style="background-color:rgb(80, 188, 255);"> 
+      <div class="row">
+        <div class="col-md-12" style="text-align: center;">
+        <h5 class="mb-0  text-uppercase text-muted mb-1"><span style="color:white;">   DOCUMENTS ROLLBACK LIST</span></h5>
+        </div> 
+    </div> 
+  </div> 
+  
+  
+  <div class="card-body">
+    <div class="row"> 
+      <div class="col-md-4">
+      <div class="form-group"> </div></div>
+     
+      <div class="col-md-2">
+        <div class="form-group"> <span style="text-align:right;">  Select RSK NAME:  </span>
+        </div></div>
+
+        <div class="col-md-4">
+            <div class="form-group">   
+
+          <select
+            id="rbkRejectId"
+            class="form-control"
+            [(ngModel)]="mdssDetailsReq.rbkRejectId"
+            (change)="onRbkRejectChange()"
+          >
+            <option value="">-- SELECT RSK --</option>
+            <option value="{{ obj.RBK_ID }}" *ngFor="let obj of mdssDetailsRejectedLIST">
+              {{ obj.RBK_NAME }}
+            </option>
+          </select>
+        </div>
+      </div> 
+    </div>
+<div  *ngIf="divreject" >  
+    <div class="row">
+      <div class="col-md-12">
+        <hr style="border-color: red;">
+      </div>
+    </div>
+
+    <div class="row">        
+      
+      <div class="col-md-12"  style="text-align: left;">
+        <h6><b>EMPTY DOCUMENTS DOWNLOAD :-</b> </h6>
+      </div> 
+      
+    </div><br>
+      <div class="row">  
+        
+        <div class="col-md-3">
+          <label>FORM-A : </label>
+          <button
+            type="button"
+            class="btn btn-link btn-sm"
+            (click)="btnViewFormAfp('1')"
+          >         
+            VIEW
+          </button>
+        </div>
+
+        <div class="col-md-3">
+          <label>SWORN STATEMENT : </label>
+          <button
+            type="button"
+            class="btn btn-link btn-sm"
+            (click)="btnViewSWORNSTATEMENTEMPTY('1')"
+          >
+                     VIEW
+          </button>
+        </div>
+        <div class="col-md-3">
+          <label>PROCEEDINGS OF MEETING : </label>
+          <button
+            type="button"
+            class="btn btn-link btn-sm"
+            (click)="btnViewPROCEEDINGSOFTHEMEETINGDoc('1')"
+          >
+            VIEW
+          </button>
+        </div>
+		
+		<div class="col-md-3">
+          <label>ADHOC COMMITTEE : </label>
+          <button
+            type="button"
+            class="btn btn-link btn-sm"
+            (click)="btnViewAdhocCommitteeDoc('1')"
+          >
+            VIEW
+          </button>
+        </div>
+
+        <div class="col-md-3">
+          <label>ECONOMIC VIABILITY : </label>
+          <button
+            type="button"
+            class="btn btn-link btn-sm"
+            (click)="btnViewEconomicViabilityDoc('1')"
+          >
+            VIEW
+          </button>
+        </div>
+
+        <div class="col-md-3">
+          <label>BYE LAWS DOCUMENT : </label>
+          <button
+            type="button"
+            class="btn btn-link btn-sm"
+            (click)="btnViewByLawsDoc('1')"
+          >
+            VIEW
+          </button>
+        </div>
+        <div class="col-md-3">
+          <label>FEASIBILITY REPORT : </label>
+          <button
+            type="button"
+            class="btn btn-link btn-sm"
+            (click)="btnViewFeasibility('1')"
+          >
+            VIEW
+          </button>
+        </div>
+
+         
+
+        <div class="row col-md-12">
+           
+          <div class="col-md-3">
+            <label>MASUDHA FORM : </label> 
+              
+            <button type="button"
+              class="btn btn-link btn-sm"
+              (click)="btnViewMasudhaForm('1')"
+            >
+              VIEW
+            </button>
+          
+          </div>
+  
+          <div  class="col-md-3">
+            <label>BANK REMITTANCE FORM : </label>
+            <button  type="button"
+              class="btn btn-link btn-sm"
+              (click)="btnDocumentDownload(bankRemittanceFormUrl)"
+            >
+              VIEW
+            </button>
+          </div>
+        
+   
+
+         
+
+
+        </div> 
+
+    
+        <div class="col-md-12">
+          <hr style="border-color: red;">
+        </div>
+    <div class="row">
+      <div class="col-md-12">
+        <hr style="border-color: red;">
+      </div></div>
+      <div class="row col-md-12">        
+         
+        <div class="col-md-12"  style="text-align: left;">
+          <h6><b>UPLOADED DOCUMENTS :-</b>   </h6>
+        </div> 
+        
+      </div>
+
+      <div class="row">
+          <div class="col-md-12">
+      <div   *ngFor="let obj of mandalLevelDetails; let i = index">
+       
+<button  type="button" class="btn btn-link btn-sm" (click)="btnPdfView(obj.FORM_A_PDF)" style="background-color:rgb(80, 188, 255);color: white;size: 14px;font: weight bold 16px;FONT-WEIGHT: BOLD;width: 215px;"      >
+FORM-A View   </button> 
+<button  type="button" class="btn btn-link btn-sm"  (click)="btnPdfView(obj.SWORN_STATEMENT_PDF)"  style="background-color:rgb(80, 188, 255);color: white;size: 14px;font: weight bold 16px;FONT-WEIGHT: BOLD;width: 215px;"      >
+SWORN STATEMENT View </button>
+<button  type="button" class="btn btn-link btn-sm"  (click)="btnPdfView(obj.MASUDHA_FORM_PDF)" style="background-color:rgb(80, 188, 255);color: white;size: 14px;font: weight bold 16px;FONT-WEIGHT: BOLD;width: 215px;"      >
+MASUDHA FORM View  </button>
+<button  type="button" class="btn btn-link btn-sm"  (click)="btnPdfView(obj.MEETING_PROCEDINGS_PDF)"  style="background-color:rgb(80, 188, 255);color: white;size: 14px;font: weight bold 16px;FONT-WEIGHT: BOLD;width: 215px;"      >
+MEETING PROCEEDINGS View </button> <br>
+<!-- </div></div>
+<div class="row">
+  <div class="col-md-12"> -->
+<button  type="button" class="btn btn-link btn-sm" (click)="btnPdfView(obj.REQ_LETTER_ADHOCK_COM_PDF)" style="background-color:rgb(80, 188, 255);color: white;size: 14px;font: weight bold 16px;FONT-WEIGHT: BOLD;width: 215px;"      >
+REQ LETTER ADHOC COMMITTEE View   </button>
+<button  type="button" class="btn btn-link btn-sm"  (click)="btnPdfView(obj.ECONOMIC_VIABILITY_REP_PDF)" style="background-color:rgb(80, 188, 255);color: white;size: 14px;font: weight bold 16px;FONT-WEIGHT: BOLD;width: 215px;"      >
+ECONOMIC VIABILITY REPORTView  </button>
+<button  type="button" class="btn btn-link btn-sm"  (click)="btnPdfView(obj.BANK_REMITTANCE_CERTI_PDF)" style="background-color:rgb(80, 188, 255);color: white;size: 14px;font: weight bold 16px;FONT-WEIGHT: BOLD;width: 215px;"      >
+BANK REMITTANCE CERTI View  </button> 
+<button  type="button" class="btn btn-link btn-sm"   (click)="btnPdfView(obj.BYE_LAW_PDF)" style="background-color:rgb(80, 188, 255);color: white;size: 14px;font: weight bold 16px;FONT-WEIGHT: BOLD;width: 215px;"      >
+BYE-LAWS View </button><br>
+<!-- </div></div>
+<div class="row">
+  <div class="col-md-2"> -->
+<button  type="button" class="btn btn-link btn-sm" (click)="btnPdfView(obj.FESABILITY_REPORT_PDF)" style="background-color:rgb(80, 188, 255);color: white;size: 14px;font: weight bold 16px;FONT-WEIGHT: BOLD;width: 215px;"      >
+FEASIBILITY View   </button> 
+ 
+ 
+     <br>
+     <div class="col-md-12">
+      <hr style="border-color: red;">
+    </div>
+      
+      <h6><b>REJECT REMARKS :-</b></h6> <h6></h6>
+      <span>{{ obj.REMARKS }}</span>     
+    
+     
+      </div>
+    
+    </div>
+  
+  </div>
+
+
+
+     
+  <div class="col-md-12">
+    <hr style="border-color: red;">
+  </div>
+
+
+  <div class="row">
+    
+    <div class="col-md-12"><br>
+      <hr style="border-color: red;">
+    </div></div>
+
+<br>
+
+
+<hr style="border-color: red;">
+
+<div class="row">  
+  <br>
+  <div class="col-md-2">
+    <br>
+    <div class="form-group"> <span style="text-align:right;">  SELECT UPLOAD DOCUMENT:  </span>
+    </div></div>
+
+    <div class="col-md-3">
+      <br>
+        <div class="form-group">   
+
+      <select
+        id="DOCSId"
+        class="form-control"
+        [(ngModel)]="DOCSId"
+        
+      >
+        <option value="">-- SELECT UPLOAD DOCU'S --</option>
+        <option value="{{ obj.SUB_CODE }}" *ngFor="let obj of mdssDOCSLIST">
+          {{ obj.H_NAME }}
+        </option>
+      </select>
+    </div> </div>   <div class="col-md-1"><label for="formASignedCopyUpload"
+      > 
+      <span style="color: red"
+        >* <small class="text-danger"> (PDF,Max 2MB) </small></span
+      >
+    </label></div>
+    <div class="col-md-3">
+      <br>
+    <div class="form-group">
+      
+      <input [(ngModel)]="formUpload"
+        type="file"
+        class="form-control p-0"
+        id="formUpload"
+        (change)="onFormRejectChange($event)"
+        accept="application/pdf"
+        #formASignedCopyUpload
+        
+        autocomplete="off"
+      />
+    </div> 
+    </div>
+    <div class="col-md-2">
+      <br>
+      <div class="form-group">
+
+    <button
+    type="button"
+    class="btn btn-success btn-sm"
+    (click)="btnuploaddocSubmit()"
+    >
+
+    Upload Document
+    </button>
+
+    </div></div>
+
+
+</div>
+
+
+<div class="row">
+  <div class="col-md-12">
+    <hr style="border-color: red;">
+  </div></div>
+
+
+<div class="row"> 
+ 
+<div class="col-md-12" align="center" style="display: none;">
+  <br>
+<button  type="button" class="btn btn-success btn-sm" (click)="btnRejectSUBMITTODLCO()"> SUBMIT TO DLCO  </button>
+
+
+
+</div>
+</div>
+
+</div>
+
+    <!-- <div class="row p-3" *ngIf="noDataMessage !== ''">
+      <div class="col-md-12">
+        <h5 class="text-center text-danger">{{ noDataMessage }}</h5>
+      </div>
+    </div> -->
+  </div>
+
+</div>  
+</div>
+ 

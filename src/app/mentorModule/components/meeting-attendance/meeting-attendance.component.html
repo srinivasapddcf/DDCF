@@ -1,0 +1,217 @@
+<div class="card">
+  <div class="card-header p-2">
+    <h5 class="mb-0">MEETING ATTENDANCE</h5>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="rbkId">RSK <span style="color: red">*</span></label>
+          <select
+            id="rbkId"
+            class="form-control"
+            [(ngModel)]="meetingData.rbkId"
+            (change)="onRbkChange()"
+          >
+            <option value="">-- SELECT RSK --</option>
+            <option value="{{ obj.RBK_ID }}" *ngFor="let obj of rbkList">
+              {{ obj.RBK_NAME }}
+            </option>
+          </select>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="villageId"
+            >VILLAGE <span style="color: red">*</span></label
+          >
+          <select
+            id="villageId"
+            class="form-control"
+            [(ngModel)]="meetingData.villageId"
+            (change)="onVillageChange()"
+          >
+            <option value="">-- SELECT VILLAGE --</option>
+            <option
+              value="{{ obj.VILLAGE_ID }}"
+              *ngFor="let obj of villageList"
+            >
+              {{ obj.VILLAGE_NAME }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="col-md-4 p-4" align="right">
+        <button
+          type="button"
+          class="btn btn-success btn-sm"
+          (click)="btnAddAttende()"
+        >
+          Add Attende
+        </button>
+      </div>
+
+      <div class="col-md-12 table-responsive" [hidden]="personList?.length < 1">
+        <table
+          class="table table-striped ah-table text-center"
+          datatable
+          [dtOptions]="dtOptions"
+          [dtTrigger]="dtTrigger"
+        >
+          <thead class="bg-success text-white">
+            <tr>
+              <th>S.No.</th>
+              <th>CITIZEN NAME</th>
+              <th>AGE</th>
+              <th>GENDER</th>
+              <th>MOBILE NUMBER</th>
+              <th>ATTENDANCE STATUS</th>
+              <th>ACTION</th>
+            </tr>
+          </thead>
+          <tbody *ngIf="personList?.length > 0">
+            <tr *ngFor="let obj of personList; let i = index">
+              <td>{{ i + 1 }}</td>
+              <td>
+                <b>{{ obj.CITIZEN_NAME }}</b>
+              </td>
+              <td>{{ obj.AGE }}</td>
+              <td>{{ obj.GENDER }}</td>
+              <td>{{ obj.MOBILE_NUMBER }}</td>
+              <td>
+                <span
+                  *ngIf="obj.ATTENDANCE_STATUS === '1'"
+                  style="color: green"
+                >
+                  Attendance Taken
+                </span>
+                <span *ngIf="obj.ATTENDANCE_STATUS === '0'" style="color: red">
+                  Pending
+                </span>
+              </td>
+              <td>
+                <button
+                  type="button"
+                  class="btn btn-success btn-sm"
+                  *ngIf="obj.ATTENDANCE_STATUS === '0'"
+                  (click)="btnMarkAttendance(obj)"
+                >
+                  Mark Attendance
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="popup-modal" *ngIf="addAttendePopUp">
+  <div class="popup-content">
+    <div class="popup-header">
+      <h4 class="title">ATTENDANCE OF PERSON</h4>
+      <a
+        type="button"
+        class="close"
+        (click)="addAttendePopUp = false"
+        style="cursor: pointer"
+      >
+        <span>×</span>
+      </a>
+    </div>
+
+    <div class="popup-body">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="form-group">
+            <label for="uidNum">
+              AADHAAR NUMBER : <span style="color: red">*</span>
+            </label>
+            <input
+              id="uidNum"
+              type="password"
+              class="form-control"
+              placeholder="Enter Aadhaar Number"
+              [(ngModel)]="meetingData.uidNum"
+              maxlength="12"
+              NumbersOnly
+              [allowDecimals]="false"
+              [allowSign]="false"
+              autocomplete="off" (keyup)="secretaryuidNummaskIputData($event.target.value)"	
+            />
+            <button
+              type="button"
+              class="btn btn-success btn-sm"
+              (click)="btnSearch()"
+            >
+              Search
+            </button>
+          </div>
+
+          <div
+            class="form-group"
+            *ngIf="personDetails.CITIZEN_NAME !== ''"
+            style="padding-left: 40px"
+          >
+            <label for="citizenName">
+              CITIZEN NAME :
+              <span style="color: green">
+                {{ personDetails.CITIZEN_NAME }}</span
+              >
+            </label>
+          </div>
+          <div
+            class="form-group"
+            *ngIf="personDetails.AGE !== ''"
+            style="padding-left: 40px"
+          >
+            <label for="age">
+              AGE : <span style="color: green"> {{ personDetails.AGE }}</span>
+            </label>
+          </div>
+          <div
+            class="form-group"
+            *ngIf="personDetails.GENDER !== ''"
+            style="padding-left: 40px"
+          >
+            <label for="longitude">
+              GENDER :
+              <span style="color: green"> {{ personDetails.GENDER }}</span>
+            </label>
+          </div>
+          <div
+            class="form-group"
+            *ngIf="personDetails.MOBILE_NUMBER !== ''"
+            style="padding-left: 40px"
+          >
+            <label for="noOfFarmers">
+              MOBILE NUMBER :
+              <span style="color: green">
+                {{ personDetails.MOBILE_NUMBER }}</span
+              >
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="popup-footer justify-content-center" *ngIf="singleAttenBtn">
+      <button
+        type="button"
+        class="btn btn-outline-success btn-sm btn-rounded"
+        (click)="btnMarkSingleAttendance()"
+      >
+        MARK ATTENDANCE
+      </button>
+      <button
+        type="button"
+        class="btn btn-outline-danger btn-sm btn-rounded"
+        (click)="addAttendePopUp = false"
+      >
+        Close
+      </button>
+    </div>
+  </div>
+</div>

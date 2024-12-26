@@ -1,0 +1,351 @@
+<div class="card">
+  <div class="card-header p-2">
+    <h5 class="mb-0">OTHER FACILITIES AT SITE</h5>
+  </div>
+  <div class="card-body amulBuildingInspection">
+    <div class="row">
+      <div class="col-md-3">
+        <div class="form-group">
+          <label for="rbkId">RSK <span style="color: red">*</span></label>
+          <select
+            id="rbkId"
+            class="form-control"
+            [(ngModel)]="otherFeacilitiesInputSub.rbkId"
+            (change)="onRbkChange()"
+          >
+            <option value="">-- SELECT RSK --</option>
+            <option value="{{ obj.RBK_ID }}" *ngFor="let obj of rbkList">
+              {{ obj.RBK_NAME }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="form-group">
+          <label for="villageId"
+            >VILLAGE <span style="color: red">*</span></label
+          >
+          <select
+            id="villageId"
+            class="form-control"
+            [(ngModel)]="otherFeacilitiesInputSub.villageId"
+            (change)="onVillageChange()"
+          >
+            <option value="">-- SELECT VILLAGE --</option>
+            <option
+              value="{{ obj.VILLAGE_ID }}"
+              *ngFor="let obj of villageList"
+            >
+              {{ obj.VILLAGE_NAME }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="form-group pt-4">
+          <label
+            >WORK ID :
+            <span class="text-success">{{
+              otherFeacilitiesInputSub.workId
+            }}</span></label
+          >
+        </div>
+      </div>
+    </div>
+
+    <div class="row" *ngIf="otherFeacilitiesCheck">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label
+            >AVAILABILITY OF THE WATER-BOREWELL :
+            <span
+              class="text-success"
+              *ngIf="otherFeacilitiesCheckDetails.OF_AVI_WATER_BOREWELL === '1'"
+              >YES</span
+            >
+            <span
+              class="text-danger"
+              *ngIf="otherFeacilitiesCheckDetails.OF_AVI_WATER_BOREWELL !== '1'"
+              >NO</span
+            ></label
+          >
+          <br />
+          <span
+            style="color: blue; text-decoration: underline; cursor: pointer"
+            *ngIf="otherFeacilitiesCheckDetails.OF_AVI_WATER_BOREWELL === '1'"
+            (click)="
+              btnViewImage(
+                otherFeacilitiesCheckDetails.OF_AVI_WATER_BOREWELL_IMG
+              )
+            "
+            >VIEW IMAGE</span
+          >
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="form-group">
+          <label
+            >AVAILABILITY OF THE DRAINAGE :
+            <span
+              class="text-success"
+              *ngIf="otherFeacilitiesCheckDetails.OF_AVI_DRINAGE === '1'"
+              >YES</span
+            >
+            <span
+              class="text-danger"
+              *ngIf="otherFeacilitiesCheckDetails.OF_AVI_DRINAGE !== '1'"
+              >NO</span
+            ></label
+          >
+          <br />
+          <span
+            style="color: blue; text-decoration: underline; cursor: pointer"
+            *ngIf="otherFeacilitiesCheckDetails.OF_AVI_DRINAGE === '1'"
+            (click)="
+              btnViewImage(otherFeacilitiesCheckDetails.OF_AVI_DRINAGE_IMG)
+            "
+            >VIEW IMAGE</span
+          >
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="form-group">
+          <label
+            >AVAILABILITY OF THE SEWAGE CONNECTIVITY :
+            <span
+              class="text-success"
+              *ngIf="otherFeacilitiesCheckDetails.OF_AVI_SEWAGE_CONNECT === '1'"
+              >YES</span
+            >
+            <span
+              class="text-danger"
+              *ngIf="otherFeacilitiesCheckDetails.OF_AVI_SEWAGE_CONNECT !== '1'"
+              >NO</span
+            ></label
+          >
+          <br />
+          <span
+            style="color: blue; text-decoration: underline; cursor: pointer"
+            *ngIf="otherFeacilitiesCheckDetails.OF_AVI_SEWAGE_CONNECT === '1'"
+            (click)="
+              btnViewImage(
+                otherFeacilitiesCheckDetails.OF_AVI_SEWAGE_CONNECT_IMG
+              )
+            "
+            >VIEW IMAGE</span
+          >
+        </div>
+      </div>
+    </div>
+
+    <div class="row" *ngIf="otherFeacilitiesInput">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label
+            >AVAILABILITY OF THE WATER-BOREWELL
+            <sup class="text-danger h6">*</sup></label
+          >
+          <div class="ah-radio-buttons">
+            <div class="custom-control custom-radio custom-control-inline">
+              <input
+                class="custom-control-input"
+                type="radio"
+                name="availabilityOfWater"
+                id="availabilityOfWater1"
+                value="1"
+                [(ngModel)]="otherFeacilitiesInputSub.availabilityOfWater"
+                autocomplete="off"
+                (change)="availabilityOfWaterChange()"
+              />
+              <label class="custom-control-label" for="availabilityOfWater1">
+                Yes
+              </label>
+            </div>
+
+            <div class="custom-control custom-radio custom-control-inline">
+              <input
+                class="custom-control-input"
+                type="radio"
+                name="availabilityOfWater"
+                id="availabilityOfWater2"
+                value="0"
+                [(ngModel)]="otherFeacilitiesInputSub.availabilityOfWater"
+                autocomplete="off"
+                (change)="availabilityOfWaterChange()"
+              />
+              <label class="custom-control-label" for="availabilityOfWater2">
+                No
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="col-md-6"
+        *ngIf="otherFeacilitiesInputSub.availabilityOfWater === '1'"
+      >
+        <div class="form-group">
+          <label for="availabilityOfWaterImage"
+            >AVAILABILITY OF THE WATER-BOREWELL PHOTO
+            <span style="color: red;font-size: small;">* (JPEG and  less than 100KB) </span>
+          </label>
+          <input
+            type="file"
+            class="form-control p-0"
+            id="availabilityOfWaterImageUpload"
+            (change)="availabilityOfWaterImageChange($event)"
+            accept="image/*"
+            autocomplete="off"
+            #waterBorewellPhotoUpload
+          />
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="form-group">
+          <label
+            >AVAILABILITY OF THE DRAINAGE
+            <sup class="text-danger h6">*</sup></label
+          >
+          <div class="ah-radio-buttons">
+            <div class="custom-control custom-radio custom-control-inline">
+              <input
+                class="custom-control-input"
+                type="radio"
+                name="availabilityOfDrainage"
+                id="availabilityOfDrainage1"
+                value="1"
+                [(ngModel)]="otherFeacilitiesInputSub.availabilityOfDrainage"
+                autocomplete="off"
+                (change)="availabilityOfDrainageChange()"
+              />
+              <label class="custom-control-label" for="availabilityOfDrainage1">
+                Yes
+              </label>
+            </div>
+
+            <div class="custom-control custom-radio custom-control-inline">
+              <input
+                class="custom-control-input"
+                type="radio"
+                name="availabilityOfDrainage"
+                id="availabilityOfDrainage2"
+                value="0"
+                [(ngModel)]="otherFeacilitiesInputSub.availabilityOfDrainage"
+                autocomplete="off"
+                (change)="availabilityOfDrainageChange()"
+              />
+              <label class="custom-control-label" for="availabilityOfDrainage2">
+                No
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="col-md-6"
+        *ngIf="otherFeacilitiesInputSub.availabilityOfDrainage === '1'"
+      >
+        <div class="form-group">
+          <label for="availibilityOfDrainage"
+            >AVAILABILITY OF THE DRAINAGE PHOTO<span style="color: red">*</span>
+          </label>
+          <input
+            type="file"
+            class="form-control p-0"
+            id="availabilityOfDrainageImageUpload"
+            (change)="availabilityOfDrainageImageChange($event)"
+            accept="image/*"
+            autocomplete="off"
+            #drainagePhotoUpload
+          />
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="form-group">
+          <label
+            >AVAILABILITY OF THE SEWAGE CONNECTIVITY :
+            <sup class="text-danger h6">*</sup></label
+          >
+          <div class="ah-radio-buttons">
+            <div class="custom-control custom-radio custom-control-inline">
+              <input
+                class="custom-control-input"
+                type="radio"
+                name="availabilityOfSewageConnect"
+                id="availabilityOfSewageConnect1"
+                value="1"
+                [(ngModel)]="
+                  otherFeacilitiesInputSub.availabilityOfSewageConnect
+                "
+                autocomplete="off"
+                (change)="availabilityOfSewageConnectChange()"
+              />
+              <label
+                class="custom-control-label"
+                for="availabilityOfSewageConnect1"
+              >
+                Yes
+              </label>
+            </div>
+
+            <div class="custom-control custom-radio custom-control-inline">
+              <input
+                class="custom-control-input"
+                type="radio"
+                name="availabilityOfSewageConnect"
+                id="availabilityOfSewageConnect2"
+                value="0"
+                [(ngModel)]="
+                  otherFeacilitiesInputSub.availabilityOfSewageConnect
+                "
+                autocomplete="off"
+                (change)="availabilityOfSewageConnectChange()"
+              />
+              <label
+                class="custom-control-label"
+                for="availabilityOfSewageConnect2"
+              >
+                No
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="col-md-6"
+        *ngIf="otherFeacilitiesInputSub.availabilityOfSewageConnect === '1'"
+      >
+        <div class="form-group">
+          <label for="sewageConnectivity"
+            >SEWAGE CONNECTIVITY PHOTO<span style="color: red">*</span>
+          </label>
+          <input
+            type="file"
+            class="form-control p-0"
+            id="availabilityOfSewageConnectImgUpload"
+            (change)="availabilityOfSewageConnectImgChange($event)"
+            accept="image/*"
+            autocomplete="off"
+            #sewageConnectivityPhotoUpload
+          />
+        </div>
+      </div>
+      <div class="col-md-12" align="center">
+        <button
+          type="button"
+          class="btn btn-success btn-sm"
+          (click)="btnSubmit()"
+        >
+          SUBMIT
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

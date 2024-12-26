@@ -1,0 +1,275 @@
+<div class="card">
+    <div class="card-header p-2">
+      <h5 class="mb-0">MDSS FOLLOWUP ABSTRACT REPORT</h5>
+    </div>
+    <div class="card-body" *ngIf="Districtdiv">
+      <div class="row" >
+        <div class="col-md-12">
+          <button
+            type="button"
+            class="btn btn-success btn-sm pull-right"
+            (click)="btnExcel()"
+          >
+            <i class="fa fa-file-excel-o mr-2" aria-hidden="true"></i>
+            Download Excel
+          </button>
+        </div>
+        <div
+          class="col-md-12 table-responsive"
+          [hidden]="stateLevelDetails?.length < 1"
+        >
+          <table
+            class="table table-bordered ah-table text-center"
+            datatable
+            [dtOptions]="dtOptions"
+            [dtTrigger]="dtTrigger"
+          >
+            <thead class="bg-success text-white">
+              <tr>
+                <th>S.No.</th>
+                <th>DISTRICT NAME</th>
+                <th >NO OF RSKS NOT ELIGIBLE FOR MDSS REGISTRATION</th>
+                <th>TOTAL NO OF REGISTERED FARMERS</th>
+                <th>NO OF MILK POURED FARMERS</th>
+                <th>NO OF ELIGIBLE FARMERS</th>
+                <th>NO OF NOT ELIGIBLE FARMERS</th>
+              </tr>
+            </thead>
+            <tbody *ngIf="stateLevelDetails?.length > 0">
+              <tr *ngFor="let obj of stateLevelDetails; let i = index">
+                <td>{{ i + 1 }}</td>
+                 <td style="text-align: left;">
+                  <a
+                    style="cursor: pointer; text-decoration: underline"
+                    class="text-primary"
+                    (click)="btnDistrictDetails(obj)"
+                    ><b>{{ obj.DISTRICT }}</b></a
+                  > 
+                 </td>
+                <!-- <td>{{obj.DISTRICT}}</td> -->
+                <td>{{ obj.NO_NOT_ELIGIBLE_RBKS }}</td>
+                <td>{{ obj.TOTAL_FARMERS_CNT | indianNumber}}</td>
+                <td>{{ obj.MILK_POURED_FARMER_CNT | indianNumber }}</td>
+                <td>{{ obj.ELIGIBLE_FARMER_CNT | indianNumber }}</td>
+                <td>{{ obj.NOT_ELIGIBLE_FARMER_CNT | indianNumber }}</td>
+              </tr>
+            </tbody>
+
+            <tbody *ngIf="stateLevelDetails?.length > 0">
+                <tr>
+                  <td>--</td>
+                  <td>
+                    <b>TOTAL</b>
+                  </td>
+                  <td>{{ reportTotals1.NO_NOT_ELIGIBLE_RBKS | indianNumber }}</td>
+                  <td>{{ reportTotals1.TOTAL_FARMERS_CNT | indianNumber }}</td>
+                  <td>{{ reportTotals1.MILK_POURED_FARMER_CNT | indianNumber }}</td>
+                  <td>{{ reportTotals1.ELIGIBLE_FARMER_CNT | indianNumber }}</td>
+                  <td>
+                    {{ reportTotals1.NOT_ELIGIBLE_FARMER_CNT | indianNumber }}
+                  </td>
+                </tr>
+              </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="card-body" *ngIf="rbkdiv">
+    <div class="row" > 
+      <div class="col-md-12 table-responsive headertable">
+        <div class="col-md-12 row">
+          <div class="col-md-3">
+            <label>
+                DISTRICT :
+                <span class="text-success">
+                  <b> {{ DISTRICT }}</b>
+                </span>
+              </label>
+        </div>
+        <div class="col-md-3"></div>
+        <div class="col-md-3"></div>
+        <div class="col-md-3">
+          <button
+                  type="button"
+                  class="btn btn-sm btn-info pull-right"
+                  (click)="btnback()"
+                >Back</button>
+      </div>
+  
+  
+        </div>
+        <div class="col-md-12">
+          <button
+            type="button"
+            class="btn btn-success btn-sm pull-right"
+            (click)="btnrbkExcel()"
+          >
+            <i class="fa fa-file-excel-o mr-2" aria-hidden="true"></i>
+            Download Excel
+          </button>
+        </div>
+        
+       <div
+          class="col-md-12 table-responsive"
+          [hidden]="districtLevelDetails?.length < 1"
+        >
+          <table
+            class="table table-striped ah-table text-center"
+            datatable
+            [dtOptions]="dtOptions"
+            [dtTrigger]="dtTrigger"
+          >
+            <thead class="bg-success text-white">
+              <tr>
+                <th>S.No.</th>
+                 
+                <th>RSK NAME</th>
+                <th>TOTAL NO OF REGISTERED FARMERS</th>
+                <th>NO OF MILK POURED FARMERS</th>
+                <th>NO OF ELIGIBLE FARMERS</th>
+                <th>NO OF NOT ELIGIBLE FARMERS</th>
+              </tr>
+            </thead>
+            <tbody *ngIf="districtLevelDetails?.length > 0">
+              <tr *ngFor="let obj of districtLevelDetails; let i = index">
+                <td>{{ i + 1 }}</td>
+                 
+                <td style="text-align: left;">{{ obj.RBK_NAME }}</td>
+                <td>{{ obj.TOTAL_FARMERS_CNT | indianNumber }}</td>
+                <td>{{ obj.MILK_POURED_FARMER_CNT | indianNumber }}</td>
+                <td><a 
+                  style="cursor: pointer; text-decoration: underline"
+                  class="text-primary"
+                  (click)="btneligiblefrmDetails(obj)">
+                  <b>{{ obj.ELIGIBLE_FARMER_CNT }}</b></a
+                > </td>
+                <td>
+                  <a
+                  style="cursor: pointer; text-decoration: underline"
+                  class="text-primary"
+                  (click)="btnnoteligfrmDetails(obj)"
+                  ><b>{{ obj.NOT_ELIGIBLE_FARMER_CNT }}</b></a
+                >
+                </td>
+              </tr>
+            </tbody>
+            <tbody *ngIf="districtLevelDetails?.length > 0">
+              <tr>
+                 
+                <td>
+                  <b>TOTAL</b>
+                </td>
+                <td>{{ reportTotals2.RBK_NAME | indianNumber }}</td>
+                <td>{{ reportTotals2.TOTAL_FARMERS_CNT | indianNumber }}</td>
+                <td>{{ reportTotals2.MILK_POURED_FARMER_CNT | indianNumber }}</td>
+                <td>{{ reportTotals2.ELIGIBLE_FARMER_CNT | indianNumber }}</td>
+                <td>
+                  {{ reportTotals2.NOT_ELIGIBLE_FARMER_CNT | indianNumber }}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    </div>
+
+    <div class="card-body" *ngIf="eligblefrm">
+      <div class="row" > 
+        <div class="col-md-12 table-responsive headertable">
+          <div class="col-md-12 row">
+            <div class="col-md-3">
+              <label>
+                  DISTRICT :
+                  <span class="text-success">
+                    <b> {{ DISTRICT }}</b>
+                  </span>
+                </label>
+          </div>
+            <div class="col-md-3">
+              <label>
+                RSK Name :
+                  <span class="text-success">
+                    <b> {{ RBKname }}</b>
+                  </span>
+                </label>
+          </div>
+           
+          <div class="col-md-3"></div>
+          <div class="col-md-3">
+            <button
+                    type="button"
+                    class="btn btn-sm btn-info pull-right"
+                    (click)="btnrbkback()"
+                  >Back</button>
+        </div>
+    
+    
+          </div>
+          <div class="col-md-12">
+            <button
+              type="button"
+              class="btn btn-success btn-sm pull-right"
+              (click)="btneligibleExcel()"
+            >
+              <i class="fa fa-file-excel-o mr-2" aria-hidden="true"></i>
+              Download Excel
+            </button>
+          </div>
+          
+         <div
+            class="col-md-12 table-responsive"
+            [hidden]="EligiblefrmDetails?.length < 1"
+          >
+            <table
+              class="table table-striped ah-table text-center"
+              datatable
+              [dtOptions]="dtOptions"
+              [dtTrigger]="dtTrigger"
+            >
+              <thead class="bg-success text-white">
+                <tr>
+                  <th>S.No.</th>
+                  <th>DISTRICT NAME</th>
+                  <th>RSK NAME</th>
+                  <th>RIC MOBILE NUMBER</th>
+                  <th>RIC NAME</th>
+                  <th>SOCIETY CODE</th>
+                  <th>VILLAGE NAME</th>
+                  <th>FARMER CODE</th>
+                  <th>FARMER NAME</th>
+                  <th>FARMER MOBILE NUMBER</th>
+                  <th>NO OF DAYS MILK POURED</th>
+                  <th>MILK POURED LAST DATE</th>
+                </tr>
+              </thead>
+              <tbody *ngIf="EligiblefrmDetails?.length > 0">
+                <tr *ngFor="let obj of EligiblefrmDetails; let i = index">
+                  <td>{{ i + 1 }}</td>
+                  <td>{{ obj.DISTRICT }}</td>
+                  <td>{{ obj.RBK_NAME }}</td>
+                  <td>{{ obj.RIC_MOBILE_NO}}</td>
+                  <td>{{ obj.RIC_NAME }}</td>
+                  <td>{{ obj.SOCIETY_CODE }}</td>
+                  <td>{{ obj.VILLAGE_NAME}}</td>
+                  <td>{{ obj.FARMER_CODE}}</td>
+                  <td>{{ obj.FARMER_NAME }}</td>
+                  <td>{{ obj.MOBILE_NUMBER}}</td>
+                  <td>{{ obj.NO_OF_DAYS_MILK_POURED | indianNumber }}</td>
+                  <td>{{ obj.LAST_DATE}}</td>
+                  
+                </tr>
+              </tbody>
+               
+            </table>
+          </div>
+        </div>
+      </div>
+      </div>
+</div>
+  
+
+   
+  
+
+

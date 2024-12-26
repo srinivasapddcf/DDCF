@@ -1,0 +1,65 @@
+<p>meeting-images works!</p>
+ 
+<div  >
+    <input type="button" value="ClearAll"  (click)="btnsubmit()"/>
+
+    <table    class="table table-striped ah-table text-center;  table-responsive"          >
+        <thead class="bg-success text-white" >
+          <tr>
+            <th style="width:50px;">S.NO</th>
+            <th>MEETING ID</th>
+            <th>IMAGE PATH</th>
+           
+            <!-- <th>LANDIMAGES_TYPE</th>  -->
+            <th>STATUS</th> 
+            <th>IMAGES</th>
+
+        </tr>
+    </thead>
+    <tbody *ngIf="imagesList?.length > 0">
+      <tr *ngFor="let obj of imagesList; let i = index">
+        <td>{{ i + 1 }}</td>
+        <td>{{ obj.MEETING_ID }}</td>
+        <td>{{ obj.IMAGE_PATH }}</td>
+        
+        <!-- <td>{{ obj.LANDIMAGES_TYPE  }}</td> -->
+        <td> 
+            <input style="width:100% ; height: 100% ;"
+             type="checkbox" 
+            id="status"
+             name="status" 
+             value="{{obj.STATUS}}" checked
+             (click)="btnImage(obj)"
+             > </td>
+             <td><img
+                src={{obj.IMAGE.changingThisBreaksApplicationSecurity}}
+                style="cursor: pointer"
+                class="img-thumbnail mr-3"
+                 
+              /></td>
+    </tr>
+        
+</tbody>
+</table>
+
+    <!-- <div *ngFor="let obj of imagesList">
+        <div class="time-stamp-dtl wow fadeInDown" data-wow-delay="100ms">
+            <h6>{{ obj.MEETING_ID }}</h6>  
+          </div> 
+      <a
+      [href]="obj.IMAGE_PATH"
+      title="TEST"  >
+      <img class="wow fadeInDown" data-wow-delay="100ms" [src]="obj.IMAGE_PATH" />
+      </a> 
+      <div class="time-stamp-dtl wow fadeInDown" data-wow-delay="100ms">
+        <h6>{{ obj.STATUS }}</h6> 
+      </div>
+      <div class="time-stamp-dtl wow fadeInDown" data-wow-delay="100ms">
+        <h6> {{ obj.LANDIMAGES_TYPE }}  </h6>
+      </div>
+    
+
+</div> -->
+
+   </div>
+

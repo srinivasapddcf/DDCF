@@ -1,0 +1,237 @@
+<div class="card">
+  <div class="card-header p-2">
+    <h5 class="mb-0">FUNCTIONARIES DETAILS UPDATION</h5>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="rbkId">RSK <span style="color: red">*</span></label>
+          <select
+            id="rbkId"
+            class="form-control"
+            [(ngModel)]="mcuData.rbkId"
+            (change)="onRbkChange()"
+          >
+            <option value="">-- SELECT RSK --</option>
+            <option value="{{ obj.RBK_ID }}" *ngFor="let obj of rbkList">
+              {{ obj.RBK_NAME }}
+            </option>
+          </select>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="villageId"
+            >VILLAGE <span style="color: red">*</span></label
+          >
+          <select
+            id="villageId"
+            class="form-control"
+            [(ngModel)]="mcuData.villageId"
+            (change)="onVillageChange()"
+          >
+            <option value="">-- SELECT VILLAGE --</option>
+            <option
+              value="{{ obj.VILLAGE_ID }}"
+              *ngFor="let obj of villageList"
+            >
+              {{ obj.VILLAGE_NAME }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div
+        class="col-md-12 table-responsive"
+        align="center"
+        *ngIf="functionaryDetails !== ''"
+      >
+        <table class="table table-striped ah-table text-center">
+          <thead class="bg-success text-white">
+            <tr>
+              <th>DESIGNATION</th>
+              <th>NAME</th>
+              <th>MOBILE NUMBER</th>
+              <th>AADHAR NUMBER</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>ANIMAL HUSBANDRY ASSISTANT</td>
+              <td>
+                <input
+                  id="animalHusbAssitName"
+                  type="text"
+                  class="form-control"
+                  [(ngModel)]="mcuData.animalHusbAssitName"
+                  placeholder="Please Enter Animal Husbandry Assistant Name"
+                  maxlength="15"
+                  autocomplete="off"
+                />
+              </td>
+              <td>
+                <input
+                  id="animalHusbAssitMobileno"
+                  type="text"
+                  class="form-control"
+                  [(ngModel)]="mcuData.animalHusbAssitMobileno"
+                  placeholder="Please Enter Animal Husbandry Assistant Mobile Number"
+                  maxlength="10"
+                  NumbersOnly
+                  [allowDecimals]="false"
+                  [allowSign]="false"
+                  autocomplete="off"
+                />
+              </td>
+              <td>
+                <input
+                  id="animalHusbAssitUidNum"
+                  type="password"
+                  class="form-control"
+                  [(ngModel)]="animalHusbAssitUidNum"
+                  placeholder="Please Enter Animal Husbandry Assistant Aadhar Number"
+                  maxlength="12" minlength="12"    required title="12 Digits"
+                  NumbersOnly 
+                  (keyup)="animalHusbmaskIputData($event.target.value)"
+                 
+                /> 
+                <!-- (keyup)="animalHusbmaskIputData($event.target.value)" -->
+              </td>
+            </tr>
+            <tr>
+              <td>DIGITAL ASSISTANT</td>
+              <td>
+                <input
+                  id="digitalAssitName"
+                  type="text"
+                  class="form-control"
+                  [(ngModel)]="mcuData.digitalAssitName"
+                  placeholder="Please Enter Digital Assistant Name"
+                  maxlength="15"
+                  autocomplete="off"
+                />
+              </td>
+              <td>
+                <input
+                  id="digitalAssitMobileno"
+                  type="text"
+                  class="form-control"
+                  [(ngModel)]="mcuData.digitalAssitMobileno"
+                  placeholder="Please Enter Digital Assistant Mobile Number"
+                  maxlength="10"
+                  NumbersOnly
+                  [allowDecimals]="false"
+                  [allowSign]="false"
+                  autocomplete="off"
+                />
+              </td>
+              <td>
+                <input
+                  id="digitalAssitUidNum"
+                  type="password"
+                  class="form-control"
+                  [(ngModel)]="digitalAssitUidNum"
+                  placeholder="Please Enter Digital Assistant Aadhar Number"
+                  maxlength="12" 
+                  NumbersOnly 
+                  (keyup)="digitalmaskIputData($event.target.value)"
+                />
+                <!-- (keyup)="digitalmaskIputData($event.target.value)" -->
+              </td>
+            </tr>
+            <tr>
+              <td>WELFARE ASSISTANT</td>
+              <td>
+                <input
+                  id="welfareAssistantName"
+                  type="text"
+                  class="form-control"
+                  [(ngModel)]="mcuData.welfareAssistantName"
+                  placeholder="Please Enter Welfare Assistant Name"
+                  maxlength="15"
+                  autocomplete="off"
+                />
+              </td>
+              <td>
+                <input
+                  id="welfareAssistantMobileno"
+                  type="text"
+                  class="form-control"
+                  [(ngModel)]="mcuData.welfareAssistantMobileno"
+                  placeholder="Please Enter Welfare Assistant Mobile Number"
+                  maxlength="10"
+                  NumbersOnly
+                  [allowDecimals]="false"
+                  [allowSign]="false"
+                  autocomplete="off"
+                />
+              </td>
+              <td>
+                <input
+                  id="welfareAssistantUidNum"
+                  type="password"
+                  class="form-control"
+                  [(ngModel)]="welfareAssistantUidNum"
+                  placeholder="Please Enter Welfare Assistant Aadhar Number"
+                  maxlength="12" 
+                  NumbersOnly   (keyup)="welfAnimatormaskIputData($event.target.value)"
+                />
+              </td>
+              <!-- (keyup)="welfAnimatormaskIputData($event.target.value)" -->
+            </tr>
+            <tr>
+              <td>VILLAGE ANIMATOR</td>
+              <td>
+                <input
+                  id="villageAnimatorName"
+                  type="text"
+                  class="form-control"
+                  [(ngModel)]="mcuData.villageAnimatorName"
+                  placeholder="Please Enter Village Animator Name"
+                  maxlength="15"
+                  autocomplete="off"
+                />
+              </td>
+              <td>
+                <input
+                  id="villageAnimatorMobileno"
+                  type="text"
+                  class="form-control"
+                  [(ngModel)]="mcuData.villageAnimatorMobileno"
+                  placeholder="Please Enter Village Animator Mobile Number"
+                  maxlength="10"
+                  NumbersOnly
+                  [allowDecimals]="false"
+                  [allowSign]="false"
+                  autocomplete="off"
+                />
+              </td>
+              <td>
+                <input
+                  id="villageAnimatorUidNum"
+                  type="password"
+                  class="form-control"
+                  [(ngModel)]="villageAnimatorUidNum"
+                  placeholder="Please Enter Village Animator Aadhar Number"
+                  maxlength="12" (keyup)="villageAnimatormaskIputData($event.target.value)"                  
+                  autocomplete="off" NumbersOnly
+                />
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="col-md-12" align="center" *ngIf="functionaryDetails !== ''">
+        <button
+          type="button"
+          class="btn btn-success btn-sm"
+          (click)="btnSubmit()"
+        >
+          UPDATE
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

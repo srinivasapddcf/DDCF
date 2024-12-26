@@ -1,0 +1,92 @@
+<div class="row mt-3" >
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="mb-0 secondary-heading pb-0">DEAD & MIGRATION FARMER APPROVAL LIST</h5>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-12 table-responsive" [hidden]="personList?.length < 1">
+              <table
+                class="table table-striped ah-table text-center"
+                datatable
+                [dtOptions]="dtOptions"
+                [dtTrigger]="dtTrigger"
+              >
+                <thead class="bg-success text-white">
+                  <tr>
+                    <th>S.No.</th>
+                    <th>CLUSTER ID</th>
+                    <th>FARMER NAME</th>
+                    <th>MOBILE NUMBER</th>
+                    <th>AADHAAR NUMBER</th>
+                    <th>STATUS</th>
+                    <th>REMOVE_TYPE</th>
+                    <th>REASON</th>
+                    <th>ACTION TAKEN</th>
+                    <th>VERIFY</th>
+                  </tr>
+                </thead>
+                <tbody *ngIf="personList?.length > 0">
+                  <tr *ngFor="let obj of personList; let i = index">
+                    <td>{{ i + 1 }}</td>
+                    <td>{{ obj.CLUSTER_ID }}</td>
+                    <td>
+                      <b>{{ obj.NAME }}</b>
+                    </td>
+                    <td>{{ obj.MOBILE_NO }}</td>
+                    <td>XXXX-XXXX-{{ obj.UID_NUM | slice: -4 }}</td>
+                    <td>
+                      <span *ngIf="obj.REMOVE_TYPE === 'D'" class="text-danger"
+                        >Dead</span
+                      >
+                      <span *ngIf="obj.REMOVE_TYPE === 'M'" class="text-warning"
+                        >Migrated</span
+                      >
+                    </td>
+                    <td>{{ obj.REMOVE_REASON }}</td>
+                    <td>
+                      <span *ngIf="obj.STATUS === '1'" class="text-success"
+                        >Approved</span
+                      >
+                      <span *ngIf="obj.STATUS === '2'" class="text-danger"
+                        >Rejected</span
+                      ><span *ngIf="obj.STATUS === '0'" class="text-primary"
+                        >Pending</span
+                      >
+                    </td>
+                    <td>
+                      <select
+                        class="form-control"
+                        [(ngModel)]="obj.ACTION_TAKEN"
+                        *ngIf="obj.STATUS === '0'"
+                      >
+                        <option value=" ">-- SELECT ACTION --</option>
+                        <option value="1">Approve</option>
+                        <option value="2">Reject</option>
+                      </select>
+                    </td>
+                    <td>
+                      <button
+                        type="button"
+                        class="btn btn-primary btn-sm"
+                        (click)="btnVerify(obj)"
+                        *ngIf="obj.STATUS === '0'"
+                      >
+                        VERIFY
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+  
+            <div class="col-md-12" *ngIf="personList?.length < 1">
+              <h5 class="text-center">Persons Not Avaliable For Approval</h5>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

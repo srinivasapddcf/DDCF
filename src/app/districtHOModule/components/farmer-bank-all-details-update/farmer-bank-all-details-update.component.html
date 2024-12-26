@@ -1,0 +1,606 @@
+<div class="card">
+  <div class="card-header p-2">
+      <h5 class="mb-0">FARMER BANK DETAILS UPDATE</h5>
+  </div>
+  <div class="card-body">
+      <div class="row">
+          <div class="col-md-5 offset-3">
+              <div class="form-group">
+                  <div class="ah-radio-buttons" (change)="onSelectionChange()">
+                      <div class="custom-control custom-radio custom-control-inline">
+                          <input class="custom-control-input" type="radio" name="inputRadio" id="inputRadio1" value="1"
+                              [(ngModel)]="inputRadio" />
+                          <label class="custom-control-label" for="inputRadio1">
+                              AADHAAR NUMBER
+                          </label>
+                      </div>
+
+                      <div class="custom-control custom-radio custom-control-inline">
+                          <input class="custom-control-input" type="radio" name="inputRadio" id="inputRadio2" value="2"
+                              [(ngModel)]="inputRadio" />
+                          <label class="custom-control-label" for="inputRadio2">
+                              FARMER CODE
+                          </label> 
+                      </div>
+                  </div>
+                  <input id="uidNum" type="password" class="form-control" [(ngModel)]="farmerDetails.uidNum"
+                      placeholder="{{ inputPlaceHolder }}" maxlength="12" autocomplete="off" NumbersOnly [allowDecimals]="false"
+                      [allowSign]="false" (keyup)="uidNummaskIputData($event.target.value)" />
+
+                  <input id="frmNum" type="text" class="form-control" [(ngModel)]="farmerDetails.frmNum"
+                      placeholder="{{ inputPlaceHolder }}" maxlength="8" autocomplete="off" NumbersOnly [allowDecimals]="false"
+                      [allowSign]="false" />
+
+              </div>
+          </div>
+
+          <div class="col-md-3 pt-4" align="left">
+              <button type="button" class="btn btn-success btn-sm" (click)="btnUidDetails()">
+                  CHECK STATUS
+              </button>
+          </div>
+      </div>
+
+      <div *ngIf="
+        personDetails.UID_NUM !== null &&
+        personDetails.UID_NUM !== '' &&
+        personDetails.UID_NUM !== undefined
+      ">
+          <h5 class="sub-heading pb-0">
+              <label>Farmer Registration Details</label>
+          </h5>
+
+          <div class="row px-4">
+              <div class="col-md-3">
+                  <div class="form-group">
+                      <label>
+                          NAME :
+                          <span class="text-success">
+                              <b>{{ personDetails.FARMER_NAME }}</b>
+                          </span>
+                      </label>
+                  </div>
+              </div>
+              <div class="col-md-3">
+                  <div class="form-group">
+                      <label>
+                          CODE :
+                          <span class="text-success">
+                              <b>{{ personDetails.FARMER_CODE }}</b>
+                          </span>
+                      </label>
+                  </div>
+              </div>
+              <div class="col-md-3">
+                  <div class="form-group">
+                      <label>DISTRICT :
+                          <span class="text-success">
+                              <b>{{ personDetails.DISTRICT_NAME }}</b>
+                          </span>
+                      </label>
+                  </div>
+              </div>
+              <div class="col-md-3">
+                  <div class="form-group">
+                      <label>MANDAL :
+                          <span class="text-success">
+                              <b>{{ personDetails.MANDAL_NAME }}</b>
+                          </span>
+                      </label>
+                  </div>
+              </div>
+              <div class="col-md-3">
+                  <div class="form-group">
+                      <label>RSK :
+                          <span class="text-success">
+                              <b>{{ personDetails.RBK_NAME }}</b>
+                          </span>
+                      </label>
+                  </div>
+              </div>
+              <div class="col-md-3">
+                  <div class="form-group">
+                      <label>VILLAGE :
+                          <span class="text-success">
+                              <b>{{ personDetails.VILLAGE_NAME }}</b>
+                          </span>
+                      </label>
+                  </div>
+              </div>
+          </div>
+
+          <h5 class="sub-heading pb-0"><label>Mobile Number Details</label></h5>
+
+          <div class="row px-4">
+              <div class="col-md-3">
+                  <div class="form-group">
+                      <label>MOBILE NUMBER :
+                          <span class="text-success">
+                              <b>{{ personDetails.MOBILE_NUMBER }}</b>
+                          </span>
+                      </label>
+                  </div>
+              </div>
+              <div class="col-md-12" align="center">
+                  <button class="btn btn-primary btn-sm m-0 btn-rounded" type="submit" (click)="btnMobileNoPopUp()" id="button-addon2">
+                      UPDATE MOBILE NUMBER
+                  </button>
+              </div>
+          </div>
+
+          <h5 class="sub-heading pb-0"><label>Bank Details</label></h5>
+
+          <div class="row px-4">
+              <div class="col-md-3">
+                  <div class="form-group">
+                      <label>
+                          BANK ACCOUNT NUMBER :
+                          <span class="text-success">
+                              <b>{{ personDetails.ACCOUNT_NUMBER }}</b>
+                          </span>
+                      </label>
+                  </div>
+              </div>
+              <div class="col-md-3">
+                  <div class="form-group">
+                      <label>IFSC CODE :
+                          <span class="text-success">
+                              <b>{{ personDetails.IFSC_CODE }}</b>
+                          </span>
+                      </label>
+                  </div>
+              </div>
+              <div class="col-md-3">
+                  <div class="form-group">
+                      <label>BANK NAME :
+                          <span class="text-success">
+                              <b>{{ personDetails.BANK_NAME }}</b>
+                          </span>
+                      </label>
+                  </div>
+              </div>
+              <div class="col-md-3">
+                  <div class="form-group">
+                      <label>BRANCH NAME :
+                          <span class="text-success">
+                              <b>{{ personDetails.BANK_BRANCH }}</b>
+                          </span>
+                      </label>
+                  </div>
+              </div>
+              <div class="col-md-3">
+                  <div class="form-group">
+                      <label>BANK PIN CODE :
+                          <span class="text-success">
+                              <b>{{ personDetails.BANK_PINCODE }}</b>
+                          </span>
+                      </label>
+                  </div>
+              </div>
+              <div class="col-md-3">
+                  <div class="form-group">
+                      <label>MICR CODE :
+                          <span class="text-success">
+                              <b>{{ personDetails.MICR_CODE }}</b>
+                          </span>
+                      </label>
+                  </div>
+              </div>
+              <div class="col-md-3" *ngIf="personDetails.PASSBOOK_IMG !== null">
+                  <label>BANK PASSBOOK IMAGE :</label>
+                  <img [src]="'data:image/jpeg;base64,' + passBookImg" style="cursor: pointer" class="img-thumbnail mr-3"
+                      (click)="btnImage(passBookImg)" />
+              </div>
+              <div class="col-md-3" *ngIf="personDetails.PASSBOOK_IMG === null">
+                  <div class="form-group">
+                      <label>BANK PASSBOOK IMAGE :
+                          <span class="text-success">
+                              <b>NA</b>
+                          </span>
+                      </label>
+                  </div>
+              </div>
+
+              <div class="col-md-12" align="center">
+                  <button class="btn btn-primary btn-sm m-0 btn-rounded" type="submit" (click)="btnBankDetailsPopUp()" id="button-addon2">
+                      UPDATE BANK DETAILS
+                  </button>
+              </div>
+          </div>
+
+          <h5 class="sub-heading pb-0"><label>Milch Animals Details</label></h5>
+
+          <div class="row px-4">
+              <div class="col-md-3">
+                  <div class="form-group">
+                      <label>NO OF MILK POTENTIAL BUFFALO :
+                          <span class="text-success">
+                              <b>{{ personDetails.MILK_POTENTIAL_BUFFALO }}</b>
+                          </span>
+                      </label>
+                  </div>
+              </div>
+              <div class="col-md-3">
+                  <div class="form-group">
+                      <label>NO OF MILK POTENTIAL COW :
+                          <span class="text-success">
+                              <b>{{ personDetails.MILK_POTENTIAL_COW }}</b>
+                          </span>
+                      </label>
+                  </div>
+              </div>
+
+              <div class="col-md-3">
+                  <div class="form-group">
+                      <label>NO OF BUFFALO FEMALE :
+                          <span class="text-success">
+                              <b>{{ personDetails.NOOFBUFFALOFEMALE }}</b>
+                          </span>
+                      </label>
+                  </div>
+              </div>
+
+              <div class="col-md-3">
+                  <div class="form-group">
+                      <label>NO OF BUFFALO MALE :
+                          <span class="text-success">
+                              <b>{{ personDetails.NOOFBUFFALOMALE }}</b>
+                          </span>
+                      </label>
+                  </div>
+              </div>
+
+              <div class="col-md-3">
+                  <div class="form-group">
+                      <label>NO OF WHITE CATTLE FEMALE :
+                          <span class="text-success">
+                              <b>{{ personDetails.NOOFWHITECALLTEFEMALE }}</b>
+                          </span>
+                      </label>
+                  </div>
+              </div>
+
+              <div class="col-md-3">
+                  <div class="form-group">
+                      <label>NO OF WHITE CATTLE MALE :
+                          <span class="text-success">
+                              <b>{{ personDetails.NOOFWHITECATTLEMALE }}</b>
+                          </span>
+                      </label>
+                  </div>
+              </div>
+
+              <div class="col-md-3">
+                  <div class="form-group">
+                      <label>NO OF MILCH ANIMALS BUFFALO :
+                          <span class="text-success">
+                              <b>{{ personDetails.NO_OF_MILCH_ANIMALS_BUFFALO }}</b>
+                          </span>
+                      </label>
+                  </div>
+              </div>
+
+              <div class="col-md-3">
+                  <div class="form-group">
+                      <label>NO OF MILCH ANIMALS COW :
+                          <span class="text-success">
+                              <b>{{ personDetails.NO_OF_MILCH_ANIMALS_COW }}</b>
+                          </span>
+                      </label>
+                  </div>
+              </div>
+
+              <!-- <div class="col-md-12" align="center">
+          <button
+            class="btn btn-primary btn-sm m-0 btn-rounded"
+            type="submit"
+            (click)="btnAnimalsPopUp()"
+            id="button-addon2"
+          >
+            UPDATE ANIMALS DETAILS
+          </button>
+        </div> -->
+
+              <!-- <div class="col-md-12" *ngIf="personDetails.STATUS === '2'">
+          <div class="form-group">
+            <h5 class="text-danger text-center">
+              <b>
+                Volunteer survey has to be done first before updating milch
+                animals</b
+              >
+            </h5>
+          </div>
+        </div> -->
+          </div>
+      </div>
+  </div>
+</div>
+
+<div class="popup-modal" [hidden]="!mobileNumberPopUp">
+  <div class="popup-content">
+      <div class="popup-header">
+          <h4 class="title">MOBILE NUMBER UPDATE</h4>
+          <a type="button" class="close" (click)="mobileNumberPopUp = false" style="cursor: pointer">
+              <span>×</span>
+          </a>
+      </div>
+
+      <div class="popup-body">
+          <div class="row justify-content-center align-items-center">
+              <div class="col-md-12">
+                  <div class="form-group">
+                      <label for="mobileNum">
+                          Mobile Number <span style="color: red">*</span>
+                      </label>
+                      <input type="text" class="form-control" [(ngModel)]="farmerDetails.mobileNum"
+                          placeholder="Please Enter Mobile Number" maxlength="10" autocomplete="off" NumbersOnly [allowDecimals]="false"
+                          [allowSign]="false" />
+                  </div>
+              </div>
+          </div>
+      </div>
+
+      <div class="popup-footer justify-content-center">
+          <button type="button" class="btn btn-outline-success btn-sm btn-rounded" (click)="btnMobileNoUpdate()">
+              UPDATE
+          </button>
+          <button type="button" class="btn btn-outline-danger btn-sm btn-rounded" (click)="mobileNumberPopUp = false">
+              Close
+          </button>
+      </div>
+  </div>
+</div>
+
+<div class="popup-modal" *ngIf="bankDetailsPopUp">
+  <div class="popup-content" style="min-width: 40%">
+      <div class="popup-header">
+          <h4 class="title">BANK DETAILS UPDATE</h4>
+          <a type="button" class="close" (click)="bankDetailsPopUp = false" style="cursor: pointer">
+              <span>×</span>
+          </a>
+      </div>
+
+      <div class="popup-body">
+          <div class="row justify-content-center align-items-center">
+              <div class="col-md-3">
+                  <div class="form-group">
+                      <label for="accountNo">BANK ACCOUNT NO <span style="color: red">*</span></label>
+                      <input id="accountNo" type="text" class="form-control" [(ngModel)]="farmerDetails.accountNo"
+                          placeholder="Please Enter BANK ACCOUNT NUMBER" maxlength="20" autocomplete="off" NumbersOnly
+                          [allowDecimals]="false" [allowSign]="false" />
+                  </div>
+              </div>
+
+              <div class="col-md-4">
+                  <div class="form-group">
+                      <label>IFSC CODE</label>
+                      <div class="input-group">
+                          <input type="text" class="form-control" [(ngModel)]="farmerDetails.ifscCode"
+                              placeholder="Please Enter IFSC Code" maxlength="15" autocomplete="off" />
+                          <div class="input-group-append">
+                              <button class="btn btn-primary btn-sm m-0 btn-rounded" type="submit" (click)="btnVerifyIfscCode()"
+                                  id="button-addon2">
+                                  Verify
+                              </button>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+
+              <div class="col-md-3">
+                  <div class="form-group">
+                      <label for="bankPinCode">BANK PINCODE <span style="color: red">*</span></label>
+                      <input id="bankPinCode" type="text" class="form-control" [(ngModel)]="farmerDetails.bankPinCode"
+                          placeholder="Please Enter BANK PINCODE" maxlength="6" autocomplete="off" NumbersOnly [allowDecimals]="false"
+                          [allowSign]="false" />
+                  </div>
+              </div>
+
+
+
+              <div class="col-md-5">
+                  <div class="form-group">
+                      <label for="bankName">BANK NAME <span style="color: red">*</span></label>
+                      <h6 style="color: green">
+                          <b>{{ farmerDetails.bankName }}</b>
+                      </h6>
+                  </div>
+              </div>
+
+              <div class="col-md-5">
+                  <div class="form-group">
+                      <label for="branchName">BRANCH NAME <span style="color: red">*</span></label>
+                      <h6 style="color: green">
+                          <b>{{ farmerDetails.branchName }}</b>
+                      </h6>
+                  </div>
+              </div>
+
+
+
+              <div class="col-md-10">
+                  <div class="form-group">
+                      <label for="passBookImgUpload">
+                          Bank PassBook Image Upload <span style="color: red;font-size: small;">* (JPEG and less than 100KB) </span>
+                      </label>
+                      <input type="file" class="form-control p-0" id="passBookImgUpload" (change)="onPassBookImageChange($event)"
+                          accept="image/*" #passBookImgUpload autocomplete="off" />
+                  </div>
+              </div>
+          </div>
+      </div>
+
+      <div class="popup-footer justify-content-center">
+          <button type="button" class="btn btn-outline-success btn-sm btn-rounded" (click)="btnBankDetailsUpdate()">
+              Update Bank Details
+          </button>
+          <button type="button" class="btn btn-outline-danger btn-sm btn-rounded" (click)="bankDetailsPopUp = false">
+              Close
+          </button>
+      </div>
+
+      <!-- <div class="popup-footer justify-content-center">
+      <button
+        type="button"
+        class="btn btn-outline-success btn-sm btn-rounded"
+        (click)="btnBankDetailsUpdate_Passbook()"
+      >
+      Update Bank Passbook
+      </button>
+      <button
+        type="button"
+        class="btn btn-outline-danger btn-sm btn-rounded"
+        (click)="bankDetailsPopUp = false"
+      >
+        Close
+      </button>
+    </div> -->
+
+  </div>
+</div>
+
+<div class="popup-modal" *ngIf="animalsDetailsPopUp">
+  <div class="popup-content" style="min-width: 75%">
+      <div class="popup-header">
+          <h4 class="title">MILCH ANIMALS UPDATE</h4>
+          <a type="button" class="close" (click)="animalsDetailsPopUp = false" style="cursor: pointer">
+              <span>×</span>
+          </a>
+      </div>
+
+      <div class="popup-body">
+          <div class="row justify-content-center align-items-center">
+              <div class="col-md-4">
+                  <div class="form-group">
+                      <label for="accountNo">NO OF MILK POTENTIAL BUFFALO
+                          <span style="color: red">*</span></label>
+                      <input id="accountNo" type="text" class="form-control" [(ngModel)]="farmerDetails.milkPotentialBuffalo"
+                          placeholder="Please Enter No of Milk Potential Buffalo" maxlength="3" autocomplete="off" NumbersOnly
+                          [allowDecimals]="false" [allowSign]="false" />
+                  </div>
+              </div>
+
+              <div class="col-md-4">
+                  <div class="form-group">
+                      <label for="accountNo">NO OF MILK POTENTIAL COW <span style="color: red">*</span></label>
+                      <input type="text" class="form-control" [(ngModel)]="farmerDetails.milkPotentialCow"
+                          placeholder="Please Enter No of Milk Potential Cow" maxlength="3" autocomplete="off" NumbersOnly
+                          [allowDecimals]="false" [allowSign]="false" />
+                  </div>
+              </div>
+
+              <div class="col-md-4">
+                  <div class="form-group">
+                      <label for="accountNo">NO OF FEMALE BUFFALO <span style="color: red">*</span></label>
+                      <input id="accountNo" type="text" class="form-control" [(ngModel)]="farmerDetails.noOfBuffaloFemale"
+                          placeholder="Please Enter No of Female Buffalo" maxlength="3" autocomplete="off" NumbersOnly
+                          [allowDecimals]="false" [allowSign]="false" />
+                  </div>
+              </div>
+
+              <div class="col-md-4">
+                  <div class="form-group">
+                      <label for="accountNo">NO OF MALE BUFFALO <span style="color: red">*</span></label>
+                      <input id="accountNo" type="text" class="form-control" [(ngModel)]="farmerDetails.noOfBuffaloMale"
+                          placeholder="Please Enter No of Male Buffalo" maxlength="3" autocomplete="off" NumbersOnly
+                          [allowDecimals]="false" [allowSign]="false" />
+                  </div>
+              </div>
+
+              <div class="col-md-4">
+                  <div class="form-group">
+                      <label for="accountNo">NO OF WHITE CATTLE FEMALE
+                          <span style="color: red">*</span></label>
+                      <input id="accountNo" type="text" class="form-control" [(ngModel)]="farmerDetails.noOfWhiteCattleFemale"
+                          placeholder="Please Enter No of Female White Cattle" maxlength="3" autocomplete="off" NumbersOnly
+                          [allowDecimals]="false" [allowSign]="false" />
+                  </div>
+              </div>
+
+              <div class="col-md-4">
+                  <div class="form-group">
+                      <label for="accountNo">NO OF WHITE CATTLE MALE <span style="color: red">*</span></label>
+                      <input id="accountNo" type="text" class="form-control" [(ngModel)]="farmerDetails.noOfWhiteCattleMale"
+                          placeholder="Please Enter No of male White Cattle" maxlength="3" autocomplete="off" NumbersOnly
+                          [allowDecimals]="false" [allowSign]="false" />
+                  </div>
+              </div>
+
+              <div class="col-md-4">
+                  <div class="form-group">
+                      <label for="accountNo">NO OF MILCH ANIMALS BUFFALO
+                          <span style="color: red">*</span></label>
+                      <input id="accountNo" type="text" class="form-control" [(ngModel)]="farmerDetails.noOfMilchAnimalsBuffalo"
+                          placeholder="Please Enter No of Milch Animals Bufflao" maxlength="3" autocomplete="off" NumbersOnly
+                          [allowDecimals]="false" [allowSign]="false" />
+                  </div>
+              </div>
+
+              <div class="col-md-4">
+                  <div class="form-group">
+                      <label for="accountNo">NO OF MILCH ANIMALS COW <span style="color: red">*</span></label>
+                      <input id="accountNo" type="text" class="form-control" [(ngModel)]="farmerDetails.noOfMilchAnimalsCow"
+                          placeholder="Please Enter No of Milch Animals Cow" maxlength="3" autocomplete="off" NumbersOnly
+                          [allowDecimals]="false" [allowSign]="false" />
+                  </div>
+              </div>
+              <div class="col-md-4"></div>
+          </div>
+      </div>
+
+      <div class="popup-footer justify-content-center">
+          <button type="button" class="btn btn-outline-success btn-sm btn-rounded" (click)="btnAnimalsDetailsUpdate()">
+              UPDATE
+          </button>
+          <button type="button" class="btn btn-outline-danger btn-sm btn-rounded" (click)="animalsDetailsPopUp = false">
+              Close
+          </button>
+      </div>
+  </div>
+</div>
+
+
+
+
+<!--   
+<div class="popup-modal" *ngIf="bankconfirmationPopUp">
+  <div class="popup-content" style="min-width: 40%">
+    <div class="popup-header">
+      <h4 class="title">CONFIRM REQUEST</h4>
+      <a
+        type="button"
+        class="close"
+        (click)="bankconfirmationPopUp = false"
+        style="cursor: pointer"
+      >
+        <span>×</span>
+      </a>
+    </div>
+
+    <div class="popup-body">
+      <div class="row justify-content-center align-items-center">
+        ARE YOU SURE REQUEST RAISE FOR UPDATE BANK DETAILS?
+      </div>
+    </div>
+
+    <div class="popup-footer justify-content-center">
+      <button
+        type="button"
+        class="btn btn-outline-success btn-sm btn-rounded"
+        (click)="btnrequest('1')"
+      >
+        Yes
+      </button>
+
+      <button
+        type="button"
+        class="btn btn-outline-success btn-sm btn-rounded"
+        (click)="btnrequest('0')"
+      >
+        No 
+      </button>
+
+      
+    </div>
+  </div>
+</div> -->

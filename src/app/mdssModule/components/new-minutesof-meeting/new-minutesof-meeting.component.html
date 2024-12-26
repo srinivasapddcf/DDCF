@@ -1,0 +1,485 @@
+ 
+<div class="card">
+  <div class="card-header p-2">
+    <h5 class="mb-0">MEMBER ADD MINUTES OF MEETING</h5>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-1"></div>
+      <div class="col-md-5">
+        <div class="form-group">
+          <label for="rbkId"><b>RSK</b> <span style="color: red">*</span></label>
+          <select
+            id="rbkId"
+            class="form-control"
+            [(ngModel)]="meetingData.rbk_code" class="card">
+              <div class="card-header p-2">
+                  <h5 class="mb-0">MEMBER ADD MINUTES OF MEETING</h5>
+              </div>
+              <div class="card-body">
+                  <div class="row">
+                      <div class="col-md-1"></div>
+                      <div class="col-md-5">
+                          <div class="form-group">
+                              <label for="rbkId"><b>RSK</b> <span style="color: red">*</span></label>
+                              <select id="rbkId" class="form-control" [(ngModel)]="meetingData.rbk_code" (change)="onRbkChange()">
+                                  <option value="">-- SELECT RSK --</option>
+                                  <option value="{{ obj.RBK_CODE }}" *ngFor="let obj of rbkList">
+                                      {{ obj.RBK_NAME }}
+                                  </option>
+                              </select>
+                          </div>
+                      </div>
+          
+                      <div class="col-md-5">
+                          <div class="form-group">
+                              <label for="meetingId"><b>MEETING ID </b><span style="color: red">*</span></label>
+                              <select id="meetingId" class="form-control" [(ngModel)]="meetingData.meeting_code" (change)="onMeetingChange()">
+                                  <option value="">-- SELECT MEETING --</option>
+                                  <option value="{{ obj.MEETING_CODE }}" *ngFor="let obj of meetingList">
+                                      {{ obj.MEETING_DATE }} {{ obj.MEETING_TIME }} (
+                                      {{ obj.MEETING_VENUE }} )
+                                  </option>
+                              </select>
+                          </div>
+                      </div>
+                  </div>
+          
+                  <div class="col-md-12 table-responsive" [hidden]="personList?.length < 1">
+                      <table class="table table-striped ah-table text-center">
+                          <thead class="bg-success text-white">
+                              <tr>
+                                  <th>S.No.</th>
+                                  <th>FARMER NAME</th>
+                                  <th> DATE OD BIRTH</th>
+                                  <th>VILLAGE NAME</th>
+                                  <th>MDSS DESIGNATION NAME</th>
+                                  <th>ATTENDANCE STATUS</th>
+                                  <th>ACTION</th>
+                              </tr>
+                          </thead>
+                          <tbody *ngIf="personList?.length > 0">
+                              <tr *ngFor="let obj of personList; let i = index">
+                                  <td>{{ i + 1 }}</td>
+                                  <td>
+                                      <b>{{ obj.FARMER_NAME }}</b>
+                                  </td>
+                                  <td>{{ obj.DATE_OF_BIRTH }}</td>
+                                  <td>{{obj.VILLAGE_NAME}}</td>
+                                  <td>{{obj.MDSS_DESIGNATION}}</td>
+          
+                                  <td>
+                                      <span *ngIf="obj.STATUS === '1'" style="color: green">
+                                          Attendance Taken
+                                      </span>
+                                      <span *ngIf="obj.STATUS === '0'" style="color: red">
+                                          Pending
+                                      </span>
+                                  </td>
+                                  <td>
+                                      <span *ngIf="obj.STATUS === '1'">
+                                          <button type="button" value="Approve" (click)="Approvedclick(obj)" class="btn btn-success">
+                                              Approve</button>&nbsp; &nbsp;&nbsp;
+                                          <button type="button" value="Approve" (click)="RejectClick(obj)" class="btn btn-danger"> Reject</button>
+                                      </span>
+                                      <span *ngIf="obj.STATUS === '0'" style="color: red">
+                                          -
+                                      </span>
+                                  </td>
+                              </tr>
+                          </tbody>
+                      </table>
+          
+          
+                  </div>
+          
+                  <div class="row ">
+          
+                      <div class="col-md-1"></div>
+          
+                      <div class="col-md-10" *ngIf="Approvelist?.length > 0">
+                          <label for="minutesOfMeeting"><b>NEW MEMBER APPROVED DETAILS </b> </label>
+          
+          
+                          <table class="table table-striped ah-table text-center">
+                              <thead class="bg-info text-white">
+                                  <tr>
+          
+                                      <th>FARMER NAME</th>
+                                      <th>VILLAGE NAME</th>
+          
+                                      <th>RELATIONSHIP</th>
+                                      <th>NOMANI RELATIONSHIP</th>
+          
+                                  </tr>
+                              </thead>
+                              <tbody *ngIf="Approvelist?.length > 0">
+                                  <tr *ngFor="let obj of Approvelist; let i = index">
+          
+                                      <td>
+                                          {{ obj.FARMER_NAME }}
+                                      </td>
+                                      <td>{{obj.VILLAGE_NAME}}</td>
+                                      <td>{{obj.RELATIONSHIP}}</td>
+                                      <td>{{obj.FATHER_OR_HUSBAND_NAME}}</td>
+          
+          
+          
+          
+          
+                                  </tr>
+                              </tbody>
+                          </table>
+          
+          
+          
+                          <!-- <textarea
+                      id="VILLAGE_LIST"
+                      type="text"
+                      class="form-control"
+                      [(ngModel)]="VILLAGE_LIST"
+                      [disabled]="true"
+                     rows="6" width="100%"
+                      
+                    ></textarea> -->
+                          <!-- maxlength="500" placeholder="Please Enter Minutes Of Meeting upto 500 characters" -->
+          
+                          <!-- </div>
+                      <div class="col-md-4">  placeholder="Please Enter Minutes Of Meeting upto 500 characters"-->
+                          <div class="form-group">
+                              <label for="minutesOfMeeting"><b>ADDITIONAL VILLAGES / HABITATIONS </b> </label>
+                              <textarea id="minutesOfMeeting" type="text" class="form-control"
+                                  placeholder="Please Enter Additional Village or Habitation Names Only" [(ngModel)]="meetingData.minutesOfMeeting"
+                                  maxlength="500" rows="3"></textarea>
+                              <!-- </div> -->
+                          </div>
+                      </div>
+          
+          
+                      <div class="row">
+          
+          
+                          <div class="col-md-12 row" style="margin-left: 10px;">
+          
+                              <div class="col-md-6">
+          
+                                  <div class="form-group">
+                                      <label for="docUpload">Upload Document <small class="text-danger">
+                                              ( PDF, Max Size: 1MB )
+                                          </small> <span style="color: red">*</span></label>
+                                      <input type="file" class="form-control p-0" id="docUpload" (change)="onDocChange($event)"
+                                          accept="application/pdf" #docUpload autocomplete="off" />
+                                  </div>
+          
+                              </div>
+                              <div class="col-md-6">
+                                  <div class="form-group">
+                                      <label for="photoUpload"><b>UPLOAD MEETING PHOTOS </b><small class="text-danger">
+                                              ( JPG, Max Size: 100KB )
+                                          </small><span style="color: red">*</span>
+                                      </label>
+                                      <input type="file" class="form-control p-0" id="photoUpload" (change)="onPhotoChange($event)" accept="image/*"
+                                          #photoUpload autocomplete="off" />
+                                  </div>
+                              </div>
+          
+          
+          
+                          </div>
+          
+                          <div class="col-md-12">
+                              <div class="img-thumb mt-3" *ngFor="let obj of meetingData.Imagelist; let i = index">
+                                  <a style="cursor: pointer" (click)="btnImageCancel(i)">
+                                      <i class="fa fa-times-circle text-black"></i>
+                                  </a>
+                                  <img [src]="'data:image/jpeg;base64,' + obj.image_path" style="cursor: pointer" class="img-thumbnail mr-3"
+                                      (click)="btnImage(obj.image_path)" />
+                              </div>
+                          </div>
+          
+          
+          
+                          <!--  <div class="col-md-12">
+                  <div class="row">
+                    <div
+                      class="img-thumb col-md-2"
+                      *ngFor="let obj of meetingData.docs; let i = index"
+                    >
+                      <a
+                        style="cursor: pointer; color: blue"
+                        (click)="btnDoc(obj.DOC, i + 1)"
+                        >DOCUMENT-{{ i + 1 }}
+                        <span style="cursor: pointer" (click)="btnDocCancel(i)">
+                          <i class="fa fa-times-circle text-black"></i>
+                        </span>
+                      </a>
+                    </div>
+                  </div>
+                </div> -->
+          
+                          <div class="col-md-12 row" align="center" style="margin-left: 500px;">
+                              <button type="button" class="btn btn-success btn-sm" (click)="btnSubmit()">
+                                  SUBMIT
+                              </button>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          
+            (change)="onRbkChange()"
+          >
+            <option value="">-- SELECT RSK --</option>
+            <option value="{{ obj.RBK_CODE }}" *ngFor="let obj of rbkList">
+              {{ obj.RBK_NAME }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="col-md-5"  >
+        <div class="form-group">
+          <label for="meetingId"
+            ><b>MEETING ID </b><span style="color: red">*</span></label
+          >
+          <select
+            id="meetingId"
+            class="form-control"
+            [(ngModel)]="meetingData.meeting_code"
+            (change)="onMeetingChange()"
+          >
+            <option value="">-- SELECT MEETING --</option>
+            <option
+              value="{{ obj.MEETING_CODE }}"
+              *ngFor="let obj of meetingList"
+            >
+              {{ obj.MEETING_DATE }} {{ obj.MEETING_TIME }} (
+              {{ obj.MEETING_VENUE }} )
+            </option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-12 table-responsive" [hidden]="personList?.length < 1">
+      <table
+        class="table table-striped ah-table text-center"           
+      >
+        <thead class="bg-success text-white">
+          <tr>
+            <th>S.No.</th>
+            <th>FARMER NAME</th>                 
+            <th> DATE OD BIRTH</th>
+            <th>VILLAGE NAME</th>
+            <th>MDSS DESIGNATION NAME</th>              
+            <th>ATTENDANCE STATUS</th>
+            <th>ACTION</th>
+          </tr>
+        </thead>
+        <tbody *ngIf="personList?.length > 0">
+          <tr *ngFor="let obj of personList; let i = index">
+            <td>{{ i + 1 }}</td>
+            <td>
+              <b>{{ obj.FARMER_NAME }}</b>
+            </td>               
+            <td>{{ obj.DATE_OF_BIRTH }}</td>
+            <td>{{obj.VILLAGE_NAME}}</td>
+            <td>{{obj.MDSS_DESIGNATION}}</td>
+             
+            <td >
+              <span *ngIf="obj.STATUS === '1'" style="color: green">
+                Attendance Taken
+              </span>
+              <span *ngIf="obj.STATUS === '0'" style="color: red">
+                Pending
+              </span>
+            </td>
+            <td >
+              <span *ngIf="obj.STATUS === '1'">
+              <button type="button" value="Approve" (click)="Approvedclick(obj)" class="btn btn-success"> Approve</button>&nbsp; &nbsp;&nbsp;
+              <button type="button" value="Approve" (click)="RejectClick(obj)" class="btn btn-danger"> Reject</button>
+          </span>
+              <span *ngIf="obj.STATUS === '0'" style="color: red">
+                  -
+                </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+       
+    </div>
+
+      <div class="row " >
+         
+<div class="col-md-1"></div>
+
+          <div class="col-md-10"  *ngIf="Approvelist?.length > 0"> 
+            <label for="minutesOfMeeting"
+><b>NEW MEMBER APPROVED DETAILS </b> </label
+>
+
+
+<table
+  class="table table-striped ah-table text-center"           
+>
+  <thead class="bg-info text-white">
+    <tr>
+       
+      <th>FARMER NAME</th>               
+      <th>VILLAGE NAME</th>
+                 
+       <th>RELATIONSHIP</th>
+       <th>NOMANI RELATIONSHIP</th>
+      
+    </tr>
+  </thead>
+  <tbody *ngIf="Approvelist?.length > 0">
+    <tr *ngFor="let obj of Approvelist; let i = index">
+       
+      <td>
+         {{ obj.FARMER_NAME }} 
+      </td>   
+      <td>{{obj.VILLAGE_NAME}}</td>          
+            <td>{{obj.RELATIONSHIP}}</td>
+      <td>{{obj.FATHER_OR_HUSBAND_NAME}}</td>
+      
+    
+       
+      
+       
+    </tr>
+  </tbody>
+</table>
+
+ 
+
+            <!-- <textarea
+            id="VILLAGE_LIST"
+            type="text"
+            class="form-control"
+            [(ngModel)]="VILLAGE_LIST"
+            [disabled]="true"
+           rows="6" width="100%"
+            
+          ></textarea> -->
+          <!-- maxlength="500" placeholder="Please Enter Minutes Of Meeting upto 500 characters" -->
+
+            <!-- </div>
+            <div class="col-md-4">  placeholder="Please Enter Minutes Of Meeting upto 500 characters"-->
+              <div class="form-group">
+                <label for="minutesOfMeeting"
+                  ><b>ADDITIONAL VILLAGES / HABITATIONS </b> </label
+                >
+                <textarea
+                  id="minutesOfMeeting"
+                  type="text"
+                  class="form-control" placeholder="Please Enter Additional Village or Habitation Names Only"
+                  [(ngModel)]="meetingData.minutesOfMeeting" 
+                  
+                  maxlength="500"
+                  rows="3"
+                ></textarea>
+              <!-- </div> -->
+            </div>
+      </div>
+       
+
+      <div class="row">
+    
+
+      <div class="col-md-12 row" style="margin-left: 10px;">
+        
+        <div class="col-md-6">
+   
+          <div class="form-group">
+            <label for="docUpload"
+              >Upload Document <small class="text-danger">
+                ( PDF, Max Size: 1MB )
+              </small> <span style="color: red">*</span></label
+            >
+            <input
+              type="file"
+              class="form-control p-0"
+              id="docUpload"
+              (change)="onDocChange($event)"
+              accept="application/pdf"
+              #docUpload
+              autocomplete="off"
+            />
+          </div>
+         
+      </div>
+<div class="col-md-6">
+  <div class="form-group">
+    <label for="photoUpload"
+      ><b>UPLOAD MEETING PHOTOS </b><small class="text-danger">
+        ( JPG, Max Size: 100KB )
+      </small><span style="color: red">*</span>
+     </label
+    >
+    <input
+      type="file"
+      class="form-control p-0"
+      id="photoUpload"
+      (change)="onPhotoChange($event)"
+      accept="image/*"
+      #photoUpload
+      autocomplete="off"
+    />
+  </div>
+</div>
+
+        
+       
+      </div>
+
+      <div class="col-md-12">
+        <div
+          class="img-thumb mt-3"
+          *ngFor="let obj of meetingData.Imagelist; let i = index"
+        >
+          <a style="cursor: pointer" (click)="btnImageCancel(i)">
+            <i class="fa fa-times-circle text-black"></i>
+          </a>
+          <img
+            [src]="'data:image/jpeg;base64,' + obj.image_path"
+            style="cursor: pointer"
+            class="img-thumbnail mr-3"
+            (click)="btnImage(obj.IMAGE)"
+          />
+        </div>
+      </div>
+ 
+      
+
+     <!--  <div class="col-md-12">
+        <div class="row">
+          <div
+            class="img-thumb col-md-2"
+            *ngFor="let obj of meetingData.docs; let i = index"
+          >
+            <a
+              style="cursor: pointer; color: blue"
+              (click)="btnDoc(obj.DOC, i + 1)"
+              >DOCUMENT-{{ i + 1 }}
+              <span style="cursor: pointer" (click)="btnDocCancel(i)">
+                <i class="fa fa-times-circle text-black"></i>
+              </span>
+            </a>
+          </div>
+        </div>
+      </div> -->
+
+      <div class="col-md-12 row" align="center" style="margin-left: 500px;">
+        <button
+          type="button"
+          class="btn btn-success btn-sm"
+          (click)="btnSubmit()"
+        >
+          SUBMIT
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+

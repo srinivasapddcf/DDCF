@@ -1,0 +1,212 @@
+<div class="card">
+  <div class="card-header p-2">
+    <h5 class="mb-0">MDAC ACCOUNT UPDATE</h5>
+  </div>
+  <div class="card-body">
+    <div class="row px-4">
+      <div class="col-md-3">
+        <div class="form-group">
+          <label
+            >MANDAL :
+            <span class="text-success">
+              <b>{{ personDetails.MANDAL_NAME }}</b>
+            </span>
+          </label>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <label
+            >RSK :
+            <span class="text-success">
+              <b>{{ personDetails.RBK_NAME }}</b>
+            </span>
+          </label>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <label>
+            MDAC CODE :
+            <span class="text-success">
+              <b>{{ personDetails.MPUSS_CODE }}</b>
+            </span>
+          </label>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <label
+            >PROMOTER-1 NAME :
+            <span class="text-success">
+              <b>{{ personDetails.PRAMOTOR1_NAME }}</b>
+            </span>
+          </label>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <label
+            >PROMOTER-1 MOBILE NO :
+            <span class="text-success">
+              <b>{{ personDetails.PRAMOTOR1_MOBILE }}</b>
+            </span>
+          </label>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <label
+            >PROMOTER-1 AADHAR :
+            <span class="text-success">
+              <b>XXXX-XXXX-{{ personDetails.PRAMOTOR1_ADHAR | slice: -4 }}</b>
+            </span>
+          </label>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <label
+            >PROMOTER-2 NAME :
+            <span class="text-success">
+              <b>{{ personDetails.PRAMOTOR2_NAME }}</b>
+            </span>
+          </label>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <label
+            >PROMOTER-2 MOBILE NO :
+            <span class="text-success">
+              <b>{{ personDetails.PRAMOTOR2_MOBILE }}</b>
+            </span>
+          </label>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <label
+            >PROMOTER-2 AADHAR :
+            <span class="text-success">
+              <b>XXXX-XXXX-{{ personDetails.PRAMOTOR2_ADHAR | slice: -4 }}</b>
+            </span>
+          </label>
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="form-group">
+          <label>
+            BANK :
+            <span class="text-success">
+              <b>{{ personDetails.BANK_NAME }}</b>
+            </span>
+          </label>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <label
+            >BRANCH :
+            <span class="text-success">
+              <b>{{ personDetails.BRANCH_NAME }}</b>
+            </span>
+          </label>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <label>
+            ACCOUNT NO :
+            <span class="text-success">
+              <b>{{ personDetails.BANK_ACCOUNT_NO }}</b>
+            </span>
+          </label>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <label>
+            ACCOUNT NAME :
+            <span class="text-success">
+              <b>{{ personDetails.BANK_ACCOUNT_NAME }}</b>
+            </span>
+          </label>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <label>
+            IFSC CODE :
+            <span class="text-success">
+              <b>{{ personDetails.IFSCCODE }}</b>
+            </span>
+          </label>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <label>
+            PINCODE :
+            <span class="text-success">
+              <b>{{ personDetails.PINCODE }}</b>
+            </span>
+          </label>
+        </div>
+      </div>
+
+      <div
+        class="col-md-3"
+        *ngIf="
+          personDetails !== undefined && personDetails.PASS_BOOK_IMG !== null
+        "
+      >
+        <label>BANK PASSBOOK IMAGE :</label>
+        <img
+          [src]="'data:image/jpeg;base64,' + passBookImg"
+          style="cursor: pointer"
+          class="img-thumbnail mr-3"
+          (click)="btnImage(passBookImg)"
+        />
+      </div>
+      <div
+        class="col-md-3"
+        *ngIf="
+          personDetails !== undefined &&
+          personDetails.SUPPORTING_DOCUMENT !== null
+        "
+      >
+        <label>SUPPORTING DOCUMENT :</label>
+       <button
+          type="button"
+          class="btn btn-link"
+          *ngIf="
+            personDetails.SUPPORTING_DOCUMENT !== null &&
+            personDetails.SUPPORTING_DOCUMENT !== '' &&
+            personDetails.SUPPORTING_DOCUMENT !== undefined
+          "
+          (click)="btnPdfView(personDetails.SUPPORTING_DOCUMENT)"
+        >
+          VIEW
+        </button>
+      </div>
+    </div>
+    <div class="col-md-12" align="center">
+      <button
+        type="button"
+        class="btn btn-success btn-sm"
+        (click)="btnMdacAccountUpdate('1')"
+      >
+        Approve
+      </button>
+      <button
+        type="button"
+        class="btn btn-danger btn-sm"
+        (click)="btnMdacAccountUpdate('2')"
+      >
+        Reject
+      </button>
+    </div>
+  </div>
+</div>

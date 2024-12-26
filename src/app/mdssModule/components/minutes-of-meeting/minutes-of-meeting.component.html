@@ -1,0 +1,218 @@
+<div class="card">
+  <div class="card-header p-2">
+    <h5 class="mb-0">MINUTES OF MEETING</h5>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="rbkId"><b>RSK</b> <span style="color: red">*</span></label>
+          <select
+            id="rbkId"
+            class="form-control"
+            [(ngModel)]="meetingData.rbkId"
+            (change)="onRbkChange()"
+          >
+            <option value="">-- SELECT RSK --</option>
+            <option value="{{ obj.RBK_ID }}" *ngFor="let obj of rbkList">
+              {{ obj.RBK_NAME }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="col-md-5"  >
+        <div class="form-group">
+          <label for="meetingId"
+            ><b>MEETING ID </b><span style="color: red">*</span></label
+          >
+          <select
+            id="meetingId"
+            class="form-control"
+            [(ngModel)]="meetingData.meetingId"
+            (change)="onMeetingChange()"
+          >
+            <option value="">-- SELECT MEETING --</option>
+            <option
+              value="{{ obj.MEETING_CODE }}"
+              *ngFor="let obj of meetingList"
+            >
+              {{ obj.MEETING_DATE }} {{ obj.MEETING_TIME }} (
+              {{ obj.MEETING_VENUE }} )
+            </option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+      <div class="row">
+        <!-- <div class="col-md-1" style="width:5px ;"  > 
+          <label> </label>  <br> <label>|</label>  <br> <label>|</label>  <br> <label>|</label>  <br> <label>|</label>  <br> <label>|</label>  <br><label>|</label>  <br><label>|</label>   
+          </div> -->
+        <div class="col-md-6">
+           
+            <label style="text-align:center;" ><b>  MINUTES OF MEETING :- </b> </label><br>
+           
+             
+            <label>  1.  REQUEST THE REGISTRAR TO REGISTER THE MDSS.  </label>  <br>
+            <label>  2.  ADOPTION OF BYE-LAWS.  </label> <br>
+            <label>  3.  TO DECIDE AREA OF OPERATION.  </label><br>
+            <label>  4.  TO ELECT THE CHIEF PROMOTERS.   </label><br>
+            <label>  5.  TO AUTHORIZE TO MAKE CORRECTIONS IF NECESSARY.     </label><br>
+            <label>  6.  TO ELECT ADHOC COMMITTEE.  </label> 
+             
+           
+          
+          
+        </div>
+        <!-- <div class="col-md-1"  > 
+          <label> </label>  <br> <label>|</label>  <br> <label>|</label>  <br> <label>|</label>  <br> <label>|</label>  <br> <label>|</label>  <br><label>|</label>  <br><label>|</label>   
+          </div> -->
+
+          <div class="col-md-5"  > 
+            <textarea
+            id="VILLAGE_LIST"
+            type="text"
+            class="form-control"
+            [(ngModel)]="VILLAGE_LIST"
+            [disabled]="true"
+           rows="6" width="100%"
+            
+          ></textarea>
+          <!-- maxlength="500" placeholder="Please Enter Minutes Of Meeting upto 500 characters" -->
+
+            <!-- </div>
+            <div class="col-md-4">  placeholder="Please Enter Minutes Of Meeting upto 500 characters"-->
+              <div class="form-group">
+                <label for="minutesOfMeeting"
+                  ><b>ADDITIONAL VILLAGES / HABITATIONS </b> </label
+                >
+                <textarea
+                  id="minutesOfMeeting"
+                  type="text"
+                  class="form-control" placeholder="Please Enter Additional Village or Habitation Names Only"
+                  [(ngModel)]="meetingData.minutesOfMeeting" 
+                  
+                  maxlength="500"
+                  rows="3"
+                ></textarea>
+              <!-- </div> -->
+            </div>
+      </div>
+      <!-- <div class="row">
+        <div class="col-md-12">
+        <div class="col-md-8">
+        <div class="form-group">
+          <label for="photoUpload"
+            >Upload Meeting Photos  <small class="text-danger">
+              ( JPG, Max Size: 100KB )
+            </small><span style="color: red">*</span>
+           </label
+          >
+          <input
+            type="file"
+            class="form-control p-0"
+            id="photoUpload"
+            (change)="onPhotoChange($event)"
+            accept="image/*"
+            #photoUpload
+            autocomplete="off"
+          />
+        </div>
+      </div>
+      </div>
+    </div> -->
+
+      <div class="row">
+    
+
+      <div class="col-md-12 row" style="margin-left: 10px;">
+        
+         
+
+        <div class="form-group">
+          <label for="photoUpload"
+            ><b>UPLOAD MEETING PHOTOS </b><small class="text-danger">
+              ( JPG, Max Size: 100KB )
+            </small><span style="color: red">*</span>
+           </label
+          >
+          <input
+            type="file"
+            class="form-control p-0"
+            id="photoUpload"
+            (change)="onPhotoChange($event)"
+            accept="image/*"
+            #photoUpload
+            autocomplete="off"
+          />
+        </div>
+       
+      </div>
+
+      <div class="col-md-12">
+        <div
+          class="img-thumb mt-3"
+          *ngFor="let obj of meetingData.photos; let i = index"
+        >
+          <a style="cursor: pointer" (click)="btnImageCancel(i)">
+            <i class="fa fa-times-circle text-black"></i>
+          </a>
+          <img
+            [src]="'data:image/jpeg;base64,' + obj.IMAGE"
+            style="cursor: pointer"
+            class="img-thumbnail mr-3"
+            (click)="btnImage(obj.IMAGE)"
+          />
+        </div>
+      </div>
+
+      <!-- <div class="col-md-4">
+        <div class="form-group">
+          <label for="docUpload"
+            >Upload Documents <small class="text-danger">
+              ( PDF, Max Size: 1MB )
+            </small> <span style="color: red">*</span></label
+          >
+          <input
+            type="file"
+            class="form-control p-0"
+            id="docUpload"
+            (change)="onDocChange($event)"
+            accept="application/pdf"
+            #docUpload
+            autocomplete="off"
+          />
+        </div>
+      </div>
+
+      <div class="col-md-12">
+        <div class="row">
+          <div
+            class="img-thumb col-md-2"
+            *ngFor="let obj of meetingData.docs; let i = index"
+          >
+            <a
+              style="cursor: pointer; color: blue"
+              (click)="btnDoc(obj.DOC, i + 1)"
+              >DOCUMENT-{{ i + 1 }}
+              <span style="cursor: pointer" (click)="btnDocCancel(i)">
+                <i class="fa fa-times-circle text-black"></i>
+              </span>
+            </a>
+          </div>
+        </div>
+      </div> -->
+
+      <div class="col-md-12 row" align="center" style="margin-left: 500px;">
+        <button
+          type="button"
+          class="btn btn-success btn-sm"
+          (click)="btnSubmit()"
+        >
+          SUBMIT
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

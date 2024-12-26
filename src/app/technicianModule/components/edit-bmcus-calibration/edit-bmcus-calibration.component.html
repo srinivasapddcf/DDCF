@@ -1,0 +1,789 @@
+<div class="card">
+    <div class="card-header p-2">
+        <h5 class="mb-0">INSPECTION OF BMCU'S</h5>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="districtId">DISTRICT<span style="color: red">*</span></label>
+                    <select id="districtId" class="form-control" [(ngModel)]="calibrationDeviceDetails.districtId"
+                        (change)="onDistrictChange(calibrationDeviceDetails.districtId)">
+                        <option value="">-- SELECT DISTRICT --</option>
+                        <option value="{{ obj.NEW_DISTRICT_CODE }}" *ngFor="let obj of DistrictList">
+                            {{ obj.NEW_DISTRICT }}
+                        </option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="mandalId">MANDAL <span style="color: red">*</span></label>
+                    <select id="mandalId" class="form-control" [(ngModel)]="calibrationDeviceDetails.mandalId"
+                        (change)="onMandalChange(calibrationDeviceDetails.mandalId)">
+                        <option value="">-- SELECT MANDAL --</option>
+                        <option value="{{ obj.MANDAL_CODE }}" *ngFor="let obj of MandalList">
+                            {{ obj.MANDAL_NAME }}
+                        </option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="bmculocId">BMCU LOCATION <span style="color: red">*</span></label>
+                    <select id="bmculocId" class="form-control" [(ngModel)]="calibrationDeviceDetails.bmculocId"
+                        (change)="onbmculocchange(calibrationDeviceDetails.bmculocId)">
+                        <option value="">-- SELECT BMCU LOCATION --</option>
+                        <option value="{{ obj.BMCU_CODE }}" *ngFor="let obj of BMCUList">
+                            {{ obj.BMCU_NAME }}
+                        </option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="bmculocId">BMCU TYPE <span style="color: red">*</span></label>
+                    <select id="bmcutype" class="form-control" [(ngModel)]="calibrationDeviceDetails.bmcutype"
+                        (change)="onbmcutypechange()">
+                        <option value="">-- SELECT BMCU TYPE --</option>
+                        <!-- <option value="1"> OLD BMCU </option>
+            <option value="2"> NEW BMCU </option> -->
+                        <option value="{{ obj.SLNO_OLD_NEW }}" *ngFor="let obj of BMCUTypeList">
+                            {{ obj.OLD_NEW }}
+                        </option>
+                    </select>
+                </div>
+            </div>
+
+
+            <div class="col-md-12 row" *ngIf="isTableHS">
+                <div class="table-responsive">
+                    <table class="table table-striped ah-table text-center">
+                        <thead class="bg-success text-white">
+                            <tr style="white-space: nowrap;">
+                                <!-- <th class="tableheader_color">S NO</th>
+                          <th class="tableheader_color">EQUIPMENT ID</th> -->
+                                <th class="tableheader_color">EQUIPMENT</th>
+                                <th class="tableheader_color">IS EQUIPMENT AVAILABLE</th>
+                                <th class="tableheader_color">SERIAL NUMBER</th>
+                                <th class="tableheader_color">MAKE</th>
+                                <th class="tableheader_color">CAPACITY</th>
+                                <th class="tableheader_color">UNIT OF MEASUREMENT (UOM)</th>
+                                <th class="tableheader_color">WORKING CONDITION</th>
+                                <th class="tableheader_color">PHOTO UPLOAD</th>
+                                <th class="tableheader_color">INSTALLATION YEAR</th>
+                                <th class="tableheader_color">ACTION</th>
+                            </tr>
+                        </thead>
+                        <tbody calss="table_cells_borders">
+                            <tr>
+                                <td style="width: 100px;">
+                                    <div class="form-group">
+                                        <select id="deviceId" class="form-control" [(ngModel)]="deviceId"
+                                            (change)="devicechange(deviceId)">
+                                            <option disabled selected value="undefined">-- SELECT EQUIPMENT --</option>
+                                            <option value="{{obj.DEVICE_ID}}" *ngFor="let obj of devicesList">
+                                                {{obj.DEVICE_NAME}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                </td>
+
+                                <td style="width: 100px;">
+                                    <div class="form-group">
+                                        <select id="deviceavail" class="form-control" [(ngModel)]="deviceavail"
+                                            (change)="deviceAvailchange(deviceavail)">
+                                            <option disabled selected value="undefined">-- SELECT IS EQUIPMENT AVAILABLE
+                                                --</option>
+                                            <option value="1">YES</option>
+                                            <option value="2">NO</option>
+                                        </select>
+                                    </div>
+                                </td>
+
+
+                                <td style="width: 100px;">
+
+                                    <div class="form-group">
+                                        <!-- <label>SERIAL NUMBER <span style="color: red">*</span></label> -->
+                                        <input type="text" id="deviceSerialNo" class="form-control"
+                                            name="deviceSerialNo" [(ngModel)]="deviceSerialNo"
+                                            placeholder="ENTER SERIAL NUMBER" maxlength="50" autocomplete="off"
+                                            [disabled]="isprecheck" />
+                                    </div>
+
+                                </td>
+
+                                <td style="width: 100px;">
+                                    <div class="form-group">
+                                        <!-- <label>MAKER <span style="color: red">*</span></label> -->
+                                        <input type="text" id="deviceMaker" class="form-control"
+                                            [(ngModel)]="deviceMaker" placeholder="ENTER MAKER" maxlength="50"
+                                            autocomplete="off" [disabled]="isprecheck" />
+                                        <!-- onkeypress="return (event.charCode >= 65 && event.charCode <= 90)" -->
+                                    </div>
+                                </td>
+                                <td style="width: 100px;">
+                                    <div class="form-group">
+                                        <!-- <label>CAPACITY<span style="color: red">*</span></label> -->
+                                        <input type="text" id="deviceCapacity" class="form-control"
+                                            [(ngModel)]="deviceCapacity" placeholder="ENTER CAPACITY" maxlength="50"
+                                            autocomplete="off" NumbersOnly [allowDecimals]="true" [allowSign]="false"
+                                            [disabled]="isprecheck" />
+                                    </div>
+                                </td>
+
+                                <td style="width: 100px;">
+                                    <div class="form-group">
+                                        <!-- <label for="uomId"
+                                >UNIT OF MEASUREMENT (UOM) <span style="color: red">*</span></label
+                              > -->
+                                        <select id="uomId" class="form-control" [(ngModel)]="uomId"
+                                            (change)="uomchange(uomId)" [disabled]="isprecheck">
+                                            <option disabled selected value="undefined">-- SELECT UNIT OF MEASUREMENT
+                                                (UOM) --</option>
+                                            <option value="{{ obj.UOM }}" *ngFor="let obj of UOMList">
+                                                {{ obj.UOM_NAME }}
+                                            </option>
+                                        </select>
+                                    </div>
+                                </td>
+
+                                <td style="width: 100px;">
+                                    <div class="form-group">
+                                        <!-- <label for="uomId"
+                                >UNIT OF MEASUREMENT (UOM) <span style="color: red">*</span></label
+                              > -->
+                                        <select id="workcond" class="form-control" [(ngModel)]="workcond"
+                                            [disabled]="isprecheck">
+                                            <option disabled selected value="undefined">-- SELECT WORKING CONDITION --
+                                            </option>
+                                            <option value="1"> WORKING </option>
+                                            <option value="2"> NOT WORKING </option>
+                                            <option value="3"> NEED SERVICING</option>
+                                            <!-- <option value="{{ obj.UOM }}" *ngFor="let obj of UOMList">
+                                  {{ obj.UOM_NAME }}
+                                </option>  -->
+                                        </select>
+                                    </div>
+                                </td>
+                                <!-- <td style="width: 100px;">                           
+                          <div class="form-group"> 
+                            <input
+                              type="text"
+                              id="workcond"
+                              class="form-control"
+                              [(ngModel)]="workcond"
+                              placeholder="ENTER WORKING CONDITION"
+                              maxlength="50"
+                              autocomplete="off"
+                              [disabled]="isprecheck"
+                            />
+                          </div>
+                         </td> -->
+                                <td style="width: 100px;">
+                                    <div class="form-group">
+                                        <!-- <label for="deviceImage"
+                              >PHOTO UPLOAD <span style="color: red">*</span>
+                            </label> -->
+                                        <input type="file" class="form-control p-0" id="deviceImage"
+                                            (change)="onImageChange($event)" accept="image/*" #deviceImage
+                                            [(ngModel)]="imagepath" autocomplete="off" [disabled]="isprecheck" />
+                                    </div>
+                                </td>
+                                <td style="width: 100px;">
+                                    <div class="form-group">
+                                        <!-- <label for="manfactureDate"
+                              >PURCHASE DATE <span style="color: red">*</span></label
+                            > -->
+                                        <app-date-picker [PlaceHolder]="'SELECT PURCHASE DATE'"
+                                            [(selectedDate)]="manfactureDate" [maxDate]="maxDate"
+                                            [datedisable]="isprecheck"></app-date-picker>
+                                    </div>
+                                </td>
+
+
+
+                                <td style="width: 100px;">
+                                    <div class="form-group">
+                                        <button class="btn btn-success" (click)="DetailsAdd()">ADD</button>
+
+                                    </div>
+                                </td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+
+            <div class="col-md-12 row" *ngIf="BMCUReportList?.length > 0">
+                <div class="table-responsive">
+                    <table class="table table-striped ah-table text-center">
+                        <thead class="bg-success text-white">
+                            <tr>
+                                <th class="tableheader_color align-middle" rowspan="3">S NO</th>
+                                <th class="tableheader_color align-middle" rowspan="3">EQUIPMENT ID</th>
+                                <th class="tableheader_color align-middle" rowspan="3">EQUIPMENT</th>
+                                <th class="tableheader_color align-middle" rowspan="3">SERIAL NUMBER</th>
+                                <th class="tableheader_color align-middle" rowspan="3">MAKE</th>
+                                <th class="tableheader_color align-middle" rowspan="3">CAPACITY</th>
+                                <th class="tableheader_color align-middle" rowspan="3">UNIT OF MEASUREMENT (UOM)</th>
+                                <th class="tableheader_color align-middle" rowspan="3">WORKING CONDITION</th>
+                                <th class="tableheader_color align-middle" rowspan="3">PHOTO UPLOAD</th>
+                                <th class="tableheader_color align-middle" rowspan="3">INSTALLATION YEAR</th>
+                                <th class="tableheader_color align-middle" rowspan="3">STATUS</th>
+                                <th class="tableheader_color align-middle" rowspan="3" *ngIf="showedit">ACTION</th>
+
+
+
+                            </tr>
+                        </thead>
+                        <tbody calss="table_cells_borders">
+                            <tr *ngFor="let obj of BMCUReportList let i=index;">
+
+                                <td class="number_align" style="width: 50px;">{{i+1}}</td>
+                                <td class="number_align" style="width: 100px;">{{obj.DEVICE_ID}}</td>
+                                <td class="text-align" style="width: 200px;">{{obj.DEVICE_NAME}}</td>
+                                <td class="number_align" style="width: 100px;">{{obj.SERIAL_NUMBER}}</td>
+                                <td class="text-align" style="width: 100px;">{{obj.MAKER}}</td>
+                                <td class="number_align" style="width: 100px;">{{obj.CAPACITY_IN}}</td>
+                                <td class="text-align" style="width: 100px;">{{obj.UOM}}</td>
+                                <td class="text-align" style="width: 100px;">{{obj.WORKING_STATUS}}</td>
+                                <td class="text-align" style="width: 100px;">
+                                    <button type="button" class="btn btn-link btn-sm" *ngIf="
+                              obj.PHOTO_UPD !== null &&
+                              obj.PHOTO_UPD !== '' &&
+                              obj.PHOTO_UPD !== 'NA' &&
+                              obj.PHOTO_UPD !== undefined
+                            " (click)="btnViewImage(obj.PHOTO_UPD)">
+                                        VIEW
+                                    </button>
+                                    <span *ngIf="
+                              obj.PHOTO_UPD === null ||
+                              obj.PHOTO_UPD === '' ||
+                              obj.PHOTO_UPD === 'NA' ||
+                              obj.PHOTO_UPD === undefined
+                            ">NA</span>
+                                </td>
+                                <td class="number_align" style="width: 100px;">{{obj.PURCHASE_DATE}}</td>
+
+                                <td class="text-align" style="width: 100px;">
+                                    <span *ngIf="
+                              obj.SERIAL_NUMBER == '-'  &&
+                              obj.MAKER == '-' &&
+                              obj.CAPACITY_IN == '-' &&
+                              obj.UOM == '-' &&
+                              obj.WORKING_STATUS == '-' &&                               
+                              obj.PHOTO_UPD == null  &&
+                              obj.PURCHASE_DATE == '-'">
+                                        NOT AVAILABLE
+                                    </span>
+                                    <span *ngIf="
+                  obj.SERIAL_NUMBER != '-' ||
+                  obj.MAKER !=  '-' ||
+                  obj.CAPACITY_IN !=  '-'||
+                  obj.UOM !=  '-' ||
+                  obj.WORKING_STATUS !=  '-' ||
+                  obj.PHOTO_UPD !=  null ||                  
+                  obj.PURCHASE_DATE != '-'">AVAILABLE</span>
+                                </td>
+
+                                <td class="text-align" style="width: 100px;" *ngIf="showedit">
+                                    <button type="button" class="btn btn-success btn-sm" (click)="btnEdit(obj)">
+                                        EDIT
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <label>LAST OPERATED YEAR<span style="color: red">*</span></label>
+                <!-- <div class="form-group">          
+          <input type="text" id="operatedyear" class="form-control" [(ngModel)]="calibrationDeviceDetails.operatedyear"
+            placeholder="ENTER LAST OPERATED YEAR" maxlength="50" autocomplete="off" />
+        </div> -->
+
+                <!-- <input type="text" class="form-control" id="operatedyear" placeholder="--SELECT YEAR--" bsDatepicker [(ngModel)]="operatedyear"
+                 [bsConfig]="{ dateInputFormat: 'YYYY', containerClass: 'theme-dark-blue', selectFromOtherMonth: false, minMode: 'year' }" /> -->
+
+                <input type="text" class="form-control" id="operatedyear" placeholder="--SELECT YEAR--" bsDatepicker
+                    [(ngModel)]="operatedyear" [bsConfig]="datePickerConfig" />
+            </div>
+
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="bmculocId">OPERATED BY <span style="color: red">*</span></label>
+                    <select id="operatedby" class="form-control" [(ngModel)]="calibrationDeviceDetails.operatedby">
+                        <!-- (change)="onbmcutypechange(calibrationDeviceDetails.bmcutype)" -->
+                        <option value="">-- SELECT OPERATED BY --</option>
+                        <option value="{{ obj.OPERBY_CODE }}" *ngFor="let obj of OperatedByList">
+                            {{ obj.OPERBY_NAME }}
+                        </option>
+                    </select>
+                </div>
+            </div>
+
+
+
+
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="latitude">LATITUDE
+                        <span style="color: red">* <small class="text-danger">Ex: (17.926152) </small>
+                        </span></label>
+                    <input id="latitude" type="text" class="form-control"
+                        [(ngModel)]="calibrationDeviceDetails.Latitude" placeholder="ENTER LATITUDE" maxlength="15"
+                        NumbersOnly [allowDecimals]="true" [allowSign]="false" autocomplete="off" />
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="longitude">LONGITUDE
+                        <span style="color: red">* <small class="text-danger">Ex: (83.165592) </small>
+                        </span></label>
+                    <input id="longitude" type="text" class="form-control"
+                        [(ngModel)]="calibrationDeviceDetails.Longitude" placeholder="ENTER LONGITUDE" maxlength="15"
+                        NumbersOnly [allowDecimals]="true" [allowSign]="false" autocomplete="off" />
+                </div>
+            </div>
+
+            <div class="col-md-3" *ngIf="shiftedavail">
+                <div class="form-group">
+                    <label>IF SHIFTED
+                        <sup class="text-danger h6">*</sup></label>
+                    <div class="ah-radio-buttons">
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input class="custom-control-input" type="radio" name="ifshifted" id="ifshifted1" value="1"
+                                [(ngModel)]="calibrationDeviceDetails.ifshifted" autocomplete="off"
+                                (change)="onshiftedchange()" />
+                            <label class="custom-control-label" for="ifshifted1">
+                                YES
+                            </label>
+                        </div>
+
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input class="custom-control-input" type="radio" name="ifshifted" id="ifshifted2" value="2"
+                                [(ngModel)]="calibrationDeviceDetails.ifshifted" autocomplete="off" />
+                            <label class="custom-control-label" for="ifshifted2">
+                                NO
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3" *ngIf="calibrationDeviceDetails.ifshifted === '1'">
+                <div class="form-group">
+                    <label for="districtId">DISTRICT<span style="color: red">*</span></label>
+                    <select id="districtId1" class="form-control" [(ngModel)]="calibrationDeviceDetails.districtId1"
+                        (change)="shiftedDistrictChange(calibrationDeviceDetails.districtId1)">
+
+                        <option value="">-- SELECT DISTRICT --</option>
+                        <option value="{{ obj.DIST_CODE }}" *ngFor="let obj of ShiftedDistrictList">
+                            {{ obj.DISTRICT_NAME }}
+                        </option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-md-3" *ngIf="calibrationDeviceDetails.ifshifted === '1'">
+                <div class="form-group">
+                    <label for="mandalId">MANDAL <span style="color: red">*</span></label>
+                    <select id="mandalId1" class="form-control" [(ngModel)]="calibrationDeviceDetails.mandalId1"
+                        (change)="shiftedMandalChange(calibrationDeviceDetails.mandalId1)">
+                        <option value="">-- SELECT MANDAL --</option>
+                        <option value="{{ obj.MANDAL_CODE }}" *ngFor="let obj of ShiftedMandalList">
+                            {{ obj.MANDAL_NAME }}
+                        </option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-md-3" *ngIf="calibrationDeviceDetails.ifshifted === '1'">
+                <div class="form-group">
+                    <label for="bmculocId">BMCU LOCATION <span style="color: red">*</span></label>
+                    <select id="bmculocId1" class="form-control" [(ngModel)]="calibrationDeviceDetails.bmculocId1"
+                        (change)="shiftedBMCUChange(calibrationDeviceDetails.bmculocId1)">
+                        <option value="">-- SELECT BMCU LOCATION --</option>
+                        <option value="{{ obj.VILLAGE_NAME }}" *ngFor="let obj of ShiftedBMCUList">
+                            {{ obj.VILLAGE_NAME }}
+                        </option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <br>
+
+        <div class="row">
+            <div class="col-md-6" style="text-align: left;">
+                <h4 class="mb-0"><b>BMCU BUILDING INSPECTION :</b></h4>
+            </div>
+
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="isAvailableElectricityEarthedUpload">BUILDING IMAGE UPLOAD
+                        <span style="color: red;font-size: small;">* (JPEG and less than 100KB)</span>
+                    </label>
+                    <input type="file" class="form-control p-0" id="buildingImage"
+                        (change)="onBuildingImageChange($event)" accept="image/*" autocomplete="off" />
+                </div>
+            </div>
+            <div class="col-md-2"></div>
+
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="Buildingtype">BUILDING TYPE<span style="color: red">*</span></label>
+                    <select id="Buildingtype" class="form-control" [(ngModel)]="BuildingInspectDetails.Buildingtype">
+                        <!-- (change)="onDistrictChange(BuildingInspectDetails.Buildingtype)" -->
+                        <option value="">-- SELECT BUILDING TYPE --</option>
+                        <option value="1">APDDCF</option>
+                        <option value="2">DRDA/DISTRICT UNION</option>
+                        <option value="3">PRIVATE</option>
+                        <option value="4">GOVERNMENT</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="BuildingCond">BUILDING CONDITION<span style="color: red">*</span></label>
+                    <select id="BuildingCond" class="form-control" [(ngModel)]="BuildingInspectDetails.BuildingCond">
+                        <option value="">-- SELECT BUILDING CONDITION --</option>
+                        <option value="1"> GOOD </option>
+                        <!-- <option value="2"> NEED CIVIL WORK </option> -->
+                        <option value="2"> NOT FIT FOR USE </option>
+                        <option value="3"> NEED TECHNICAL EVALUATION </option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label>SAFETY ARRANGEMENTS (LOCK & KEY/SHUTTER FACILITY)<sup class="text-danger h6">*</sup></label>
+                    <div class="ah-radio-buttons">
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input class="custom-control-input" type="radio" name="isSafetyArrangements"
+                                id="isSafetyArrangements1" value="1"
+                                [(ngModel)]="BuildingInspectDetails.isSafetyArrangements" autocomplete="off" />
+                            <label class="custom-control-label" for="isSafetyArrangements1">
+                                AVAILABLE
+                            </label>
+                        </div>
+
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input class="custom-control-input" type="radio" name="isSafetyArrangements"
+                                id="isSafetyArrangements2" value="2"
+                                [(ngModel)]="BuildingInspectDetails.isSafetyArrangements" autocomplete="off" />
+                            <label class="custom-control-label" for="isSafetyArrangements2">
+                                NOT AVAILABLE
+                            </label>
+                        </div>
+                        <!-- <div class="custom-control custom-radio custom-control-inline">
+              <input class="custom-control-input" type="radio" name="isSafetyArrangements" id="isSafetyArrangements3"
+                value="3" [(ngModel)]="BuildingInspectDetails.isSafetyArrangements" autocomplete="off" />
+              <label class="custom-control-label" for="isSafetyArrangements3">
+                
+              </label>
+            </div> -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label>WATER AVAILABILITY<sup class="text-danger h6">*</sup></label>
+                    <div class="ah-radio-buttons">
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input class="custom-control-input" type="radio" name="wateravailability"
+                                id="wateravailability1" value="1" [(ngModel)]="BuildingInspectDetails.wateravailability"
+                                autocomplete="off" />
+                            <label class="custom-control-label" for="wateravailability1">
+                                AVAILABLE
+                            </label>
+                        </div>
+
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input class="custom-control-input" type="radio" name="wateravailability"
+                                id="wateravailability2" value="2" [(ngModel)]="BuildingInspectDetails.wateravailability"
+                                autocomplete="off" />
+                            <label class="custom-control-label" for="wateravailability2">
+                                NOT AVAILABLE
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label>ELECTRICITY AVAILABILITY
+                        <sup class="text-danger h6">*</sup></label>
+                    <div class="ah-radio-buttons">
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input class="custom-control-input" type="radio" name="isElectricityAvailable"
+                                id="isElectricityAvailable1" value="1"
+                                [(ngModel)]="BuildingInspectDetails.isElectricityAvailable" autocomplete="off" />
+                            <label class="custom-control-label" for="isElectricityAvailable1">
+                                AVAILABLE
+                            </label>
+                        </div>
+
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input class="custom-control-input" type="radio" name="isElectricityAvailable"
+                                id="isElectricityAvailable2" value="2"
+                                [(ngModel)]="BuildingInspectDetails.isElectricityAvailable" autocomplete="off" />
+                            <label class="custom-control-label" for="isElectricityAvailable2">
+                                NOT AVAILABLE
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label>DRAINAGE AVAILABILITY
+                        <sup class="text-danger h6">*</sup></label>
+                    <div class="ah-radio-buttons">
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input class="custom-control-input" type="radio" name="Drainageavail" id="Drainageavail1"
+                                value="1" [(ngModel)]="BuildingInspectDetails.Drainageavail" autocomplete="off" />
+                            <label class="custom-control-label" for="Drainageavail1">
+                                AVAILABLE
+                            </label>
+                        </div>
+
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input class="custom-control-input" type="radio" name="Drainageavail" id="Drainageavail2"
+                                value="2" [(ngModel)]="BuildingInspectDetails.Drainageavail" autocomplete="off" />
+                            <label class="custom-control-label" for="Drainageavail2">
+                                NOT AVAILABLE
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="address">STREET NAME / LAND MARK<span style="color: red">*</span></label>
+                    <!-- <textarea
+      id="remarks"
+      type="text"
+      class="form-control"
+      [(ngModel)]="BuildingInspectDetails.address"
+      placeholder="ENTER ADDRESS"
+      maxlength="500"
+      rows="2"
+    ></textarea> -->
+
+
+                    <input type="text" id="address" class="form-control" [(ngModel)]="BuildingInspectDetails.address"
+                        placeholder="ENTER STREET NAME / LAND MARK" maxlength="100" autocomplete="off" />
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="address">PIN CODE <span style="color: red">*</span></label>
+                    <input type="text" id="pincode" class="form-control" [(ngModel)]="BuildingInspectDetails.pincode"
+                        placeholder="ENTER PINCODE" maxlength="6" autocomplete="off" NumbersOnly [allowDecimals]="true"
+                        [allowSign]="false" (change)="validatePinCode(BuildingInspectDetails.pincode)"
+                        onkeypress="return (event.charCode != 46)" />
+                </div>
+            </div>
+
+        </div>
+
+        <br>
+
+        <div class="row">
+            <div class="col-md-9">
+                <label *ngIf="RejRemarksHide" >REMARKS : <span class="text-danger">
+                        <b>{{RejectedRemarks}}</b>
+                    </span></label>
+            </div>
+
+<!-- 
+            <div class="col-md-2" align="right">
+               
+            </div> -->
+
+            <div class="col-md-3" align="right">
+                <button type="button" class="btn btn-success btn-sm" *ngIf="issubmit" (click)="btnSubmit()">
+                    SUBMIT
+                </button>
+                <button type="button" class="btn btn-success btn-sm" (click)="BtnFileUpload()">
+                    FIle Upload
+                </button>  
+            </div>
+        </div>
+
+        <br>
+        <br>
+        <!-- <div class="row" *ngIf="bmcufilehide">
+      <div class="col-md-2"></div>
+      <div class="col-md-3 button">
+        <div class="form-group">
+          <button type="button" class="btn btn-info btn-sm" (click)="btnPDF()">
+            DOWNLOAD PDF FILE
+          </button>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <label for="fileupdforpdf">BMCU EQUIPMENT FILE UPLOAD <span style="color: red; font-size: 10px;">* (MAX 1MB
+              PDF ONLY)</span>
+          </label>
+          <input type="file" class="form-control p-0" id="fileupdforpdf" (change)="onpdffileChange1($event)"
+            accept="pdf/*" autocomplete="off" />
+        </div>
+      </div>
+
+      <div class="col-md-3 button">
+        <div class="form-group">
+          <label></label>
+          <button type="button" class="btn btn-success btn-sm" (click)="Certificateupload()">
+            SUBMIT
+          </button>
+        </div>
+      </div>
+
+
+
+    </div> -->
+
+        <!-- <div class="row" *ngIf="MessageStatus">
+    <h3 style="margin:30px">  Details Added Successfully... !</h3>
+</div> -->
+
+    </div>
+
+    <div class="popup-modal" *ngIf="editdetails">
+        <div class="popup-content" style="min-width: 75%">
+            <div class="popup-header">
+                <h4 class="title">EDIT INSPECTION OF BMCU'S DETAILS</h4>
+                <a type="button" class="close" (click)="editdetails = false" style="cursor: pointer">
+                    <span>×</span>
+                </a>
+            </div>
+            <div class="popup-body">
+                <div class="row justify-content-center align-items-center">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>EQUIPMENT NAME </label>
+                            <br>
+                            <label class="text-success"><b>{{editdevicename}}</b></label>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label> IS EQUIPMENT AVAILABLE </label>
+                            <select id="editdeviceavail" class="form-control" [(ngModel)]="editdeviceavail"
+                                (change)="editdeviceAvailchange(editdeviceavail)">
+                                <option disabled selected value="undefined">-- SELECT IS EQUIPMENT AVAILABLE --</option>
+                                <option value="1">YES</option>
+                                <option value="2">NO</option>
+                            </select>
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>SERIAL NUMBER </label>
+                            <input type="text" id="editdeviceSerialNo" class="form-control" name="editdeviceSerialNo"
+                                [(ngModel)]="editdeviceSerialNo" placeholder="ENTER DEVICE SERIAL NUMBER" maxlength="50"
+                                autocomplete="off" />
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>MAKE </label>
+                            <input type="text" id="editdeviceMaker" class="form-control" [(ngModel)]="editdeviceMaker"
+                                placeholder="ENTER DEVICE MAKER" maxlength="50" autocomplete="off" />
+                            <!-- onkeypress="return (event.charCode >= 65 && event.charCode <= 90)" -->
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>CAPACITY</label>
+                            <input type="text" id="editdeviceCapacity" class="form-control"
+                                [(ngModel)]="editdeviceCapacity" placeholder="ENTER DEVICE CAPACITY" maxlength="50"
+                                autocomplete="off" NumbersOnly [allowDecimals]="true" [allowSign]="false" />
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="uomId">UNIT OF MEASUREMENT (UOM)</label>
+                            <select id="edituomId" class="form-control" [(ngModel)]="edituomId"
+                                (change)="edituomchange(edituomId)">
+                                <option disabled selected value="undefined">-- SELECT UNIT OF MEASUREMENT (UOM) --
+                                </option>
+                                <option value="{{ obj.UOM }}" *ngFor="let obj of UOMList">
+                                    {{ obj.UOM_NAME }}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="editworkcond">WORKING CONDITION</label>
+                            <select id="editworkcond" class="form-control" [(ngModel)]="editworkcond">
+                                <option disabled selected value="undefined">-- SELECT WORKING CONDITION --</option>
+                                <option value="1"> WORKING </option>
+                                <option value="2"> NOT WORKING </option>
+                                <option value="3"> NEED SERVICING</option>
+                                <!-- <option value="{{ obj.UOM }}" *ngFor="let obj of UOMList">
+                            {{ obj.UOM_NAME }}
+                          </option>  -->
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="deviceImage"> EQUIPMENT PHOTO UPLOAD
+                            </label>
+                            <input type="file" class="form-control p-0" id="editdeviceImage"
+                                (change)="editonImageChange($event)" accept="image/*" #deviceImage autocomplete="off" />
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="manfactureDate">INSTALLATION DATE</label>
+                            <app-date-picker [PlaceHolder]="'SELECT PURCHASE DATE'"
+                                [(selectedDate)]="editmanfactureDate" [maxDate]="maxDate"></app-date-picker>
+                        </div>
+                    </div>
+
+
+
+                    <div class="popup-footer justify-content-center">
+                        <button type="button" class="btn btn-success btn-sm btn-rounded" (click)="btnEqpUpdate()">
+
+                            UPDATE
+                        </button>
+                        <button type="button" class="btn btn-danger btn-sm btn-rounded" (click)="editdetails = false">
+                            Close
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,278 @@
+<div class="card">
+  <div class="card-header p-2">
+    <h5 class="mb-0">SECRETARY / ASSISTANT SECRETARY EDIT</h5>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="rbkId">RSK <span style="color: red">*</span></label>
+          <select
+            id="rbkId"
+            class="form-control"
+            [(ngModel)]="secretaryDetails.rbkId"
+            (change)="onRbkChange()"
+          >
+            <option value="">-- SELECT RSK --</option>
+            <option value="{{ obj.RBK_ID }}" *ngFor="let obj of rbkList">
+              {{ obj.RBK_NAME }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="villageId"
+            >DESIGNATION <span style="color: red">*</span></label
+          >
+          <select
+            id="villageId"
+            class="form-control"
+            [(ngModel)]="secretaryDetails.designation"
+            (change)="onDesignationChange()"
+          >
+            <option value="">-- SELECT DESIGNATION --</option>
+            <option value="1">SECRETARY</option>
+            <option value="2">ASSISTANT SECRETARY</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="villageId"
+            >VILLAGE <span style="color: red">*</span></label
+          >
+          <select
+            id="villageId"
+            class="form-control"
+            [(ngModel)]="secretaryDetails.villageId"
+            (change)="onVillageChange()"
+          >
+            <option value="">-- SELECT VILLAGE --</option>
+            <option
+              value="{{ obj.VILLAGE_ID }}"
+              *ngFor="let obj of villageList"
+            >
+              {{ obj.VILLAGE_NAME }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div
+        class="row m-0"
+        [hidden]="secList === null || secList === '' || secList === undefined"
+      >
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="name"> NAME <span style="color: red">*</span></label>
+            <input
+              id="name"
+              type="text"
+              class="form-control"
+              [(ngModel)]="secretaryDetails.name"
+              placeholder="Please Enter Name"
+              maxlength="50"
+              autocomplete="off"
+            />
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="uidNum">
+              AADHAAR NO <span style="color: red">*</span></label
+            >
+            <input
+              id="uidNum"
+              type="password"
+              class="form-control"
+              [(ngModel)]="secretaryDetails.uidNum"
+              placeholder="Please Enter Aadhaar Number"
+              maxlength="12"
+              NumbersOnly
+              [allowDecimals]="false"
+              [allowSign]="false"
+              autocomplete="off"
+            />
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="dob"
+              >DATE OF BIRTH <span style="color: red">*</span></label
+            >
+            <app-date-picker
+            [PlaceHolder]="'Please Select Date Of Birth'"
+            [(selectedDate)]="secretaryDetails.dob"
+            [minDate]="minDate"
+            [maxDate]="maxDate"
+          ></app-date-picker>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="villageId"
+              >MARITAL STATUS <span style="color: red">*</span></label
+            >
+            <select
+              id="villageId"
+              class="form-control"
+              [(ngModel)]="secretaryDetails.maritalStatus"
+            >
+              <option value="">-- SELECT MARITAL STATUS --</option>
+              <option
+                value="{{ obj.NAME }}"
+                *ngFor="let obj of maritalStatusList"
+              >
+                {{ obj.NAME }}
+              </option>
+            </select>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="name"
+              >MOBILE NUMBER <span style="color: red">*</span></label
+            >
+            <input
+              id="name"
+              type="text"
+              class="form-control"
+              [(ngModel)]="secretaryDetails.mobileNumber"
+              placeholder="Please Enter Mobile Number"
+              maxlength="10"
+              NumbersOnly
+              [allowDecimals]="false"
+              [allowSign]="false"
+              autocomplete="off"
+            />
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="bankAcNo"
+              >BANK ACCOUNT NO <span style="color: red">*</span></label
+            >
+            <input
+              id="bankAcNo"
+              type="text"
+              class="form-control"
+              [(ngModel)]="secretaryDetails.bankAcNo"
+              placeholder="Please Enter Bank Account Number"
+              maxlength="20"
+              NumbersOnly
+              [allowDecimals]="false"
+              [allowSign]="false"
+              autocomplete="off"
+            />
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="bankIFSCCode"
+              >IFSC CODE <span style="color: red">*</span></label
+            >
+            <input
+              id="bankIFSCCode"
+              type="text"
+              class="form-control"
+              [(ngModel)]="secretaryDetails.bankIFSCCode"
+              placeholder="Please Enter Bank IFSC Code"
+              maxlength="11"
+              autocomplete="off"
+            />
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="qualification"
+              >QUALIFICATION <span style="color: red">*</span></label
+            >
+            <select
+              id="qualification"
+              class="form-control"
+              [(ngModel)]="secretaryDetails.qualification"
+            >
+              <option value="">-- SELECT QUALIFICATION --</option>
+              <option
+                value="{{ obj.ID }}"
+                *ngFor="let obj of qualificationList"
+              >
+                {{ obj.QULIFICATION }}
+              </option>
+            </select>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="bankPassBookUpload"
+              >Bank PassBook Front Page Photo Upload
+              <span style="color: red;font-size: small;">* (JPEG and  less than 100KB) </span>
+            </label>
+            <div [hidden]="secretaryDetails.passBookImg === ''">
+              <img
+                [src]="'data:image/jpeg;base64,' + secretaryDetails.passBookImg"
+                style="cursor: pointer"
+                class="img-thumbnail mr-3"
+                (click)="btnImage(secretaryDetails.passBookImg)"
+              />
+            </div>
+            <input
+              type="file"
+              class="form-control p-0"
+              id="bankPassBookUpload"
+              (change)="onBankPassBookChange($event)"
+              accept="image/*"
+              #bankPassBookUpload
+              autocomplete="off"
+            />
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="sscMarksMemoUpload"
+              >SSC Marks Memo Upload <span style="color: red;font-size: small;">* (JPEG and  less than 100KB) </span>
+            </label>
+            <div [hidden]="secretaryDetails.marksMemo === ''">
+              <img
+                [src]="'data:image/jpeg;base64,' + secretaryDetails.marksMemo"
+                style="cursor: pointer"
+                class="img-thumbnail mr-3"
+                (click)="btnImage(secretaryDetails.marksMemo)"
+              />
+            </div>
+            <input
+              type="file"
+              class="form-control p-0"
+              id="sscMarksMemoUpload"
+              (change)="onSSCMarksMemoChange($event)"
+              accept="image/*"
+              #sscMarksMemoUpload
+              autocomplete="off"
+            />
+          </div>
+        </div>
+
+        <div class="col-md-12" align="center">
+          <button
+            type="button"
+            class="btn btn-success btn-sm"
+            (click)="btnSubmit()"
+          >
+            Update
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

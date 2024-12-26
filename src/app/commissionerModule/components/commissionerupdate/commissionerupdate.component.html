@@ -1,0 +1,141 @@
+
+<div class="card">
+  <div class="card-header p-2">
+    <h5 class="mb-0">Comissioner Update</h5>
+  </div>
+  <div class="card-body">
+    <div class="row">
+
+
+
+      
+      <div class="col-md-3">
+        <div class="form-group">
+          <label for="rbkId">RSK <span style="color: red">*</span></label>
+          <select   aria-sort="ascending"  
+            id="RBKDDSelected"
+            class="form-control"
+            [(ngModel)]="RBKDDSelected"
+            (change)="onRbkChange()"
+          >
+            <option class="dropdown-item" disabled selected value="undefined">-- SELECT RSK --</option>
+            <option value="{{ obj.RBK_CODE }}" *ngFor="let obj of rbkList">
+              {{ obj.RBK_NAME }}         -     ({{ obj.RBK_CODE }})
+            </option>
+          </select>
+        </div>
+      </div>
+      
+    </div>
+    <div class="col-md-12 table-responsive">
+    <table
+      class="table table-striped ah-table text-center"
+    >
+      <thead class="bg-success text-white">
+        <tr>
+          <th>RSK NAME</th>
+          <th>DISTRICT</th>
+          <th>DIVISION_NAME</th>
+          <th>RIC STATUS</th>
+          <th>DLCO STATUS</th>
+          <th>DCO STATUS</th>
+          <th>GM STATUS</th>
+          <th>COMISSIONER STATUS</th>
+          <th>REMARKS</th>
+        </tr>
+      </thead>
+      <tbody *ngIf="RBKStatusDetails?.length > 0">
+          <tr *ngFor="let obj of RBKStatusDetails; let i = index">
+            <td>{{ obj.RBK_NAME}}</td>
+            <td>{{ obj.DISTRICT}}</td>
+            <td>{{ obj.DIVISION_NAME}} </td>
+            <td>{{ obj.RIC_STATUS}}</td>
+            <td>{{ obj.DLCO_STATUS }}</td>
+            <td>{{ obj.DCO_STATUS }}</td>
+            <td>{{ obj.GM_STATUS}}</td>
+            <td>{{ obj.COMM_STATUS}}</td>
+            <td>{{ obj.REMARKS}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<br/>
+<div class="row">
+  <div class="col-md-4" ></div>
+<div class="col-md-4" >
+  <div class="form-group">
+    <label for="natureOfUnit">Remove RSK Current Approved/Reject Status <span style="color: red">*</span></label>
+    <select
+      id="Typechange"
+      class="form-control"
+      [(ngModel)]="Typechange"
+       
+    >
+      <option  class="dropdown-item" disabled selected value="undefined">---------------SELECT-CURRENT-STATUS---------</option>
+      <option value="1">DLCO</option>
+      <option value="2">DCO</option>
+      <option value="3">GM</option>
+      <option value="4">COMMISSIONER</option>
+      <!-- <option value="{{ obj.RBK_ID }}" *ngFor="let obj of rbkList"></option>
+        {{ obj.RBK_NAME }}
+      </option> -->
+    </select>
+  </div>
+</div>
+<div class="col-md-2" align="left">
+  <br/>
+  <button style="width:300px;height:50px;background-color: #28a745;font-size: 20px;color: white;"
+    type="submit"
+    class="btn btn-rounded btn-sm"
+    (click)="btnclick()"
+  >
+   Remove Current Status 
+  </button>
+</div>
+</div>
+
+<div class="popup-modal" *ngIf="deletepopup">
+  <div class="popup-content" style="min-width: 40%">
+    <div class="popup-header">
+      <h4 class="title">CONFIRM REQUEST</h4>
+      <a
+        type="button"
+        class="close"
+        (click)="deletepopup = false"
+        style="cursor: pointer"
+      >
+        <span>×</span>
+      </a>
+    </div>
+
+    <div class="popup-body">
+      <div class="row justify-content-center align-items-center">
+        ARE YOU SURE WANT TO DELETE?
+      </div>
+    </div>
+
+    <div class="popup-footer justify-content-center">
+      <button
+        type="button"
+        class="btn btn-outline-success btn-sm btn-rounded"
+        (click)="btnrequest('1')"
+      >
+        Yes
+      </button>
+
+      <button
+        type="button"
+        class="btn btn-outline-success btn-sm btn-rounded"
+        (click)="btnrequest('0')"
+      >
+        No 
+      </button>
+
+      
+    </div>
+  </div>
+</div> 
+
+

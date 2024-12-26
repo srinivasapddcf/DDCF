@@ -1,0 +1,124 @@
+<div class="card">
+  <div class="card-header p-2">
+    <h5 class="mb-0">MDSS MEETING SCHEDULE CREATION</h5>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="rbkId"><b>RSK</b> <span style="color: red">*</span></label>
+          <select
+            id="rbkId"
+            class="form-control"
+            [(ngModel)]="scheduleData.rbkId"
+            (change)="onRbkChange()"
+          >
+            <option value="">-- SELECT RSK --</option>
+            <option value="{{ obj.RBK_CODE }}" *ngFor="let obj of rbkList">
+              {{ obj.RBK_NAME }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="meetingVenue"
+            ><b>SCHEDULE MEETING VENUE</b> <span style="color: red">*</span></label
+          >
+          <input
+            id="meetingVenue"
+            type="text"
+            class="form-control"
+            [(ngModel)]="scheduleData.meetingVenue"
+            placeholder="Please Enter Meeting Venue"
+            maxlength="50"
+            autocomplete="off"
+          />
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="meetingVenueAddress"
+            ><b>SCHEDULE MEETING VENUE ADDRESS</b>
+            <span style="color: red">*</span></label
+          >
+          <input
+            id="meetingVenueAddress"
+            type="text"
+            class="form-control"
+            [(ngModel)]="scheduleData.meetingVenueAddress"
+            placeholder="Please Enter Meeting Venue Address"
+            maxlength="50"
+            autocomplete="off"
+          />
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="meetingDate"
+            ><b>SCHEDULE MEETING DATE </b> <span style="color: red">*</span></label
+          >
+          <app-date-picker
+            [PlaceHolder]="'Please Select Meeting Date'"
+            [(selectedDate)]="scheduleData.meetingDate"
+            [minDate]="minDate"
+            [maxDate]="maxDate"
+          ></app-date-picker>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="meetingTime"
+            ><b>SCHEDULE MEETING TIME </b><span style="color: red">*</span></label
+          >
+           
+          <input
+            id="meetingTime"
+            type="time"
+            class="form-control" pattern="^([0-1]?[0-9]|2[0-4]):([0-5][0-9])(:[0-5][0-9])?$"
+            [(ngModel)]="scheduleData.meetingTime"
+            placeholder="Please Enter Meeting Time"
+            maxlength="8"
+            autocomplete="off"
+          />
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="villageAnimatorName"
+            ><b>MEETING AGENDA </b><span style="color: red">*</span></label
+          >
+          <!-- <h5 class="text-success" id="meetingAgenda">
+            <b> {{ scheduleData.meetingAgenda }}</b>
+          </h5> -->
+
+          <input
+          id="meetingAgenda"
+          type="text"
+          class="form-control"
+          [(ngModel)]="scheduleData.meetingAgenda"
+          placeholder='{{ scheduleData.meetingAgenda }}'
+          maxlength="50"
+          autocomplete="off"
+          disabled="false"
+        />
+        </div>
+      </div>
+
+      <div class="col-md-12" align="center">
+        <button
+          type="button"
+          class="btn btn-success btn-sm"
+          (click)="btnSubmit()"
+        >
+          SUBMIT
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

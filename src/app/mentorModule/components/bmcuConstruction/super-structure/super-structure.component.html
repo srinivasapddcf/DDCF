@@ -1,0 +1,334 @@
+<div class="card">
+  <div class="card-header p-2">
+    <h5 class="mb-0">SUPER STRUCTURE LEVEL</h5>
+  </div>
+  <div class="card-body amulBuildingInspection">
+    <div class="row">
+      <div class="col-md-3">
+        <div class="form-group">
+          <label for="rbkId">RSK <span style="color: red">*</span></label>
+          <select
+            id="rbkId"
+            class="form-control"
+            [(ngModel)]="superStructureInputSub.rbkId"
+            (change)="onRbkChange()"
+          >
+            <option value="">-- SELECT RSK --</option>
+            <option value="{{ obj.RBK_ID }}" *ngFor="let obj of rbkList">
+              {{ obj.RBK_NAME }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="form-group">
+          <label for="villageId"
+            >VILLAGE <span style="color: red">*</span></label
+          >
+          <select
+            id="villageId"
+            class="form-control"
+            [(ngModel)]="superStructureInputSub.villageId"
+            (change)="onVillageChange()"
+          >
+            <option value="">-- SELECT VILLAGE --</option>
+            <option
+              value="{{ obj.VILLAGE_ID }}"
+              *ngFor="let obj of villageList"
+            >
+              {{ obj.VILLAGE_NAME }}
+            </option>
+          </select>
+        </div>
+      </div>
+      
+      <div class="col-md-3">
+        <div class="form-group pt-4">
+          <label
+            >WORK ID :
+            <span class="text-success">{{
+              superStructureInputSub.workId
+            }}</span></label
+          >
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6" *ngIf="superStructureCheck.providingColumn">
+        <div class="form-group">
+          <label
+            >PROVIDING COLUMNS :
+            <span
+              class="text-success"
+              *ngIf="superStructureCheckDetails.PROVIDING_COLUMNS === '1'"
+              >YES</span
+            >
+            <span
+              class="text-danger"
+              *ngIf="superStructureCheckDetails.PROVIDING_COLUMNS !== '1'"
+              >NO</span
+            ></label
+          >
+          <br />
+          <span
+            style="color: blue; text-decoration: underline; cursor: pointer"
+            *ngIf="superStructureCheckDetails.PROVIDING_COLUMNS === '1'"
+            (click)="
+              btnViewImage(superStructureCheckDetails.PROVIDING_COLUMNS_IMG)
+            "
+            >VIEW IMAGE</span
+          >
+        </div>
+      </div>
+
+      <div class="col-md-6" *ngIf="superStructureInput.providingColumn">
+        <div class="form-group">
+          <label>PROVIDING COLUMNS : </label>
+          <div class="ah-radio-buttons">
+            <div class="custom-control custom-radio custom-control-inline">
+              <input
+                class="custom-control-input"
+                type="radio"
+                name="providingColumns"
+                id="providingColumns1"
+                value="1"
+                [(ngModel)]="superStructureInputSub.providingColumns"
+                autocomplete="off"
+                (change)="providingColumnsChange()"
+              />
+              <label class="custom-control-label" for="providingColumns1">
+                Yes
+              </label>
+            </div>
+
+            <div class="custom-control custom-radio custom-control-inline">
+              <input
+                class="custom-control-input"
+                type="radio"
+                name="providingColumns"
+                id="providingColumns2"
+                value="0"
+                [(ngModel)]="superStructureInputSub.providingColumns"
+                autocomplete="off"
+                (change)="providingColumnsChange()"
+              />
+              <label class="custom-control-label" for="providingColumns2">
+                No
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>  
+
+      <div
+        class="col-md-6"
+        *ngIf="superStructureInputSub.providingColumns === '1'"
+      >
+        <div class="form-group">
+          <label for="markingMdacWomenImage"
+            >PROVIDING COLUMNS PHOTO :
+            <span style="color: red;font-size: small;">* (JPEG and  less than 100KB) </span>
+          </label>
+          <input
+            type="file"
+            class="form-control p-0"
+            id="providingColumnsImageUpload"
+            (change)="providingColumnsImageChange($event)"
+            accept="image/*"
+            autocomplete="off"
+            #providingColumnPhotoUpload
+          />
+        </div>
+      </div>
+
+      <div class="col-md-6" *ngIf="superStructureCheck.providSlab">
+        <div class="form-group">
+          <label
+            >PROVIDING SLAB :
+            <span
+              class="text-success"
+              *ngIf="superStructureCheckDetails.PROVIDING_SLAB === '1'"
+              >YES</span
+            >
+            <span
+              class="text-danger"
+              *ngIf="superStructureCheckDetails.PROVIDING_SLAB !== '1'"
+              >NO</span
+            ></label
+          >
+          <br />
+          <span
+            style="color: blue; text-decoration: underline; cursor: pointer"
+            *ngIf="superStructureCheckDetails.PROVIDING_SLAB === '1'"
+            (click)="
+              btnViewImage(superStructureCheckDetails.PROVIDING_SLAB_IMG)
+            "
+            >VIEW IMAGE</span
+          >
+        </div>
+      </div>
+
+      <div class="col-md-6" *ngIf="superStructureInput.providSlab">
+        <div class="form-group">
+          <label>PROVIDING SLAB : </label>
+          <div class="ah-radio-buttons">
+            <div class="custom-control custom-radio custom-control-inline">
+              <input
+                class="custom-control-input"
+                type="radio"
+                name="providingSlab"
+                id="providingSlab1"
+                value="1"
+                [(ngModel)]="superStructureInputSub.providingSlab"
+                autocomplete="off"
+                (change)="providingSlabChange()"
+              />
+              <label class="custom-control-label" for="providingSlab1">
+                Yes
+              </label>
+            </div>
+
+            <div class="custom-control custom-radio custom-control-inline">
+              <input
+                class="custom-control-input"
+                type="radio"
+                name="providingSlab"
+                id="providingSlab2"
+                value="0"
+                [(ngModel)]="superStructureInputSub.providingSlab"
+                autocomplete="off"
+                (change)="providingSlabChange()"
+              />
+              <label class="custom-control-label" for="providingSlab2">
+                No
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="col-md-6"
+        *ngIf="superStructureInputSub.providingSlab === '1'"
+      >
+        <div class="form-group">
+          <label for="providingSlabImage"
+            >PROVIDING SLAB PHOTO :
+            <span style="color: red">*</span>
+          </label>
+          <input
+            type="file"
+            class="form-control p-0"
+            id="providingSlabImageUpload"
+            (change)="providingSlabImageChange($event)"
+            accept="image/*"
+            autocomplete="off"
+            #providingSlabPhotoUpload
+          />
+        </div>
+      </div>
+
+      <div class="col-md-6" *ngIf="superStructureCheck.brickWall">
+        <div class="form-group">
+          <label
+            >BRICK WORK FOR WALLS :
+            <span
+              class="text-success"
+              *ngIf="superStructureCheckDetails.BRICK_WORK_FOR_WALLS === '1'"
+              >YES</span
+            >
+            <span
+              class="text-danger"
+              *ngIf="superStructureCheckDetails.BRICK_WORK_FOR_WALLS !== '1'"
+              >NO</span
+            ></label
+          >
+          <br />
+          <span
+            style="color: blue; text-decoration: underline; cursor: pointer"
+            *ngIf="superStructureCheckDetails.BRICK_WORK_FOR_WALLS === '1'"
+            (click)="
+              btnViewImage(superStructureCheckDetails.BRICK_WORK_FOR_WALLS_IMG)
+            "
+            >VIEW IMAGE</span
+          >
+        </div>
+      </div>
+
+      <div class="col-md-6" *ngIf="superStructureInput.brickWall">
+        <div class="form-group">
+          <label>BRICK WORK FOR WALLS : </label>
+          <div class="ah-radio-buttons">
+            <div class="custom-control custom-radio custom-control-inline">
+              <input
+                class="custom-control-input"
+                type="radio"
+                name="brickWorkForWalls"
+                id="brickWorkForWalls1"
+                value="1"
+                [(ngModel)]="superStructureInputSub.brickWorkForWalls"
+                autocomplete="off"
+                (change)="brickWorkForWallsChange()"
+              />
+              <label class="custom-control-label" for="brickWorkForWalls1">
+                Yes
+              </label>
+            </div>
+
+            <div class="custom-control custom-radio custom-control-inline">
+              <input
+                class="custom-control-input"
+                type="radio"
+                name="brickWorkForWalls"
+                id="brickWorkForWalls2"
+                value="0"
+                [(ngModel)]="superStructureInputSub.brickWorkForWalls"
+                autocomplete="off"
+                (change)="brickWorkForWallsChange()"
+              />
+              <label class="custom-control-label" for="brickWorkForWalls2">
+                No
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="col-md-6"
+        *ngIf="superStructureInputSub.brickWorkForWalls === '1'"
+      >
+        <div class="form-group">
+          <label for="roadVehicleImg"
+            >BRICK WORK FOR WALLS PHOTO :
+            <span style="color: red">*</span>
+          </label>
+          <input
+            type="file"
+            class="form-control p-0"
+            id="brickWorkForWallsImageUpload"
+            (change)="brickWorkForWallsImageChange($event)"
+            accept="image/*"
+            autocomplete="off"
+            #brickWallPhotoUpload
+          />
+        </div>
+      </div>
+
+      <div
+        class="col-md-12"
+        align="center"
+        *ngIf="superStructureInputSub.submission"
+      >
+        <button
+          type="button"
+          class="btn btn-success btn-sm"
+          (click)="btnSubmit()"
+        >
+          SUBMIT
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

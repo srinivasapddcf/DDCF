@@ -1,0 +1,264 @@
+<div class="card">
+  <div class="card-header p-2">
+    <h5 class="mb-0">MILK INSPECTION</h5>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="mandalId">MANDAL <span style="color: red">*</span></label>
+          <select
+            id="mandalId"
+            class="form-control"
+            [(ngModel)]="inspectionData.mandalId"
+            (change)="onMandalChange()"
+          >
+            <option value="">-- SELECT MANDAL --</option>
+            <option value="{{ obj.MANDAL_ID }}" *ngFor="let obj of mandalList">
+              {{ obj.MANDAL_NAME }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="rbkId">RSK <span style="color: red">*</span></label>
+          <select
+            id="rbkId"
+            class="form-control"
+            [(ngModel)]="inspectionData.rbkId"
+            (change)="onRbkChange()"
+          >
+            <option value="">-- SELECT RSK --</option>
+            <option value="{{ obj.RBK_ID }}" *ngFor="let obj of rbkList">
+              {{ obj.RBK_NAME }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="villageId"
+            >SOCIETY <span style="color: red">*</span></label
+          >
+          <select
+            id="villageId"
+            class="form-control"
+            [(ngModel)]="inspectionData.villageData"
+            (change)="onSocietyChange()"
+          >
+            <option value="">-- SELECT SOCIETY --</option>
+            <option value="{{ obj | json }}" *ngFor="let obj of societyList">
+              {{ obj.VDCSNAME }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="col-md-4 pt-4">
+        <button
+          type="button"
+          class="btn btn-primary btn-sm"
+          (click)="addFarmerPopUp()"
+        >
+          Add Farmer
+        </button>
+      </div>
+
+      <div
+        class="col-md-12 table-responsive"
+        [hidden]="inspectionData.milkInspectionList?.length < 1"
+      >
+        <table
+          class="table table-striped ah-table text-center"
+          datatable
+          [dtOptions]="dtOptions"
+          [dtTrigger]="dtTrigger"
+        >
+          <thead class="bg-success text-white">
+            <tr>
+              <th>FARMER NAME</th>
+              <th>TYPE OF MILK</th>
+              <th>FAT</th>
+              <th>SNF</th>
+              <th>AMOUNT</th>
+              <th>REMOVE</th>
+            </tr>
+          </thead>
+          <tbody *ngIf="inspectionData.milkInspectionList?.length > 0">
+            <tr
+              *ngFor="
+                let obj of inspectionData.milkInspectionList;
+                let i = index
+              "
+            >
+              <td>
+                <b>{{ obj.farmerName }}</b>
+              </td>
+              <td>{{ obj.typeOfMilk === "B" ? "BUFFALO" : "COW" }}</td>
+              <td>{{ obj.fat }}</td>
+              <td>{{ obj.SNF }}</td>
+              <td>{{ obj.amount }}</td>
+              <td>
+                <a
+                  class="btn btn-danger"
+                  style="cursor: pointer"
+                  (click)="btnRemoveFarmer(i)"
+                >
+                  <i class="fa fa-trash fa-lg"></i
+                ></a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div
+        class="col-md-12"
+        align="center"
+        [hidden]="inspectionData.milkInspectionList?.length < 1"
+      >
+        <button
+          type="button"
+          class="btn btn-sm btn-success"
+          (click)="btnSubmit()"
+        >
+          SUBMIT
+        </button>
+      </div>
+
+      <div class="popup-modal" *ngIf="showFarmersPopup">
+        <div class="popup-content" style="min-width: 75%">
+          <div class="popup-header">
+            <h4 class="title">ADDITION OF FARMERS</h4>
+            <a
+              type="button"
+              class="close"
+              (click)="showFarmersPopup = false"
+              style="cursor: pointer"
+            >
+              <span>×</span>
+            </a>
+          </div>
+          <div class="popup-body">
+            <div class="row justify-content-center align-items-center">
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="farmerData"
+                    >FARMER <span style="color: red">*</span></label
+                  >
+                  <select
+                    id="farmerData"
+                    class="form-control"
+                    [(ngModel)]="milkInspectionData.farmerData"
+                  >
+                    <option value="">-- SELECT FARMER --</option>
+                    <option
+                      value="{{ obj | json }}"
+                      *ngFor="let obj of farmerList"
+                    >
+                      {{ obj.FARMER_NAME }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="typeOfMilk"
+                    >TYPE OF MILK <span style="color: red">*</span></label
+                  >
+                  <select
+                    id="typeOfMilk"
+                    class="form-control"
+                    [(ngModel)]="milkInspectionData.typeOfMilk"
+                  >
+                    <option value="">-- SELECT TYPE OF MILK --</option>
+                    <option value="B">BUFFALO</option>
+                    <option value="C">COW</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="fat">FAT <span style="color: red">*</span></label>
+                  <input
+                    id="fat"
+                    type="text"
+                    class="form-control"
+                    [(ngModel)]="milkInspectionData.fat"
+                    placeholder="Please Enter FAT"
+                    maxlength="5"
+                    autocomplete="off"
+                    NumbersOnly
+                    [allowDecimals]="false"
+                    [allowSign]="false"
+                  />
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="SNF">SNF <span style="color: red">*</span></label>
+                  <input
+                    id="SNF"
+                    type="text"
+                    class="form-control"
+                    [(ngModel)]="milkInspectionData.SNF"
+                    placeholder="Please Enter SNF"
+                    maxlength="5"
+                    autocomplete="off"
+                    NumbersOnly
+                    [allowDecimals]="false"
+                    [allowSign]="false"
+                  />
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="amount"
+                    >AMOUNT <span style="color: red">*</span></label
+                  >
+                  <input
+                    id="amount"
+                    type="text"
+                    class="form-control"
+                    [(ngModel)]="milkInspectionData.amount"
+                    placeholder="Please Enter Amount"
+                    maxlength="5"
+                    autocomplete="off"
+                    NumbersOnly
+                    [allowDecimals]="false"
+                    [allowSign]="false"
+                  />
+                </div>
+              </div>
+
+              <div class="col-md-4"></div>
+
+              <div class="popup-footer justify-content-center">
+                <button
+                  type="button"
+                  class="btn btn-success btn-sm btn-rounded"
+                  (click)="btnAddFarmer()"
+                >
+                  ADD FARMER
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-danger btn-sm btn-rounded"
+                  (click)="showFarmersPopup = false"
+                >
+                  Close
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

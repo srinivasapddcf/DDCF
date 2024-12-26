@@ -1,0 +1,101 @@
+<div class="card">
+  <div class="card-header p-2">
+    <h5 class="mb-0">PENDING INVALID BANK ACCOUNTS LIST</h5>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div
+        class="col-md-12 table-responsive"
+        [hidden]="pendingList?.length < 1"
+      >
+        <table
+          class="table table-striped ah-table text-center"
+          datatable
+          [dtOptions]="dtOptions"
+          [dtTrigger]="dtTrigger"
+        >
+          <thead class="bg-success text-white">
+            <tr> 
+              <th>S.No.</th>
+              <th>FARMER NAME</th>
+              <th>FARMER CODE</th>
+              <th>MOBILE NUMBER</th>
+              <th>AADHAAR NUMBER</th>
+              <th>PAN CARD</th> 
+              <th>BANK NAME</th>
+              <th>BRANCH NAME</th>
+              <th>BANK A/C NUMBER</th>
+              <th>IFSC CODE</th>
+              <th>BANK PINCODE</th>
+              <th>PASSBOOK PHOTO</th>
+              <TH>ACTIVATE ACCOUNT WITH SAME BANK DETAILS</TH>
+              <th>ACTION TAKEN</th>
+            </tr>
+          </thead>
+          <tbody *ngIf="pendingList?.length > 0">
+            <tr *ngFor="let obj of pendingList; let i = index">
+              <td>{{ i + 1 }}</td>
+              <td>
+                <b>{{ obj.FARMER_NAME }}</b>
+              </td>
+              <td>{{ obj.FARMER_CODE }}</td>
+              <td>{{ obj.MOBILE_NUMBER }}</td>
+              <td>XXXX-XXXX-{{ obj.UID_NUM  | slice: -4}}</td>
+              <td>{{ obj.PAN_CARD }}</td>
+              <td>{{ obj.BANK_NAME }}</td>
+              <td>{{ obj.BANK_BRANCH }}</td>
+              <td>{{ obj.ACCOUNT_NUMBER }}</td>
+              <td>{{ obj.IFSC_CODE }}</td>
+              <td>{{ obj.BANK_PINCODE }}</td>
+              <td>
+                <button
+                  type="button"
+                  class="btn btn-link btn-sm"
+                  *ngIf="
+                    obj.PASSBOOK_IMG !== null &&
+                    obj.PASSBOOK_IMG !== '' &&
+                    obj.PASSBOOK_IMG !== undefined
+                  "
+                  (click)="btnPhotoView(obj.PASSBOOK_IMG)"
+                >
+                  VIEW
+                </button>
+                <span
+                  *ngIf="
+                    obj.PASSBOOK_IMG === null ||
+                    obj.PASSBOOK_IMG === '' ||
+                    obj.PASSBOOK_IMG === undefined
+                  "
+                  >NA</span
+                >
+              </td>
+              <td>
+                <button
+                  type="button"
+                  class="btn btn-success btn-sm"
+                  (click)="btnActivateBankAccount(obj)"
+                >
+                  ACTIVATE
+                </button>
+              </td>
+              <td>
+                <button
+                  type="button"
+                  class="btn btn-primary btn-sm"
+                  (click)="btnVerify(obj.UID_NUM)"
+                >
+                  VERIFY
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="col-md-12" [hidden]="pendingList?.length > 0">
+        <h3 class="text-center">
+          No Farmers With Invalid Banks Accounts Available !!!
+        </h3>
+      </div>
+    </div>
+  </div>
+</div>

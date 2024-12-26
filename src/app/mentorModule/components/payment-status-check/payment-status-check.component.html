@@ -1,0 +1,84 @@
+<div class="card">
+  <div class="card-header p-2">
+    <h5 class="mb-0">PAYMENT STATUS CHECK</h5>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-3 offset-3">
+        <div class="form-group">
+          <label for="uidNum"
+            >AADHAAR NUMBER <span style="color: red">*</span></label
+          >
+          <input
+            id="uidNum"
+            type="password"
+            class="form-control"
+            [(ngModel)]="statusuidNum"
+            placeholder="Please Enter Aadhaar Number"
+            maxlength="12"
+            autocomplete="off"
+            (keyup)="uidmaskIputData($event.target.value)"
+            NumbersOnly
+          />
+        </div>
+      </div>
+
+      <div class="col-md-3 pt-4" align="left">
+        <button
+          type="button"
+          class="btn btn-success btn-sm"
+          (click)="btnPaymentDetails()"
+        >
+          SUBMIT
+        </button>
+      </div>
+    </div>
+
+    <hr />
+
+    <div class="row">
+      <div
+        class="col-md-12 table-responsive"
+        [hidden]="personDetails?.length < 1"
+      >
+        <table
+          class="table table-striped ah-table text-center"
+          datatable
+          [dtOptions]="dtOptions"
+          [dtTrigger]="dtTrigger"
+        >
+          <thead class="bg-success text-white">
+            <tr>
+              <th>S.No.</th>
+              <th>FARMER NAME</th>
+              <th>FARMER CODE</th>
+              <th>AMOUNT</th>
+              <th>NO OF LITRES POURED</th>
+              <th>CATEGORY</th>
+              <th>AVERAGE PRICE</th>
+              <th>TRANSACTION DATE</th>
+              <th>FAT CONTENT</th>
+              <th>FAT SNF</th>
+            </tr>
+          </thead>
+          <tbody *ngIf="personDetails?.length > 0">
+            <tr *ngFor="let obj of personDetails; let i = index">
+              <td>{{ i + 1 }}</td>
+              <td>
+                <b>{{ obj.FARMER_NAME }}</b>
+              </td>
+              <td>{{ obj.FARMER_CODE }}</td>
+              <td>{{ obj.AMOUNT }}</td>
+              <td>{{ obj.HOW_MANY_LIT }}</td>
+              <td>{{ obj.CATEGORY === "B" ? "BUFFALO" : "COW" }}</td>
+              <td>{{ obj.AVG_PRICE }}</td>
+              <td>{{ obj.TRANSACTION_DATE }}</td>
+              <td>{{ obj.FAT_CONTENT }}</td>
+              <td>{{ obj.FAT_SNF }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

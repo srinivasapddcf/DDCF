@@ -1,0 +1,369 @@
+<div class="card">
+    <div class="card-header p-2">
+        <h5 class="mb-0">BMCU Equipments</h5>
+    </div>
+
+    <div class="card-body">
+        <!-- <div class="col-md-12 row">
+            <div class="col-md-4" style="text-align: right;"> <label for="UninonId">Bmcu Equipments
+                    <span style="color: red">*</span></label>
+            </div>
+
+        </div> -->
+
+
+
+
+        <div class="row"><div class="col-md-1"></div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="Districtid">District <span style="color: red">*</span></label>
+                <!-- </div>
+            </div>
+        <div class="col-md-2">
+            <div class="form-group">  -->
+                <select id="Districtid" class="form-control" [(ngModel)]="Districtid"  (change)="mandaldetails();">
+                    <option  disabled selected value="undefined">-- Select District --</option>
+                    <option value="{{ obj.DISTRICT_ID }}" *ngFor="let obj of Districtlist"> {{ obj.DISTRICT_NAME }} </option>
+
+                </select>
+            </div>
+        </div>
+
+        <div class="col-md-2">
+            <div class="form-group">
+                <label for="Mandalid">Mandal <span style="color: red">*</span></label>
+            <!-- </div>
+        </div>
+    <div class="col-md-2">
+        <div class="form-group">  -->
+            <select id="MANDALID" class="form-control" [(ngModel)]="MANDALID"  (change)="bmcudetails();">
+                <option  disabled selected value="undefined">-- Select Mandal --</option>
+                <option value="{{ obj.MANDALID }}" *ngFor="let obj of mandallist"> {{ obj.MANDAL_NAME }} </option>
+
+            </select>
+        </div>
+    </div>
+
+        <div class="col-md-2">
+            <div class="form-group">
+                <label for="BMCUID">BMCU<span style="color: red">*</span></label>
+            <!-- </div>
+        </div>  
+        <div class="col-md-2">
+            <div class="form-group"> 
+                 (change)="equipmentdetailsGridList();"-->
+                 
+                <select id="BMCUID" class="form-control" [(ngModel)]="BMCUID"    >
+                    <option  disabled selected value="undefined">-- Select BMCU --</option> 
+                    <option value="{{ obj.BMCU_CODE }}" *ngFor="let obj of Bmculist"> {{ obj.BMCU_NAME }} </option>
+                </select>
+            </div>
+        </div> 
+        <div class="col-md-2">
+            <div class="form-group">
+                <label for="INVID">Invoice<span style="color: red">*</span></label>
+            <!-- </div>
+        </div>      
+        <div class="col-md-2">
+            <div class="form-group"> -->
+               
+
+                <select id="INVID" class="form-control" [(ngModel)]="INVID"     >
+                    <option  disabled selected value="undefined">-- Select Invoice --</option> 
+                    <option value="{{ obj.INVID }}" *ngFor="let obj of Invoicelist"> {{ obj.INVOICENO }} </option>
+                </select>
+
+            </div>
+        </div>  
+        
+
+     <!-- <div class="col-md-1"><div class="form-group">
+        <button style="margin-top: 30px;" class="btn btn-primary" (click)="equipmentdetailsGridList()">Find</button>
+    </div>
+    </div>   -->
+</div>
+<div  class="col-md-12 row"   > <div class="col-md-1"></div>
+    <table style="width: 85%;text-align: center ;"><tr>
+        <td > <hr  style="color:brown; background-color: brown; height: 1px;" />   </td></tr></table>
+    
+        <div class="col-md-1"></div>
+    </div>
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label for="eqpt">Equipment<span style="color: red">*</span></label>
+            <select id="eqpt" class="form-control" [(ngModel)]="eqpt">
+                <option  disabled selected value="undefined">-- Select Equipment --</option>  
+                <option value="{{ obj.EQUIPMENT_ID }}" *ngFor="let obj of equipmentlist"> {{ obj.EQUIPMENT_NAME }} </option>
+            </select>
+        </div>
+    </div>
+<div class="col-md-2">
+    <div class="form-group">
+        <label for="Devicemaker">Device maker </label>
+        <input type="text" class="form-control" [(ngModel)]="Devicemaker"     (input)="trimInput()">
+    </div>
+</div> 
+<div class="col-md-3">
+    <div class="form-group">
+        <label for="Manufacturingdate">Installation  Date<span style="color: red">*</span></label>
+         
+        <app-date-picker [PlaceHolder]="'Select Manufacturing Date'" [(selectedDate)]="Manufacturingdate"  [(ngModel)]="Manufacturingdate"  [maxDate]="maxDate"></app-date-picker>
+
+    </div> 
+</div> 
+<div class="col-md-3">
+    <div class="form-group">
+        <label for="Capacity">Capacity </label>
+        <input type="text" class="form-control" [(ngModel)]="Capacity"  >
+    </div>
+</div>
+<div class="col-md-2">
+    <div class="form-group">
+        <label for="Serialnumber">Serial Number </label>
+        <input type="text" class="form-control" [(ngModel)]="Serialnumber"   >
+    </div>
+</div> 
+
+ 
+<!-- </div>
+<div class="row"> -->
+    
+    
+<div class="col-md-2">
+    <div class="form-group">
+        <label for="Calibrationstatus">Calibration Status<span style="color: red">*</span></label>
+        <!-- <input type="text" class="form-control" [(ngModel)]="Calibrationstatus"> -->
+
+        <select id="Calibrationstatus" class="form-control" [(ngModel)]="Calibrationstatus">
+            <option  disabled selected value="undefined">-- Select Status --</option>  
+            <option value="1" >  Yes </option>
+            <option value="0" >  No </option>
+        </select>
+
+    </div>
+</div> 
+
+<div class="col-md-2">
+    <div class="form-group">
+        <label for="installationstatus">Installation Status<span style="color: red">*</span></label>
+         
+
+        <select id="installationstatus" class="form-control" [(ngModel)]="installationstatus">
+            <option  disabled selected value="undefined">-- Select Status --</option>  
+            <option value="1" >  Yes </option>
+            <option value="0" >  No </option>
+        </select>
+
+    </div>
+</div> 
+
+<div class="col-md-3">
+    <div class="form-group">
+         
+
+        <label for="Deviceimage"
+        > Attach Device image (jpeg) <span style="color: red">*</span>
+      </label>
+      <!-- <input   [(ngModel)]="Deviceimage"
+        type="file"
+        class="form-control p-0"
+        id="Deviceimage"
+        (change)="onInvoiceChange($event)"
+        accept="image/jpeg"
+        autocomplete="off" /> -->
+
+        <input   [(ngModel)]="WayBillUpload"
+        type="file"
+        class="form-control p-0"
+        id="WayBillUpload"
+        (change)="onInvoiceChange($event)" 
+        accept="image/jpeg"
+        autocomplete="off" />
+
+
+    </div>
+</div> 
+
+ 
+
+
+<div class="col-md-3">
+    <div class="form-group">
+      <label for="Serialnumberimage"
+        > Attach Serial Number Image (jpeg) 
+      </label>
+      <!-- <input   [(ngModel)]="Serialnumberimage"
+        type="file"
+        class="form-control p-0"
+        id="Serialnumberimage"
+        (change)="onSerialnumberimageChange($event)"
+        accept="image/jpeg"
+        autocomplete="off" /> -->
+
+        <input   [(ngModel)]="allotmentAlienationUpload"
+                type="file"
+                class="form-control p-0"
+                id="allotmentAlienationUpload"
+                (change)="onSerialnumberimageChange($event)"
+                accept="image/jpeg"
+                autocomplete="off" />
+
+    </div>
+  </div> 
+
+</div>
+<div class="row">
+    <div class="col-md-11"></div>
+    
+    <div class="col-md-1">
+        <button class="btn btn-primary" (click)="DataSub()">ADD</button>
+    </div>
+     
+    
+</div>
+
+    <div class="row">
+         <div class="col-md-1"></div>
+        <div class="col-md-10">
+           
+            <div class="card-body" >
+                <div class="col-md-12 table-responsive" [hidden]="equipmentdetailsGrid?.length < 1">
+                    <table class="table table-striped ah-table text-center" datatable [dtOptions]="dtOptions"
+                    [dtTrigger]="dtTrigger"  >
+                    <thead class="bg-success text-white">
+                            <tr>
+                                <th  class="tableheader_color">S NO</th>
+                                <th  class="tableheader_color" >District </th>
+                                <th  class="tableheader_color" >BMCU </th>
+                                <th  class="tableheader_color" >Equipment </th> 
+
+                                <th  class="tableheader_color">Invoice No</th>
+                                <th  class="tableheader_color" > Make</th>
+                                <th  class="tableheader_color" >Installation Date</th>
+                               
+                                <th  class="tableheader_color" >Capacity Value</th>
+                                <th  class="tableheader_color" >Serial Number</th>
+                                <th  class="tableheader_color" >Calibration Status</th> 
+                                <th  class="tableheader_color" >Installation Status</th>
+                                <th  class="tableheader_color" >Serial No Image </th>
+                                <th  class="tableheader_color" >Device Image </th>
+                                <!-- <th  class="tableheader_color" >Status</th> -->
+                               
+                                
+
+                            </tr>
+                            <tr>
+                                <th   class="tableheader_color">(1)</th>
+                                <th  class="tableheader_color">(2)</th>
+                                <th   class="tableheader_color">(3)</th>
+                                <th   class="tableheader_color">(4)</th>
+                                <th   class="tableheader_color">(5)</th>
+                                <th  class="tableheader_color">(6)</th>
+                                <th   class="tableheader_color">(7)</th>
+                                <th   class="tableheader_color">(8)</th>
+                                <th   class="tableheader_color">(9)</th>
+                                <th   class="tableheader_color">(10)</th>
+                                <th   class="tableheader_color">(11)</th>
+                                <th  class="tableheader_color">(12)</th>
+                                <th   class="tableheader_color">(13)</th>
+                                <!-- <th   class="tableheader_color">(14)</th> -->
+                            </tr>
+                        </thead>
+                        
+                                <tbody [hidden]="equipmentdetailsGrid?.length < 1">
+                                    <tr *ngFor="let obj of equipmentdetailsGrid; let i = index">
+                                        <td class="number_align">{{ i + 1 }}</td>
+                                        <td style="text-align: left;" class="table_cells_borders"> {{obj.DISTRICT_NAME}}</td>
+                                        <td style="text-align: left;" class="table_cells_borders"> {{obj.BMCU_NAME}}</td>
+                                        <td style="text-align: left;" class="table_cells_borders"> {{obj.EQUIPMENT_NAME}}</td>
+                                        <td style="text-align: left;" class="table_cells_borders"> {{obj.INVOICE_NUMBER}}</td>
+                                        <td style="text-align: left;" class="table_cells_borders"> {{obj.DEVICE_MAKER}}</td>
+                                        <td style="text-align: left;" class="table_cells_borders"> {{obj.MANUFACTURE_DATE}}</td>
+                                        
+                                        <td style="text-align: left;" class="table_cells_borders"> {{obj.CAPACITY_VALUE}}</td>
+                                        <td style="text-align: left;" class="table_cells_borders"> {{obj.SERIAL_NUMBER}}</td>
+                                        <td style="text-align: left;" class="table_cells_borders"> {{obj.CALIBRATION_STATUS}}</td> 
+
+                              
+                                <td style="text-align: left;" class="table_cells_borders"> {{obj.INSTALLATION_STATUS}}</td>
+
+                                <td>
+                                    <span *ngIf="obj.SERIAL_NUMBER_IMG !== '0' && obj.SERIAL_NUMBER_IMG !==undefined  &&  obj.SERIAL_NUMBER_IMG !== null">
+                                        <button class="btn btn-sm btn-info block"
+                                   (click)="btnAllPdf(obj.SERIAL_NUMBER_IMG)">
+                                   <i>VIEW</i></button>
+                                        </span> 
+                                  <span *ngIf="obj.SERIAL_NUMBER_IMG === '0'  || obj.SERIAL_NUMBER_IMG ===undefined  ||  obj.SERIAL_NUMBER_IMG === null" >NA</span >     
+                                </td>
+                                 <td>
+                                    <span *ngIf="obj.DEVICE_IMG !== '0' && obj.DEVICE_IMG !==undefined  &&  obj.DEVICE_IMG !== null">
+                                        <button class="btn btn-sm btn-info block"
+                                   (click)="btnAllPdf(obj.DEVICE_IMG)">
+                                   <i>VIEW</i></button>
+                                        </span> 
+                                  <span *ngIf="obj.DEVICE_IMG === '0'  || obj.DEVICE_IMG ===undefined  ||  obj.DEVICE_IMG === null" >NA</span >
+ 
+                                 </td>      
+                               
+                                  <!-- <td>
+                                    <button class="btn btn-sm btn-info block"
+                                    (click)="btnAllPdf(obj.SERIAL_NUMBER_IMG)">
+                                    <i>VIEW</i></button> 
+                                  </td>
+                                  <td>
+                                    <button class="btn btn-sm btn-info block"
+                                    (click)="btnAllPdf(obj.DEVICE_IMG)">
+                                    <i>VIEW</i></button> 
+                                  </td> -->
+                                  
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+   
+
+    </div>
+    <div class="card-body">
+       <div class="row"> 
+
+       <div class="col-md-3"></div>
+
+       <div class="col-md-2" *ngIf="PAYMODEID2" >
+        <div class="form-group">
+          <label for="WayBillUpload"
+            > Attach Inovice (PDF) <span style="color: red">*</span>
+          </label>
+        </div>
+    </div>
+          <div class="col-md-4" *ngIf="PAYMODEID2" >
+            <div class="form-group">
+               
+
+          <input   [(ngModel)]="WayBillUpload"
+            type="file"
+            class="form-control p-0"
+            id="WayBillUpload"
+            (change)="onWayBill($event)" 
+            accept="application/pdf"
+            autocomplete="off" />
+        </div>
+      </div> 
+
+    
+       <div class="col-md-1" *ngIf="sub">
+           <button class="btn btn-primary" (click)="DataSubmittion()">Submitt</button>
+       </div>
+        
+      </div>
+
+
+        </div>
+
+</div>

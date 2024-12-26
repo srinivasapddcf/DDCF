@@ -1,0 +1,102 @@
+<div class="card">
+    <div class="card-header p-2">
+      <h5 class="mb-0">BMCU INSPECTION LIST</h5>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="rbkId">RSK <span style="color: red">*</span></label>
+            <select
+              id="rbkId"
+              class="form-control"
+              [(ngModel)]="rbkId"
+              (change)="onRbkChange()"
+            >
+              <option value="">-- SELECT RSK --</option>
+              <option value="{{ obj.RBK_ID }}" *ngFor="let obj of rbkList">
+                {{ obj.RBK_NAME }}
+              </option>
+            </select>
+          </div>
+        </div>
+  
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="villageId"
+              >VILLAGE <span style="color: red">*</span></label
+            >
+            <select
+              id="villageId"
+              class="form-control"
+              [(ngModel)]="villageId"
+            >
+              <option value="">-- SELECT VILLAGE --</option>
+              <option
+                value="{{ obj.VILLAGE_ID }}"
+                *ngFor="let obj of villageList"
+              >
+                {{ obj.VILLAGE_NAME }}
+              </option>
+            </select>
+          </div>
+        </div>
+
+        <div class="col-md-4 pt-4">
+          <button
+            type="button"
+            class="btn btn-success btn-sm"
+            (click)="btnSubmit()"
+          >
+            GO
+          </button>
+        </div>
+  
+        <div class="col-md-12 table-responsive" [hidden]="inspectionList?.length < 1">
+          <table
+            class="table table-striped ah-table text-center"
+            datatable
+            [dtOptions]="dtOptions"
+            [dtTrigger]="dtTrigger"
+          >
+            <thead class="bg-primary text-white">
+              <tr>
+                <th>S.No.</th>
+                <th>CATEGORY</th>
+                <th>SUB CATEGORY</th>
+                <th>AVAILABILITY</th>
+                <th>PHOTO</th>
+              </tr>
+            </thead>
+            <tbody *ngIf="inspectionList?.length > 0">
+              <tr
+                *ngFor="
+                  let obj of inspectionList;
+                  let i = index
+                "
+              >
+                <td>{{ i + 1 }}</td>
+                <td>{{ obj.BMCU_BUILD_INSPECT_NAME }}</td>
+                <td>{{ obj.BMCU_BUILD_INSPECT_INFO_NAME }}</td>
+                <td>
+                  <b *ngIf="obj.IS_AVAILABLE === '1'">YES</b>
+                  <b *ngIf="obj.IS_AVAILABLE === '0'">NO</b>
+                  <b *ngIf="obj.IS_AVAILABLE === null">NA</b>
+                </td>
+                <td>
+                  <span
+                    *ngIf="obj.BMCU_BUILD_INSPECT_IMG !== 'NA'"
+                    (click)="btnViewPhoto(obj.BMCU_BUILD_INSPECT_IMG)"
+                    style="cursor: pointer; text-decoration: underline;color: blue;"
+                    >VIEW</span
+                  >
+                  <span *ngIf="obj.BMCU_BUILD_INSPECT_IMG === 'NA'">NA</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  

@@ -1,0 +1,489 @@
+<div class="card">
+  <div class="card-header p-2">
+    <h5 class="mb-0">FINISHING LEVEL</h5>
+  </div>
+  <div class="card-body amulBuildingInspection">
+    <div class="row">
+      <div class="col-md-3">
+        <div class="form-group">
+          <label for="rbkId">RSK <span style="color: red">*</span></label>
+          <select
+            id="rbkId"
+            class="form-control"
+            [(ngModel)]="finishingInputSub.rbkId"
+            (change)="onRbkChange()"
+          >
+            <option value="">-- SELECT RSK --</option>
+            <option value="{{ obj.RBK_ID }}" *ngFor="let obj of rbkList">
+              {{ obj.RBK_NAME }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="form-group">
+          <label for="villageId"
+            >VILLAGE <span style="color: red">*</span></label
+          >
+          <select
+            id="villageId"
+            class="form-control"
+            [(ngModel)]="finishingInputSub.villageId"
+            (change)="onVillageChange()"
+          >
+            <option value="">-- SELECT VILLAGE --</option>
+            <option
+              value="{{ obj.VILLAGE_ID }}"
+              *ngFor="let obj of villageList"
+            >
+              {{ obj.VILLAGE_NAME }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="form-group pt-4">
+          <label
+            >WORK ID :
+            <span class="text-success">{{
+              finishingInputSub.workId
+            }}</span></label
+          >
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6" *ngIf="finishingCheck.plasting">
+        <div class="form-group">
+          <label
+            >PLASTERING :
+            <span
+              class="text-success"
+              *ngIf="finishingCheckDetails.PLASTERING === '1'"
+              >YES</span
+            >
+            <span
+              class="text-danger"
+              *ngIf="finishingCheckDetails.PLASTERING !== '1'"
+              >NO</span
+            ></label
+          >
+          <br />
+          <span
+            style="color: blue; text-decoration: underline; cursor: pointer"
+            *ngIf="finishingCheckDetails.PLASTERING === '1'"
+            (click)="btnViewImage(finishingCheckDetails.PLASTERING_IMG)"
+            >VIEW IMAGE</span
+          >
+        </div>
+      </div>
+
+      <div class="col-md-6" *ngIf="finishingInput.plasting">
+        <div class="form-group">
+          <label>PLASTERING : </label>
+          <div class="ah-radio-buttons">
+            <div class="custom-control custom-radio custom-control-inline">
+              <input
+                class="custom-control-input"
+                type="radio"
+                name="plastering"
+                id="plastering1"
+                value="1"
+                [(ngModel)]="finishingInputSub.plastering"
+                autocomplete="off"
+                (change)="plasteringChange()"
+              />
+              <label class="custom-control-label" for="plastering1">
+                Yes
+              </label>
+            </div>
+
+            <div class="custom-control custom-radio custom-control-inline">
+              <input
+                class="custom-control-input"
+                type="radio"
+                name="plastering"
+                id="plastering2"
+                value="0"
+                [(ngModel)]="finishingInputSub.plastering"
+                autocomplete="off"
+                (change)="plasteringChange()"
+              />
+              <label class="custom-control-label" for="plastering2"> No </label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6" *ngIf="finishingInputSub.plastering === '1'">
+        <div class="form-group">
+          <label for="plasteringImage"
+            >PLASTERING PHOTO :
+            <span style="color: red;font-size: small;">* (JPEG and  less than 100KB) </span>
+          </label>
+          <input
+            type="file"
+            class="form-control p-0"
+            id="plasteringImageUpload"
+            (change)="plasteringImageChange($event)"
+            accept="image/*"
+            autocomplete="off"
+            #plasteringPhotoUpload
+          />
+        </div>
+      </div>
+
+      <div class="col-md-6" *ngIf="finishingCheck.flooring">
+        <div class="form-group">
+          <label
+            >FLOORING :
+            <span
+              class="text-success"
+              *ngIf="finishingCheckDetails.FLOORING === '1'"
+              >YES</span
+            >
+            <span
+              class="text-danger"
+              *ngIf="finishingCheckDetails.FLOORING !== '1'"
+              >NO</span
+            ></label
+          >
+          <br />
+          <span
+            style="color: blue; text-decoration: underline; cursor: pointer"
+            *ngIf="finishingCheckDetails.FLOORING === '1'"
+            (click)="btnViewImage(finishingCheckDetails.FLOORING_IMG)"
+            >VIEW IMAGE</span
+          >
+        </div>
+      </div>
+
+      <div class="col-md-6" *ngIf="finishingInput.flooring">
+        <div class="form-group">
+          <label>FLOORING : </label>
+          <div class="ah-radio-buttons">
+            <div class="custom-control custom-radio custom-control-inline">
+              <input
+                class="custom-control-input"
+                type="radio"
+                name="flooring"
+                id="flooring1"
+                value="1"
+                [(ngModel)]="finishingInputSub.flooring"
+                autocomplete="off"
+                (change)="flooringChange()"
+              />
+              <label class="custom-control-label" for="flooring1"> Yes </label>
+            </div>
+
+            <div class="custom-control custom-radio custom-control-inline">
+              <input
+                class="custom-control-input"
+                type="radio"
+                name="flooring"
+                id="flooring2"
+                value="0"
+                [(ngModel)]="finishingInputSub.flooring"
+                autocomplete="off"
+                (change)="flooringChange()"
+              />
+              <label class="custom-control-label" for="flooring2"> No </label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6" *ngIf="finishingInputSub.flooring === '1'">
+        <div class="form-group">
+          <label for="flooringImage"
+            >FLOORING PHOTO :
+            <span style="color: red;font-size: small;">* (JPEG and  less than 100KB) </span>
+          </label>
+          <input
+            type="file"
+            class="form-control p-0"
+            id="flooringImageUpload"
+            (change)="flooringImageChange($event)"
+            accept="image/*"
+            autocomplete="off"
+            #flooringPhotoUpload
+          />
+        </div>
+      </div>
+
+      <div class="col-md-6" *ngIf="finishingCheck.windowsDoors">
+        <div class="form-group">
+          <label
+            >PLACING OF WINDOWS ,DOORS ,ROLLING SHUTTER , VENTILATORS :
+            <span
+              class="text-success"
+              *ngIf="finishingCheckDetails.WINDOWS_DOORS_VENTILAT === '1'"
+              >YES</span
+            >
+            <span
+              class="text-danger"
+              *ngIf="finishingCheckDetails.WINDOWS_DOORS_VENTILAT !== '1'"
+              >NO</span
+            ></label
+          >
+          <br />
+          <span
+            style="color: blue; text-decoration: underline; cursor: pointer"
+            *ngIf="finishingCheckDetails.WINDOWS_DOORS_VENTILAT === '1'"
+            (click)="
+              btnViewImage(finishingCheckDetails.WINDOWS_DOORS_VENTILAT_IMG)
+            "
+            >VIEW IMAGE</span
+          >
+        </div>
+      </div>
+
+      <div class="col-md-6" *ngIf="finishingInput.windowsDoors">
+        <div class="form-group">
+          <label
+            >PLACING OF WINDOWS ,DOORS ,ROLLING SHUTTER , VENTILATORS :
+          </label>
+          <div class="ah-radio-buttons">
+            <div class="custom-control custom-radio custom-control-inline">
+              <input
+                class="custom-control-input"
+                type="radio"
+                name="windowsDoorsVentilators"
+                id="windowsDoorsVentilators1"
+                value="1"
+                [(ngModel)]="finishingInputSub.windowsDoorsVentilators"
+                autocomplete="off"
+                (change)="windowsDoorsVentilatorsChange()"
+              />
+              <label
+                class="custom-control-label"
+                for="windowsDoorsVentilators1"
+              >
+                Yes
+              </label>
+            </div>
+
+            <div class="custom-control custom-radio custom-control-inline">
+              <input
+                class="custom-control-input"
+                type="radio"
+                name="windowsDoorsVentilators"
+                id="windowsDoorsVentilators2"
+                value="0"
+                [(ngModel)]="finishingInputSub.windowsDoorsVentilators"
+                autocomplete="off"
+                (change)="windowsDoorsVentilatorsChange()"
+              />
+              <label
+                class="custom-control-label"
+                for="windowsDoorsVentilators2"
+              >
+                No
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="col-md-6"
+        *ngIf="finishingInputSub.windowsDoorsVentilators === '1'"
+      >
+        <div class="form-group">
+          <label for="roadVehicleImg"
+            >PLACING OF WINDOWS PHOTO :
+            <span style="color: red;font-size: small;">* (JPEG and  less than 100KB) </span>
+          </label>
+          <input
+            type="file"
+            class="form-control p-0"
+            id="windowsDoorsVentilatorsImageUpload"
+            (change)="windowsDoorsVentilatorsImageChange($event)"
+            accept="image/*"
+            autocomplete="off"
+            #windowsDoorsVentilatorsorsPhotoUpload
+          />
+        </div>
+      </div>
+
+      <div class="col-md-6" *ngIf="finishingCheck.painting">
+        <div class="form-group">
+          <label
+            >PAINTING :
+            <span
+              class="text-success"
+              *ngIf="finishingCheckDetails.PAINTING === '1'"
+              >YES</span
+            >
+            <span
+              class="text-danger"
+              *ngIf="finishingCheckDetails.PAINTING !== '1'"
+              >NO</span
+            ></label
+          >
+          <br />
+          <span
+            style="color: blue; text-decoration: underline; cursor: pointer"
+            *ngIf="finishingCheckDetails.PAINTING === '1'"
+            (click)="btnViewImage(finishingCheckDetails.PAINTING_IMG)"
+            >VIEW IMAGE</span
+          >
+        </div>
+      </div>
+
+      <div class="col-md-6" *ngIf="finishingInput.painting">
+        <div class="form-group">
+          <label>PAINTING : </label>
+          <div class="ah-radio-buttons">
+            <div class="custom-control custom-radio custom-control-inline">
+              <input
+                class="custom-control-input"
+                type="radio"
+                name="painting"
+                id="painting1"
+                value="1"
+                [(ngModel)]="finishingInputSub.painting"
+                autocomplete="off"
+                (change)="paintingChange()"
+              />
+              <label class="custom-control-label" for="painting1"> Yes </label>
+            </div>
+
+            <div class="custom-control custom-radio custom-control-inline">
+              <input
+                class="custom-control-input"
+                type="radio"
+                name="painting"
+                id="painting2"
+                value="0"
+                [(ngModel)]="finishingInputSub.painting"
+                autocomplete="off"
+                (change)="paintingChange()"
+              />
+              <label class="custom-control-label" for="painting2"> No </label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6" *ngIf="finishingInputSub.painting === '1'">
+        <div class="form-group">
+          <label for="paintingImage"
+            >PAINTING PHOTO :
+            <span style="color: red;font-size: small;">* (JPEG and  less than 100KB) </span>
+          </label>
+          <input
+            type="file"
+            class="form-control p-0"
+            id="paintingImageUpload"
+            (change)="paintingImageChange($event)"
+            accept="image/*"
+            autocomplete="off"
+            #paintingPhotoUpload
+          />
+        </div>
+      </div>
+
+      <div class="col-md-6" *ngIf="finishingCheck.logos">
+        <div class="form-group">
+          <label
+            >LOGOS AND NAME BOARD(MGNREGS,NAVARATNALU,YSR CHEYUTHA) :
+            <span
+              class="text-success"
+              *ngIf="finishingCheckDetails.LOGOS_NAMEBOARD === '1'"
+              >YES</span
+            >
+            <span
+              class="text-danger"
+              *ngIf="finishingCheckDetails.LOGOS_NAMEBOARD !== '1'"
+              >NO</span
+            ></label
+          >
+          <br />
+          <span
+            style="color: blue; text-decoration: underline; cursor: pointer"
+            *ngIf="finishingCheckDetails.LOGOS_NAMEBOARD === '1'"
+            (click)="btnViewImage(finishingCheckDetails.LOGOS_NAMEBOARD_IMG)"
+            >VIEW IMAGE</span
+          >
+        </div>
+      </div>
+
+      <div class="col-md-6" *ngIf="finishingInput.logos">
+        <div class="form-group">
+          <label
+            >LOGOS AND NAME BOARD(MGNREGS,NAVARATNALU,YSR CHEYUTHA) :
+          </label>
+          <div class="ah-radio-buttons">
+            <div class="custom-control custom-radio custom-control-inline">
+              <input
+                class="custom-control-input"
+                type="radio"
+                name="logosNameboard"
+                id="logosNameboard1"
+                value="1"
+                [(ngModel)]="finishingInputSub.logosNameboard"
+                autocomplete="off"
+                (change)="logosNameboardChange()"
+              />
+              <label class="custom-control-label" for="logosNameboard1">
+                Yes
+              </label>
+            </div>
+
+            <div class="custom-control custom-radio custom-control-inline">
+              <input
+                class="custom-control-input"
+                type="radio"
+                name="logosNameboard"
+                id="logosNameboard2"
+                value="0"
+                [(ngModel)]="finishingInputSub.logosNameboard"
+                autocomplete="off"
+                (change)="logosNameboardChange()"
+              />
+              <label class="custom-control-label" for="logosNameboard2">
+                No
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6" *ngIf="finishingInputSub.logosNameboard === '1'">
+        <div class="form-group">
+          <label for="logosNameboardImage"
+            >LOGOS AND NAME BOARD PHOTO :
+            <span style="color: red;font-size: small;">* (JPEG and  less than 100KB) </span>
+          </label>
+          <input
+            type="file"
+            class="form-control p-0"
+            id="logosNameboardImageUpload"
+            (change)="logosNameboardImageChange($event)"
+            accept="image/*"
+            autocomplete="off"
+            #logosAndNameBoardPhotoUpload
+          />
+        </div>
+      </div>
+
+      <div
+        class="col-md-12"
+        align="center"
+        *ngIf="finishingInputSub.submission"
+      >
+        <button
+          type="button"
+          class="btn btn-success btn-sm"
+          (click)="btnSubmit()"
+        >
+          SUBMIT
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

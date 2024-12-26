@@ -1,0 +1,217 @@
+<div class="card">
+  <div class="card-header p-2">
+    <h5 class="mb-0">BANK MANAGER GROUNDING</h5>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="form-group">
+          <label>
+            APPLICANT NAME :
+            <span style="color: green">
+              <b>{{ personDetails.BEN_NAME }}</b>
+            </span>
+          </label>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div>
+          <label for="BEN_FATHER_NAME">
+            FATHER'S /HUSBAND'S NAME :
+            <span style="color: green">
+              <b>{{ personDetails.BEN_FATHER_NAME }}</b>
+            </span>
+          </label>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label>
+            AADHAR :
+            <span style="color: green">
+              <b>{{ personDetails.UID_NUM }}</b>
+            </span>
+          </label>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label>
+            SB ACCOUNT NO. :
+            <span style="color: green">
+              <b>{{ personDetails.ACCOUNT_NUMBER }}</b>
+            </span>
+          </label>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label>
+            IFSC CODE :
+            <span style="color: green">
+              <b>{{ personDetails.IFSC_CODE }}</b>
+            </span>
+          </label>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div>
+          <label for="DOB_DT">
+            DATE OF BIRTH :
+            <span style="color: green">
+              <b>{{ personDetails.DOB_DT }}</b>
+            </span>
+          </label>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label>
+            NATURE OF UNIT :
+            <span style="color: green">
+              <b>{{ personDetails.NATURE_OF_UINT }}</b>
+            </span>
+          </label>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label>
+            ANIMAL COST :
+            <span style="color: green">
+              <b>{{ personDetails.ANIMAL_COST }}</b>
+            </span>
+          </label>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label>
+            INSURANCE :
+            <span style="color: green">
+              <b>{{ personDetails.INSURANCE }}</b>
+            </span>
+          </label>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label>
+            TRANSPORTATION :
+            <span style="color: green">
+              <b>{{ personDetails.TRANSPORTATION }}</b>
+            </span>
+          </label>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label>
+            TOTAL PROJECT COST :
+            <span style="color: green">
+              <b>{{ personDetails.TOT_PROJECT_COST }}</b>
+            </span>
+          </label>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label>
+            MARGIN :
+            <span style="color: green">
+              <b>{{ personDetails.MARGIN }}</b>
+            </span>
+          </label>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label>
+            BANK LOAN :
+            <span style="color: green">
+              <b>{{ personDetails.BANK_LOAN }}</b>
+            </span>
+          </label>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label>
+            APPLICATION HARD COPY SENT TO BANK DATE : <br />
+            <span style="color: green">
+              <b>{{ personDetails.APP_HARD_COPY_SENT_DATE }}</b>
+            </span>
+          </label>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label>
+            SUBMISSION DATE : <br />
+            <span style="color: green">
+              <b>{{ personDetails.SUBMISSION_DATE }}</b>
+            </span>
+          </label>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label>
+            LOAN SANCTION DATE : <br />
+            <span style="color: green">
+              <b>{{ personDetails.LOAN_SANCTION_DATE }}</b>
+            </span>
+          </label>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label>
+            LOAN AMOUNT : <br />
+            <span style="color: green">
+              <b>{{ personDetails.LOAN_AMOUNT }}</b>
+            </span>
+          </label>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="documentationCompletionDate">
+            DOCUMENTATION COMPLETION DATE
+            <span style="color: red">*</span>
+          </label>
+          <app-date-picker
+            [PlaceHolder]="'Please Select Documentation Completion Date'"
+            [(selectedDate)]="applicantData.documentationCompletionDate"
+            [maxDate]="maxDate"
+          ></app-date-picker>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="groundingDate">
+            GROUNDING DATE
+            <span style="color: red">*</span>
+          </label>
+          <app-date-picker
+          [PlaceHolder]="'Please Select Grounding Date'"
+          [(selectedDate)]="applicantData.groundingDate"
+          [maxDate]="maxDate"
+        ></app-date-picker>
+        </div>
+      </div>
+
+      <div class="col-md-12" align="center">
+        <button
+          type="button"
+          class="btn btn-success btn-sm"
+          (click)="btnSubmit()"
+        >
+          SUBMIT
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

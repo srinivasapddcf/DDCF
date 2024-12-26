@@ -1,0 +1,353 @@
+<div class="card">
+  <div class="card-header p-2">
+    <h5 class="mb-0">FEASIBILITY OF LAND</h5>
+  </div>
+  <div class="card-body amulBuildingInspection">
+    <div class="row">
+      <div class="col-md-3">
+        <div class="form-group">
+          <label for="rbkId">RSK <span style="color: red">*</span></label>
+          <select
+            id="rbkId"
+            class="form-control"
+            [(ngModel)]="feasibilityInputSub.rbkId"
+            (change)="onRbkChange()"
+          >
+            <option value="">-- SELECT RSK --</option>
+            <option value="{{ obj.RBK_ID }}" *ngFor="let obj of rbkList">
+              {{ obj.RBK_NAME }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="form-group">
+          <label for="villageId"
+            >VILLAGE <span style="color: red">*</span></label
+          >
+          <select
+            id="villageId"
+            class="form-control"
+            [(ngModel)]="feasibilityInputSub.villageId"
+            (change)="onVillageChange()"
+          >
+            <option value="">-- SELECT VILLAGE --</option>
+            <option
+              value="{{ obj.VILLAGE_ID }}"
+              *ngFor="let obj of villageList"
+            >
+              {{ obj.VILLAGE_NAME }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="form-group" *ngIf="feasibilityInput">
+          <label for="workId">WORK ID <span style="color: red">*</span></label>
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Please Enter Work ID"
+            [(ngModel)]="feasibilityInputSub.workId"
+            maxlength="20"
+            NumbersOnly
+            [allowDecimals]="false"
+            [allowSign]="false"
+          />
+        </div>
+        <div class="form-group pt-4" *ngIf="feasibilityCheck">
+          <label
+            >WORK ID :
+            <span class="text-success">{{
+              feasibilityCheckDetails.WORK_ID
+            }}</span></label
+          >
+        </div>
+      </div>
+    </div>
+
+    <div class="row" *ngIf="feasibilityCheck">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label
+            >WHETHER LENGTH AND BREADTH IS OF THE GIVEN TYPE DESIGN :
+            <span
+              class="text-success"
+              *ngIf="feasibilityCheckDetails.F_LGTH_BRTH_DESIGN === '1'"
+              >YES</span
+            >
+            <span
+              class="text-danger"
+              *ngIf="feasibilityCheckDetails.F_LGTH_BRTH_DESIGN !== '1'"
+              >NO</span
+            ></label
+          >
+          <br />
+          <span
+            style="color: blue; text-decoration: underline; cursor: pointer"
+            *ngIf="feasibilityCheckDetails.F_LGTH_BRTH_DESIGN === '1'"
+            (click)="
+              btnViewImage(feasibilityCheckDetails.F_LGTH_BRTH_DESIGN_IMG)
+            "
+            >VIEW IMAGE</span
+          >
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="form-group">
+          <label
+            >WHETHER THE LOCATION IS EASILY ACCESSIBLE TO THE WOMEN POURERS :
+            <span
+              class="text-success"
+              *ngIf="feasibilityCheckDetails.F_LOCATION_ACCESS_WOMEN === '1'"
+              >YES</span
+            >
+            <span
+              class="text-danger"
+              *ngIf="feasibilityCheckDetails.F_LOCATION_ACCESS_WOMEN !== '1'"
+              >NO</span
+            ></label
+          >
+          <br />
+          <span
+            style="color: blue; text-decoration: underline; cursor: pointer"
+            *ngIf="feasibilityCheckDetails.F_LOCATION_ACCESS_WOMEN === '1'"
+            (click)="
+              btnViewImage(feasibilityCheckDetails.F_LOCATION_ACCESS_WOMEN_IMG)
+            "
+            >VIEW IMAGE</span
+          >
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="form-group">
+          <label
+            >WHETHER ROAD CONNECTIVITY FOR THE VEHICLE MOVEMENT IS THERE :
+            <span
+              class="text-success"
+              *ngIf="feasibilityCheckDetails.F_ROAD_VEHICLE === '1'"
+              >YES</span
+            >
+            <span
+              class="text-danger"
+              *ngIf="feasibilityCheckDetails.F_ROAD_VEHICLE !== '1'"
+              >NO</span
+            ></label
+          >
+          <br />
+          <span
+            style="color: blue; text-decoration: underline; cursor: pointer"
+            *ngIf="feasibilityCheckDetails.F_ROAD_VEHICLE === '1'"
+            (click)="btnViewImage(feasibilityCheckDetails.F_ROAD_VEHICLE_IMG)"
+            >VIEW IMAGE</span
+          >
+        </div>
+      </div>
+    </div>
+
+    <div class="row" *ngIf="feasibilityInput">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label
+            >WHETHER THE LENGTH AND BREADTH IS OF THE GIVEN TYPE DESIGN :
+            <sup class="text-danger h6">*</sup></label
+          >
+          <div class="ah-radio-buttons">
+            <div class="custom-control custom-radio custom-control-inline">
+              <input
+                class="custom-control-input"
+                type="radio"
+                name="lengthBreadthDesign"
+                id="lengthBreadthDesign1"
+                value="1"
+                [(ngModel)]="feasibilityInputSub.lengthBreadthDesign"
+                autocomplete="off"
+                (change)="lengthBreadthDesignChange()"
+              />
+              <label class="custom-control-label" for="lengthBreadthDesign1">
+                Yes
+              </label>
+            </div>
+
+            <div class="custom-control custom-radio custom-control-inline">
+              <input
+                class="custom-control-input"
+                type="radio"
+                name="lengthBreadthDesign"
+                id="lengthBreadthDesign2"
+                value="0"
+                [(ngModel)]="feasibilityInputSub.lengthBreadthDesign"
+                autocomplete="off"
+                (change)="lengthBreadthDesignChange()"
+              />
+              <label class="custom-control-label" for="lengthBreadthDesign2">
+                No
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="col-md-6"
+        *ngIf="feasibilityInputSub.lengthBreadthDesign === '1'"
+      >
+        <div class="form-group">
+          <label for="lengthBreadthDesignImage"
+            >LENGTH AND BREADTH PHOTO :<span style="color: red">*</span>
+          </label>
+          <input
+            type="file"
+            class="form-control p-0"
+            id="lengthBreadthDesignImageUpload"
+            (change)="lengthBreadthDesignImageChange($event)"
+            accept="image/*"
+            autocomplete="off"
+            #lengthBrethPhotoUpload
+          />
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="form-group">
+          <label
+            >WHETHER THE LOCATION IS EASILY ACCESSIBLE TO THE WOMEN POURERS :
+            <sup class="text-danger h6">*</sup></label
+          >
+          <div class="ah-radio-buttons">
+            <div class="custom-control custom-radio custom-control-inline">
+              <input
+                class="custom-control-input"
+                type="radio"
+                name="locationAccessToWomen"
+                id="locationAccessToWomen1"
+                value="1"
+                [(ngModel)]="feasibilityInputSub.locationAccessToWomen"
+                autocomplete="off"
+                (change)="locationChange()"
+              />
+              <label class="custom-control-label" for="locationAccessToWomen1">
+                Yes
+              </label>
+            </div>
+
+            <div class="custom-control custom-radio custom-control-inline">
+              <input
+                class="custom-control-input"
+                type="radio"
+                name="locationAccessToWomen"
+                id="locationAccessToWomen2"
+                value="0"
+                [(ngModel)]="feasibilityInputSub.locationAccessToWomen"
+                autocomplete="off"
+                (change)="locationChange()"
+              />
+              <label class="custom-control-label" for="locationAccessToWomen2">
+                No
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="col-md-6"
+        *ngIf="feasibilityInputSub.locationAccessToWomen === '1'"
+      >
+        <div class="form-group">
+          <label for="locationAccessToWomenImage"
+            >LOCATION ACCESSIBILITY PHOTO <span style="color: red">*</span>
+          </label>
+          <input
+            type="file"
+            class="form-control p-0"
+            id="locationAccessToWomenImageUpload"
+            (change)="locationAccessToWomenImageChange($event)"
+            accept="image/*"
+            autocomplete="off"
+            #locationPhotoUpload
+          />
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="form-group">
+          <label
+            >WHETHER ROAD CONNECTIVITY FOR THE VEHICLE MOVEMENT IS THERE :
+            <sup class="text-danger h6">*</sup></label
+          >
+          <div class="ah-radio-buttons">
+            <div class="custom-control custom-radio custom-control-inline">
+              <input
+                class="custom-control-input"
+                type="radio"
+                name="roadConnectivityForVehicle"
+                id="roadConnectivityForVehicle1"
+                value="1"
+                [(ngModel)]="feasibilityInputSub.roadConnectivityForVehicle"
+                autocomplete="off"
+                (change)="roadConnectivityForVehicleChange()"
+              />
+              <label
+                class="custom-control-label"
+                for="roadConnectivityForVehicle1"
+              >
+                Yes
+              </label>
+            </div>
+
+            <div class="custom-control custom-radio custom-control-inline">
+              <input
+                class="custom-control-input"
+                type="radio"
+                name="roadConnectivityForVehicle"
+                id="roadConnectivityForVehicle2"
+                value="0"
+                [(ngModel)]="feasibilityInputSub.roadConnectivityForVehicle"
+                autocomplete="off"
+                (change)="roadConnectivityForVehicleChange()"
+              />
+              <label
+                class="custom-control-label"
+                for="roadConnectivityForVehicle2"
+              >
+                No
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="col-md-6"
+        *ngIf="feasibilityInputSub.roadConnectivityForVehicle === '1'"
+      >
+        <div class="form-group">
+          <label for="roadConnectivityForVehicleImg"
+            >ROAD CONNECTIVITY PHOTO<span style="color: red">*</span>
+          </label>
+          <input
+            type="file"
+            class="form-control p-0"
+            id="roadConnectivityForVehicleImgUpload"
+            (change)="roadConnectivityForVehicleImgChange($event)"
+            accept="image/*"
+            autocomplete="off"
+            #roadConnectivityForVehiclePhotoUpload
+          />
+        </div>
+      </div>
+      <div class="col-md-12" align="center">
+        <button
+          type="button"
+          class="btn btn-success btn-sm"
+          (click)="btnSubmit()"
+        >
+          SUBMIT
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

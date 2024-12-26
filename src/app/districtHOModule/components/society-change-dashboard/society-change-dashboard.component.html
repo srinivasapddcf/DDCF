@@ -1,0 +1,173 @@
+<div class="card-header p-1">
+  <h5 class="mb-0">SOCIETY CHANGE DASHBOARD</h5>
+</div>
+<div class="row">
+  <div class="col mb-2">
+    <div
+      class="stats-card primary"
+      (click)="btnSocietyChangeDashboardDetails(null)"
+    >
+      <div class="overlay"></div>
+      <div class="card-body">
+        <div class="d-flex justify-content-between">
+          <div class="stats-text">
+            <p class="text-uppercase text-muted mb-1">
+              <small>PENDING</small>
+            </p>
+            <h5 class="font-weight-bold mb-0">
+              {{ dashboardCounts.PENDING_FARMERS }}
+            </h5>
+          </div>
+          <div class="circle">
+            <i class="fas fa-hourglass-half"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col mb-2">
+    <div
+      class="stats-card success"
+      (click)="btnSocietyChangeDashboardDetails('1')"
+    >
+      <div class="overlay"></div>
+
+      <div class="card-body">
+        <div class="d-flex justify-content-between">
+          <div class="stats-text">
+            <p class="text-uppercase text-muted mb-1">
+              <small>APPROVED</small>
+            </p>
+            <h5 class="font-weight-bold mb-0">
+              {{ dashboardCounts.VERIFIED_FARMERS }}
+            </h5>
+          </div>
+          <div class="circle">
+            <i class="fas fa-check-double"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col mb-2">
+    <div
+      class="stats-card reject"
+      (click)="btnSocietyChangeDashboardDetails('2')"
+    >
+      <div class="overlay"></div>
+
+      <div class="card-body">
+        <div class="d-flex justify-content-between">
+          <div class="stats-text">
+            <p class="text-uppercase text-muted mb-1">
+              <small>REJECTED</small>
+            </p>
+            <h5 class="font-weight-bold mb-0">
+              {{ dashboardCounts.REJECTED_FARMERS }}
+            </h5>
+          </div>
+          <div class="circle">
+            <i class="fas fa-times-circle"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row mt-3" [hidden]="societyChangeList?.length < 1">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <h5 class="mb-0 secondary-heading pb-0">{{ headingText }}</h5>
+      </div>
+      <div class="card-body">
+        <div class="col-md-12 table-responsive">
+          <table
+            class="table table-striped ah-table text-center"
+            datatable
+            [dtOptions]="dtOptions"
+            [dtTrigger]="dtTrigger"
+          >
+            <thead class="bg-success text-white">
+              <tr>
+                <th class="tableheader_color">S.No.</th>
+                <th class="tableheader_color">DISTRICT</th>
+                <th class="tableheader_color">MANDAL</th>
+                <th class="tableheader_color">RSK</th>
+                <th class="tableheader_color">VILLAGE</th>
+                <th class="tableheader_color">FARMER</th>
+                <th class="tableheader_color">FARMER CODE</th>
+                <th class="tableheader_color">MOBILE NUMBER</th>
+                <th class="tableheader_color">AADHAR</th>
+                <th class="tableheader_color" [hidden]="requestType !== null">NEW DISTRICT</th>
+                <!-- <th class="tableheader_color">NEW ROUTE</th> -->
+                <th class="tableheader_color">NEW RSK</th>
+                <th class="tableheader_color">NEW VILLAGE</th>
+                <th class="tableheader_color" [hidden]="requestType !== null">REQUEST RAISED BY</th>
+                <th [hidden]="requestType !== null">ACTION TAKEN</th>
+                <th [hidden]="requestType !== null">SUBMIT</th>
+              </tr>
+              <tr>      
+                <th class="tableheader_color">1</th>
+                <th class="tableheader_color">2</th>
+                <th class="tableheader_color">3</th>
+                <th class="tableheader_color">4</th>
+                <th class="tableheader_color">5</th>
+                <th class="tableheader_color">6</th>
+                <th class="tableheader_color">7</th>
+                <th class="tableheader_color">8</th>
+                <th class="tableheader_color">9</th>
+                <th class="tableheader_color">10</th>
+                <th class="tableheader_color">11</th>
+                <th class="tableheader_color" [hidden]="requestType !== null">12</th>
+                <th class="tableheader_color" [hidden]="requestType !== null">13</th>
+                <th [hidden]="requestType !== null" class="tableheader_color">14</th>
+                <th [hidden]="requestType !== null" class="tableheader_color">15</th>
+                <!-- <th class="tableheader_color">16</th> -->
+              </tr>
+            </thead>
+            <tbody [hidden]="societyChangeList?.length < 1">
+              <tr *ngFor="let obj of societyChangeList; let i = index">
+                <td class="number_align">{{ i + 1 }}</td>
+                <td style="text-align: left;" class="table_cells_borders">{{ obj.DISTRICT }}</td>
+                <td style="text-align: left;" class="table_cells_borders">{{ obj.MANDAL_NAME }}</td>
+                <td style="text-align: left;" class="table_cells_borders">{{ obj.OLD_RBK_NAME }}</td>
+                <td style="text-align: left;" class="table_cells_borders">{{ obj.OLD_VILLAGE_NAME }}</td>
+                <td style="text-align: left;" class="table_cells_borders">{{ obj.FARMER_NAME }}</td>
+                <td class="number_align">{{ obj.FARMER_CODE }}</td>
+                <td style="text-align: left;" class="table_cells_borders">{{ obj.MOBILE_NUMBER }}</td>
+                <td class="number_align" >XXXX-XXXX-{{ obj.UID_NUM | slice: -4 }}</td>
+                <td style="text-align: left;" class="table_cells_borders" [hidden]="requestType !== null">{{ obj.NEW_DISTRICT }}</td>
+                <!-- <td style="text-align: left;" class="table_cells_borders">{{ obj.NEW_ROUTE }}</td> -->
+                <td style="text-align: left;" class="table_cells_borders">{{ obj.NEW_RBK_NAME }}</td>
+                <td style="text-align: left;" class="table_cells_borders">{{ obj.NEW_VILLAGE_NAME }}</td>
+                <td style="text-align: left;" class="table_cells_borders" [hidden]="requestType !== null">{{ obj.REQUESTED_BY }}</td>
+                <td [hidden]="requestType !== null">
+                  <select 
+                    id="actionTaken"
+                    class="form-control"
+                    [(ngModel)]="obj.SUBMIT_ACTION"
+                  >
+                    <option value="0">-- SELECT ACTION TAKEN --</option>
+                    <option value="1">APPROVE</option>
+                    <option value="2">REJECT</option>
+                  </select>
+                </td>
+                <td [hidden]="requestType !== null">
+                  <button
+                    type="button"
+                    class="btn btn-primary btn-sm"
+                    (click)="btnVerify(obj)"
+                  >
+                  Submit
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

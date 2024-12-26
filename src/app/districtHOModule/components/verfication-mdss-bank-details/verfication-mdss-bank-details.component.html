@@ -1,0 +1,337 @@
+<div class="card">
+    <div class="card-header p-2">
+      <h5 class="mb-0"> MDSS BANK DETAILS VERIFICATION</h5>
+    </div>
+    <div class="card-body">
+      <div class="row">
+              
+       
+        <div class=" table-responsive">
+            <table class="table table-striped ah-table text-center tabsdata">
+                              <thead class="bg-success text-white table-fixed">
+                <tr >
+                  <th  >S.No.</th>
+                  <th   style="font-size: 11px;">MDAC ACCOUNT NAME</th>
+                  <th style="font-size: 11px;" >MDSS NAME</th>                 
+                  <th style="font-size: 11px;">RSK CODE</th>
+                  <th style="font-size: 11px;">STATUS MESSAGE</th>
+                  <th style="font-size: 11px;">REMARKS</th>
+                  <th style="font-size: 11px;">ACTION</th>
+                   
+                </tr>
+              </thead>
+              <tbody *ngIf="BankDetailsList?.length > 0">
+                <tr *ngFor="let obj of BankDetailsList; let i = index">
+                  <td >{{ i + 1 }}</td>
+                  <td >{{ obj.MDAC_ACC_NAME }}</td>
+                  <td >{{ obj.MDSS_NAME }}</td>
+                  <td >{{ obj.RBK_CODE }}</td>
+                  <td >{{ obj.STATUS_MSG }}</td>
+                  <td >{{ obj.REMARKS }}</td>
+                    
+                     
+                    <td >
+                      <button 
+                      type="button"
+                      class="btn btn-link btn-sm btn-success text-white"
+                      *ngIf="
+                        obj.STATUS_CODE !== null &&
+                        obj.STATUS_CODE !== 'NA' &&
+                        obj.STATUS_CODE !== undefined && obj.STATUS_CODE ==='1'
+                      "
+                      (click)="Verifybankbtn(obj)"
+                      
+        
+                    >
+                    Verify
+                    </button>
+                    <span
+                      *ngIf="
+                        obj.STATUS_CODE === null ||
+                        obj.STATUS_CODE === 'NA' ||
+                        obj.STATUS_CODE === undefined || obj.STATUS_CODE !=='1'
+                      "
+                      >NA</span
+                    >
+                  </td> 
+                                     </tr>
+              </tbody>
+            </table>
+        
+          </div>
+
+           
+  
+       
+          
+        </div>
+      </div>
+ </div>
+
+ <div class="popup-modal" *ngIf="showvERIFYPopup" >
+    <div class="popup-content" style="min-width: 75%; overflow-y: scroll; height:700px;">
+      <div class="popup-header popup-header-fixed">
+        <h4 class="title">VERIFY BANK DETAILS </h4>
+        <a
+          type="button"
+          class="close"
+            
+          style="cursor: pointer"
+        >
+          <span (click)="onClear()">×</span>
+        </a>
+      </div>
+  
+      <div class="popup-body">
+        <div class="row justify-content-center align-items-center">
+          
+          <div class="card-red col-md-11">
+            <div class="card-header bg-danger text-center">
+              <h5 class="text-white"><b>OLD BANK DETAILS</b></h5>
+            </div>
+            <div class="card-body">
+               
+              <div class="col-md-12 row">
+                
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <!-- <label><b>WDC Indent 200ml(<span class="mlcode"> {{Edit_indent_qty.f_fino_m}} </span>) , 500ml(<span class="mlcode"> {{Edit_indent_qty.f_felxi_m}} </span>)</b></label><br> -->
+                   <!-- <div id="dataenable_finowdc" *ngIf="dataenable_finowdc"> -->
+                    <label for="finomid">MDSS NAME : <b>{{accountDataView.Mdss_name}}</b></label>
+                     
+                  </div>
+                </div>
+                 
+        
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="newtetra"> ACOUNT HOLDER NAME : <b>{{accountDataView.OLD_BANK_NAME}}</b></label
+                    >
+                      
+                  </div>
+                </div>
+                  <div class="col-md-12">
+                   <div class="form-group"><label> BANK NAME : <b>{{accountDataView.OLD_BANK_NAME}}</b></label></div></div> 
+        
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="newfelxi"> BRANCH NAME :<b>{{accountDataView.OLD_BRANCH_NAME}}</b></label>
+                     
+                    
+                  </div>
+                </div>
+        
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="newfelxi">BANK ACOUNT NUMBER :<b>{{accountDataView.OLD_ACC_NO}}</b></label
+                    >
+                     
+                    
+                  </div>
+                </div>
+        
+                
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="newfelxi"> IFSC CODE :<b>{{accountDataView.OLD_IFSC_CODE}}</b></label>
+                     
+                    
+                  </div>
+                </div>
+        
+        
+        
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="newfelxi"
+                      > PASS BOOK IMAGE  : <button
+                      type="button" (click)="AddBankold(accountDataView.OLD_BANK_PB_IMAGE);"
+                      class="btn btn-success btn-sm"
+                      
+                    >
+                     VIEW
+                    </button></label>
+                     
+                      
+                
+              
+                    
+                  </div>
+                </div>
+      
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="newfelxi"> PAN CARD NUMBER :<b>{{accountDataView.OLD_PAN_NUMBER}}</b></label>
+                     
+                    
+                  </div>
+                </div>
+      
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="newfelxi"
+                      > PAN CARD IMAGE  : <button
+                      type="button" (click)="AddBankNew(accountDataView.OLD_PAN_IMAGE);"
+                      class="btn btn-info btn-sm"
+                      
+                    >
+                     VIEW
+                    </button></label>
+                     
+                      
+                
+              
+                    
+                  </div>
+                </div>
+                
+              </div>
+            </div>
+          </div>
+
+          <div class="card-green col-md-11 mt-3">
+            <div class="card-header bg-success text-center">
+              <h5 class="text-white"><b>NEW BANK DETAILS</b></h5>
+            </div>
+            <div class="card-body">
+              <div class="col-md-12 row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <!-- <label><b>WDC Indent 200ml(<span class="mlcode"> {{Edit_indent_qty.f_fino_m}} </span>) , 500ml(<span class="mlcode"> {{Edit_indent_qty.f_felxi_m}} </span>)</b></label><br> -->
+                   <!-- <div id="dataenable_finowdc" *ngIf="dataenable_finowdc"> -->
+                    <label for="finomid">MDSS NAME : <b>{{accountDataView.Mdss_name}}</b></label>
+                     
+                  </div>
+                </div>
+                 
+        
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="newtetra"> MDSS ACOUNT NAME : <b>{{accountDataView.NEW_ACC_NAME}}</b></label
+                    >
+                      
+                  </div>
+                </div>
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label> BANK NAME : <b>{{accountDataView.NEW_BANK_NAME}}</b></label></div></div> 
+         <br>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="newfelxi"
+                      > BRANCH NAME :<b>{{accountDataView.NEW_BRANCH_NAME}}</b></label>
+                     
+                    
+                  </div>
+                </div>
+        
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="newfelxi"> BANK ACOUNT NUMBER :<b>{{accountDataView.NEW_ACC_NO}}</b></label>
+                     
+                    
+                  </div>
+                </div>
+        
+                 
+        
+                
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="newfelxi"> IFSC CODE :<b>{{accountDataView.NEW_IFSC_CODE}}</b></label>
+                     
+                    
+                  </div>
+                </div>
+        
+        
+        
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="newfelxi"
+                      > PASS BOOK IMAGE  : <button
+                      type="button" (click)="AddBankNew(accountDataView.NEW_BANK_PB_IMAGE);"
+                      class="btn btn-success btn-sm"
+                      
+                    >
+                     VIEW
+                    </button></label>
+                    
+                  </div>
+                </div>
+      
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="newfelxi"> PAN CARD NUMBER :<b>{{accountDataView.NEW_PAN_NUMBER}}</b></label>
+                     
+                    
+                  </div>
+                </div>
+      
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="newfelxi"
+                      > PAN CARD IMAGE  : <button
+                      type="button" (click)="AddBankNew(accountDataView.NEW_PAN_IMAGE);"
+                      class="btn btn-info btn-sm"
+                      
+                    >
+                     VIEW
+                    </button></label>
+                     
+                      
+                
+              
+                    
+                  </div>
+                </div>
+      
+                <div class="col-md-12" *ngIf="RejectDiv">
+                  <div class="form-group">
+                    <label for="newfelxi" class="text-danger"><b>REASON</b>&nbsp; <span>*</span> </label>
+                    <textarea
+                    id="Rason"
+                    type="text"
+                    class="form-control" 
+                    [(ngModel)]="accountDataView.Reason"
+                                  maxlength="200"
+                    autocomplete="off"></textarea>
+                    
+                  </div>
+                </div>
+                
+              </div>
+              
+            </div>
+          </div>
+  
+        
+        <div class="popup-footer justify-content-center">
+           
+          <button *ngIf="Approved"
+            type="button" (click)="ApprovedDetails();" id="Approved"
+            class="btn btn-success btn-sm"          
+          >
+            APPROVE
+          </button>
+          &nbsp;
+          <button *ngIf="Approved"
+            type="button" (click)="Rejectbtn();"
+            class="btn btn-danger btn-sm"
+            
+          >
+            REJECT
+          </button>
+        
+
+          <button *ngIf="RejectDiv"
+            type="button" (click)="SubmitRejectbtn();"
+            class="btn btn-danger btn-sm"
+            
+          >
+            SUBMIT
+          </button>
+        </div>
+      </div>
+    </div>
+  </div> 

@@ -1,0 +1,59 @@
+<div class="card">
+    <div class="card-header row">
+        <h5 class="mb-0">NEW MEMBERS DOWNLOAD AND UPLAOD DOCUMENTS</h5>
+
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="rbkId"><b>RSK</b> <span style="color: red">*</span></label>
+                    <select id="rbkId" class="form-control" [(ngModel)]="meetingData.rbkId" (change)="onRbkChange()">
+                        <option value="">-- SELECT RSK --</option>
+                        <option value="{{ obj.RBK_CODE }}" *ngFor="let obj of rbkList">
+                            {{ obj.RBK_NAME }}
+                        </option>
+                    </select>
+                </div>
+            </div>
+
+
+            <div class="col-md-12 table-responsive" [hidden]="personList?.length < 1">
+                <table class="table table-striped ah-table text-center" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+                    <thead class="bg-success text-white">
+                        <tr>
+                            <th>S No</th>
+                            <th>Farmer Name</th>
+                            <th>Promoter Id</th>
+                            <th>Farmer Id</th>
+                            <th>Downlaod Document</th>
+                            <th>Uplaod Document</th>
+                            <th>Action</th>
+
+                        </tr>
+                    </thead>
+                    <tbody *ngIf="personList?.length > 0">
+                        <tr *ngFor="let obj of personList; let i = index">
+                            <td>{{ i + 1 }}</td>
+                            <td style="text-align: left;">
+                                <b>{{ obj.FARMER_NAME }}</b>
+                            </td>
+                            <td>{{obj.PROMOTER_CODE}} </td>
+                            <td>{{obj.FARMER_CODE}}</td>
+                            <td><a class="btn btn-sm btn-info" (click)="DownloadPdf(obj)"> View</a></td>
+                            <td>
+                                <input type="file" class="form-control" (change)="onPositionStatementChange($event)">
+                            </td>
+                            <td>
+                                <button class="btn btn-primary" (click)="onClick(obj)">Submit</button>
+                            </td>
+
+                        </tr>
+                    </tbody>
+                </table>
+
+
+            </div>
+        </div>
+    </div>
+</div>

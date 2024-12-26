@@ -1,0 +1,282 @@
+<div class="card">
+    <div class="card-header p-2">
+        <h5 class="mb-0">REPORT AN ISSUE</h5>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-3 "></div>
+            <div class="col-md-2" style="text-align: right;">
+                <div class="form-group">
+                    <label for="rbkId">Society Code <span style="color: red">*</span></label>
+
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <input id="societycode" type="text" class="form-control" [(ngModel)]="societycode"
+                        placeholder="Please Enter Society Code" maxlength="5" autocomplete="off" NumbersOnly [allowDecimals]="false"
+                        [allowSign]="false" />
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div>
+                    <button type="button" class="btn btn-success btn-sm" (click)="btnFindDetails()">
+
+                        Find
+                    </button>
+                </div>
+            </div>
+            <div class="col-md-3 "></div>
+            <div class="col-md-2 "></div>
+            <div class="col-md-8 ">
+                <hr style="border-color: brown;height: 3px;">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-2 "></div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="rbkId">Society Name<span style="color: red">*</span></label>
+                </div>
+            </div>
+
+
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="rbkId">District Name<span style="color: red">*</span></label>
+                </div>
+            </div>
+
+
+
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="rbkId">Mandal Name<span style="color: red">*</span></label>
+                </div>
+            </div>
+
+
+
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="rbkId">RSK Name<span style="color: red">*</span></label>
+                </div>
+            </div>
+
+
+
+        </div>
+
+        <div class="row">
+            <div class="col-md-2 "></div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <input id="societyName" type="text" class="form-control" [(ngModel)]="societyName" placeholder=""
+                        value=" {{societyName}}" maxlength="4" readonly autocomplete="off" NumbersOnly [allowDecimals]="false"
+                        [allowSign]="false" />
+                </div>
+            </div>
+
+            <div class="col-md-2">
+                <div class="form-group">
+                    <input id="DistrictName" type="text" class="form-control" [(ngModel)]="DistrictName" value=" {{DistrictName}}"
+                        placeholder="" maxlength="4" readonly autocomplete="off" NumbersOnly [allowDecimals]="false" [allowSign]="false" />
+                </div>
+            </div>
+
+            <div class="col-md-2">
+                <div class="form-group">
+                    <input id="MandalName" type="text" class="form-control" [(ngModel)]="MandalName" value=" {{MandalName}}" placeholder=""
+                        maxlength="4" readonly autocomplete="off" NumbersOnly [allowDecimals]="false" [allowSign]="false" />
+                </div>
+            </div>
+
+            <div class="col-md-2">
+                <div class="form-group">
+                    <input id="RBKName" type="text" class="form-control" [(ngModel)]="RBKName" value=" {{RBKName}}" placeholder=""
+                        maxlength="4" readonly autocomplete="off" NumbersOnly [allowDecimals]="false" [allowSign]="false" />
+                </div>
+            </div>
+
+
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-2 "></div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="issueType">Issue Type <span style="color: red">*</span></label>
+                </div>
+            </div>
+
+
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="issueType"> Module Name <span style="color: red">*</span></label>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="issueType"> Issue Title <span style="color: red">*</span></label>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="col-md-2 "></div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <select id="issueType" class="form-control" [(ngModel)]="trackingData.issueType" (change)="onIssueTypeChange()">
+                        <option value="">-- Select Issue Type --</option>
+                        <option value="1">SOFTWARE ISSUE</option>
+                        <option value="2">HARDWARE ISSUE</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-md-2">
+                <div class="form-group">
+
+                    <select id="moduleId" class="form-control" [(ngModel)]="trackingData.moduleId" (change)="onmoduleNameChange()">
+                        <option value="">-- Select Module --</option>
+                        <option value="{{ obj.MODULE_ID }}" *ngFor="let obj of moduleList">
+                            {{ obj.MODULE_NAME }}
+                        </option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="form-group">
+
+                    <input id="moduleTitle" type="text" class="form-control" [(ngModel)]="trackingData.issueTitle"
+                        placeholder="Please Enter Issue Title" maxlength="50" autocomplete="off" />
+                </div>
+            </div>
+
+
+        </div>
+
+        <div class="row">
+            <div class="col-md-2 "></div>
+            <div class="col-md-8">
+                <div class="form-group">
+                    <label for="description">Issue Description </label>
+                    <textarea id="description" type="text" class="form-control" [(ngModel)]="trackingData.description"
+                        placeholder="Please Enter Issue Description" maxlength="500" rows="5"></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2 "></div>
+            <div class="col-md-2" style="text-align: right;">
+                <div class="form-group" style="text-align: right;">
+                    <label for="issueTrackingImgUpload">Issue Photo Upload
+                    </label>
+                </div>
+            </div>
+            <div class="col-md-2" style="text-align: right;">
+                <div class="form-group" style="text-align: right;">
+                    <input type="file" class="form-control p-0" id="issueTrackingImgUpload" (change)="onIssueTrackingImageChange($event)"
+                        accept="image/*" #issueTrackingImgUpload autocomplete="off" />
+                </div>
+            </div>
+
+            <div class="col-md-2">
+                <button type="button" class="btn btn-success btn-sm" (click)="btnSubmit()">
+                    SUBMIT
+                </button>
+            </div>
+        </div>
+
+
+
+        <div class="row">
+            <div class="table-responsive" [hidden]="IssuesList?.length <1">
+                <table class="table table-striped ah-table text-center  table-bordered" datatable [dtOptions]="dtOptions"
+                    [dtTrigger]="dtTrigger" data-page-length='25'>
+                    <thead class="bg-success text-white">
+                        <tr>
+                            <th>SL.NO</th>
+                            <th>SOCIETY NAME</th>
+                            <th>DISTRICT</th>
+                            <th>MANDAL NAME</th>
+                            <th>RSK NAME</th>
+                            <th>ISSUE TITLE</th>
+                            <th>ISSUE DESCRIPTION</th>
+                            <th>MODULE NAME</th>
+                            <th>ISSUE TYPE</th>
+                            <!-- <th>ISSUE IMG</th>  -->
+                            <th>ISSUE STATUS</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr *ngFor="let obj of IssuesList; let i = index">
+                            <td>{{ i + 1 }}</td>
+                            <td style="text-align: left;">{{ obj.SOCIETY_NAME }}</td>
+                            <td style="text-align: left;">{{ obj.DISTRICT }}</td>
+                            <td style="text-align: left;">{{ obj.MANDAL_NAME }}</td>
+                            <td style="text-align: left;"> {{ obj.RBK_NAME }} </td>
+                            <td style="text-align: left;"> {{ obj.ISSUE_TITLE }} </td>
+                            <td style="text-align: left;"> {{ obj.ISSUE_DESCRIPTION }} </td>
+
+                            <td style="text-align: left;"> {{ obj.MODULE_NAME }} </td>
+                            <td style="text-align: left;"> {{ obj.ISSUE_TYPE }} </td>
+                            <!-- <td style="text-align: left;">
+                            
+                            
+                            <button
+                            type="button"
+                            class="btn btn-sm btn-info block"
+                            *ngIf="
+                            obj.ISSUE_IMG  !== null &&
+                            obj.ISSUE_IMG  !== 'NA' &&
+                            obj.ISSUE_IMG  !== undefined
+                            "
+                            (click)="btnPdfView( obj.ISSUE_IMG )"
+                          >
+                            VIEW
+                          </button>
+                          <span
+                            *ngIf="
+                            obj.ISSUE_IMG  === null ||
+                            obj.ISSUE_IMG  === 'NA' ||
+                            obj.ISSUE_IMG  === undefined
+                            "
+                            >--</span
+                          >
+
+                        
+                        </td> -->
+
+                            <td style="text-align: left;">
+                                <span *ngIf="obj.ISSUE_STATUS === '0'" style="color:brown"><b>Open</b> </span>
+                                <span *ngIf="obj.ISSUE_STATUS === '1'" class="text-success"><b>Close</b> </span>
+                                <span *ngIf="obj.ISSUE_STATUS === '2'" style="color:brown"><b>Re-Open</b> </span>
+                            </td>
+
+
+
+
+
+
+
+
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+
+
+
+
+
+    </div>
+</div>

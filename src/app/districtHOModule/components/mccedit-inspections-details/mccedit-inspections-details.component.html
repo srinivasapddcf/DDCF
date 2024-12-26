@@ -1,0 +1,526 @@
+<div class="card">
+    <div class="card-header">
+        <h5 class="mb-0">DAIRY ASSETS INSPECTION EDIT</h5>
+    </div>
+    <div class="card-body">
+        <div class="col-md-12" align="right">
+            <div class="col-md-12 text-end">
+                <button type="button" class="btn btn-info btn-sm" (click)="btnBack()">
+                    Back
+                </button>
+            </div>
+        </div>
+
+        <div class="row mt-5">
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="AssetType">Asset Type</label>
+                </div>
+
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <input type="text" class="form-control" [disabled]="booleanObject.ASSET_TYPE" [(ngModel)]="object.ASSET_TYPE">
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="AssetUnitName">Asset Unit Name</label>
+                </div>
+
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+
+                    <input [disabled]="booleanObject.ASSEST_UNIT_NAME" type="text" class="form-control"
+                        [(ngModel)]="object.ASSEST_UNIT_NAME">
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="Location">Location</label>
+                </div>
+
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <textarea type="text" class="form-control" [disabled]="booleanObject.LOCATION" [(ngModel)]="object.LOCATION"
+                        placeholder="Enter Location"></textarea>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-2">
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="Address">Address</label>
+                </div>
+
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <textarea (keypress)="keyPressAlphaNumericWithSpecialCharacters($event)" type="text" class="form-control"
+                        [disabled]="booleanObject.ADDRESS ? true : false" [(ngModel)]="object.ADDRESS"></textarea>
+                </div>
+            </div>
+            <!-- Extent Land in Acres -->
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="ExtentLand">Extent Land in Acres</label>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <input [disabled]="booleanObject.EXTENT_LAND_IN_ACRES" type="number" class="form-control"
+                        [(ngModel)]="object.EXTENT_LAND_IN_ACRES">
+                </div>
+            </div>
+            <!-- Survey No -->
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="SurveyNo">Survey No</label>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <input (keypress)="keyPressAlphaNumericWithSpecialChar($event)" [disabled]="booleanObject.SURVEY_NO" type="text"
+                        class="form-control" [(ngModel)]="object.SURVEY_NO">
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row mt-2">
+            <!-- Lat Long -->
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="LatLong">Latitude</label>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <input (keypress)="decimalLatLang($event)" [disabled]="booleanObject.LAT_LONG" type="text" class="form-control"
+                        [(ngModel)]="object.LAT_LONG">
+                </div>
+            </div>
+
+            <!-- Longitude Long -->
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="Longitude">Longitude</label>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <input (keypress)="decimalLatLang($event)" [disabled]="booleanObject.INSERTED_BY" type="text" class="form-control"
+                        [(ngModel)]="object.INSERTED_BY">
+                </div>
+            </div>
+            <!-- Land Details -->
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="LandDetails">Land Details</label>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <input [disabled]="booleanObject.LAND_DETAILS" type="text" class="form-control" [(ngModel)]="object.LAND_DETAILS">
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="row mt-2">
+
+            <!-- Land Free from Encumbrance -->
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="LandEncumbrance">Land Free from Encumbrance</label>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <input [disabled]="booleanObject.LAND_FREE_FROM_ENCUMBARANCE" type="text" class="form-control"
+                        [(ngModel)]="object.LAND_FREE_FROM_ENCUMBARANCE">
+                </div>
+            </div>
+            <!-- Purchase Year -->
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="PurchaseYear">Purchase Year</label>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <input *ngIf="booleanObject.PURCHASE_YEAR" [disabled]="booleanObject.PURCHASE_YEAR" type="text" class="form-control"
+                        [(ngModel)]="object.PURCHASE_YEAR">
+
+
+                    <input type="text" *ngIf="!booleanObject.PURCHASE_YEAR" class="form-control" id="operatedyear"
+                        placeholder="--SELECT YEAR--" bsDatepicker [(ngModel)]="operatedyear" [bsConfig]="datePickerConfig" />
+
+
+                </div>
+            </div>
+            <!-- Document Type -->
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="DocumentType">Document Type / G.O.MS No./Ref.Letter/etc.</label>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <!-- <div class="form-group">
+                    <input type="text" class="form-control" [(ngModel)]="object.DOCUMENTTYPE">
+                </div> -->
+                <div class="form-group">
+
+                    <select id="DOCUMENTTYPE" class="form-control" [(ngModel)]="object.DOCUMENTTYPE"
+                        [disabled]="booleanObject.DOCUMENTTYPE">
+                        <option value=null>-- Select --</option>
+                        <option value="{{ obj.ID }}" *ngFor="let obj of DropdownListGOMS">
+                            {{ obj.GOMS }}
+                        </option>
+                        <!-- <option value="1">G.O.M.S</option>
+                        <option value="2">Ref.Letter</option>
+                        <option value="3">Other</option> -->
+
+                    </select>
+                </div>
+            </div>
+
+        </div>
+
+
+
+
+        <div class="row mt-2">
+
+            <!-- Document No -->
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="DocumentNo">Document No GOMS No Ref Letter others</label>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <input [disabled]="booleanObject.DOCUMENT_NO" type="text" class="form-control" [(ngModel)]="object.DOCUMENT_NO">
+                </div>
+            </div>
+            <!-- Available (Acres) -->
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="Available">Available (Acres)</label>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <input (keypress)="decimalFilter($event)" [disabled]="booleanObject.AVAILABLE_ACRS" type="number" class="form-control"
+                        [(ngModel)]="object.AVAILABLE_ACRS">
+                </div>
+            </div>
+            <!-- Not Available (Acres) -->
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="NotAvailable">Not Available (Acres)</label>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <input [disabled]="booleanObject.NOT_AVAILABLE_ACRS" type="number" class="form-control"
+                        [(ngModel)]="object.NOT_AVAILABLE_ACRS">
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row mt-2">
+            <!-- Encumbrance Certificate -->
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="EncumbranceCertificate">Encumbrance Certificate</label>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <input [disabled]="booleanObject.ENCUMBRANCE_CERTIFICATE" type="text" class="form-control"
+                        [(ngModel)]="object.ENCUMBRANCE_CERTIFICATE">
+                </div>
+            </div>
+            <!-- Boundaries East -->
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="BoundariesEast">Boundaries East</label>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <input (keypress)="keyPressAlphaNumericWithSpecialChar($event)" [disabled]="booleanObject.BOUNDARIES_EAST" type="text"
+                        class="form-control" [(ngModel)]="object.BOUNDARIES_EAST">
+                </div>
+            </div>
+            <!-- Boundaries West -->
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="BoundariesWest">Boundaries West</label>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <input (keypress)="keyPressAlphaNumericWithSpecialChar($event)" [disabled]="booleanObject.BOUNDARIES_WEST" type="text"
+                        class="form-control" [(ngModel)]="object.BOUNDARIES_WEST">
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row mt-2">
+
+            <!-- Boundaries North -->
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="BoundariesNorth">Boundaries North</label>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <input (keypress)="keyPressAlphaNumericWithSpecialChar($event)" [disabled]="booleanObject.BOUNDARIES_NORTH" type="text"
+                        class="form-control" [(ngModel)]="object.BOUNDARIES_NORTH">
+                </div>
+            </div>
+            <!-- Boundaries South -->
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="BoundariesSouth">Boundaries South</label>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <input (keypress)="keyPressAlphaNumericWithSpecialChar($event)" [disabled]="booleanObject.BOUNDARIES_SOUTH" type="text"
+                        class="form-control" [(ngModel)]="object.BOUNDARIES_SOUTH">
+                </div>
+            </div>
+            <!-- Ownership Details -->
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="OwnershipDetails">Ownership Details</label>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <input [disabled]="booleanObject.OWNERSHIP_DETAILS" type="text" class="form-control"
+                        [(ngModel)]="object.OWNERSHIP_DETAILS" (keypress)="keyPressAlpha($event)">
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row mt-2">
+
+            <!-- Under Operational Mgmt as on 01st June 2014 -->
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="OperationalMgmtStatus">Under Operational Mgmt as on 01st June 2014</label>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <input [disabled]="booleanObject.UND_OPTNL_MGMT_AS_ON_01JUN2014" type="text" class="form-control"
+                        [(ngModel)]="object.UND_OPTNL_MGMT_AS_ON_01JUN2014">
+                </div>
+            </div>
+            <!-- Under Possession -->
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="PossessionStatus">Under Possession</label>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <textarea class="form-control" [disabled]="booleanObject.UNDER_POSSESSION"
+                        [(ngModel)]="object.UNDER_POSSESSION"></textarea>
+                </div>
+            </div>
+            <!-- Building -->
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="Building">Building</label>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <input [disabled]="booleanObject.BUILDING" type="text" class="form-control" [(ngModel)]="object.BUILDING">
+                </div>
+            </div>
+
+        </div>
+
+
+
+
+        <div class="row mt-2">
+
+            <!-- Plinth Area of the Building (Sqft) -->
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="PlinthArea">Plinth Area of the Building (Sqft)</label>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <input [disabled]="booleanObject.PLINTH_AREA_OF_BUILDING_SQFT" type="number" class="form-control"
+                        [(ngModel)]="object.PLINTH_AREA_OF_BUILDING_SQFT">
+                </div>
+            </div>
+            <!-- Capacity of Plant -->
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="PlantCapacity">Capacity of Plant</label>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <input [disabled]="booleanObject.CAPACITY_OF_PLANT" type="text" class="form-control"
+                        [(ngModel)]="object.CAPACITY_OF_PLANT" (keypress)="decimalFilter($event)">
+                </div>
+            </div>
+            <!-- Details of Machinery -->
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="MachineryDetails">Details of Machinery</label>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <!-- <input [disabled]="booleanObject.NO_OF_MACHINERY" type="text" class="form-control" [(ngModel)]="object.NO_OF_MACHINERY"> -->
+
+                    <select id="NO_OF_MACHINERY" class="form-control" [(ngModel)]="object.NO_OF_MACHINERY"
+                        [disabled]="booleanObject.NO_OF_MACHINERY">
+                        <option value=null>-- Select --</option>
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+
+
+                    </select>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row mt-2">
+
+            <!-- Licenses -->
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="Licenses">Licenses</label>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <input [disabled]="booleanObject.LICENSES" type="text" class="form-control" [(ngModel)]="object.LICENSES">
+                </div>
+            </div>
+            <!-- Photos With Geo Tagging -->
+            <div class="col-md-2">
+                <div class="form-group" *ngIf="!booleanObject.PHOTOS_WITH_GEO_TAGGING">
+                    <label for="GeoTaggedPhotos">Photos With Geo Tagging
+                        <span style="color: red;font-size: small;">*<BR> (JPEG and less than 100KB) </span>
+                    </label>
+                </div>
+                <div class="form-group" *ngIf="booleanObject.PHOTOS_WITH_GEO_TAGGING">
+                    <label for="GeoTaggedPhotos">Photos With Geo Tagging
+                    </label>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <input *ngIf="!booleanObject.PHOTOS_WITH_GEO_TAGGING" type="file" class="form-control"
+                        (change)="onPhotosImageChange($event)" [(ngModel)]="photosGeo">
+
+
+                    <img *ngIf="booleanObject.PHOTOS_WITH_GEO_TAGGING" [src]="'data:image/jpeg;base64,' + photosGeo" style="cursor: pointer"
+                        class="img-thumbnail mr-3" (click)="btnImage(photosGeo)" />
+
+                </div>
+            </div>
+            <!-- Present Condition -->
+            <!-- <div class="col-md-2">
+                <div class="form-group">
+                    <label for="Condition">Present Condition</label>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <input [disabled]="booleanObject.PRESENT_CONDITON" type="text" class="form-control"
+                        [(ngModel)]="object.PRESENT_CONDITON">
+                </div>
+            </div> -->
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="DeviceCWS">Asset Current Working Status<span style="color: red">*</span></label>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <select id="DeviceCWS" class="form-control" [(ngModel)]="object.DEVICE_CODE" (change)="DataChange(object.DEVICE_CODE)"
+                        [disabled]="booleanObject.DEVICE_CODE">
+                        <option value=null>-- Select --</option>
+                        <option value="{{ obj.STATUS_CODE }}" *ngFor="let obj of DropdownList">
+                            {{ obj.STATUS }}
+                        </option>
+
+                    </select>
+                </div>
+            </div>
+
+
+
+        </div>
+
+        <div class="row mt-2">
+
+            <!-- Remarks -->
+            <!-- <div class="col-md-2">
+                <div class="form-group">
+                    <label for="Remarks">Remarks</label>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <textarea type="text" class="form-control" [(ngModel)]="object.REMARKS" [disabled]="booleanObject.REMARKS"></textarea>
+                </div>
+            </div> -->
+
+            <!-- Remarks alias reason -->
+            <div class="col-md-2" *ngIf="ReasonHide">
+                <div class="form-group">
+                    <label for="Reason">Remarks<span style="color: red">*</span></label>
+                </div>
+            </div>
+            <div class="col-md-2" *ngIf="ReasonHide">
+                <div class="form-group">
+                    <textarea type="text" class="form-control" [(ngModel)]="object.DEVICE_NAME"
+                        [disabled]="booleanObject.DEVICE_NAME"></textarea>
+                </div>
+            </div>
+
+
+        </div>
+
+        <div class="row mt-2">
+            <div class="col-md-5"></div>
+            <div class="col-md-3">
+                <button type="button" class="btn btn-success btn-sm mt-3" [disabled]="booleanObject.UPDATE_STATUS"
+                    (click)="UpdateDeatils()">
+
+                    Update
+                </button>
+            </div>
+        </div>
+
+
+
+
+
+    </div>
+</div>

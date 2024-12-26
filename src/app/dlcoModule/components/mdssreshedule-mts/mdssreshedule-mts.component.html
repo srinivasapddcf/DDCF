@@ -1,0 +1,110 @@
+
+<div class="card">
+    <div class="card-header p-2">
+      <h5 class="mb-0">MDSS RESCHEDULE</h5>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-12">
+          <!-- <button
+            type="button"
+            class="btn btn-primary btn-sm pull-right"
+            (click)="btnDocumentDownload(registrationFormUrl)"
+          >
+            APPLICATION FORM
+          </button> -->
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="rbkId">RSK <span style="color: red">*</span></label>
+            <select
+              id="rbkId"
+              class="form-control"
+              [(ngModel)]="resheduleData.rbkId"
+              (change)="onRbkChange(resheduleData.rbkId)"
+            >
+              <option value="">-- SELECT RSK --</option>
+              <option value="{{ obj.RBK_CODE }}" *ngFor="let obj of rbkdetailslist">
+                {{ obj.RBK_NAME }}
+              </option>
+            </select>
+          </div>
+        </div>
+       
+
+        <div class="row col-md-12" *ngIf="RbkDetails">
+            <table
+            class="table table-bordered ah-table text-center"
+             
+          >
+            <thead class="bg-success text-white">
+                <tr>
+                  <th>S.No.</th>
+                  <th>RSK NAME</th>
+                  <th>RIC NAME</th>
+                  <th>SCHEDULE CREATED DATE</th>
+                  <th>MEETING  DATE</th>
+                  <th>MEETING VENUE</th>
+                  <th>MEETING VENUE ADDRESS</th>
+                   
+                </tr>
+              </thead>
+              <tbody *ngIf="rbkdetailslistReshedule?.length > 0">
+                <tr *ngFor="let obj of rbkdetailslistReshedule; let i = index">
+                    <td>{{1+i}}</td>
+                    <td>{{obj.RBK_NAME}}</td>
+                    <td>{{obj.RIC_NAME}}</td>
+                    <td>{{obj.SCHEDULE_CREATED_DATE}}</td>
+                    <td>{{obj.MEETING_DATE}} - {{ obj.MEETING_TIME}}</td>
+                    <td>{{obj.MEETING_VENUE}}</td>
+                    <td>{{obj.MEETING_VENUE_ADDRESS}}</td>
+                </tr>
+               
+              </tbody>
+              </table>
+              <!-- <tbody *ngIf="stateLevelDetails?.length > 0">
+                <tr *ngFor="let obj of stateLevelDetails; let i = index">
+                  <td>{{ i + 1 }}</td>
+                   <td style="text-align: left;">
+                    <a
+                      style="cursor: pointer; text-decoration: underline"
+                      class="text-primary"
+                      (click)="btnDistrictDetails(obj)"
+                      ><b>{{ obj.DISTRICT }}</b></a
+                    > 
+                   </td>
+                  <td>{{obj.DISTRICT}}</td> 
+                  <td>{{ obj.NO_NOT_ELIGIBLE_RBKS }}</td>
+                  <td>{{ obj.TOTAL_FARMERS_CNT | indianNumber}}</td>
+                  <td>{{ obj.MILK_POURED_FARMER_CNT | indianNumber }}</td>
+                  <td>{{ obj.ELIGIBLE_FARMER_CNT | indianNumber }}</td>
+                  <td>{{ obj.NOT_ELIGIBLE_FARMER_CNT | indianNumber }}</td>
+                </tr>
+              </tbody> -->
+        </div>
+
+        <div class=" col-md-12 row" *ngIf="RbkDetails">
+            <div class="col-md-6">
+            <div class="form-group">
+              <label for="rbkId">Reason for Reshedule <span style="color: red">*</span></label>
+              <textarea type="text" [(ngModel)]="resheduleData.source" class="form-control"></textarea>
+            </div>
+        </div>
+          </div>
+          <div class="col-md-12 row" style="text-align: center;" *ngIf="RbkDetails">
+            <div class="col-md-6"></div>
+            <div class="col-md-2">
+            <button
+          type="button"
+          class="btn btn-success btn-sm"
+          (click)="onsubmitbtn()"
+        >
+          SUBMIT
+        </button>
+          </div>
+  
+        </div>
+      </div>
+      
+    </div>
+  </div>

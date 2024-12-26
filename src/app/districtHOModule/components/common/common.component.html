@@ -1,0 +1,590 @@
+<!--Navbar-->
+<nav class="navbar navbar-expand-lg navbar-dark blue-green-gradient">
+    <!-- Navbar brand -->
+    <a class="navbar-brand d-flex align-items-center" style="cursor: pointer">
+        <img class="brand-logo" src="https://apddcf.ap.gov.in/cdn/img/ap-logo.png" style="width: 50px" />
+        <h5 class="brand-text text-white mb-0 font-weight-normal ml-1">
+            Andhra Pradesh Dairy Development Cooperative Federation Limited (APDDCF)
+        </h5>
+    </a>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="basicExampleNav">
+        <!-- Links -->
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item text-right">
+                <a class="navbar-brand d-flex align-items-center" style="cursor: pointer">
+                    <img class="brand-logo" src="https://apddcf.ap.gov.in/cdn/img/CM.png" style="width:50px" />
+                    <div class="text-center">
+                        <h6 class="brand-text text-white mb-0 font-weight-normal ml-1">
+                            Sri Nara Chandrababu Naidu
+                        </h6>
+                        <p style="font-size: 12px; margin-bottom: 0; color: #fff">
+                            Hon’ble Chief Minister, <br />
+                            Andhra Pradesh
+                        </p>
+                    </div>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <!-- Collapsible content -->
+</nav>
+<!--/.Navbar-->
+
+<!--Menu-Navbar -->
+<nav class="menu-navbar navbar navbar-expand-lg navbar-dark primary-color-dark py-md-0 text-white">
+    <a class="navbar-brand d-md-none d-block" style="cursor: pointer">MENU</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-333"
+        aria-controls="navbarSupportedContent-333" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent-333">
+        <ul class="navbar-nav mr-auto align-items-center">
+            <li class="nav-item dropdown" routerLinkActive="active">
+                <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-333" data-toggle="dropdown" aria-haspopup="true"
+                    aria-expanded="false" style="cursor: pointer"><i class="fab fa-wpforms"></i> Menu
+                </a>
+                <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink-333">
+                    <a *ngIf="RADistrictco" class="dropdown-item" routerLink="FarmerSocietyChange" routerLinkActive="active"
+                        [routerLinkActiveOptions]="{ exact: true }">
+                        FARMER SOCIETY CHANGE FORM
+                    </a>
+                    <!-- <a
+            class="dropdown-item"
+            routerLink="SocietyChangeDashboard"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+          >
+            SOCIETY CHANGE DASHBOARD
+          </a> -->
+                    <a class="dropdown-item" routerLink="Bankdetailsallupdate" routerLinkActive="active"
+                        [routerLinkActiveOptions]="{ exact: true }">
+                        FARMER BANK DETAILS UPDATE
+                    </a>
+                    <a *ngIf="RADistrictho" class="dropdown-item" routerLink="SocietyChangeDashboardForAllDistricts"
+                        routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+                        FARMER SOCIETY CHANGE REQUEST APPROVALS
+                    </a>
+
+                    <a class="dropdown-item" routerLink="MdacAccountDashboard" routerLinkActive="active"
+                        [routerLinkActiveOptions]="{ exact: true }">
+                        MDAC ACCOUNT DASHBOARD
+                    </a>
+                    <a class="dropdown-item" routerLink="EditPromoters" routerLinkActive="active"
+                        [routerLinkActiveOptions]="{ exact: true }">
+                        EDIT PROMOTERS
+                    </a>
+
+
+                    <a class="dropdown-item" routerLink="invalidbankrequeststatusdetails" routerLinkActive="active"
+                        [routerLinkActiveOptions]="{ exact: true }">
+                        INVALID BANK PENDING REQUEST DETAILS
+                    </a>
+
+
+                    <a class="dropdown-item" routerLink="InvalidBankAccount" routerLinkActive="active"
+                        [routerLinkActiveOptions]="{ exact: true }">
+                        INVALID BANK ACCOUNT
+                    </a>
+                    <a class="dropdown-item" routerLink="PromotersDashboard" routerLinkActive="active"
+                        [routerLinkActiveOptions]="{ exact: true }">
+                        PROMOTERS DASHBOARD
+                    </a>
+                    <a class="dropdown-item" routerLink="FeedIndentDashboard" routerLinkActive="active"
+                        [routerLinkActiveOptions]="{ exact: true }">
+                        FARMER FEED INDENT DASHBOARD
+                    </a>
+                    <a class="dropdown-item" routerLink="FarmerCertificateDashboard" routerLinkActive="active"
+                        [routerLinkActiveOptions]="{ exact: true }">
+                        FARMER MILK POURING CERTIFICATE DASHBOARD
+                    </a>
+                    <a class="dropdown-item" routerLink="gswspersondetailsupdate" routerLinkActive="active"
+                        [routerLinkActiveOptions]="{ exact: true }">
+                        GSWS PERSON DETAILS UPDATE
+                    </a>
+
+                    <a class="dropdown-item" routerLink="UPLOADPAYMENTDETAILS" routerLinkActive="active"
+                        [routerLinkActiveOptions]="{ exact: true }">
+                        UPLOAD PAYMENT DETAILS
+                    </a>
+
+                    <a class="dropdown-item" routerLink="PasswordReset" routerLinkActive="active"
+                        [routerLinkActiveOptions]="{ exact: true }">
+                        PASSWORD RESET
+                    </a>
+
+                    <a class="dropdown-item" routerLink="SocietyMilkCollectionStatusUpated" routerLinkActive="active"
+                        [routerLinkActiveOptions]="{ exact: true }">
+                        SOCIETY MILK COLLECTION STATUS UPDATION
+                    </a>
+                    <!-- <a
+      class="dropdown-item"
+      routerLink="InvoiceReport"
+      routerLinkActive="active" 
+      [routerLinkActiveOptions]="{ exact: true }"
+    >
+    INVOICE REPORT
+    </a> -->
+
+
+
+                    <!-- <a
+        class="dropdown-item"
+        routerLink="VerificationofLandallotment"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+      >
+        VERIFICATION OF LANDALLOTMENT (BMCU)
+      </a> -->
+
+
+
+
+                    <a class="dropdown-item" routerLink="Resendingoflogincredentials" routerLinkActive="active"
+                        [routerLinkActiveOptions]="{ exact: true }">
+                        RESENDING OF LOGIN CREDENTIALS
+                    </a>
+
+                    <a class="dropdown-item" routerLink="bmcusEquipmentStatus" routerLinkActive="active"
+                        [routerLinkActiveOptions]="{ exact: true }">
+                        BMCU PHYSICAL VERIFICATION
+                    </a>
+                    <a class="dropdown-item" routerLink="bmcusEquipmentFileUpload" routerLinkActive="active"
+                        [routerLinkActiveOptions]="{ exact: true }">
+                        BMCU PHYSICAL VERIFICATION FILE UPLOAD
+                    </a>
+                    <!-- <a
+      class="dropdown-item"
+      routerLink="bmcusbuildinginspection"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }"
+    >
+      BMCU BUILDING INSPECTION
+    </a> -->
+
+
+                    <a class="dropdown-item" routerLink="addPromoters" routerLinkActive="active"
+                        [routerLinkActiveOptions]="{ exact: true }">
+                        PROMOTERS ADDITION
+                    </a>
+
+                    <a class="dropdown-item" routerLink="MpuacAccountCreation" routerLinkActive="active"
+                        [routerLinkActiveOptions]="{ exact: true }">
+                        MDAC BANK ACCOUNT CREATION
+                    </a>
+                    <a class="dropdown-item" routerLink="AssistantSecretaryAddition" routerLinkActive="active"
+                        [routerLinkActiveOptions]="{ exact: true }">
+                        SECRETARY / ASSISTANT SECRETARY ADDITION
+                    </a>
+
+                    <a class="dropdown-item" routerLink="registerFarmerStatus" routerLinkActive="active"
+                        [routerLinkActiveOptions]="{ exact: true }">
+                        FARMER REGISTRATION STATUS
+                    </a>
+
+                    <a class="dropdown-item" routerLink="EditSecAsssecDetails" routerLinkActive="active"
+                        [routerLinkActiveOptions]="{ exact: true }">
+                        EDIT SECRETARY / ASSISTANT SECRETARY DETAILS
+                    </a>
+
+                    <a class="dropdown-item" routerLink="EditMdacAccount" routerLinkActive="active"
+                        [routerLinkActiveOptions]="{ exact: true }">
+                        EDIT MDAC ACCOUNT
+                    </a>
+
+                    <a class="dropdown-item" routerLink="EditMdacAccountRequests" routerLinkActive="active"
+                        [routerLinkActiveOptions]="{ exact: true }">
+                        EDIT MDAC ACCOUNT REQUESTS
+                    </a>
+
+                    <!-- <a
+    class="dropdown-item"
+    routerLink="EditPromoters"
+    routerLinkActive="active"
+    [routerLinkActiveOptions]="{ exact: true }"
+  >
+    EDIT PROMOTERS
+  </a> -->
+
+                    <a class="dropdown-item" routerLink="EditPromotersRequests" routerLinkActive="active"
+                        [routerLinkActiveOptions]="{ exact: true }">
+                        EDIT PROMOTERS REQUESTS
+                    </a>
+
+                    <a class="dropdown-item" routerLink="FarmerMilkPouringCertificate" routerLinkActive="active"
+                        [routerLinkActiveOptions]="{ exact: true }">
+                        FARMER MILK POURING CERTIFICATE
+                    </a>
+
+                    <a class="dropdown-item" routerLink="MCCInspection" routerLinkActive="active"
+                        [routerLinkActiveOptions]="{ exact: true }">
+                        DAIRY ASSETS INSPECTION
+                    </a>
+
+
+                </div>
+            </li>
+            <li class="nav-item dropdown" routerLinkActive="active" style="display: none;">
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                    style="cursor: pointer"><i class="fab fa-wpforms"></i> User Manuals
+                </a>
+                <ul class="dropdown-menu multi-level dropdown-primary custom-sub-dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
+                    <li>
+                        <a class="dropdown-item" style="cursor: pointer" (click)="btnDownloadUserManual(1)">
+                            Farmer Milk Pouring Certificate Approvals
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" style="cursor: pointer" (click)="btnDownloadUserManual(2)">
+                            Farmer Feed Indent Approvals
+                        </a>
+                    </li>
+
+                    <li>
+                        <a class="dropdown-item" style="cursor: pointer" (click)="btnDownloadUserManual(3)">
+                            Volunteer Household Survey
+                        </a>
+                    </li>
+
+
+                </ul>
+            </li>
+            <li class="nav-item dropdown" routerLinkActive="active" style="display: none;">
+                <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-333" data-toggle="dropdown" aria-haspopup="true"
+                    aria-expanded="false" style="cursor: pointer"><i class="fab fa-wpforms"></i> Guidelines
+                </a>
+                <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink-333">
+                    <a *ngFor="let guideLine of guideLines" class="dropdown-item" style="cursor: pointer"
+                        (click)="btnDocumentDownload(guideLine.URL)">
+                        {{ guideLine.NAME }}
+                    </a>
+                </div>
+            </li>
+
+
+            <li class="nav-item dropdown" routerLinkActive="active">
+                <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-333" data-toggle="dropdown" aria-haspopup="true"
+                    aria-expanded="false" style="cursor: pointer"><i class="fab fa-wpforms"></i> VERIFICATION OF LANDALLOTMENT </a>
+
+                <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink-333">
+                    <a class="dropdown-item" routerLink="VerificationofLandallotmentBMCU" routerLinkActive="active"
+                        [routerLinkActiveOptions]="{ exact: true }"> VERIFICATION OF LANDALLOTMENT (BMCU)
+                    </a>
+                    <!-- </div>
+
+        <div     class="dropdown-menu dropdown-primary"    aria-labelledby="navbarDropdownMenuLink-333"  > -->
+                    <a class="dropdown-item" routerLink="VerificationofLandallotmentAMCU" routerLinkActive="active"
+                        [routerLinkActiveOptions]="{ exact: true }"> VERIFICATION OF LANDALLOTMENT (AMCU)
+                    </a>
+                </div>
+
+            </li>
+
+            <li class="nav-item dropdown" routerLinkActive="active">
+                <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-333" data-toggle="dropdown" aria-haspopup="true"
+                    aria-expanded="false" style="cursor: pointer"><i class="fab fa-wpforms"></i> MDSS </a>
+
+                <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink-333">
+                    <a class="dropdown-item" routerLink="VerifyBankDetails" routerLinkActive="active"
+                        [routerLinkActiveOptions]="{ exact: true }">
+                        MDSS BANK DETAILS VERIFICATION
+                    </a>
+                    <a class="dropdown-item" routerLink="MDSSRBKDetails" routerLinkActive="active"
+                        [routerLinkActiveOptions]="{ exact: true }"> APPROVED RSK's DETAILS
+                    </a>
+
+                    <!-- </div>
+
+  <div     class="dropdown-menu dropdown-primary"    aria-labelledby="navbarDropdownMenuLink-333"  > -->
+
+                </div>
+
+            </li>
+
+
+
+            <li class="nav-item dropdown" routerLinkActive="active">
+                <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-333" data-toggle="dropdown" aria-haspopup="true"
+                    aria-expanded="false" style="cursor: pointer"><i class="fab fa-wpforms"></i> Report An Issue </a>
+
+                <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink-333">
+                    <a class="dropdown-item" routerLink="issuehodetails" routerLinkActive="active"
+                        [routerLinkActiveOptions]="{ exact: true }"> Issues Entry Details
+                    </a>
+                    <a class="dropdown-item" routerLink="IssueDashboard" routerLinkActive="active"
+                        [routerLinkActiveOptions]="{ exact: true }"> View DashBorad
+                    </a>
+
+
+
+                </div>
+
+            </li>
+
+            <!-- <li class="nav-item dropdown" routerLinkActive="active">
+  <a
+    class="nav-link dropdown-toggle"
+    id="navbarDropdownMenuLink-333"
+    data-toggle="dropdown"
+    aria-haspopup="true"
+    aria-expanded="false"
+    style="cursor: pointer"
+    ><i class="fab fa-wpforms"></i> User Manuals2
+  </a>
+  <ul
+    class="dropdown-menu multi-level dropdown-primary custom-sub-dropdown-menu"
+    role="menu"
+    aria-labelledby="dropdownMenu"
+  >
+    <li>
+      <a
+        class="dropdown-item"
+        style="cursor: pointer"
+        (click)="btnDocumentDownload(kccApplicationFormUrl)"
+      >
+        KCC Application Form
+      </a>
+    </li>
+
+    <li>
+      <a
+        class="dropdown-item"
+        style="cursor: pointer"
+        (click)="btnDownloadUsermentorManual(1)"
+      >
+        Invalid Bank Account Updation
+      </a>
+    </li>
+
+    <li>
+      <a
+        class="dropdown-item"
+        style="cursor: pointer"
+        (click)="btnDownloadUsermentorManual(2)"
+      >
+        Mentor Village Meeting PART-I
+      </a>
+    </li>
+
+    
+
+    <li>
+      <a
+        class="dropdown-item"
+        style="cursor: pointer"
+        (click)="btnDownloadUsermentorManual(15)"
+      >
+        Edit Secretary & Assistant Secretary Details
+      </a>
+    </li>
+
+    <li class="dropdown-submenu">
+      <a
+        class="dropdown-item"
+        style="cursor: pointer"
+        routerLinkActive="active"
+        >Inspection <i class="fa fa-angle-right"></i>
+      </a>
+      <ul class="dropdown-menu">
+        <li>
+          <a
+            class="dropdown-item"
+            style="cursor: pointer"
+            (click)="btnDownloadUsermentorManual(4)"
+          >
+            Milk Inspection
+          </a>
+        </li>
+        <li>
+          <a
+            class="dropdown-item"
+            style="cursor: pointer"
+            (click)="btnDownloadUsermentorManual(5)"
+          >
+            Society Inspection
+          </a>
+        </li>
+        <li>
+          <a
+            class="dropdown-item"
+            style="cursor: pointer"
+            (click)="btnDownloadUsermentorManual(6)"
+          >
+            Payment Inspection
+          </a>
+        </li>
+      </ul>
+    </li>
+
+    <li>
+      <a
+        class="dropdown-item"
+        style="cursor: pointer"
+        (click)="btnDownloadUsermentorManual(7)"
+      >
+        Issue Tracking
+      </a>
+    </li>
+
+    <li class="dropdown-submenu">
+      <a
+        class="dropdown-item"
+        style="cursor: pointer"
+        routerLinkActive="active"
+        >BMCU Contruction <i class="fa fa-angle-right"></i>
+      </a>
+      <ul class="dropdown-menu">
+        <li>
+          <a
+            class="dropdown-item"
+            style="cursor: pointer"
+            (click)="btnDownloadUsermentorManual(8)"
+          >
+            Feasibility Of Land
+          </a>
+        </li>
+        <li>
+          <a
+            class="dropdown-item"
+            style="cursor: pointer"
+            (click)="btnDownloadUsermentorManual(9)"
+          >
+            Registration Of Land
+          </a>
+        </li>
+        <li>
+          <a
+            class="dropdown-item"
+            style="cursor: pointer"
+            (click)="btnDownloadUsermentorManual(10)"
+          >
+            Other Facilities At Site
+          </a>
+        </li>
+        <li>
+          <a
+            class="dropdown-item"
+            style="cursor: pointer"
+            (click)="btnDownloadUsermentorManual(11)"
+          >
+            Basement Level
+          </a>
+        </li>
+        <li>
+          <a
+            class="dropdown-item"
+            style="cursor: pointer"
+            (click)="btnDownloadUsermentorManual(12)"
+          >
+            Super Structure Level
+          </a>
+        </li>
+        <li>
+          <a
+            class="dropdown-item"
+            style="cursor: pointer"
+            (click)="btnDownloadUsermentorManual(13)"
+          >
+            Finishing Level
+          </a>
+        </li>
+        <li>
+          <a
+            class="dropdown-item"
+            style="cursor: pointer"
+            (click)="btnDownloadUsermentorManual(14)"
+          >
+            Other Infrastructure
+          </a>
+        </li>
+      </ul>
+    </li>
+
+    <li>
+      <a
+        class="dropdown-item"
+        style="cursor: pointer"
+        (click)="btnDownloadUsermentorManual(16)"
+      >
+        Farmer Milk Pouring Certificate
+      </a>
+    </li>
+
+    <li>
+      <a
+        class="dropdown-item"
+        style="cursor: pointer"
+        (click)="btnDownloadUsermentorManual(17)"
+      >
+        Farmer Dead & Migration Approvals
+      </a>
+    </li>
+    <li>
+      <a
+        class="dropdown-item"
+        style="cursor: pointer"
+        (click)="btnDownloadUsermentorManual(18)"
+      >
+        Farmer Feed Indent Approvals
+      </a>
+    </li>
+  </ul>
+</li> -->
+
+
+
+        </ul>
+        <ul class="navbar-nav ml-auto nav-flex-icons">
+            <li class="nav-item dropdown" routerLinkActive="active">
+                <a class="nav-link dropdown-toggle d-flex align-items-center" id="navbarDropdownMenuLink-333" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false" style="cursor: pointer">
+                    <h6 class="mb-0 mr-1">
+                        Welcome <b>{{ userName }}</b>
+                    </h6>
+                    <i class="fas fa-user"></i>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right dropdown-primary" aria-labelledby="navbarDropdownMenuLink-333">
+                    <!-- <a class="dropdown-item" href="#" routerLink="">Profile</a> -->
+                    <a class="dropdown-item" style="cursor: pointer" (click)="btnForgetPassword()">
+                        <i class="fas fa-key"></i> Forget Password
+                    </a>
+                    <a class="dropdown-item" style="cursor: pointer" (click)="btnLogout()"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                    <hr class="my-1" />
+                    <a class="dropdown-item text-center" style="cursor: pointer">
+                        <span>Last logged in: <br />
+                            <b class="text-danger">{{ lastLoginTime }}</b></span>
+                    </a>
+                </div>
+            </li>
+        </ul>
+    </div>
+</nav>
+<!--/.Menu-Navbar -->
+
+<!--Main Content -->
+<div id="page-container">
+    <div id="content-wrap">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-11 mx-auto">
+                    <router-outlet></router-outlet>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Footer Content -->
+    <footer class="page-footer font-small blue">
+        <!-- Copyright -->
+        <div class="footer-copyright text-center pt-3">
+            <a style="cursor: pointer; color: #fff">
+                <img src="https://apddcf.ap.gov.in/cdn/img/apddcf-circle.png" style="width: 30px" />
+                Andhra Pradesh Dairy Development Cooperative Federation Limited (APDDCF)
+            </a>
+        </div>
+        <!-- Copyright -->
+    </footer>
+    <!--/.Footer-Content -->
+</div>
+<!--/.Main-Content -->

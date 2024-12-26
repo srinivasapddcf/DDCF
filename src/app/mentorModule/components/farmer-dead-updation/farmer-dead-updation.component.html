@@ -1,0 +1,106 @@
+<div class="card">
+  <div class="card-header p-2">
+    <h5 class="mb-0">FARMER DEAD UPDATION</h5>
+  </div>
+  <div class="card-body">
+    <div class="row align-items-center">
+      <div class="col-md-4 offset-4">
+        <div class="form-group">
+          <label for="uidNum"
+            >AADHAR NUMBER <span style="color: red">*</span></label
+          >
+          <div class="input-group">
+            <input
+              id="uidNum"
+              type="text"
+              class="form-control"
+              [(ngModel)]="uidNum"
+              placeholder="Please Enter Aadhar Number"
+              maxlength="12"
+              autocomplete="off"
+              NumbersOnly
+              [allowDecimals]="false"
+              [allowSign]="false"
+            />
+            <div class="input-group-append">
+              <button
+                type="button"
+                class="btn btn-success btn-sm my-0"
+                (click)="btnUidDetails()"
+              >
+                SUBMIT
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row mt-3" [hidden]="familyDetails?.length < 1">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-body">
+            <div class="col-md-12 table-responsive">
+              <table
+                class="table table-striped ah-table text-center"
+                datatable
+                [dtOptions]="dtOptions"
+                [dtTrigger]="dtTrigger"
+              >
+                <thead class="bg-success text-white">
+                  <tr>
+                    <th>S.No</th>
+                    <th>NAME</th>
+                    <th>GENDER</th>
+                    <th>DATE OF BIRTH</th>
+                    <th>AADHAR</th>
+                    <th>MOBILE</th>
+                  </tr>
+                </thead>
+                <tbody [hidden]="familyDetails?.length < 1">
+                  <tr *ngFor="let obj of familyDetails; let i = index">
+                    <td>{{ i + 1 }}</td>
+                    <td>{{ obj.CITIZEN_NAME }}</td>
+                    <td>{{ obj.GENDER }}</td>
+                    <td>
+                      <span *ngIf="obj.DOB_DT === null">NA</span>
+                      <span *ngIf="obj.DOB_DT !== null">{{ obj.DOB_DT }}</span>
+                    </td>
+                    <td>XXXX-XXXX-{{ obj.UID_NUM | slice: -4 }}</td>
+                    <td>{{ obj.MOBILE_NO }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-12 pt-2" *ngIf="!isFamilyDeadFlag">
+        <div class="form-group">
+          <label for="remarks">Remarks</label>
+          <textarea
+            id="remarks"
+            type="text"
+            class="form-control"
+            [(ngModel)]="remarks"
+            placeholder="Please Enter remarks maxium of 100 characters"
+            maxlength="100"
+            autocomplete="off"
+            rows="2"
+          ></textarea>
+        </div>
+      </div>
+
+      <div class="col-md-12" align="center" *ngIf="!isFamilyDeadFlag">
+        <button
+          type="button"
+          class="btn btn-success btn-sm"
+          (click)="btnfarmerDeadUpdate()"
+        >
+          UPDATE FAMILY AS DEAD
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,189 @@
+<div class="card">
+    <div class="card-header p-2">
+        <h5 class="mb-0">DAIRY ASSETS INSPECTION </h5>
+    </div>
+    <div class="card-body">
+        <div class="col-md-12 " align="right" [hidden]="GridList?.length < 1">
+            <button type="button" class="btn btn-success btn-sm pull-right" (click)="btnExcel()">
+                <i class="fa fa-file-excel-o mr-2" aria-hidden="true"></i>
+                DOWNLOAD EXCEL
+            </button>
+        </div>
+        <div class="row align-items-center">
+
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="districtId">DISTRICT<span style="color: red">*</span></label>
+                    <select id="districtId" class="form-control" [(ngModel)]="districtId">
+                        <option selected disabled value="undefined">-- SELECT DISTRICT --</option>
+                        <option value="{{ obj.DISTRICT_CODE }}" *ngFor="let obj of DistrictList">
+                            {{ obj.DISTRICT }}
+                        </option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-md-2">
+                <div>
+
+                    <button type="button" class="btn btn-success btn-sm mt-3" (click)="btnFindDetails()">
+                        <i class="fa fa-arrow-right mr-2" aria-hidden="true"></i>
+                        Find
+                    </button>
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="tbl-fixed col-md-12 table-responsive" [hidden]="GridList?.length < 1">
+            <table class="table table-striped ah-table text-center tbl-data" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+                <thead class="bg-success text-white">
+                    <tr>
+
+                        <th class="tableheader_color static-column-1">Action Type</th>
+                        <th class="tableheader_color static-column-2">Action Type</th>
+                        <th class="tableheader_color static-column-3">S No</th>
+                        <th class="tableheader_color static-column-4">Asset Type</th>
+                        <th class="tableheader_color static-column-5">Asset Unit Name</th>
+                        <th class="tableheader_color">Location</th>
+                        <th class="tableheader_color">Address</th>
+                        <th class="tableheader_color">Extent Land in Acres</th>
+                        <th class="tableheader_color">Survey No</th>
+                        <th class="tableheader_color">Latitude</th>
+                        <th class="tableheader_color">Longitude</th>
+                        <th class="tableheader_color">Land Details</th>
+                        <th class="tableheader_color">Land Free from Encumbrance</th>
+                        <th class="tableheader_color">Purchase Year</th>
+                        <th class="tableheader_color">Documenttype / G.O.MS No./Ref.Letter/etc.</th>
+                        <th class="tableheader_color">Document No GOMS No Ref Letter others</th>
+                        <th class="tableheader_color">Available (Ac)</th>
+                        <th class="tableheader_color">Not Available (Ac)</th>
+                        <th class="tableheader_color">Encumbrance Certificate</th>
+                        <th class="tableheader_color">Boundaries East</th>
+                        <th class="tableheader_color">Boundaries West</th>
+                        <th class="tableheader_color">Boundaries North</th>
+                        <th class="tableheader_color">Boundaries South</th>
+                        <th class="tableheader_color">Ownership Details</th>
+                        <th class="tableheader_color">Under Operational Mgmt as on 01st June 2014</th>
+                        <th class="tableheader_color">Under Possession</th>
+                        <th class="tableheader_color">Building</th>
+                        <th class="tableheader_color">Plinth area of the Building (Sqft)</th>
+                        <th class="tableheader_color">Capacity of Plant</th>
+                        <th class="tableheader_color">Details of Machinery</th>
+                        <th class="tableheader_color">Licenses</th>
+                        <th class="tableheader_color">Photos With Geo Tagging</th>
+                        <!-- <th class="tableheader_color">Present Condition</th>
+                        <th class="tableheader_color">Remarks</th> -->
+                        <th class="tableheader_color">Asset Current Working Status</th>
+                        <th class="tableheader_color">Remarks</th>
+
+
+                    </tr>
+                    <tr>
+                        <th class="tableheader_color static-column-1">1</th>
+                        <th class="tableheader_color static-column-2">2</th>
+                        <th class="tableheader_color static-column-3">3</th>
+                        <th class="tableheader_color static-column-4">4</th>
+                        <th class="tableheader_color static-column-5">5</th>
+                        <th class="tableheader_color">6</th>
+                        <th class="tableheader_color">7</th>
+                        <th class="tableheader_color">8</th>
+                        <th class="tableheader_color">9</th>
+                        <th class="tableheader_color">10</th>
+                        <th class="tableheader_color">11</th>
+                        <th class="tableheader_color">12</th>
+                        <th class="tableheader_color">13</th>
+                        <th class="tableheader_color">14</th>
+                        <th class="tableheader_color">15</th>
+                        <th class="tableheader_color">16</th>
+                        <th class="tableheader_color">17</th>
+                        <th class="tableheader_color">18</th>
+                        <th class="tableheader_color">19</th>
+                        <th class="tableheader_color">20</th>
+                        <th class="tableheader_color">21</th>
+                        <th class="tableheader_color">22</th>
+                        <th class="tableheader_color">23</th>
+                        <th class="tableheader_color">24</th>
+                        <th class="tableheader_color">25</th>
+                        <th class="tableheader_color">26</th>
+                        <th class="tableheader_color">27</th>
+                        <th class="tableheader_color">28</th>
+                        <th class="tableheader_color">29</th>
+                        <th class="tableheader_color">30</th>
+                        <th class="tableheader_color">31</th>
+                        <th class="tableheader_color">32</th>
+                        <th class="tableheader_color">33</th>
+                        <th class="tableheader_color">34</th>
+                        <!-- <th class="tableheader_color">35</th>
+                        <th class="tableheader_color">36</th> -->
+                    </tr>
+                </thead>
+                <tbody *ngIf="GridList?.length > 0">
+                    <tr *ngFor="let obj of GridList; let i = index">
+                        <td class="table_cells_borders static-column-1" style="text-align: center;"><button class="btn btn-info"
+                                (click)="MCCEditInspection(obj)">
+                                Edit</button></td>
+                        <td class="table_cells_borders static-column-2" style="text-align: center;"><button class="btn btn-success"
+                                (click)="MCCDetails(obj)">Machinery</button></td>
+                        <td class="number_align static-column-3">{{ i + 1 }}</td>
+                        <td class="table_cells_borders static-column-4">{{ obj.ASSET_TYPE }}</td>
+                        <td class="table_cells_borders static-column-5">{{ obj.ASSEST_UNIT_NAME }}</td>
+                        <td style="text-align: left;" class="table_cells_borders">{{obj.LOCATION}}</td>
+                        <td style="text-align: left;" class="table_cells_borders">{{obj.ADDRESS}}</td>
+                        <td class="number_align">{{obj.EXTENT_LAND_IN_ACRES}}</td>
+                        <td class="number_align">{{obj.SURVEY_NO}}</td>
+                        <td class="number_align">{{obj.LAT_LONG}}</td>
+                        <td class="number_align">{{obj.INSERTED_BY}}</td>
+                        <td class="number_align">{{obj.LAND_DETAILS}}</td>
+                        <td class="number_align">{{obj.LAND_FREE_FROM_ENCUMBARANCE}}</td>
+                        <td class="number_align">{{obj.PURCHASE_YEAR}}</td>
+                        <td class="number_align">{{obj.DOCUMENTTYPE}}</td>
+                        <td class="number_align">{{obj.DOCUMENT_NO}}</td>
+                        <td class="number_align">{{obj.AVAILABLE_ACRS}}</td>
+                        <td class="number_align">{{obj.NOT_AVAILABLE_ACRS}}</td>
+                        <td class="number_align">{{obj.ENCUMBRANCE_CERTIFICATE}}</td>
+                        <td class="number_align">{{obj.BOUNDARIES_EAST}}</td>
+                        <td class="number_align">{{obj.BOUNDARIES_WEST}}</td>
+                        <td class="number_align">{{obj.BOUNDARIES_NORTH}}</td>
+                        <td class="number_align">{{obj.BOUNDARIES_SOUTH}}</td>
+                        <td class="number_align">{{obj.OWNERSHIP_DETAILS}}</td>
+                        <td style="text-align: left;" class="table_cells_borders">{{obj.UND_OPTNL_MGMT_AS_ON_01JUN2014}}
+                        </td>
+                        <td style="text-align: left; " class="table_cells_borders">{{obj.UNDER_POSSESSION}}</td>
+                        <td class="number_align">{{obj.BUILDING}}</td>
+                        <td class="number_align">{{obj.PLINTH_AREA_OF_BUILDING_SQFT}}</td>
+                        <td class="number_align">{{obj.CAPACITY_OF_PLANT}}</td>
+                        <td class="number_align">{{obj.NO_OF_MACHINERY}}</td>
+                        <td class="number_align">{{obj.LICENSES}}</td>
+                        <td class="number_align">
+                            <!-- {{obj.PHOTOS_WITH_GEO_TAGGING}} -->
+                            <button type="button" class="btn btn-link btn-sm" *ngIf="
+                                                obj.PHOTOS_WITH_GEO_TAGGING !== null &&
+                                                obj.PHOTOS_WITH_GEO_TAGGING !== '' &&
+                                                obj.PHOTOS_WITH_GEO_TAGGING !== undefined
+                                              " (click)="btnPhotoView(obj.PHOTOS_WITH_GEO_TAGGING)">
+                                VIEW
+                            </button>
+                            <span *ngIf="
+                                                obj.PHOTOS_WITH_GEO_TAGGING === null ||
+                                                obj.PHOTOS_WITH_GEO_TAGGING === '' ||
+                                                obj.PHOTOS_WITH_GEO_TAGGING === undefined
+                                              ">NA</span>
+                        </td>
+                        <!-- <td class="number_align">{{obj.PRESENT_CONDITON}}</td> -->
+                        <!-- <td style="text-align: left;" class="table_cells_borders">{{obj.REMARKS}}</td> -->
+                        <td style="text-align: left;" class="table_cells_borders">{{obj.WORKING_STATUS}}</td>
+                        <td style="text-align: left;" class="table_cells_borders">{{obj.REASON}}</td>
+
+
+
+
+
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>

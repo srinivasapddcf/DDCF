@@ -1,0 +1,50 @@
+<div class="card">
+    <div class="card-header p-2">
+      <h5 class="mb-0">Pending Issues</h5>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-12 table-responsive" [hidden]="issuesList?.length < 1">
+          <table
+            class="table table-striped ah-table text-center"
+            datatable
+            [dtOptions]="dtOptions"
+            [dtTrigger]="dtTrigger"
+          >
+            <thead class="bg-success text-white">
+              <tr>
+                <th>S.No.</th>
+                <th>ISSUE ID</th>
+                <th>REGISTERED DATE</th>
+                <th>ISSUE MODULE NAME</th>
+                <th>ISSUE TITLE</th>
+                <th>DESCRIPTION</th>
+                <th>REMARKS</th>
+              </tr>
+            </thead>
+            <tbody *ngIf="issuesList?.length > 0">
+              <tr *ngFor="let obj of issuesList; let i = index">
+                <td>{{ i + 1 }}</td>
+                <td>            
+                  <a *ngIf="obj.ISSUE_STATUS  !== 'CLOSE'" 
+                  style="cursor: pointer;text-decoration: underline;" 
+                  class="text-primary" 
+                  (click)="btnGetDetails(obj.ISSUE_ID);"
+                  ><b>{{obj.ISSUE_ID}}</b></a>
+                  <span *ngIf="obj.ISSUE_STATUS === 'CLOSE'" class="text-success">
+                    <b>{{obj.ISSUE_ID}}</b>
+                  </span></td>
+                <td>{{obj.REGISTERD_ON}}</td>
+                <td>{{obj.ISSUE_MODULE_NAME}}</td>
+                <td>{{obj.ISSUE_TITLE}}</td>
+                <td>{{obj.DESCRIPTION}}</td>
+                <td>{{obj.REMARKS}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  

@@ -1,0 +1,533 @@
+<div class="row">
+
+  <div class="col mb-2">
+    <div class="stats-card primary" (click)="btnFeedIndentDashboardDetails('0')">
+
+      <div class="overlay"></div>
+      <div class="card-body">
+        <div class="d-flex justify-content-between">
+          <div class="stats-text">
+            <p class="text-uppercase text-muted mb-1">
+              <small>PENDING</small>
+            </p>
+            <h5 class="font-weight-bold mb-0">
+              <!-- {{ dashboardCounts.PENDING }} -->
+            </h5>
+          </div>
+          <div class="circle">
+            <i class="fas fa-hourglass-half"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col mb-2">
+    <div class="stats-card success" (click)="btnFeedIndentDashboardDetails('1')">
+
+      <div class="overlay"></div>
+
+      <div class="card-body">
+        <div class="d-flex justify-content-between">
+          <div class="stats-text">
+            <p class="text-uppercase text-muted mb-1">
+              <small>APPROVED</small>
+            </p>
+            <h5 class="font-weight-bold mb-0">
+              <!-- {{ dashboardCounts.APPROVED }} -->
+            </h5>
+          </div>
+          <div class="circle">
+            <i class="fas fa-check-double"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+<div class="row" id="griddata">
+  <div class="col-md-12 table-responsive" [hidden]="registrationapprovalsList?.length < 1">
+    <table class="table table-striped ah-table text-center" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger"
+      data-page-length='-1'>
+      <thead class="bg-success text-white">
+        <tr>
+          <th>S.No.</th>
+          <th>DISTRICT</th>
+          <th>MANDAL NAME</th>
+          <th>DIVISION NAME</th>
+          <th>RSK NAME</th>
+          <th>RSK CODE</th> <!-- <th>MANDAL CODE</th>   <th>DIST CODE</th> -->
+          <th>VIEW PDF</th>
+        </tr>
+      </thead>
+      <tbody *ngIf="registrationapprovalsList?.length > 0">
+        <tr *ngFor="let obj of registrationapprovalsList; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>{{ obj.DISTRICT }}</td>
+          <td>{{ obj.MANDAL_NAME }}</td>
+          <td>{{ obj.DIVISION_NAME }}</td>
+          <td>{{ obj.RBK_NAME }}</td>
+          <td>{{ obj.RBK_CODE }}</td> <!--   <td>{{ obj.MANDAL_CODE}}</td>   <td>{{ obj.DIST_CODE}}</td> -->
+          <td> <button class="btn btn-sm btn-info block"
+              (click)="btnAllPdf(obj.RBK_CODE+','+obj.DIST_CODE+','+obj.MANDAL_CODE)">
+              <i>VIEW</i></button></td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+</div>
+
+
+  
+
+
+
+<div class="row" id="approvedgriddata">
+  <div class="col-md-12 table-responsive" [hidden]="registrationapprovalsPDFList?.length < 1">
+    <table class="table table-striped ah-table text-center" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger"
+      data-page-length='-1'>
+      <thead class="bg-success text-white">
+        <tr>
+          <th>S.No.</th>
+          <th>DISTRICT</th>
+          <th>MANDAL NAME</th>
+          <th>DIVISION NAME</th>
+          <th>RSK NAME</th>
+          <th>RSK CODE</th> <!-- <th>MANDAL CODE</th>   <th>DIST CODE</th> -->
+          <th>VIEW PDF</th>
+        </tr>
+      </thead>
+      <tbody *ngIf="registrationapprovalsPDFList?.length > 0">
+        <tr *ngFor="let obj of registrationapprovalsPDFList; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>{{ obj.DISTRICT }}</td>
+          <td>{{ obj.MANDAL_NAME }}</td>
+          <td>{{ obj.DIVISION_NAME }}</td>
+          <td>{{ obj.RBK_NAME }}</td>
+          <td>{{ obj.RBK_CODE }}</td> <!--   <td>{{ obj.MANDAL_CODE}}</td>   <td>{{ obj.DIST_CODE}}</td> -->
+          <td> <button class="btn btn-sm btn-info block"
+              (click)="btnAllapprovedPdf(obj.RBK_CODE+','+obj.DIST_CODE+','+obj.MANDAL_CODE)">
+              <i>VIEW</i></button></td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+</div>
+
+
+
+
+
+
+<div class="modal-content" id="pdfdata">
+  <div class="modal-header bg-primary text-white">
+     Documents
+  </div>
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-md-2">
+         
+
+        <div class="stats-card primary" (click)="btnviewPdf(FORM_A_PDF1);" id="FORM_A">
+          <div class="overlay"></div>
+          <div class="card-body" style="border-radius: 12px;">
+            <div class="d-flex justify-content-between">
+              <div class="stats-text">
+                <p class="text-uppercase text-muted mb-1">
+                  <small>FORM-A</small>
+                </p>
+              </div>
+              <div class="circle">
+                <i class="fas fa-check-double"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+
+
+      </div>
+      <div class="col-md-2">
+         
+
+        <div class="stats-card primary" (click)="btnviewPdf(MASUDHA_FORM_PDF1);" id="MASUDHA">
+          <div class="overlay"></div>
+          <div class="card-body" style="border-radius: 12px;">
+            <div class="d-flex justify-content-between">
+              <div class="stats-text">
+                <p class="text-uppercase text-muted mb-1">
+                  <small>MASUDHA</small>
+                </p>
+              </div>
+              <div class="circle">
+                <i class="fas fa-check-double"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="col-md-2">
+         
+
+        <div class="stats-card primary" (click)="btnviewPdf(BYE_LAW_PDF1);" id="BYE_LAW">
+          <div class="overlay"></div>
+          <div class="card-body" style="border-radius: 12px;">
+            <div class="d-flex justify-content-between">
+              <div class="stats-text">
+                <p class="text-uppercase text-muted mb-1">
+                  <small>BYE-LAW</small>
+                </p>
+              </div>
+              <div class="circle">
+                <i class="fas fa-check-double"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="col-md-2">
+        
+        <div class="stats-card primary" (click)="btnviewPdf(FESABILITY_REPORT_PDF1);" id="FESABILITY">
+          <div class="overlay"></div>
+          <div class="card-body" style="border-radius: 12px;">
+            <div class="d-flex justify-content-between">
+              <div class="stats-text">
+                <p class="text-uppercase text-muted mb-1">
+                  <small>FEASIBILITY</small>
+                </p>
+              </div>
+              <div class="circle">
+                <i class="fas fa-check-double"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="col-md-2">
+         
+
+        <div class="stats-card primary" (click)="btnviewPdf(REQ_LETTER_ADHOCK_COM_PDF1);" id="ADHOCK">
+          <div class="overlay"></div>
+          <div class="card-body" style="border-radius: 12px;">
+            <div class="d-flex justify-content-between">
+              <div class="stats-text">
+                <p class="text-uppercase text-muted mb-1">
+                  <small>ADHOC</small>
+                </p>
+              </div>
+              <div class="circle">
+                <i class="fas fa-check-double"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div><BR>
+    <div class="row">
+
+      <div class="col-md-2"> 
+        <div class="stats-card primary" (click)="btnviewPdf(ECONOMIC_VIABILITY_REP_PDF1);" id="ECONOMIC_VIABILITY">
+          <div class="overlay"></div>
+          <div class="card-body" style="border-radius: 12px;">
+            <div class="d-flex justify-content-between">
+              <div class="stats-text">
+                <p class="text-uppercase text-muted mb-1">
+                  <small>ECONOMIC VIABILITY</small>
+                </p>
+              </div>
+              <div class="circle">
+                <i class="fas fa-check-double"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="col-md-2"> 
+        <div class="stats-card primary" (click)="btnviewPdf(BANK_REMITTANCE_CERTI_PDF1);" id="BANK_REMITTANCE_CERTI">
+          <div class="overlay"></div>
+          <div class="card-body" style="border-radius: 12px;">
+            <div class="d-flex justify-content-between">
+              <div class="stats-text">
+                <p class="text-uppercase text-muted mb-1">
+                  <small>BANK REMITTANCE CERTIFICATE</small>
+                </p>
+              </div>
+              <div class="circle">
+                <i class="fas fa-check-double"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="col-md-2">  
+        <div class="stats-card primary" (click)="btnviewPdf(MEETING_PROCEDINGS_PDF1);" id="MEETING_PROCEDINGS">
+          <div class="overlay"></div>
+          <div class="card-body" style="border-radius: 12px;">
+            <div class="d-flex justify-content-between">
+              <div class="stats-text">
+                <p class="text-uppercase text-muted mb-1">
+                  <small>MEETING PROCEEDINGS</small>
+                </p>
+              </div>
+              <div class="circle">
+                <i class="fas fa-check-double"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="col-md-2"> 
+        <div class="stats-card primary" (click)="btnviewPdf(SWORN_STATEMENT_PDF1);" id="SWORN_STATEMENT">
+          <div class="overlay"></div>
+          <div class="card-body" style="border-radius: 12px;">
+            <div class="d-flex justify-content-between">
+              <div class="stats-text">
+                <p class="text-uppercase text-muted mb-1">
+                  <small>SWORN STATEMENT</small>
+                </p>
+              </div>
+              <div class="circle">
+                <i class="fas fa-check-double"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div> <br>
+      <hr style="border-color :red;">  
+      <div class="row"  >
+      <div class="col-md-2"> 
+        <div class="stats-card success" (click)="btnviewPdf(REGISTRATION_CERTIFICATE1);" id="REGISTRATION_CERTIFICATE">
+          <div class="overlay"></div>
+          <div class="card-body" style="border-radius: 12px;">
+            <div class="d-flex justify-content-between">
+              <div class="stats-text">
+                <p class="text-uppercase text-muted mb-1">
+                  <small>REGISTRATION CERTIFICATE</small>
+                </p>
+              </div>
+              <div class="circle">
+                <i class="fas fa-check-double"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="col-md-2">
+        
+
+        <div class="stats-card success" (click)="btnviewPdf(PROCEDDINGS_ORDERS1);" id="PROCEDDINGS_ORDERS">
+          <div class="overlay"></div>
+          <div class="card-body" style="border-radius: 12px;">
+            <div class="d-flex justify-content-between">
+              <div class="stats-text">
+                <p class="text-uppercase text-muted mb-1">
+                  <small>PROCEEDINGS ORDERS</small>
+                </p>
+              </div>
+              <div class="circle">
+                <i class="fas fa-check-double"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="col-md-2">
+        
+
+        <div class="stats-card success" (click)="btnviewPdf(PROCEDDINGS_ADHOCK1);" id="PROCEDDINGS_ADHOCK">
+          <div class="overlay"></div>
+          <div class="card-body" style="border-radius: 12px;">
+            <div class="d-flex justify-content-between">
+              <div class="stats-text">
+                <p class="text-uppercase text-muted mb-1">
+                  <small>PROCEEDINGS ADHOC</small>
+                </p>
+              </div>
+              <div class="circle">
+                <i class="fas fa-check-double"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="col-md-2"> 
+
+        <div class="stats-card success" (click)="btnviewPdf(BYE_LAW_REGISTARION1);" id="BYE_LAW_REGISTARION">
+          <div class="overlay"></div>
+          <div class="card-body" style="border-radius: 12px;">
+            <div class="d-flex justify-content-between">
+              <div class="stats-text">
+                <p class="text-uppercase text-muted mb-1">
+                  <small>BYE-LAW REGISTRATION</small>
+                </p>
+              </div>
+              <div class="circle">
+                <i class="fas fa-check-double"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>  
+
+
+    <hr style="border-color :red;">
+    <div class="row">
+      <div class="col-md-2">
+        <!-- <input type="button" title="REGISTRATION_CERTIFICATE" value="REG_CERTIFICATE" id="REGISTRATION_CERTIFICATE"
+            style="background-image: url ('/image/btn.png') no-repeat;background-color:#007bff;border-radius: 12px;"
+            (click)="btnPdf(REGISTRATION_CERTIFICATE1);" /> -->
+
+        <div class="stats-card success" (click)="btnPdf(REGISTRATION_CERTIFICATE1);" id="REGISTRATION_CERTIFICATE">
+          <div class="overlay"></div>
+          <div class="card-body" style="border-radius: 12px;">
+            <div class="d-flex justify-content-between">
+              <div class="stats-text">
+                <p class="text-uppercase text-muted mb-1">
+                  <small>REGISTRATION CERTIFICATE</small>
+                </p>
+              </div>
+              <div class="circle">
+                <i class="fas fa-check-double"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="col-md-2">
+        <!-- <input type="button" title="PROCEDDINGS_ORDERS" value="PROCEDDINGS_ORDERS" id="PROCEDDINGS_ORDERS"
+            style="background-image: url ('/image/btn.png') no-repeat;background-color:#007bff;border-radius: 12px;"
+            (click)="btnPdf(PROCEDDINGS_ORDERS1);" /> -->
+
+        <div class="stats-card success" (click)="btnPdf(PROCEDDINGS_ORDERS1);" id="PROCEDDINGS_ORDERS">
+          <div class="overlay"></div>
+          <div class="card-body" style="border-radius: 12px;">
+            <div class="d-flex justify-content-between">
+              <div class="stats-text">
+                <p class="text-uppercase text-muted mb-1">
+                  <small>PROCEEDINGS ORDERS</small>
+                </p>
+              </div>
+              <div class="circle">
+                <i class="fas fa-check-double"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="col-md-2">
+        <!-- <input type="button" title="PROCEDDINGS_ADHOCK" value="PROCEDDINGS_ADHOCK" id="PROCEDDINGS_ADHOCK"
+            style="background-image: url ('/image/btn.png') no-repeat;background-color:#007bff;border-radius: 12px;"
+            (click)="btnPdf(PROCEDDINGS_ADHOCK1);" /> -->
+
+        <div class="stats-card success" (click)="btnPdf(PROCEDDINGS_ADHOCK1);" id="PROCEDDINGS_ADHOCK">
+          <div class="overlay"></div>
+          <div class="card-body" style="border-radius: 12px;">
+            <div class="d-flex justify-content-between">
+              <div class="stats-text">
+                <p class="text-uppercase text-muted mb-1">
+                  <small>PROCEEDINGS ADHOC</small>
+                </p>
+              </div>
+              <div class="circle">
+                <i class="fas fa-check-double"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="col-md-2">
+        <!-- <input type="button" title="BYE_LAW_REGISTARION" value="BYE_LAW_REGISTARION" id="BYE_LAW_REGISTARION"
+            style="background-image: url ('/image/btn.png') no-repeat;background-color:#007bff;border-radius: 12px;"
+            (click)="btnPdf(BYE_LAW_REGISTARION1);" /> -->
+
+        <div class="stats-card success" (click)="btnPdf(BYE_LAW_REGISTARION1);" id="BYE_LAW_REGISTARION">
+          <div class="overlay"></div>
+          <div class="card-body" style="border-radius: 12px;">
+            <div class="d-flex justify-content-between">
+              <div class="stats-text">
+                <p class="text-uppercase text-muted mb-1">
+                  <small>BYE_LAW REGISTRATION</small>
+                </p>
+              </div>
+              <div class="circle">
+                <i class="fas fa-check-double"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+
+
+      <!-- <div class="col-md-4">
+          <iframe id="ifrmREGISTRATION_CERTIFICATE" height="150" width="150"></iframe>
+          <a href="#" (click)="btnPdf(REGISTRATION_CERTIFICATE1);">REG CERT</a>
+        </div> 
+       <div class="col-md-4">
+          <iframe id="ifrmPROCEDDINGS_ORDERS" height="150" width="150"></iframe>
+          <a href="#" (click)="btnPdf(PROCEDDINGS_ORDERS1);">PROCE ORDERS</a>
+        </div>
+  
+        <div class="col-md-4">
+          <iframe id="ifrmPROCEDDINGS_ADHOCK" height="150" width="150"></iframe>
+          <a href="#" (click)="btnPdf(PROCEDDINGS_ADHOCK1);">PROCE ADHOCK</a>
+        </div>
+  
+          <div class="col-md-4">
+          <iframe id="ifrmBYE_LAW_REGISTARION" height="150" width="150"></iframe>
+          <a href="#" (click)="btnPdf(BYE_LAW_REGISTARION1);">BYE_LAW REGISTARION</a>
+        </div> -->
+
+    </div>
+
+ 
+
+   
+
+
+
+
+  </div>
+  <div class="modal-footer" *ngIf="btnclapproveds" >
+    <button type="button" class="btn btn-danger" (click)="closePopup()"> Close </button>
+    <button type="button" class="btn btn-danger" (click)="Approved()"> Approve </button>
+
+    <button type="button" class="btn btn-danger" (click)="RejectPopup()"> Reject </button>
+  </div>
+</div>
+
+
+
+<div class="modal-X" tabindex="-1" role="dialog" [ngStyle]="{'display':displayStyle}">
+  <div class="modal-dialog" role="document">
+
+  </div>
+</div>

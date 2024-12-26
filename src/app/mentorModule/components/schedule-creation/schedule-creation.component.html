@@ -1,0 +1,139 @@
+<div class="card"> 
+  <div class="card-header p-2">
+    <h5 class="mb-0">SCHEDULE CREATION MDAC </h5>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="rbkId">RSK <span style="color: red">*</span></label>
+          <select
+            id="rbkId"
+            class="form-control"
+            [(ngModel)]="scheduleData.rbkId"
+            (change)="onRbkChange()"
+          >
+            <option value="">-- SELECT RSK --</option>
+            <option value="{{ obj.RBK_ID }}" *ngFor="let obj of rbkList">
+              {{ obj.RBK_NAME }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="villageId"
+            >VILLAGE <span style="color: red">*</span></label
+          >
+          <select
+            id="villageId"
+            class="form-control"
+            [(ngModel)]="scheduleData.villageId"
+          >
+            <option value="">-- SELECT VILLAGE --</option>
+            <option
+              value="{{ obj.VILLAGE_ID }}"
+              *ngFor="let obj of villageList"
+            >
+              {{ obj.VILLAGE_NAME }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="meetingVenue"
+            >SCHEDULE MEETING VENUE <span style="color: red">*</span></label
+          >
+          <input
+            id="meetingVenue"
+            type="text"
+            class="form-control"
+            [(ngModel)]="scheduleData.meetingVenue"
+            placeholder="Please Enter Meeting Venue"
+            maxlength="50"
+            autocomplete="off"
+          />
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="meetingVenueAddress"
+            >SCHEDULE MEETING VENUE ADDRESS
+            <span style="color: red">*</span></label
+          >
+          <input
+            id="meetingVenueAddress"
+            type="text"
+            class="form-control"
+            [(ngModel)]="scheduleData.meetingVenueAddress"
+            placeholder="Please Enter Meeting Venue Address"
+            maxlength="50"
+            autocomplete="off"
+          />
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="meetingDate"
+            >SCHEDULE MEETING DATE <span style="color: red">*</span></label
+          >
+          <app-date-picker
+            [PlaceHolder]="'Please Select Meeting Date'"
+            [(selectedDate)]="scheduleData.meetingDate"
+            [minDate]="minDate"
+            [maxDate]="maxDate"
+          ></app-date-picker>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="meetingTime"
+            >SCHEDULE MEETING TIME <span style="color: red">*</span></label
+          >
+          <input
+            id="meetingTime"
+            type="time"
+            class="form-control"
+            [(ngModel)]="scheduleData.meetingTime" 
+            placeholder="Please Enter Meeting Time"
+            maxlength="8"
+            autocomplete="off"
+          />
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="villageAnimatorName"
+            >MEETING AGENDA <span style="color: red">*</span></label
+          >
+          <input
+            id="villageAnimatorName"
+            type="text"
+            class="form-control"
+            [(ngModel)]="scheduleData.meetingAgenda"
+            placeholder="Please Enter Meeting Agenda"
+            maxlength="50"
+            autocomplete="off"
+          />
+        </div>
+      </div>
+
+      <div class="col-md-12" align="center">
+        <button
+          type="button"
+          class="btn btn-success btn-sm" 
+          (click)="btnSubmit()"
+        >
+          SUBMIT 
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,487 @@
+
+
+
+<div class="row">
+    <div class="col mb-2">
+        <div class="stats-card success" (click)="TenderDetailsClick('1')">
+
+            <div class="overlay"></div>
+
+            <div class="card-body">
+                <div class="d-flex justify-content-between">
+                    <div class="stats-text">
+                        <p class="text-uppercase text-muted mb-1">
+                            <small>SCHEDULE CREATION FARMER SELECTION</small>
+                        </p>
+                        <!-- <h5 class="font-weight-bold mb-0">
+                  {{ dashboardCounts.Approve }}
+                </h5> -->
+                    </div>
+                    <div class="circle">
+                        <i class="fas fa-check-double"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- <div class="col mb-2">
+      <div class="stats-card success" (click)="TenderDetailsClick('3')">
+
+          <div class="overlay"></div>
+
+          <div class="card-body">
+              <div class="d-flex justify-content-between">
+                  <div class="stats-text">
+                      <p class="text-uppercase text-muted mb-1">
+                          <small>EMPLOYEE SELECTION</small>
+                      </p>
+                     
+                  </div>
+                  <div class="circle">
+                      <i class="fas fa-check-double"></i>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div> -->
+
+    <div class="col mb-2">
+        <div class="stats-card success" (click)="TenderDetailsClick('2')">
+
+            <div class="overlay"></div>
+
+            <div class="card-body">
+                <div class="d-flex justify-content-between">
+                    <div class="stats-text">
+                        <p class="text-uppercase text-muted mb-1">
+                            <small>SCHEDULE TRAINING SELECTED FARMER</small>
+
+                            <!-- <small>SCHEDULE CREATION FARMER ATTENDANCE</small> -->
+                        </p>
+                        <!-- <h5 class="font-weight-bold mb-0">
+                {{ dashboardCounts.Approve }}
+              </h5> -->
+                    </div>
+                    <div class="circle">
+                        <i class="fas fa-check-double"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card" *ngIf="subhead" >
+
+    <div class="card-body">
+        <div class="row align-items-center"  >
+              <div class="col-md-12 row">
+
+                <div class="col-md-1" style="text-align: right;"> <label for="UninonId">  RSK
+                    <span style="color: red">*</span></label></div>
+    
+                    <div class="col-md-2">
+            <div class="form-group">
+             
+              <select
+                id="rbkId"
+                class="form-control"
+                [(ngModel)]="rbkId"
+                (change)="onRbkChange()"
+              >
+              <!-- (change)="onRbkChange()" -->
+                <option disabled selected value="undefined">-- SELECT RSK --</option>
+                <option value="{{ obj.RBK_ID }}" *ngFor="let obj of rbkList">
+                  {{ obj.RBK_NAME }}
+                </option>
+              </select>
+            </div>
+                   </div>
+
+
+
+                   <div class="col-md-2" style="text-align: right;"> <label for="UninonId">  Schedule Training
+                    <span style="color: red">*</span></label></div>
+  
+  
+                  <div class="col-md-2">
+                   <div class="form-group">
+                    
+                     <select id="TRAININGID"  class="form-control" [(ngModel)]="TRAININGID"   (change)="TRAININGList()">                
+                         <option disabled selected value="undefined">-- Select Schedule Testing --</option>
+                       <option  value="{{ obj.TRAININGID }}"    *ngFor="let obj of POlist"> {{ obj.TRAININGNAME }}  </option>  
+                     </select>
+                   </div> 
+                 </div>
+
+                 <div class="col-md-2" style="text-align: right;"> <label for="UninonId">  Meeting Session
+                    <span style="color: red">*</span></label></div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                         
+                          <select id="TID"  class="form-control" [(ngModel)]="TID"   (change)="onScheduleChange()">                
+                              <option disabled selected value="undefined">-- Select Meeting Session --</option>
+                            <option  value="{{ obj.TID }}"    *ngFor="let obj of sessionList"> {{ obj.MEETING_NAME }}  </option>  
+                          </select>
+                        </div>
+                      </div>
+
+
+                </div>
+            </div>
+        </div>
+</div>
+
+<div   class="card col-md-12 ">
+   
+  <!-- datatable -->
+  <table    class="table table-striped ah-table text-center"   >   
+    <thead class="bg-success text-white" >
+      <tr>
+         
+        <th>Total Farmers Count</th>
+         <th>Total Milk Poured Farmers Count</th>  
+         <th>InActive Farmers Count</th>
+            
+
+      </tr>
+    </thead>
+       <tbody   >
+      <tr  >
+         
+        <td>{{ TotalFarmersCount }}</td>
+        <td>{{ TotalMilkPouredFarmersCount }}</td> 
+        <td>{{ InActiveFarmersCount }}</td>
+       
+       
+
+      </tr>
+      </tbody>  
+          
+
+          <tfoot> 
+          </tfoot>
+
+     </table> 
+ </div>
+
+
+
+<div class="card" *ngIf="clickone">
+    <div class="card-header p-2">
+      <h5 class="mb-0">Schedule Creation Farmers Selection  </h5>
+    </div>
+
+    <div class="card-body">
+        <!-- <div class="row align-items-center"  >
+              <div class="col-md-12 row">
+
+                <div class="col-md-1" style="text-align: right;"> <label for="UninonId">  RBK
+                    <span style="color: red">*</span></label></div>
+    
+                    <div class="col-md-2">
+            <div class="form-group">
+             
+              <select
+                id="rbkId"
+                class="form-control"
+                [(ngModel)]="rbkId"
+                (change)="onRbkChange()"
+              >
+               
+                <option disabled selected value="undefined">-- SELECT RBK --</option>
+                <option value="{{ obj.RBK_ID }}" *ngFor="let obj of rbkList">
+                  {{ obj.RBK_NAME }}
+                </option>
+              </select>
+            </div>
+                   </div>
+
+
+
+                   <div class="col-md-2" style="text-align: right;"> <label for="UninonId">  Schedule Training
+                    <span style="color: red">*</span></label></div>
+  
+  
+                  <div class="col-md-2">
+                   <div class="form-group">
+                    
+                     <select id="TRAININGID"  class="form-control" [(ngModel)]="TRAININGID"   (change)="TRAININGList()">                
+                         <option disabled selected value="undefined">-- Select Schedule Testing --</option>
+                       <option  value="{{ obj.TRAININGID }}"    *ngFor="let obj of POlist"> {{ obj.TRAININGNAME }}  </option>  
+                     </select>
+                   </div>
+                 </div>
+
+                 <div class="col-md-2" style="text-align: right;"> <label for="UninonId">  Meeting Session
+                    <span style="color: red">*</span></label></div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                         
+                          <select id="TID"  class="form-control" [(ngModel)]="TID"   (change)="onScheduleChange()">                
+                              <option disabled selected value="undefined">-- Select Meeting Session --</option>
+                            <option  value="{{ obj.TID }}"    *ngFor="let obj of sessionList"> {{ obj.MEETING_NAME }}  </option>  
+                          </select>
+                        </div>
+                      </div>
+
+
+                </div>
+            </div> -->
+
+            
+            <div class="row align-items-center"  >
+                <div class="col-md-12 row">
+
+                    
+                        <div
+                          class="col-md-12 table-responsive"
+                          [hidden]="schedulelist?.length < 0"
+                        >
+
+                        <div class="col-md-12 row">
+
+                            <div class="col-md-7" style="text-align: right;"> 
+                                <label for="UninonId"> Enter No of Farmers count
+                               </label></div>  <div class="col-md-2" style="text-align: right;"> 
+                <input type="text" id="txt" [(ngModel)]="txt" (change)="onReloadChange()" />        </div> 
+                <div class="col-md-3" style="text-align: left;"> 
+                    <input type="button" id="btns" (change)="onReloadChange()" value="Find"  (click)="onReloadChange()" >  </div> 
+                
+                </div>
+
+                <label for="UninonId"> Selected Farmers count {{farmercount}}  </label>
+
+
+                <div class="col-md-12 row"  [hidden]="schedulelist?.length < 1">
+                          <table
+                            class="table table-striped ah-table text-center"
+                            datatable
+                            [dtOptions]="dtOptions"
+                            [dtTrigger]="dtTrigger"
+                          >
+                            <thead class="bg-success text-white" style="border: 1px solid white;">
+                              <tr>
+                                <th class="tableheader_color" >S.No.</th>
+                                <th class="tableheader_color" >FARMER NAME</th> 
+                                <th class="tableheader_color" >VILLAGE NAME</th>
+                                <th class="tableheader_color" >ACTION TAKEN</th>
+                                 
+                              </tr>
+                              <tr >             
+                                <th  class="tableheader_color"  >(1)</th>
+                                <th  class="tableheader_color" >(2)</th>
+                                <th  class="tableheader_color" >(3)</th>
+                                <th  class="tableheader_color" >(4)</th>
+                                 
+                                     
+                              </tr> 
+                            </thead>
+                            <tbody   *ngIf="schedulelist?.length > 0">
+                              <tr *ngFor="let obj of schedulelist; let i = index">
+                                <td  class="table_cells_borders">{{ i + 1 }}</td>
+                                <td  class="table_cells_borders"  style="text-align: left;font-size: 12px;" >    {{ obj.FARMER_NAME }}  </td>
+                                <td  class="table_cells_borders"   style="text-align: left;font-size: 12px;">{{ obj.VILLAGE_NAME }}</td>
+                              
+                                <!-- <td><input type="checkbox" value="{{obj.RBK_CODE}}" (change)="selectsingleCheck(obj.RBK_CODE)" [(ngModel)]="societyapprovalsList[i].checked"></td> -->
+                                <td  class="table_cells_borders">
+                                   <!-- <input type="checkbox"  id=obj.FARMER_CODE [(ngModel)]="FARMER_CODE" value=" {{ obj.FARMER_CODE }}"  >
+                                     <input _ngcontent-ssb-c149="" type="checkbox" ng-reflect-name="18563134" value="18563134" class="ng-untouched ng-pristine ng-valid" ng-reflect-model="true"> -->
+
+                                    <button
+                                    type="button"
+                                    class="btn btn-success btn-sm"
+                                     
+                                    (click)="btnMarkAttendance(obj)"
+                                  >
+                                    Mark Training
+                                  </button>
+
+                                </td>
+
+
+                                
+                                
+                               
+                              </tr>
+                            </tbody>
+                          </table>
+                       
+                       
+                        </div>
+
+
+                        <div class="col-md-12" align="center">
+                            <button
+                              type="button"
+                              style="background-color: blue;color: white;"
+                              class="btn btn-sm"
+                              (click)="TenderDetailsClick('2')"
+                            >
+                              Selected Farmers
+                            </button>
+                          </div>
+
+
+
+                        </div>
+                       
+
+
+
+                </div>
+            </div>
+
+
+
+
+
+        </div>
+    </div>
+
+
+    <div class="card" *ngIf="clicktwo">
+        <div class="card-header p-2">
+          <h5 class="mb-0">Schedule Creation Farmer Attendance  </h5>
+        </div>
+
+
+
+        <div class="row align-items-center"    [hidden]="twolist?.length < 1">
+            <div class="col-md-12 row">
+
+                
+                    <div
+                      class="col-md-12 table-responsive"
+                      [hidden]="twolist?.length < 1"
+                    >
+                      <table
+                        class="table table-striped ah-table text-center"
+                        datatable
+                        [dtOptions]="dtOptions1"
+                        [dtTrigger]="dtTrigger1"
+                      >
+                        <thead class="bg-success text-white" style="border: 1px solid white;">
+                          <tr>
+                            <th class="tableheader_color" >S.No.</th>
+                            <th class="tableheader_color" >FARMER NAME</th> 
+                            <th class="tableheader_color" >VILLAGE NAME</th>
+                            <th class="tableheader_color" >ACTION TAKEN</th>
+                             
+                          </tr>
+                          <tr >             
+                            <th  class="tableheader_color"  >(1)</th>
+                            <th  class="tableheader_color" >(2)</th>
+                            <th  class="tableheader_color" >(3)</th>
+                            <th  class="tableheader_color" >(4)</th>
+                             
+                                 
+                          </tr> 
+                        </thead>
+                        <tbody   *ngIf="twolist?.length > 0">
+                          <tr *ngFor="let obj of twolist; let i = index">
+                            <td  class="table_cells_borders">{{ i + 1 }}</td>
+                            <td  class="table_cells_borders"  style="text-align: left;font-size: 12px;" >    {{ obj.FARMER_NAME }}  </td>
+                            <td  class="table_cells_borders"   style="text-align: left;font-size: 12px;">{{ obj.VILLAGE_NAME }}</td>
+                          
+                            <!-- <td><input type="checkbox" value="{{obj.RBK_CODE}}" (change)="selectsingleCheck(obj.RBK_CODE)" [(ngModel)]="societyapprovalsList[i].checked"></td> -->
+                            <td  class="table_cells_borders">
+                               
+                                <button
+                                type="button"
+                                class="btn btn-success btn-sm"
+                                 
+                                (click)="btnRemoveAttendance(obj)"
+                              >
+                                Remove Training List
+                              </button>
+
+                            </td>
+
+
+                            
+                            
+                           
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div> 
+                   
+
+
+
+            </div>
+        
+        
+            <div  class="col-md-12 row"  >
+                <div class="col-md-7" style="text-align: right;"> 
+                <button
+                  type="button"
+                  class="btn btn-success btn-sm"
+                  (click)="btnSubmit()"
+                    
+                >
+                  Submit Attendance
+                </button>
+              </div>
+            </div>
+        </div>
+
+
+       
+
+    </div>
+
+
+    <div class="card" *ngIf="clickthree">
+      <div class="card-header p-2">
+        <h5 class="mb-0">Employee Selection  </h5>
+      </div>
+  
+      <div class="card-body">
+        <div class="col-md-12 row"   >
+                   
+          <div class="col-md-2">
+           <div class="form-group" style="text-align: right;">
+             <label for="UninonId">Mentor Mobile No :
+               <span style="color: red">*</span></label>                                           
+                   </div>
+                   </div>
+              <div class="col-md-3">
+                  <div class="form-group">
+              <input   id="mentorphno"   [tabIndex]="1"   type="text"   class="form-control"  [(ngModel)]="mentorphno" 
+              onkeypress="return(event.charCode >= 48 && event.charCode <= 57)"
+              placeholder="Mentor Phone No"   maxlength="10"   autocomplete="off"  />
+
+          </div>
+          </div>
+         
+          <div class="col-md-2">
+              <div class="form-group" style="text-align: right;"> 
+                  <label  > Ric Mobile No:</label> 
+                  
+                   </div>
+              
+               </div>
+          <div class="col-md-3">
+
+              <input   id="ricphno"   [tabIndex]="1"   type="text"   class="form-control"  [(ngModel)]="ricphno" 
+              onkeypress="return(event.charCode >= 48 && event.charCode <= 57)"
+              placeholder="Ric Phone No"   maxlength="10"   autocomplete="off"  />
+              
+          </div>
+           <div class="col-md-2"> 
+                <button
+              type="button"  
+              class="btn btn-success btn-sm"
+              (click)="btnFind()"
+            >
+             Find  
+            </button> </div>
+
+            <div class="col-md-12  ">
+              <HR style="height: 1px;color:brown;background-color: brown;">
+              </div>
+            </div>
+      </div>
+    </div>

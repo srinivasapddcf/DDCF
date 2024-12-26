@@ -1,0 +1,209 @@
+<!--Navbar-->
+<nav class="navbar navbar-expand-lg navbar-dark blue-green-gradient">
+    <!-- Navbar brand -->
+    <a class="navbar-brand d-flex align-items-center" style="cursor: pointer">
+      <img
+        class="brand-logo"
+        src="https://apddcf.ap.gov.in/cdn/img/ap-logo.png"
+        style="width: 50px"
+      />
+      <h5 class="brand-text text-white mb-0 font-weight-normal ml-1">
+        Andhra Pradesh Dairy Development Cooperative Federation Limited (APDDCF)
+      </h5>
+    </a>
+  
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="basicExampleNav">
+      <!-- Links -->
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item text-right">
+          <a
+            class="navbar-brand d-flex align-items-center"
+            style="cursor: pointer"
+          >
+          <img
+          class="brand-logo"
+          src="https://apddcf.ap.gov.in/cdn/img/CM.png"
+          style="width:50px"
+        />  
+       <div class="text-center">
+          <h6 class="brand-text text-white mb-0 font-weight-normal ml-1">
+            Sri Nara Chandrababu Naidu
+          </h6>
+              <p style="font-size: 12px; margin-bottom: 0; color: #fff">
+                Hon’ble Chief Minister, <br />
+                Andhra Pradesh
+              </p>
+            </div>  
+          </a>
+        </li>
+      </ul>
+    </div>
+    <!-- Collapsible content -->
+  </nav>
+  <!--/.Navbar-->
+  
+  <!--Menu-Navbar -->
+  <nav
+    class="
+      menu-navbar
+      navbar navbar-expand-lg navbar-dark
+      primary-color-dark
+      py-md-0
+      text-white
+    "
+  >
+    <a class="navbar-brand d-md-none d-block" style="cursor: pointer">MENU</a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-toggle="collapse"
+      data-target="#navbarSupportedContent-333"
+      aria-controls="navbarSupportedContent-333"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent-333">
+      <ul class="navbar-nav mr-auto align-items-center">
+        <li class="nav-item dropdown" routerLinkActive="active">
+          <a
+            class="nav-link dropdown-toggle"
+            id="navbarDropdownMenuLink-333"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+            style="cursor: pointer"
+            ><i class="fab fa-wpforms"></i> Menu
+          </a>
+
+          <!-- RAVI KAMESHWARI 301 start menu-->
+          <div *ngIf="menu0">
+          <div  class="dropdown-menu dropdown-primary"    aria-labelledby="navbarDropdownMenuLink-333" > 
+            <a
+            class="dropdown-item"
+            routerLink="RegistrationApprovals"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+          >          REGISTARTIONS APPROVAL NEW UPDATES          </a> 
+            <!-- <a  
+            class="dropdown-item"
+            routerLink="comissionerupdate"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+            >Commissioner Update</a>   -->
+          </div>
+        </div>
+
+
+         <!-- others 301 start menu-->
+         <div *ngIf="menu1">
+          <div  class="dropdown-menu dropdown-primary"    aria-labelledby="navbarDropdownMenuLink-333" > 
+            <a
+            class="dropdown-item"
+            routerLink="podetails"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+          >          Purchase Order Details          </a> 
+             
+          </div>
+        </div>
+
+
+
+
+
+
+        </li>
+  
+        
+  
+        
+  
+    <li 
+    class="nav-item"
+    routerLinkActive="active"
+    [routerLinkActiveOptions]="{ exact: true }"
+  >
+    <a *ngIf="mdssshowhide" class="nav-link" routerLink="comissionerupdate" 
+      > Commissioner Update</a
+    >
+  
+  </li>
+      </ul>
+      <ul class="navbar-nav ml-auto nav-flex-icons">
+        <li class="nav-item dropdown" routerLinkActive="active">
+          <a
+            class="nav-link dropdown-toggle d-flex align-items-center"
+            id="navbarDropdownMenuLink-333"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+            style="cursor: pointer"
+          >
+            <h6 class="mb-0 mr-1">
+              Welcome <b>{{ userName }}</b>
+            </h6>
+            <i class="fas fa-user"></i>
+          </a>
+          <div
+            class="dropdown-menu dropdown-menu-right dropdown-primary"
+            aria-labelledby="navbarDropdownMenuLink-333"
+          >
+            <!-- <a class="dropdown-item" href="#" routerLink="">Profile</a> -->
+            <a
+            class="dropdown-item"
+            style="cursor: pointer"
+            (click)="btnForgetPassword()"
+          >
+              <i class="fas fa-key"></i> Forget Password
+            </a>
+            <a class="dropdown-item" style="cursor: pointer" (click)="btnLogout()"
+            ><i class="fas fa-sign-out-alt"></i> Logout</a
+          >
+            <hr class="my-1" />
+            <a class="dropdown-item text-center" style="cursor: pointer">
+              <span
+                >Last logged in: <br />
+                <b class="text-danger">{{ lastLoginTime }}</b></span
+              >
+            </a>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <!--/.Menu-Navbar -->
+  
+  <!--Main Content -->
+  <div id="page-container">
+    <div id="content-wrap">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-11 mx-auto">
+            <router-outlet></router-outlet>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <!--Footer Content -->
+    <footer class="page-footer font-small blue">
+      <!-- Copyright -->
+      <div class="footer-copyright text-center pt-3">
+        <a style="cursor: pointer; color: #fff">
+          <img
+            src="https://apddcf.ap.gov.in/cdn/img/apddcf-circle.png"
+            style="width: 30px"
+          />
+          Andhra Pradesh Dairy Development Cooperative Federation Limited (APDDCF)
+        </a>
+      </div>
+      <!-- Copyright -->
+    </footer>
+    <!--/.Footer-Content -->
+  </div>
+  <!--/.Main-Content -->
+  
+  

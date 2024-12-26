@@ -1,0 +1,453 @@
+<div class="card">
+    <div class="card-header p-2">
+      <h5 class="mb-0"> APPROVED RSK's DETAILS</h5>
+    </div>
+    <div class="card-body">
+      <div class="row">
+         
+            <div class="col-md-12">
+              <button
+                type="button"
+                class="btn btn-sm btn-success pull-right"
+                (click)="btnApprovedExcelDownload()"
+              >
+                <i class="fa fa-file-excel-o mr-2" aria-hidden="true"></i>
+                DOWNLOAD EXCEL
+              </button>
+            </div>
+          
+       
+        <div class=" table-responsive">
+            <table class="table table-striped ah-table text-center tabsdata">
+              <thead class="bg-success text-white table-fixed">
+                <tr >
+                  <th  >S.No.</th>
+                  <th style="font-size: 11px;" >DISTRICT</th>
+                  <th   style="font-size: 11px;">MANDAL NAME</th>
+                  <th style="font-size: 11px;">DIVISION NAME</th>
+                  <th style="font-size: 11px;">RSK NAME</th>
+                  <th style="font-size: 11px;">RSK CODE</th>
+                  <th style="font-size: 11px;"> APPLICATION  DATE</th>
+                    <th style="font-size: 11px;"> RC NO</th>
+                    <th style="font-size: 11px;"> REGISTRATION NO</th>
+                    <th style="font-size: 11px;"> REGISTRATION DATE</th>
+                    
+                  
+                  <th style="font-size: 11px;"> FORM-A</th>
+                  <th style="font-size: 11px;"> SWORN STATEMENT</th>
+                  <th style="font-size: 11px;"> MASUDHA FORM</th>
+                  <th style="font-size: 11px;"> MEETING PROCEEDINGS</th>
+                  <th style="font-size: 11px;"> REQ LETTER ADHOC</th>
+                  <th style="font-size: 11px;"> ECONOMIC VIABILITY</th>
+                  <th style="font-size: 11px;"> BANK REMITTANCE CERTIFICATE</th>
+                  <th style="font-size: 11px;"> FEASIBILITY</th>
+                  <th style="font-size: 11px;"> BYE-LAW</th>
+
+                  <th style="font-size: 11px;"> DLCO APPROVED CERTIFICATE</th>
+                  <th style="font-size: 11px;"> DCO APPROVED CERTIFICATE</th>
+                  <th style="font-size: 11px;"> AR APPROVED CERTIFICATE</th>
+
+                  <th style="font-size: 11px;"> REGISTRATION CERTIFICATE</th>
+                  <th style="font-size: 11px;"> BYE-LAW REGISTRATION</th>
+                  <th style="font-size: 11px;"> PROCEEDINGS ORDERS</th>
+                  <th style="font-size: 11px;"> PROCEEDINGS ADHOC</th>
+               
+                </tr>
+              </thead>
+              <tbody *ngIf="APPROVED_RBKList?.length > 0">
+                <tr *ngFor="let obj of APPROVED_RBKList; let i = index">
+                  <td >{{ i + 1 }}</td>
+                  <td >{{ obj.DISTRICT }}</td>
+                  <td >{{ obj.MANDAL_NAME }}</td>
+                  <td >{{ obj.DIVISION_NAME }}</td>
+                  <td >{{ obj.RBK_NAME }}</td>               
+                                      <td >{{ obj.RBK_CODE }}</td> 
+                                      <td >{{ obj.CREATED_DATE.substring(0,10) }}</td> 
+                      <td >{{ obj.RC_NO }}</td> 
+                      <td >{{ obj.REG_NO }}</td> 
+                      <td >{{ obj.REGISTERED_DATE.substring(0,10) }}</td> 
+                      
+                  <td >
+                  <button style="background-color: cornflowerblue;color: white;"
+                  type="button"
+                  class="btn btn-link btn-sm"
+                  *ngIf="
+                    obj.FORM_A_PDF !== null &&
+                    obj.FORM_A_PDF !== 'NA' &&
+                    obj.FORM_A_PDF !== undefined
+                  "
+                  (click)="btnPdfView(obj.FORM_A_PDF)"
+                >
+                View
+                </button>
+                <span
+                  *ngIf="
+                    obj.FORM_A_PDF === null ||
+                    obj.FORM_A_PDF === 'NA' ||
+                    obj.FORM_A_PDF === undefined
+                  "
+                  >NA</span
+                >
+              </td>
+              <td >
+                <button style="background-color: cornflowerblue;color: white;"
+                type="button"
+                class="btn btn-link btn-sm"
+                *ngIf="
+                  obj.SWORN_STATEMENT_PDF !== null &&
+                  obj.SWORN_STATEMENT_PDF !== 'NA' &&
+                  obj.SWORN_STATEMENT_PDF !== undefined
+                "
+                (click)="btnPdfView(obj.SWORN_STATEMENT_PDF)"
+              >
+              View
+              </button>
+              <span
+                *ngIf="
+                  obj.SWORN_STATEMENT_PDF === null ||
+                  obj.SWORN_STATEMENT_PDF === 'NA' ||
+                  obj.SWORN_STATEMENT_PDF === undefined
+                "
+                >NA</span
+              >
+            </td>
+              <td >
+              <button style="background-color: cornflowerblue;color: white;"
+              type="button"
+              class="btn btn-link btn-sm"
+              *ngIf="
+                obj.MASUDHA_FORM_PDF !== null &&
+                obj.MASUDHA_FORM_PDF !== 'NA' &&
+                obj.MASUDHA_FORM_PDF !== undefined
+              "
+              (click)="btnPdfView(obj.MASUDHA_FORM_PDF)"
+            >
+            View
+            </button>
+            <span
+              *ngIf="
+                obj.MASUDHA_FORM_PDF === null ||
+                obj.MASUDHA_FORM_PDF === 'NA' ||
+                obj.MASUDHA_FORM_PDF === undefined
+              "
+              >NA</span
+            >
+          </td>
+              
+          <td >
+            <button style="background-color: cornflowerblue;color: white;"
+            type="button"
+            class="btn btn-link btn-sm"
+            *ngIf="
+              obj.MEETING_PROCEDINGS_PDF !== null &&
+              obj.MEETING_PROCEDINGS_PDF !== 'NA' &&
+              obj.MEETING_PROCEDINGS_PDF !== undefined
+            "
+            (click)="btnPdfView(obj.MEETING_PROCEDINGS_PDF)"
+          >
+          View
+          </button>
+          <span
+            *ngIf="
+              obj.MEETING_PROCEDINGS_PDF === null ||
+              obj.MEETING_PROCEDINGS_PDF === 'NA' ||
+              obj.MEETING_PROCEDINGS_PDF === undefined
+            "
+            >NA</span
+          >
+        </td> 
+        <td >
+          <button style="background-color: cornflowerblue;color: white;"
+          type="button"
+          class="btn btn-link btn-sm"
+          *ngIf="
+            obj.REQ_LETTER_ADHOCK_COM_PDF !== null &&
+            obj.REQ_LETTER_ADHOCK_COM_PDF !== 'NA' &&
+            obj.REQ_LETTER_ADHOCK_COM_PDF !== undefined
+          "
+          (click)="btnPdfView(obj.REQ_LETTER_ADHOCK_COM_PDF)"
+        >
+        View
+        </button>
+        <span
+          *ngIf="
+            obj.REQ_LETTER_ADHOCK_COM_PDF === null ||
+            obj.REQ_LETTER_ADHOCK_COM_PDF === 'NA' ||
+            obj.REQ_LETTER_ADHOCK_COM_PDF === undefined
+          "
+          >NA</span
+        >
+      </td>  
+      <td >
+        <button style="background-color: cornflowerblue;color: white;"
+        type="button"
+        class="btn btn-link btn-sm"
+        *ngIf="
+          obj.ECONOMIC_VIABILITY_REP_PDF !== null &&
+          obj.ECONOMIC_VIABILITY_REP_PDF !== 'NA' &&
+          obj.ECONOMIC_VIABILITY_REP_PDF !== undefined
+        "
+        (click)="btnPdfView(obj.ECONOMIC_VIABILITY_REP_PDF)"
+      >
+      View
+      </button>
+      <span
+        *ngIf="
+          obj.ECONOMIC_VIABILITY_REP_PDF === null ||
+          obj.ECONOMIC_VIABILITY_REP_PDF === 'NA' ||
+          obj.ECONOMIC_VIABILITY_REP_PDF === undefined
+        "
+        >NA</span
+      >
+    </td>    
+             
+    <td >
+      <button style="background-color: cornflowerblue;color: white;"
+      type="button"
+      class="btn btn-link btn-sm"
+      *ngIf="
+        obj.BANK_REMITTANCE_CERTI_PDF !== null &&
+        obj.BANK_REMITTANCE_CERTI_PDF !== 'NA' &&
+        obj.BANK_REMITTANCE_CERTI_PDF !== undefined
+      "
+      (click)="btnPdfView(obj.BANK_REMITTANCE_CERTI_PDF)"
+    >
+    View
+    </button>
+    <span
+      *ngIf="
+        obj.BANK_REMITTANCE_CERTI_PDF === null ||
+        obj.BANK_REMITTANCE_CERTI_PDF === 'NA' ||
+        obj.BANK_REMITTANCE_CERTI_PDF === undefined
+      "
+      >NA</span
+    >
+  </td>  
+  <td >
+    <button style="background-color: cornflowerblue;color: white;"
+    type="button"
+    class="btn btn-link btn-sm"
+    *ngIf="
+      obj.FESABILITY_REPORT_PDF !== null &&
+      obj.FESABILITY_REPORT_PDF !== 'NA' &&
+      obj.FESABILITY_REPORT_PDF !== undefined
+    "
+    (click)="btnPdfView(obj.FESABILITY_REPORT_PDF)"
+  >
+  View
+  </button>
+  <span
+    *ngIf="
+      obj.FESABILITY_REPORT_PDF === null ||
+      obj.FESABILITY_REPORT_PDF === 'NA' ||
+      obj.FESABILITY_REPORT_PDF === undefined
+    "
+    >NA</span
+  >
+</td>  
+
+<td >
+  <button style="background-color: cornflowerblue;color: white;"
+  type="button"
+  class="btn btn-link btn-sm"
+  *ngIf="
+    obj.BYE_LAW_PDF !== null &&
+    obj.BYE_LAW_PDF !== 'NA' &&
+    obj.BYE_LAW_PDF !== undefined
+  "
+  (click)="btnPdfView(obj.BYE_LAW_PDF)"
+>
+View
+</button>
+<span
+  *ngIf="
+    obj.BYE_LAW_PDF === null ||
+    obj.BYE_LAW_PDF === 'NA' ||
+    obj.BYE_LAW_PDF === undefined
+  "
+  >NA</span
+>
+</td>  
+
+<td >
+  <button style="background-color: cornflowerblue;color: white;"
+  type="button"
+  class="btn btn-link btn-sm"
+  *ngIf="
+    obj.DLCO_CERT !== null &&
+    obj.DLCO_CERT !== 'NA' && 
+    obj.DLCO_CERT !== '0' &&
+    obj.DLCO_CERT !== undefined
+  "
+  (click)="btnPdfesign(obj.DLCO_CERT)"
+>
+View
+</button>
+<span
+  *ngIf="
+    obj.DLCO_CERT === null ||
+    obj.DLCO_CERT === 'NA' || obj.DLCO_CERT === '0' ||
+    obj.DLCO_CERT === undefined
+  "
+  >NA</span
+>
+</td>  
+
+<td >
+  <button style="background-color: cornflowerblue;color: white;"
+  type="button"
+  class="btn btn-link btn-sm"
+  *ngIf="
+    obj.DCO_CERT !== null &&
+    obj.DCO_CERT !== 'NA' &&
+    obj.DCO_CERT !== undefined &&
+    obj.DCO_CERT !== '0'
+  "
+  (click)="btnPdfesign(obj.DCO_CERT)"
+>
+View
+</button>
+<span
+  *ngIf="
+    obj.DCO_CERT === null ||
+    obj.DCO_CERT === 'NA' ||
+    obj.DCO_CERT === undefined ||
+    obj.DCO_CERT === '0'
+  "
+  >NA</span
+>
+</td>  
+
+<td >
+  <button style="background-color: cornflowerblue;color: white;"
+  type="button"
+  class="btn btn-link btn-sm"
+  *ngIf="
+    obj.GM_CERT !== null &&
+    obj.GM_CERT !== 'NA' &&
+    obj.GM_CERT !== undefined &&
+    obj.GM_CERT !== '0'
+  "
+  (click)="btnPdfesign(obj.GM_CERT)"
+>
+View
+</button>
+<span
+  *ngIf="
+    obj.GM_CERT === null ||
+    obj.GM_CERT === 'NA' ||
+    obj.GM_CERT === undefined ||
+    obj.GM_CERT === '0'
+  "
+  >NA</span
+>
+</td> 
+
+
+            <td >
+              <button style="background-color: cornflowerblue;color: white;"
+              type="button"
+              class="btn btn-link btn-sm"
+              *ngIf="
+                obj.COMM_REG_CERT !== null &&
+                obj.COMM_REG_CERT !== 'NA' &&
+                obj.COMM_REG_CERT !== undefined && obj.COMM_REG_CERT !=='0'
+              "
+              (click)="btnPdfesign(obj.COMM_REG_CERT)"
+              
+
+            >
+            View
+            </button>
+            <span
+              *ngIf="
+                obj.COMM_REG_CERT === null ||
+                obj.COMM_REG_CERT === 'NA' ||
+                obj.COMM_REG_CERT === undefined || obj.COMM_REG_CERT ==='0'
+              "
+              >NA</span
+            >
+          </td>  
+
+          <td >
+            <button style="background-color: cornflowerblue;color: white;"
+            type="button"
+            class="btn btn-link btn-sm"
+            *ngIf="
+              obj.COMM_BYLAW_CERT !== null &&
+              obj.COMM_BYLAW_CERT !== 'NA' &&
+              obj.COMM_BYLAW_CERT !== undefined && obj.COMM_BYLAW_CERT !== '0'
+            "
+            (click)="btnPdfGeneratebylaw(obj.COMM_BYLAW_CERT+','+obj.RBK_CODE+','+obj.DIST_CODE);"
+          >
+          View
+          </button>
+          <span
+            *ngIf="
+              obj.COMM_BYLAW_CERT === null ||
+              obj.COMM_BYLAW_CERT === 'NA' ||
+              obj.COMM_BYLAW_CERT === undefined || obj.COMM_BYLAW_CERT === '0'
+            "
+            >NA</span
+          >
+        </td>
+
+        <td >
+          <button style="background-color: cornflowerblue;color: white;"
+          type="button"
+          class="btn btn-link btn-sm"
+          *ngIf="
+            obj.COMM_PROC_CERT !== null &&
+            obj.COMM_PROC_CERT !== 'NA' &&
+            obj.COMM_PROC_CERT !== undefined && obj.COMM_PROC_CERT !=='0'
+          "
+          (click)="btnPdfGenerateProcedings(obj.COMM_PROC_CERT+','+obj.RBK_CODE+','+obj.DIST_CODE)"
+        >
+        View
+        </button>
+        <span
+          *ngIf="
+            obj.COMM_PROC_CERT === null ||
+            obj.COMM_PROC_CERT === 'NA' ||
+            obj.COMM_PROC_CERT === undefined || obj.COMM_PROC_CERT === '0'
+          "
+          >NA</span
+        >
+      </td>  
+
+      <td >
+        <button style="background-color: cornflowerblue;color: white;"
+        type="button"
+        class="btn btn-link btn-sm"
+        *ngIf="
+          obj.COMM_ADHOC_CERT !== null &&
+          obj.COMM_ADHOC_CERT !== 'NA' &&
+          obj.COMM_ADHOC_CERT !== undefined && obj.COMM_ADHOC_CERT !== '0'
+        "
+        (click)="btnPdfGenerateadhok(obj.COMM_ADHOC_CERT+','+obj.RBK_CODE+','+obj.DIST_CODE)"
+      >
+      View
+      </button>
+      <span
+        *ngIf="
+          obj.COMM_ADHOC_CERT === null ||
+          obj.COMM_ADHOC_CERT === 'NA' ||
+          obj.COMM_ADHOC_CERT === undefined ||  obj.COMM_ADHOC_CERT === '0'
+        "
+        >NA</span
+      > 
+      </td>  
+
+    
+
+
+
+   
+
+                </tr>
+              </tbody>
+            </table>
+        
+          </div>
+      </div>
+ </div>

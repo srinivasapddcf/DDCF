@@ -1,0 +1,755 @@
+
+<div class="row">
+
+    
+    <div class="col mb-2">
+      <div
+        class="stats-card pending"
+        (click)="btnDashboardDetails('1')"
+        [ngClass]="reportType === '1' ? 'active' : ''"
+      >   
+        <div class="overlay"></div>
+  
+        <div class="card-body">
+          <div class="d-flex justify-content-between">
+            <div class="stats-text">
+              <p class="text-uppercase text-muted mb-1"><small>ROLLBACK</small></p>
+            
+            </div>
+            <div class="circle">
+              <i class="fas fa-hourglass-half"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+  
+  
+    
+    </div>
+  
+  
+  <div id="PENDING"   [(ngModel)]="PENDING">
+  
+  <div class="card">  
+    <div class="card-header p-2" style="
+    background-color: coral;color: white;
+  "> 
+      <div class="row">
+        <div class="col-md-12" style="text-align: center;">
+        <h5 class="mb-0  text-uppercase text-muted mb-1"><span style="color:white;">   DOCUMENTS ROLLBACK LIST</span></h5>
+        </div> 
+    </div>
+    </div>
+  
+    <div class="card-body">
+      <div class="row"> <div class="col-md-4">
+        <div class="form-group"> </div></div>
+       
+        <div class="col-md-2">
+          <div class="form-group"> <span style="text-align:right;">  Select RSK NAME:  </span>
+          </div></div>
+  
+          <div class="col-md-4">
+              <div class="form-group">   
+  
+            <select
+              id="rbkcodes"
+              class="form-control"
+              [(ngModel)]="rbkcodes"
+              (change)="onRbkChange()"
+            >
+              <option value="">-- SELECT RSK --</option>
+              <option value="{{ obj.RBK_ID }}" *ngFor="let obj of rbkList">
+                {{ obj.RBK_NAME }}
+              </option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <hr style="border-color: red;">
+        </div></div>
+      <div *ngIf="submittedMdssDetails.IS_MDSS_DOC_SUBMITTED === '0'">
+        <h5 class="sub-heading pb-0">
+          <label>MDSS DOCUMENTS</label>
+        </h5>
+        <div class="row px-4">
+          <div class="col-md-4">
+            <label>FORM-A DOCUMENT AND OTHER 4 DOCUMENTS : </label>
+            <button
+              type="button"
+              class="btn btn-link btn-sm"
+              (click)="btnViewFormADoc('0')"
+            >
+              VIEW
+            </button>
+          </div>
+  
+          <div class="col-md-4">
+            <label>BYE LAWS DOCUMENT : </label>
+            <button
+              type="button"
+              class="btn btn-link btn-sm"
+              (click)="btnViewByLawsDoc('0')"
+            >
+              VIEW
+            </button>
+          </div>
+  
+          <div class="col-md-4">
+            <label>FEASIBILITY REPORT : </label>
+            <button
+              type="button"
+              class="btn btn-link btn-sm"
+              (click)="btnViewFeasibility('0')"
+            >
+              VIEW
+            </button>
+          </div>
+  
+          <div class="col-md-4">
+            <label>MASUDHA FORM : </label>
+            <button
+              type="button"
+              class="btn btn-link btn-sm"
+              (click)="btnViewMasudhaForm('0')"
+            >
+              VIEW
+            </button>
+          </div>
+  
+          <div class="col-md-4">
+            <label>BANK REMITTANCE FORM : </label>
+            <button
+              type="button"
+              class="btn btn-link btn-sm"
+              (click)="btnDocumentDownload(bankRemittanceFormUrl)"
+            >
+              VIEW
+            </button>
+          </div>
+        </div>
+  
+        <h5 class="sub-heading pb-0">
+          <label>MDSS DOCUMENTS UPLOAD</label>
+        </h5>
+  
+        <div class="row px-4">
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="formASignedCopyUpload"
+                >FORM-A SIGNED DOCUMENT UPLOAD :
+                <span style="color: red"
+                  >* <small class="text-danger"> (PDF,Max 1MB) </small></span
+                >
+              </label>
+              <input
+                type="file"
+                class="form-control p-0"
+                id="formASignedCopyUpload"
+                (change)="onFormASignedCopyChange($event)"
+                accept="application/pdf"
+                #formASignedCopyUpload
+                autocomplete="off"
+              />
+            </div>
+          </div>
+  
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="swornStatementUpload"
+                >SWORN STATEMENT OF 11 INDIVIDUALS DOCUMENT UPLOAD :
+                <span style="color: red"
+                  >* <small class="text-danger"> (PDF,Max 1MB) </small></span
+                >
+              </label>
+              <input
+                type="file"
+                class="form-control p-0"
+                id="swornStatementUpload"
+                (change)="onSwornStatementChange($event)"
+                accept="application/pdf"
+                #swornStatementUpload
+                autocomplete="off"
+              />
+            </div>
+          </div>
+  
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="masudhaFormUpload"
+                >MASUDHA FORM UPLOAD :
+                <span style="color: red"
+                  >* <small class="text-danger"> (PDF,Max 1MB) </small></span
+                >
+              </label>
+              <input
+                type="file"
+                class="form-control p-0"
+                id="masudhaFormUpload"
+                (change)="onMasudhaFormChange($event)"
+                accept="application/pdf"
+                #masudhaFormUpload
+                autocomplete="off"
+              />
+            </div>
+          </div>
+  
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="meetingProceedingsUpload"
+                >MEETING PROCEEDINGS DOCUMENT UPLOAD :
+                <span style="color: red"
+                  >* <small class="text-danger"> (PDF,Max 1MB) </small></span
+                >
+              </label>
+              <input
+                type="file"
+                class="form-control p-0"
+                id="meetingProceedingsUpload"
+                (change)="onMeetingProceedingsChange($event)"
+                accept="application/pdf"
+                #meetingProceedingsUpload
+                autocomplete="off"
+              />
+            </div>
+          </div>
+  
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="adhocCommitteeUpload"
+                >REQUEST LETTER FOR ADHOC COMMITTEE DOCUMENT UPLOAD :
+                <span style="color: red"
+                  >* <small class="text-danger"> (PDF,Max 1MB) </small></span
+                >
+              </label>
+              <input
+                type="file"
+                class="form-control p-0"
+                id="adhocCommitteeUpload"
+                (change)="onAdhocCommitteeChange($event)"
+                accept="application/pdf"
+                #adhocCommitteeUpload
+                autocomplete="off"
+              />
+            </div>
+          </div>
+  
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="viabilityReportUpload"
+                >ECONOMIC VIABILITY REPORT UPLOAD :
+                <span style="color: red"
+                  >* <small class="text-danger"> (PDF,Max 1MB) </small></span
+                >
+              </label>
+              <input
+                type="file"
+                class="form-control p-0"
+                id="viabilityReportUpload"
+                (change)="onViabilityReportChange($event)"
+                accept="application/pdf"
+                #viabilityReportUpload
+                autocomplete="off"
+              />
+            </div>
+          </div>
+  
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="bankRemittanceUpload"
+                >BANK REMITTANCE CERTIFICATE UPLOAD :
+                <span style="color: red">
+                  <small class="text-danger"> (PDF,Max 1MB) </small>*</span
+                >
+              </label>
+              <input
+                type="file"
+                class="form-control p-0"
+                id="bankRemittanceUpload"
+                (change)="onBankRemittanceChange($event)"
+                accept="application/pdf"
+                #bankRemittanceUpload
+                autocomplete="off"
+              />
+            </div>
+          </div>
+  
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="byLawsUpload"
+                >BYE LAWS DOCUMENT UPLOAD :
+                <span style="color: red"
+                  >* <small class="text-danger"> (PDF,Max 1MB) </small></span
+                >
+              </label>
+              <input
+                type="file"
+                class="form-control p-0"
+                id="byLawsUpload"
+                (change)="onByeLawsChange($event)"
+                accept="application/pdf"
+                #byLawsUpload
+                autocomplete="off"
+              />
+            </div>
+          </div>
+  
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="feasibilityReportUpload"
+                >FEASIBILITY REPORT UPLOAD :
+                <span style="color: red"
+                  >* <small class="text-danger"> (PDF,Max 1MB) </small></span
+                >
+              </label>
+              <input
+                type="file"
+                class="form-control p-0"
+                id="feasibilityReportUpload"
+                (change)="onFeasibilityReportChange($event)"
+                accept="application/pdf"
+                #feasibilityReportUpload
+                autocomplete="off"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <div *ngIf="submittedMdssDetails.IS_MDSS_BANK_SUBMITTED === '0'">
+        <h5 class="sub-heading pb-0">
+          <label>BANK DETAILS</label>
+        </h5>
+        <div class="row px-4">
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="accountNo">BANK ACCOUNT NUMBER : </label>
+              <span class="text-success">
+                <b> {{ mdssDetailsReq.accountNo }}</b>
+              </span>
+            </div>
+          </div>
+  
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>IFSC CODE : </label>
+              <span class="text-success">
+                <b> {{ mdssDetailsReq.ifscCode }}</b>
+              </span>
+            </div>
+          </div>
+  
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="bankName">BANK NAME : </label>
+              <span class="text-success">
+                <b> {{ mdssDetailsReq.bankName }}</b>
+              </span>
+            </div>
+          </div>
+  
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="branchName">BRANCH NAME : </label>
+              <span class="text-success">
+                <b> {{ mdssDetailsReq.branchName }}</b>
+              </span>
+            </div>
+          </div>
+  
+          <div class="col-md-4" *ngIf="mdssDetailsReq.pinCodeAvailable">
+            <div class="form-group">
+              <label for="bankPinCode">BANK PINCODE : </label>
+              <span class="text-success">
+                <b> {{ mdssDetailsReq.pinCode }}</b>
+              </span>
+            </div>
+          </div>
+  
+          <div class="col-md-4" *ngIf="!mdssDetailsReq.pinCodeAvailable">
+            <div class="form-group">
+              <label for="bankPinCode"
+                >BANK PINCODE : <span style="color: red">*</span></label
+              >
+              <input
+                id="pinCode"
+                type="text"
+                class="form-control"
+                [(ngModel)]="mdssDetailsReq.pinCode"
+                placeholder="Please Enter Bank Pincode"
+                maxlength="6"
+                autocomplete="off"
+                NumbersOnly
+                [allowDecimals]="false"
+                [allowSign]="false"
+              />
+            </div>
+          </div>
+  
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="bankPassBookUpload">PASSBOOK FRONT PAGE PHOTO : </label>
+              <img
+                [src]="'data:image/jpeg;base64,' + mdacPassBookImg"
+                style="cursor: pointer"
+                class="img-thumbnail mr-3"
+                (click)="btnImage(mdacPassBookImg)"
+              />
+            </div>
+          </div>
+  
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="bankAccountName"
+                >BANK ACCOUNT NAME : <span style="color: red">*</span></label
+              >
+              <input
+                id="bankAccountName"
+                type="text"
+                class="form-control"
+                [(ngModel)]="mdssDetailsReq.bankAccountName"
+                placeholder="Please Enter Bank Account Name"
+                maxlength="50"
+                autocomplete="off"
+              />
+            </div>
+          </div>
+  
+          <div class="col-md-12" align="center">
+            <button
+              type="button"
+              class="btn btn-success btn-sm"
+              (click)="btnSubmit()"
+            >
+              SAVE
+            </button>
+          </div>
+        </div>
+      </div>
+  
+      <div *ngIf="submittedMdssDetails.IS_MDSS_DOC_SUBMITTED === '1'">
+        <h5 class="sub-heading pb-0">
+          <label>DOCUMENTS</label>
+        </h5>
+        <div class="row px-4">
+          <div class="col-md-4" *ngIf="submittedMdssDetails.FORM_A_PDF !== null">
+            <label>FORM-A SIGNED COPY PDF :</label>
+            <button
+              type="button"
+              class="btn btn-link btn-sm"
+              (click)="btnPdf(formAViewPdf)"
+            >
+              VIEW
+            </button>
+          </div>
+          <div class="col-md-4" *ngIf="submittedMdssDetails.FORM_A_PDF === ''">
+            <label>FORM-A SIGNED COPY PDF :</label>
+            <span class="text-danger">NA</span>
+          </div>
+  
+          <div
+            class="col-md-4"
+            *ngIf="submittedMdssDetails.SWORN_STATEMENT_PDF !== null"
+          >
+            <label>SWORN STATEMENTS OF 11 INDIVIDUALS PDF :</label>
+            <button
+              type="button"
+              class="btn btn-link btn-sm"
+              (click)="btnPdf(swornStatementViewPdf)"
+            >
+              VIEW
+            </button>
+          </div>
+          <div
+            class="col-md-4"
+            *ngIf="submittedMdssDetails.SWORN_STATEMENT_PDF === ''"
+          >
+            <label>SWORN STATEMENTS OF 11 INDIVIDUALS PDF :</label>
+            <span class="text-danger">NA</span>
+          </div>
+  
+          <div
+            class="col-md-4"
+            *ngIf="submittedMdssDetails.MASUDHA_FORM_PDF !== null"
+          >
+            <label>MASUDHA FORM PDF :</label>
+            <button
+              type="button"
+              class="btn btn-link btn-sm"
+              (click)="btnPdf(masudhaFormViewPdf)"
+            >
+              VIEW
+            </button>
+          </div>
+          <div
+            class="col-md-4"
+            *ngIf="submittedMdssDetails.MASUDHA_FORM_PDF === ''"
+          >
+            <label>MASUDHA FORM PDF :</label>
+            <span class="text-danger">NA</span>
+          </div>
+  
+          <div
+            class="col-md-4"
+            *ngIf="submittedMdssDetails.MEETING_PROCEDINGS_PDF !== null"
+          >
+            <label>MEETING PROCEEDINGS FORM PDF :</label>
+            <button
+              type="button"
+              class="btn btn-link btn-sm"
+              (click)="btnPdf(meetingProceedingsViewPdf)"
+            >
+              VIEW
+            </button>
+          </div>
+          <div
+            class="col-md-4"
+            *ngIf="submittedMdssDetails.MEETING_PROCEDINGS_PDF === ''"
+          >
+            <label>MEETING PROCEEDINGS FORM PDF :</label>
+            <span class="text-danger">NA</span>
+          </div>
+  
+          <div
+            class="col-md-4"
+            *ngIf="submittedMdssDetails.REQ_LETTER_ADHOCK_COM_PDF !== null"
+          >
+            <label>REQUEST LETTER FOR ADHOC COMMITTEE PDF :</label>
+            <button
+              type="button"
+              class="btn btn-link btn-sm"
+              (click)="btnPdf(adhocCommitteeViewPdf)"
+            >
+              VIEW
+            </button>
+          </div>
+          <div
+            class="col-md-4"
+            *ngIf="submittedMdssDetails.REQ_LETTER_ADHOCK_COM_PDF === ''"
+          >
+            <label>REQUEST LETTER FOR ADHOC COMMITTEE PDF :</label>
+            <span class="text-danger">NA</span>
+          </div>
+  
+          <div
+            class="col-md-4"
+            *ngIf="submittedMdssDetails.ECONOMIC_VIABILITY_REP_PDF !== null"
+          >
+            <label>ECONOMIC VIABILITY REPORT PDF :</label>
+            <button
+              type="button"
+              class="btn btn-link btn-sm"
+              (click)="btnPdf(viabilityReportViewPdf)"
+            >
+              VIEW
+            </button>
+          </div>
+          <div
+            class="col-md-4"
+            *ngIf="submittedMdssDetails.ECONOMIC_VIABILITY_REP_PDF === ''"
+          >
+            <label>ECONOMIC VIABILITY REPORT PDF :</label>
+            <span class="text-danger">NA</span>
+          </div>
+  
+          <div
+            class="col-md-4"
+            *ngIf="submittedMdssDetails.BANK_REMITTANCE_CERTI_PDF !== null"
+          >
+            <label>BANK REMITTANCE CERTIFICATE PDF :</label>
+            <button
+              type="button"
+              class="btn btn-link btn-sm"
+              (click)="btnPdf(bankRemittanceViewPdf)"
+            >
+              VIEW
+            </button>
+          </div>
+          <div
+            class="col-md-4"
+            *ngIf="submittedMdssDetails.BANK_REMITTANCE_CERTI_PDF === ''"
+          >
+            <label>BANK REMITTANCE CERTIFICATE PDF :</label>
+            <span class="text-danger">NA</span>
+          </div>
+  
+          <div class="col-md-4" *ngIf="submittedMdssDetails.BYE_LAW_PDF !== null">
+            <label>BYE LAWS PDF :</label>
+            <button
+              type="button"
+              class="btn btn-link btn-sm"
+              (click)="btnPdf(byeLawsViewPdf)"
+            >
+              VIEW
+            </button>
+          </div>
+          <div class="col-md-4" *ngIf="submittedMdssDetails.BYE_LAW_PDF === ''">
+            <label>BYE LAWS PDF :</label>
+            <span class="text-danger">NA</span>
+          </div>
+  
+          <div
+            class="col-md-4"
+            *ngIf="submittedMdssDetails.FESABILITY_REPORT_PDF !== null"
+          >
+            <label>FEASIBILITY REPORT PDF :</label>
+            <button
+              type="button"
+              class="btn btn-link btn-sm"
+              (click)="btnPdf(feasibilityReportViewPdf)"
+            >
+              VIEW
+            </button>
+          </div>
+          <div
+            class="col-md-4"
+            *ngIf="submittedMdssDetails.FESABILITY_REPORT_PDF === ''"
+          >
+            <label>FEASIBILITY REPORT PDF :</label>
+            <span class="text-danger">NA</span>
+          </div>
+        </div>
+      </div>
+  
+      <div *ngIf="submittedMdssDetails.IS_MDSS_BANK_SUBMITTED === '1'">
+        <h5 class="sub-heading pb-0">
+          <label>BANK DETAILS</label>
+        </h5>
+        <div class="row px-4">
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>
+                MDSS NAME :
+                <span class="text-success">
+                  <b>{{ submittedMdssDetails.MDSS_NAME }}</b>
+                </span>
+              </label>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>
+                MDSS CODE :
+                <span class="text-success">
+                  <b>{{ submittedMdssDetails.MDSS_CODE }}</b>
+                </span>
+              </label>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>
+                BANK :
+                <span class="text-success">
+                  <b>{{ submittedMdssDetails.BANK_NAME }}</b>
+                </span>
+              </label>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>
+                BRANCH :
+                <span class="text-success">
+                  <b>{{ submittedMdssDetails.BRANCH }}</b>
+                </span>
+              </label>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>
+                ACCOUNT NO :
+                <span class="text-success">
+                  <b>{{ submittedMdssDetails.ACCOUNT_NUMBER }}</b>
+                </span>
+              </label>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>
+                ACCOUNT NAME :
+                <span class="text-success">
+                  <b>{{ submittedMdssDetails.BANK_ACC_NAME }}</b>
+                </span>
+              </label>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>
+                IFSC CODE :
+                <span class="text-success">
+                  <b>{{ submittedMdssDetails.IFSC_CODE }}</b>
+                </span>
+              </label>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>
+                PINCODE :
+                <span class="text-success">
+                  <b>{{ submittedMdssDetails.PINCODE }}</b>
+                </span>
+              </label>
+            </div>
+          </div>
+          <div
+            class="col-md-4"
+            *ngIf="submittedMdssDetails.BANK_PASSBOOK_IMAGE !== null"
+          >
+            <label>BANK PASSBOOK IMAGE : </label>
+            <img
+              [src]="'data:image/jpeg;base64,' + passBookImg"
+              style="cursor: pointer"
+              class="img-thumbnail mr-3"
+              (click)="btnImage(passBookImg)"
+            />
+          </div>
+  
+          <div class="col-md-12" align="center">
+            <button
+              type="button"
+              class="btn btn-success btn-sm"
+              (click)="btnEDITSubmit()"
+            >
+           
+              EDIT
+            </button>
+            <button
+            type="button"
+            class="btn btn-success btn-sm"
+            (click)="btnSUBMITTODLCO()"
+          >
+         
+            SUBMIT TO DLCO
+          </button>
+          </div>
+  
+        </div>
+      </div>
+  
+      <div class="row p-3" *ngIf="noDataMessage !== ''">
+        <div class="col-md-12">
+          <h5 class="text-center text-danger">{{ noDataMessage }}</h5>
+        </div>
+      </div>
+    </div>
+  
+  </div>
+  </div>
+  
+  <div id="APPROVED"   [(ngModel)]="APPROVED" >
+    
+  </div> 
+  
+  <div id="REJECTED"   [(ngModel)]="REJECTED"> 
+    
+  </div>
+   

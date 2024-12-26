@@ -1,0 +1,721 @@
+<div class="card">
+  <div class="card-header p-2">
+    <h5 class="mb-0">MDSS REGISTRATION</h5>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-3">
+        <div class="form-group">
+          <label for="rbkId"><b>RSK </b><span style="color: red">*</span></label>
+          <select
+            id="rbkId"
+            class="form-control"
+            [(ngModel)]="promotorDetailsReq.rbkId"
+            (change)="onRbkChange()"
+          >
+            <option value="">-- SELECT RSK --</option>
+            <option value="{{ obj.RBK_ID }}" *ngFor="let obj of rbkList">
+              {{ obj.RBK_NAME }}
+            </option>
+          </select>
+        </div>
+      </div>
+      <div class="col-md-9" *ngIf="promotorDetailsReq.mdssName !== ''">
+        <div class="form-group pt-4 mt-2">
+          <label for="mdssName"><b>MDSS NAME :</b></label>
+          <span class="text-success">
+            <b> {{ promotorDetailsReq.mdssName }}</b>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <h5
+      class="sub-heading pb-0"
+      [hidden]="promotorDetailsReq.promotors?.length < 1"
+    >
+      <label>PROMOTERS DETAILS</label>
+    </h5>
+
+    <div class="row px-4">
+      <div
+        class="col-md-12 table-responsive"
+        [hidden]="promotorDetailsReq.promotors?.length < 1"
+      >
+        <table
+          id="promotersList"
+          class="table table-striped ah-table text-center"
+          datatable
+          [dtOptions]="dtOptions"
+          [dtTrigger]="dtTrigger1"
+        >
+          <thead class="bg-success text-white">
+            <tr>
+              <th>S.No.</th>
+              <th>PROMOTER NAME</th>
+              <th>DATE OF BIRTH</th>
+              <th>AADHAAR NUMBER</th>
+              <th>MOBILE NUMBER</th>
+              <th>FATHER/HUSBAND NAME</th>
+              <th>ADDRESS</th>
+              <th>COMMUNITY</th>
+              <th>OCCUPATION</th>
+              <th>NO. OF SHARES</th>
+              <th>AMOUNT</th>
+              <th>ENTRANCE FEE</th>
+              <th>PHOTO</th>
+              <!-- <th>SIGNATURE</th> -->
+              <th>ID PROOF</th>
+              <th>Delete</th>
+            </tr>
+          </thead>
+          <tbody *ngIf="promotorDetailsReq.promotors?.length > 0">
+            <tr *ngFor="let obj of promotorDetailsReq.promotors; let i = index">
+              <td>{{ i + 1 }}</td>
+              <td>
+                <b>{{ obj.promoterName }}</b>
+              </td>
+              <td>{{ obj.dob }}</td>
+              <td>XXXX-XXXX-{{ obj.aadharNo | slice: -4 }}</td>
+              <td>{{ obj.mobileNo }}</td>
+              <td>{{ obj.relation }} {{ obj.fatherOrHusbandName }}</td>
+              <td>{{ obj.address }}</td>
+              <td>{{ obj.caste }}</td>
+              <td>{{ obj.occupation }}</td>
+              <td>{{ obj.sharesCount }}</td>
+              <td>{{ obj.sharesAmount }}</td>
+              <td>{{ obj.entryFee }}</td>
+              <td>
+                <button
+                  type="button"
+                  class="btn btn-link btn-sm"
+                  *ngIf="
+                    obj.imagePath !== null &&
+                    obj.imagePath !== '' &&
+                    obj.imagePath !== undefined
+                  "
+                  (click)="btnPhotoView(obj.imagePath)"
+                >
+                  VIEW
+                </button>
+                <span
+                  *ngIf="
+                    obj.imagePath === null ||
+                    obj.imagePath === '' ||
+                    obj.imagePath === undefined
+                  "
+                  >NA</span
+                >
+              </td>
+              <!-- <td>
+                <button
+                  type="button"
+                  class="btn btn-link btn-sm"
+                  *ngIf="
+                    obj.signaturePath !== null &&
+                    obj.signaturePath !== '' &&
+                    obj.signaturePath !== undefined
+                  "
+                  (click)="btnPhotoView(obj.signaturePath)"
+                >
+                  VIEW
+                </button>
+                <span
+                  *ngIf="
+                    obj.signaturePath === null ||
+                    obj.signaturePath === '' ||
+                    obj.signaturePath === undefined
+                  "
+                  >NA</span
+                >
+              </td> -->
+              <td>
+                <button
+                  type="button"
+                  class="btn btn-link btn-sm"
+                  *ngIf="
+                    obj.idProofPath !== null &&
+                    obj.idProofPath !== '' &&
+                    obj.idProofPath !== undefined
+                  "
+                  (click)="btnPhotoView(obj.idProofPath)"
+                >
+                  VIEW
+                </button>
+                <span
+                  *ngIf="
+                    obj.idProofPath === null ||
+                    obj.idProofPath === '' ||
+                    obj.idProofPath === undefined
+                  "
+                  >NA</span
+                >
+              </td>
+              <td>
+                <a
+                  class="btn btn-danger"
+                  style="cursor: pointer"
+                  (click)="btnRemovePromoter(i)"
+                >
+                  <i class="fa fa-trash fa-lg"></i
+                ></a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div
+        class="col-md-12"
+        align="center"
+        [hidden]="
+          promotorDetailsReq.promotors?.length >= 10 ||
+          promotorDetailsReq.rbkId == '' ||
+          submittedPromotersList?.length > 1
+        "
+      >
+        <button
+          type="button"
+          class="btn btn-success btn-sm"
+          (click)="btnshowPromotorsPopup()"
+        >
+          Add Promoters
+        </button>
+      </div>
+    </div>
+    <!-- !== 11 -->
+
+    <div [hidden]="promotorDetailsReq.promotors?.length <10">
+      <h5 class="sub-heading pb-0">
+        <label>CHIEF PROMOTER</label>
+      </h5>
+
+      <div class="row p-3">
+        <div class="col-md-4">
+          <label> Chief Promoter <span style="color: red">*</span>: </label>
+        </div>
+
+        <div class="col-md-4">
+          <select
+            id="chiefPromoterId"
+            class="form-control"
+            [(ngModel)]="chiefPromoterId"
+            (change)="onChiefPromoterChange()"
+          >
+            <option value="">-- SELECT FARMER --</option>
+            <option
+              value="{{ obj.farmerId }}"
+              *ngFor="let obj of promotersTemp"
+            >
+              {{ obj.promoterName }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <h5 class="sub-heading pb-0">
+        <label>ADHOC COMMITTEE</label>
+      </h5>
+
+      <div class="row p-3">
+        <div class="col-md-4">
+          <label for="farmerId">
+            Farmer <span style="color: red">*</span>:
+          </label>
+          <select
+            id="farmerId"
+            class="form-control"
+            [(ngModel)]="adHocMemberReq.farmerId"
+          >
+            <option value="">-- SELECT FARMER --</option>
+            <ng-container *ngFor="let obj of promotersTemp">
+              <option *ngIf="!obj.isAssigned" value="{{ obj.farmerId }}">
+                {{ obj.promoterName }}
+              </option>
+            </ng-container>
+          </select>
+        </div>
+
+        <div class="col-md-4">
+          <label for="designation">
+            Designation <span style="color: red">*</span>:
+          </label>
+          <select
+            id="designation"
+            class="form-control"
+            [(ngModel)]="adHocMemberReq.designation"
+          >
+            <option value="">-- SELECT DESIGNATION --</option>
+            <ng-container *ngFor="let obj of designationList">
+              <option *ngIf="!obj.isAssigned" value="{{ obj.NAME }}">
+                {{ obj.NAME }}
+              </option>
+            </ng-container>
+          </select>
+        </div>
+
+        <div class="col-md-4 pt-4 mt-1">
+          <button
+            type="button"
+            class="btn btn-success"
+            (click)="onAdHocSubmit()"
+          >
+            ADD
+          </button>
+        </div>
+
+        <div
+          class="col-md-12 table-responsive pt-4"
+          [hidden]="!adHocMemberReq.isCompleted"
+        >
+          <table
+            id="promotersAdhocList"
+            class="table table-striped ah-table text-center"
+          >
+            <thead class="bg-success text-white">
+              <tr>
+                <th>PROMOTER NAME</th>
+                <th>DESIGNATION</th>
+              </tr>
+            </thead>
+            <tbody>
+              <ng-container
+                *ngFor="let obj of promotorDetailsReq.promotors; let i = index"
+              >
+                <tr *ngIf="obj.adhockDesignation !== ''">
+                  <td>
+                    <b>{{ obj.promoterName }}</b>
+                  </td>
+                  <td>{{ obj.adhockDesignation }}</td>
+                </tr>
+              </ng-container>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="col-md-12" align="center">
+        <button
+          type="button"
+          class="btn btn-success btn-sm"
+          (click)="btnSubmit()"
+        >
+          Submit
+        </button>
+      </div>
+    </div>
+
+    <h5 class="sub-heading pb-0" [hidden]="submittedPromotersList?.length < 1">
+      <label>PROMOTERS DETAILS</label>
+    </h5>
+
+    <div class="row px-4">
+      <div
+        class="col-md-12 table-responsive"
+        [hidden]="submittedPromotersList?.length < 1"
+      >
+        <table
+          id="submittedPromoters"
+          class="table table-striped ah-table text-center"
+          datatable
+          [dtOptions]="dtOptions"
+          [dtTrigger]="dtTrigger2"
+        >
+          <thead class="bg-success text-white">
+            <tr>
+              <th>S.No.</th>
+              <th>PROMOTER NAME</th>
+              <th>PROMOTER ID</th>
+              <th>ADHOC DESIGNATION</th>
+              <th>CHIEF PROMOTER</th>
+              <th>Age</th>
+              <th>FARMER ID</th>
+              <th>AADHAAR NUMBER</th>
+              <th>FATHER/HUSBAND/ MOTHER NAME</th>
+              <th>ADDRESS</th>
+              <th>COMMUNITY</th>
+              <th>OCCUPATION</th>
+              <th>NO. OF SHARES</th>
+              <th>AMOUNT</th>
+              <th>ENTRANCE FEE</th>
+            </tr>
+          </thead>
+          <tbody *ngIf="submittedPromotersList?.length > 0">
+            <tr *ngFor="let obj of submittedPromotersList; let i = index">
+              <td>{{ i + 1 }}</td>
+              <td>
+                <b>{{ obj.NAME }}</b>
+              </td>
+
+              <td>{{ obj.PROMOTER_CODE }}</td>
+              <td>
+                <span
+                  *ngIf="obj.ADHOCK_DESIGNATION !== null"
+                  class="text-success"
+                >
+                  {{ obj.ADHOCK_DESIGNATION }}</span
+                >
+                <span
+                  *ngIf="obj.ADHOCK_DESIGNATION === null"
+                  class="text-danger"
+                >
+                  NA</span
+                >
+              </td>
+              <td>
+                <span *ngIf="obj.CHEIF_PROMOTER === '1'" class="text-success">
+                  YES
+                </span>
+                <span *ngIf="obj.CHEIF_PROMOTER === null" class="text-danger">
+                  NO
+                </span>
+              </td>
+              <td>{{ obj.DOB_DT | number:'1.0-0' }}</td>
+              <td>{{ obj.FARMER_CODE }}</td>
+              <td>XXXX-XXXX-{{ obj.UID_NUM | slice: -4 }}</td>
+              <td>{{ obj.RELATION }} {{ obj.FATHER_NAME }}</td>
+              <td>{{ obj.ADDRESS }}</td>
+              <td>{{ obj.CASTE }}</td>
+              <td>{{ obj.OCCUPATION }}</td>
+              <td>{{ obj.SHARES_COUNT }}</td>
+              <td>{{ obj.SHARES_AMOUNT }}</td>
+              <td>{{ obj.ENTRY_FEE }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="popup-modal" *ngIf="showPromotorsPopup">
+  <div class="popup-content" style="min-width: 75%">
+    <div class="popup-header">
+      <h4 class="title">ADDITION OF PROMOTER</h4>
+      <a
+        type="button"
+        class="close"
+        (click)="showPromotorsPopup = false"
+        style="cursor: pointer"
+      >
+        <span>×</span>
+      </a>
+    </div>
+
+    <div class="popup-body">
+      <div class="row">
+       
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="farmerId"
+              ><b>SELECT FARMER</b> <span style="color: red">*</span></label
+            >
+            <select
+              id="farmerId"
+              class="form-control"
+              [(ngModel)]="promoterData.farmerId"
+              (change)="onFarmerChange()"
+            >
+              <option value="">-- SELECT FARMER --</option>
+              <!-- <ng-container *ngFor="let obj of farmerList">
+                <option *ngIf="!obj.isAssigned" value="{{ obj.FARMER_CODE }}">
+                  {{ obj.NAME }}
+                </option>
+              </ng-container> -->
+              <option
+                value="{{ obj.FARMER_CODE }}"
+                *ngFor="let obj of farmerList"
+              >
+                {{ obj.NAME }}
+              </option>
+            </select>
+          </div>
+        </div>
+
+        <div class="col-md-4" *ngIf="promoterData.aadharNo !== ''">
+          <div class="form-group">
+            <label><b>AADHAR NO</b></label>
+            <h6 style="color: green">
+              <b>XXXX-XXXX-{{ promoterData.aadharNo | slice: -4 }}</b>
+            </h6>
+          </div>
+        </div>
+
+        <div class="col-md-4" *ngIf="promoterData.mobileNo !== ''">
+          <div class="form-group">
+            <label><b>MOBILE NO</b> </label>
+            <h6 style="color: green">
+              <b>{{ promoterData.mobileNo }}</b>
+            </h6>
+          </div>
+        </div>
+      </div>
+        <div class="row">
+        <div class="col-md-4" *ngIf="promoterData.dobAvailable">
+          <div class="form-group">
+            <label>Date Of Birth </label>
+            <h6 style="color: green">
+              <b>{{ promoterData.dob }}</b>
+            </h6>
+          </div>
+        </div>
+
+        <div class="col-md-4" *ngIf="!promoterData.dobAvailable">
+          <div class="form-group">
+            <label><b>DATE OF BIRTH </b><span style="color: red">*</span></label>
+            <div>
+              <input type="text" placeholder="DD-MM-YYYY" class="form-control" bsDatepicker
+                              [(ngModel)]="promotorDetailsdob"  [maxDate]="dbmaxdate" placement="bottom" container="" [bsConfig]="bsDatepickerConfig">
+  
+              <!-- <app-date-picker
+                [PlaceHolder]="'Please Select Date Of Birth'"
+                [(selectedDate)]="promoterData.dob"
+                [minDate]="minDate"
+                [maxDate]="maxDate"
+              ></app-date-picker> -->
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="form-group">
+            <label><b>RELATIONSHIP</b> <span style="color: red">*</span> </label>
+            <select
+              id="relation"
+              class="form-control"
+              [(ngModel)]="promoterData.relation"
+            >
+              <option value="">-- SELECT RELATIONSHIP --</option>
+              <option value="D/O">D/O</option>
+              <option value="W/O">W/O</option>
+              <option value="Mother">Mother</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="form-group">
+            <label
+              ><b>FATHER / HUSBAND / MOTHER NAME </b><span style="color: red">*</span></label
+            >
+            <input
+              type="text"
+              class="form-control"
+              [(ngModel)]="promoterData.fatherOrHusbandName"
+              placeholder="Please Enter Father/Spouse Name"
+              maxlength="50"
+              onkeydown="return /[a-z, ]/i.test(event.key)"
+              onblur="if (this.value == '') {this.value = '';}"
+              onfocus="if (this.value == '') {this.value = '';}"
+              autocomplete="off"
+            /><!-- onkeydown="return /[a-z]/i.test(event.key)" -->
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="form-group">
+            <label><b>ADDRESS </b><span style="color: red">*</span></label>
+            <textarea
+              type="text"
+              class="form-control"
+              [(ngModel)]="promoterData.address"
+              maxlength="60"
+              placeholder="Please Enter Address"
+              autocomplete="off"
+            ></textarea>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="form-group">
+            <label><b> COMMUNITY</b> <span style="color: red">*</span></label>
+            <select
+              id="caste"
+              class="form-control"
+              [(ngModel)]="promoterData.caste"
+            >
+              <option value="">-- SELECT COMMUNITY --</option>
+              <option value="SC">SC</option>
+              <option value="ST">ST</option>
+              <option value="BC">BC</option>
+              <option value="OC">OC</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="form-group">
+            <label><b>OCCUPATION </b><span style="color: red">*</span></label>
+            <input
+              type="text"
+              class="form-control"
+              [(ngModel)]="promoterData.occupation"
+              placeholder="Please enter occupation"
+              maxlength="50"
+              onkeydown="return /[a-z, ]/i.test(event.key)"
+              onblur="if (this.value == '') {this.value = '';}"
+              onfocus="if (this.value == '') {this.value = '';}"
+              autocomplete="off"
+            />
+          </div>
+        </div>
+
+        <div class="col-md-2">
+          <div class="form-group">
+            <label><b>NO. OF SHARES</b> <span style="color: red">*</span></label>
+
+
+          </div>
+        </div>
+        <div class="col-md-2">
+          <div class="form-group">
+            <input  
+              type="text"
+              class="form-control"
+              [(ngModel)]="promoterData.sharesCount"
+              placeholder="Please enter shares Count"
+              maxlength="4"
+              autocomplete="off"
+              NumbersOnly
+              [allowDecimals]="false"
+              [allowSign]="false"
+              (input)="onSharesChange()"
+            />
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="form-group">
+            <label><b>SHARES AMOUNT</b> <span style="color: red">*</span></label>
+            <span class="text-success">{{ promoterData.sharesAmount }}</span>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="form-group">
+            <label><b>ENTRANCE FEE </b><span style="color: red">*</span></label>
+            <span class="text-success">{{ promoterData.entryFee }}</span>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="imagePath"
+              ><b>PHOTO </b><span style="color: red">*  <small class="text-danger">(jpg & above 40kb below 60kb )</small></span>
+            </label>
+            <input
+              type="file"
+              class="form-control p-0"
+              id="imagePath"
+              (change)="onPromoterImageChange($event)"
+              accept="image/*"
+              autocomplete="off"
+              #promoterImgUpload
+            />
+          </div>
+        </div>
+
+        <div class="col-md-4" style="display:none;">
+          <div class="form-group">
+            <label for="signaturePath"
+              >Signature1 <span style="color: red">* <small class="text-danger">(jpg &  above 40kb below 60kb )</small></span>
+            </label>
+            <input
+              type="file"
+              class="form-control p-0"
+              id="signaturePath"
+              (change)="onSignatureImageChange($event)"
+              accept="image/*"
+              autocomplete="off"
+              #signatureImgUpload
+            />
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="idProof"
+              ><b>ID PROOF</b>
+              <span style="color: red"
+                >*<small class="text-danger">
+                  (Ration/Aadhaar/VoterId) (jpg &  above 40kb below 100kb )
+                </small></span
+              >
+            </label>
+            <input
+              type="file"
+              
+              id="idProof"
+              (change)="onIdProofChange($event)"
+              accept="image/*"
+              class="form-control p-0"
+              autocomplete="off"
+              #idProofImgUpload
+            />
+          </div>
+        </div>
+
+<br/> 
+       
+<div  class="col-md-12">
+<div class="row col-md-12">
+
+  <div
+  class="img-thumb mt-6"
+
+><b>PHOTO IMAGE </b>  
+<!-- *ngFor="let obj of meetingData.photos; let i = index" -->
+  <a style="cursor: pointer"  >
+    <i class="fa fa-times-circle text-black" (click)="btnphotoCancel()"></i>
+  </a>
+  <img
+    [src]="'data:image/jpeg;base64,' + photoimage"
+    style="cursor: pointer"
+    class="img-thumbnail mr-3"
+    
+  />
+</div>
+
+<div  class="col-md-1"></div>
+<div
+  class="img-thumb mt-5"
+
+><b>ID IMAGE </b>  
+<!-- *ngFor="let obj of meetingData.photos; let i = index" -->
+  <a style="cursor: pointer"   >
+    <i class="fa fa-times-circle text-black" style="margin-top: -50px !important;"  (click)="btnImageCancel()"></i>
+  </a>
+  <img 
+    [src]="'data:image/jpeg;base64,' + idimage"
+    style="cursor: pointer;margin-top: -50px;"
+    class="img-thumbnail mr-3"
+    
+  />
+</div>
+
+</div>
+</div>
+
+        <div class="col-md-12 popup-footer justify-content-center">
+          <button
+            type="button"
+            class="btn btn-outline-success btn-sm btn-rounded"
+            (click)="btnAddPromoter()"
+          >
+            ADD PROMOTER
+          </button>
+          <button
+            type="button"
+            class="btn btn-outline-danger btn-sm btn-rounded"
+            (click)="showPromotorsPopup = false"
+          >
+            Close
+          </button>
+        </div>
+
+      </div>
+
+
+    </div>
+  </div>
+</div>

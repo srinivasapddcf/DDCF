@@ -1,0 +1,262 @@
+
+<div class="card">
+  <div class="card-header p-2">
+    <h5 class="mb-0">PURCHASE ORDER DETAILS </h5>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <h5 class="text-center font-weight-bold mb-3 border-bottom text-success" style="display: none;">
+        <span > Purchase Order </span>
+         <button type="button" style="margin-left: 970px;" (click)="orderDetails()" *ngIf="Details_div" class="btn btn-success btn-sm">Details</button>
+         <button type="button" style="margin-left: 970px;" (click)="orderDetails_back()" *ngIf="Details_div_back" class="btn btn-info btn-sm">Back</button>
+       </h5>
+      </div> 
+      
+      <div class="row align-items-center" *ngIf="PurchageorderIns_div">
+        <div class="col-md-12 row" >
+     
+         <div class="col-md-3">
+             <div class="form-group">
+               <label  >District Name
+                 <span style="color: red">*</span></label>
+               <!-- <select id="selectDistID"  class="form-control" [(ngModel)]="selectDistID"  (change)="onDISTRICtChange()">                
+                 <option class="dropdown-item" disabled selected value="undefined">-- Select District --</option>
+                 <option  value="{{ obj.DISTRICTID }}"   *ngFor="let obj of districtListdata"    > {{ obj.DISTRICTNAME }}  </option>
+               </select> -->
+
+
+               <select   aria-sort="ascending"  
+               id="RBKDDSelected"
+               class="form-control"
+               [(ngModel)]="RBKDDSelected"
+               
+             >
+             <!-- (change)="onDISTRICtChange()" -->
+               <option class="dropdown-item" disabled selected value="undefined">-- SELECT District --</option>
+               <option value="{{ obj.DISTRICTID }}" *ngFor="let obj of districtListdata">
+                 {{ obj.DISTRICTNAME }}         -     ({{ obj.DISTRICTID }})
+               </option>
+             </select>
+
+
+
+
+
+             </div>
+           </div>
+
+           <div class="col-md-3">
+            <div class="form-group">
+              <label for="UninonId">Form Name
+                <span style="color: red">*</span></label>
+              <select id="FORMID"  class="form-control" [(ngModel)]="FORMID">                
+                <option value="">-- Select Form --</option>
+                <option  value="{{ obj.FORMID }}"   *ngFor="let obj of formdata"    > {{ obj.FORMNAME }}  </option>
+              </select>
+            </div>
+          </div>
+
+          <div class="col-md-3">
+            <div class="form-group">
+              <label for="UninonId">Component Name
+                <span style="color: red">*</span></label>
+              <select id="COMPID"  class="form-control" [(ngModel)]="COMPID">                
+                <option value="">-- Select Component Form --</option>
+                <option  value="{{ obj.COMPID }}"   *ngFor="let obj of componentListdata"    > {{ obj.COMPNAME }}  </option>
+              </select>
+            </div>
+          </div>
+         
+
+
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="meetingDate"
+                >SCHEDULE MEETING DATE <span style="color: red">*</span></label
+              >
+              <app-date-picker
+                [PlaceHolder]="'Please Select Meeting Date'"
+                [(selectedDate)]="scheduleData.meetingDate"
+                [minDate]="minDate"
+                [maxDate]="maxDate"
+              ></app-date-picker>
+            </div>
+          </div>
+
+           <!-- <div class="col-md-2">
+             <div class="form-group">
+               <label for="StockpointId">Purchase Order Date  <span style="color: red">*</span></label>
+               <app-date-picker
+            [PlaceHolder]="'Please Select To Date'"
+            [(selectedDate)]="PurchaseOrder.PurchaseOrderDate"
+          ></app-date-picker>
+             </div>
+           </div> -->
+           <div class="col-md-2">
+            <div class="form-group">
+              <label for="UninonId">Purchase Order
+                <span style="color: red">*</span></label>
+                <input
+                id="surveyNo"
+                type="text"
+                class="form-control"
+                [(ngModel)]="PurchaseOrder.Order"
+                placeholder="Please Enter Order"
+                maxlength="30" style="width: 227px;"
+                autocomplete="off"
+              />
+             
+            </div>
+          </div>
+    
+          <div class="col-md-2">
+            <div class="form-group">
+              <label for="StockpointId"> Units  <span style="color: red">*</span></label>
+              <input
+              id="surveyN"
+              type="text"
+              class="form-control"
+              [(ngModel)]="PurchaseOrder.Units"
+              placeholder="Please Enter Units"
+              maxlength="5" NumbersOnly
+              autocomplete="off"
+            />
+            </div>
+          </div>
+          <div class="col-md-2">
+            <div class="form-group">
+              <label for="StockpointId"> Rate / Units  <span style="color: red">*</span></label>
+              <input
+              id="surveyNo"
+              type="text"
+              class="form-control"
+              [(ngModel)]="PurchaseOrder.TotalRate"
+              placeholder="Please Enter Rate / Unit"
+              maxlength="5"
+              autocomplete="off" NumbersOnly
+            />
+            </div>
+          </div>
+          <div class="col-md-2">
+            <label></label>
+            <input type="button" class="btn btn-info fa fa-plus" value="Add" (click)="AddPacketDetails();" style="margin-top: 32px;" />
+            
+            <!-- <input type="button" class="btn btn-info fa fa-plus" value="Order Details" (click)="Details();" style="margin-top: 32px;" /> -->
+          </div> 
+        </div> 
+             
+    <div class="container" *ngIf="AddDetailsview_div">
+        <div class="row">
+        <div class="col-sm-12 mt-4">
+            
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped table-hover" style="width: 100%;">
+                    <thead>
+                        <tr class="bg-primary" style="color: white;">
+                            <th>Sno</th>
+                             <th>District Name </th>
+                           <th>Purchase Order Date</th>                              
+                           <th>Purchase Order</th>
+                           <th>Unit</th>
+                           <th>Unit Rate</th>
+                           <th>Total Rate</th>
+                           <th>Delete</th>
+    
+    
+    
+                        </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let objd of todos; let i = index">
+                            <td>{{i+1}}</td>
+                            <td><b>{{objd.content}}</b></td>
+                            <td><b>{{objd.content1}}</b></td>
+                            <td><b>{{objd.content2}}</b></td>
+                            <td><b>{{objd.content4}}</b></td>
+                            <td><b>{{objd.content3}}</b></td>
+                            
+                            <td><b>{{objd.content5}}</b></td>
+                            
+                            <td><input type="button" class="fa fa-trash btn btn-danger" (click)="Deletepacket(i);" value="Remove"/></td>
+    
+    
+                        </tr>
+                    </tbody>
+                </table>
+    
+            </div>
+        
+        </div>
+    </div>
+    </div>
+         <br>
+         <div class="col-md-12">
+         <div class="popup-footer justify-content-center" *ngIf="submitbtn">
+             <button
+               type="button"
+               class="btn btn-success btn-sm"
+               (click)="btnSubmitDetails()"
+             >
+               SUBMIT
+             </button>
+           </div>
+         </div>
+       </div>
+    
+       <div class="container" *ngIf="OrderDetailsview_div">
+        <div class="row">
+        <div class="col-sm-12 mt-4">
+            
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped table-hover" style="width: 100%;">
+                    <thead>
+                        <tr class="bg-primary" style="color: white;">
+                            <th>Sno</th>
+                                  <th>District Name </th>
+                                 <th>Purchase Order Date</th>                              
+                                 <th>Purchase Order</th>
+                                 <th> Units</th>
+                                 <th>Total Rate</th>
+                                  
+    
+    
+    
+                        </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let objd of purchargeOrderList; let i = index">
+                            <td>{{i+1}}</td>
+                            <td><b>{{objd.DISTRICT_NAME}}</b></td>
+                            <td><b>{{objd.PURCHASE_ORDER_DATE}}</b></td>
+                            <td><b>{{objd.PURCHASE_ORDER}}</b></td>
+                            <td><b>{{objd.UNITS}}</b></td>
+                            <td><b>{{objd.RATE}}</b></td>
+                            
+                           
+    
+                        </tr>
+                    </tbody>
+                </table>
+    
+            </div>
+        
+        </div>
+    </div>
+    </div>
+
+  </div>
+</div>
+
+
+   
+   
+  
+
+ 
+
+    
+     
+ 
+    
+ 
+

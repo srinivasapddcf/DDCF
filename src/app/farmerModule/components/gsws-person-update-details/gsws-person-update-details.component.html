@@ -1,0 +1,251 @@
+<div class="card">
+    <div class="card-header p-2">
+      <h5 class="mb-0">GSWS PERSON DETAILS REAL-TIME UPDATE</h5>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-5 offset-3 pt-1">
+          
+          <div class="form-group">   <label> AADHAAR NUMBER   </label>
+            <input
+              id="uidNum"
+              type="password"
+              class="form-control"
+              [(ngModel)]="statusuidNum"
+              placeholder="Please Enter Aadhaar Number"
+              maxlength="12" autocomplete="off" (keyup)="uidNummaskIputData($event.target.value)"
+              NumbersOnly
+            />
+          </div>
+        </div>
+  
+        <div class="col-md-3" align="left">
+          <button
+            type="button"
+            class="btn btn-success btn-sm"
+            (click)="btnUidDetails()"
+          >
+            CHECK STATUS
+          </button>
+        </div>
+      </div>
+  
+      <div *ngIf="isAmulDataAvailable">
+        <h5 class="sub-heading pb-0">
+          <label>Person Details In JPV</label>
+        </h5>
+  
+        <div class="row px-4" *ngIf="personDetails.FARMER_STATUS === '2'">
+          <h3 class="text-center">Person data not available</h3>
+        </div>
+  
+        <div class="row px-4">
+          <div class="col-md-3">
+            <div class="form-group">
+              <label>
+                NAME :
+                <span class="text-success">
+                  <b>{{ personDetails.CITIZEN_NAME }}</b>
+                </span>
+              </label>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group">
+              <label
+                >GENDER :
+                <span class="text-success">
+                  <b>{{ personDetails.GENDER }}</b>
+                </span>
+              </label>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group">
+              <label
+                >MOBILE NUMBER :
+                <span class="text-success">
+                  <b>{{ personDetails.MOBILE_NUMBER }}</b>
+                </span>
+              </label>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group">
+              <label
+                >DOB :
+                <span class="text-success">
+                  <b>{{ personDetails.DOB_DT }}</b>
+                </span>
+              </label>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group">
+              <label>
+                DOOR NO :
+                <span class="text-success">
+                  <b>{{ personDetails.DOOR_NO }}</b>
+                </span>
+              </label>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group">
+              <label>
+                CLUSTER NAME :
+                <span class="text-success">
+                  <b>{{ personDetails.CLUSTER_NAME }}</b>
+                </span>
+              </label>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group">
+              <label>
+                SECRETARIAT NAME :
+                <span class="text-success">
+                  <b>{{ personDetails.GSWS_NAME }}</b>
+                </span>
+              </label>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group">
+              <label>
+                MANDAL NAME :
+                <span class="text-success">
+                  <b>{{ personDetails.MANDAL_NAME }}</b>
+                </span>
+              </label>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group">
+              <label>
+                DISTRICT NAME :
+                <span class="text-success">
+                  <b>{{ personDetails.DISTRICT_NAME }}</b>
+                </span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <div *ngIf="isGSWSDataAvailable">
+        <h5 class="sub-heading pb-0"><label>Details In GSWS</label></h5>
+  
+        <div class="row px-4">
+          <div class="col-md-3">
+            <div class="form-group">
+              <label>
+                NAME :
+                <span class="text-success">
+                  <b>{{ gswsDetails.CITIZEN_NAME }}</b>
+                </span>
+              </label>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group">
+              <label
+                >GENDER :
+                <span class="text-success">
+                  <b>{{ gswsDetails.GENDER }}</b>
+                </span>
+              </label>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group">
+              <label
+                >MOBILE NUMBER :
+                <span class="text-success">
+                  <b>{{ gswsDetails.MOBILENUMBER }}</b>
+                </span>
+              </label>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group">
+              <label
+                >DOB :
+                <span class="text-success">
+                  <b>{{ gswsDetails.DATEOFBIRTH | slice:0:10 }}</b>
+                </span>
+              </label>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group">
+              <label>
+                DOOR NO :
+                <span class="text-success">
+                  <b>{{ gswsDetails.DOORNO }}</b>
+                </span>
+              </label>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group">
+              <label>
+                CLUSTER NAME :
+                <span class="text-success">
+                  <b>{{ gswsDetails.CLUSTER_NAME }}</b>
+                </span>
+              </label>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group">
+              <label>
+                SECRETARIAT NAME :
+                <span class="text-success">
+                  <b>{{ gswsDetails.SACHIVALAYAM_NAME }}</b>
+                </span>
+              </label>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group">
+              <label>
+                MANDAL NAME :
+                <span class="text-success">
+                  <b>{{ gswsDetails.MANDAL_NAME }}</b>
+                </span>
+              </label>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group">
+              <label>
+                DISTRICT NAME :
+                <span class="text-success">
+                  <b>{{ gswsDetails.DISTRICT_NAME }}</b>
+                </span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <div class="row px-4" *ngIf="personDetails.FARMER_STATUS === '1'">
+        <h3 class="text-center">Person already registered as a farmer</h3>
+      </div>
+  
+      <div class="row px-4" *ngIf="personDetails.FARMER_STATUS === '0'">
+        <div class="col-md-12" align="center">
+          <button
+            type="button"
+            class="btn btn-primary btn-sm"
+            (click)="btnUpdate()"
+          >
+            Update Person Details
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+

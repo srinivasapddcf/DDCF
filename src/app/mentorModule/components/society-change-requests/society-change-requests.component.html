@@ -1,0 +1,94 @@
+<div class="card">
+  <div class="card-header p-2">
+    <h5 class="mb-0">SOCIETY CHANGE REQUESTS</h5>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div
+        class="col-md-12 table-responsive"
+        [hidden]="societyChangeRequestsList?.length < 1"
+      >
+        <table
+          class="table table-striped ah-table text-center"
+          datatable
+          [dtOptions]="dtOptions"
+          [dtTrigger]="dtTrigger"
+        >
+          <thead class="bg-success text-white">
+            <tr>
+              <th class="tableheader_color">S.No.</th>
+              <th class="tableheader_color">MANDAL</th>
+              <th class="tableheader_color">RSK</th>
+              <th class="tableheader_color">VILLAGE</th>
+              <th class="tableheader_color">NEW RSK</th>
+              <th class="tableheader_color">NEW VILLAGE</th>
+              <th class="tableheader_color">FARMER NAME</th>
+              <th class="tableheader_color">FARMER CODE</th>
+              <th class="tableheader_color">MOBILE NUMBER</th>
+              <th class="tableheader_color">AADHAR</th>
+              <th class="tableheader_color">REQUEST RAISED BY</th>
+              <th class="tableheader_color">REQUEST RAISED ON</th>
+              <th class="tableheader_color">STATUS</th>
+            </tr>
+            <tr>      
+              <th class="tableheader_color">1</th>
+              <th class="tableheader_color">2</th>
+              <th class="tableheader_color">3</th>
+              <th class="tableheader_color">4</th>
+              <th class="tableheader_color">5</th>
+              <th class="tableheader_color">6</th>
+              <th class="tableheader_color">7</th>
+              <th class="tableheader_color">8</th>
+              <th class="tableheader_color">9</th>
+              <th class="tableheader_color">10</th>
+              <th class="tableheader_color">11</th>
+              <th class="tableheader_color">12</th>
+              <th class="tableheader_color">13</th>  
+            </tr>
+          </thead>
+          <tbody *ngIf="societyChangeRequestsList?.length > 0">
+            <tr *ngFor="let obj of societyChangeRequestsList; let i = index">
+              <td class="number_align">{{ i + 1 }}</td>
+              <td style="text-align: left;" class="table_cells_borders">{{ obj.MANDAL_NAME }}</td>
+              <td style="text-align: left;" class="table_cells_borders">{{ obj.RBK_NAME }}</td>
+              <td style="text-align: left;" class="table_cells_borders">{{ obj.VILLAGE_NAME }}</td>
+              <td style="text-align: left;" class="table_cells_borders">{{ obj.NEW_RBK_NAME }}</td>
+              <td style="text-align: left;" class="table_cells_borders">{{ obj.NEW_VILLAGE_NAME }}</td>
+              <td style="text-align: left;" class="table_cells_borders">{{ obj.FARMER_NAME }}</td>
+              <td  class="number_align">{{ obj.FARMER_CODE }}</td>
+              <td class="number_align">{{ obj.MOBILE_NUMBER }}</td>
+              <td  class="number_align">XXXX-XXXX-{{ obj.UID_NUM | slice: -4 }}</td>
+              <td style="text-align: left;" class="table_cells_borders">{{ obj.REQUESTED_BY }}</td>
+              <td style="text-align: left;" class="table_cells_borders">{{ obj.INSERTED_ON }}</td>
+              <td style="text-align: left;" class="table_cells_borders">
+                <span
+                  *ngIf="obj.ACTION_TAKEN === 'PENDING'"
+                  class="text-primary"
+                >
+                  Pending
+                </span>
+                <span
+                  *ngIf="obj.ACTION_TAKEN === 'COMPLETED'"
+                  class="text-success"
+                >
+                  Completed
+                </span>
+                <span
+                  *ngIf="obj.ACTION_TAKEN === 'REJECTED'"
+                  class="text-danger"
+                >
+                  Rejected
+                </span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="col-md-12" [hidden]="societyChangeRequestsList?.length > 0">
+        <h3 class="text-center">
+          Farmer society change requests not available for this mentor !!!
+        </h3>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,173 @@
+<div class="card">
+    <div class="card-header p-2">
+        <h5 class="mb-0">BMCU BUILDING INSPECTION</h5>
+    </div>
+    <div class="card-body amulBuildingInspection">
+        <div class="row">
+
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="Buildingtype">BUILDING TYPE<span style="color: red">*</span></label>
+                    <select id="Buildingtype" class="form-control" [(ngModel)]="BuildingInspectDetails.Buildingtype"
+                        >
+                        <!-- (change)="onDistrictChange(BuildingInspectDetails.Buildingtype)" -->
+                        <option value="">-- SELECT BUILDING TYPE --</option>
+                        <option value="1">APDDCF</option>
+                        <option value="2">IKP</option>
+                        <option value="3">PRIVATE</option>
+                        <option value="4">GOVERNMENT</option> 
+                    </select>
+                </div>
+            </div>
+
+
+            <div class="col-md-4">
+                <div class="form-group">
+                  <label for="address">ADDRESS <span style="color: red">*</span></label>
+                  <textarea
+                    id="remarks"
+                    type="text"
+                    class="form-control"
+                    [(ngModel)]="BuildingInspectDetails.address"
+                    placeholder="ENTER ADDRESS"
+                    maxlength="500"
+                    rows="2"
+                  ></textarea>
+                </div>
+              </div>  
+
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="BuildingCond">BUILDING CONDITION<span style="color: red">*</span></label>
+                    <select id="BuildingCond" class="form-control" [(ngModel)]="BuildingInspectDetails.BuildingCond">                        
+                        <option value="">-- SELECT BUILDING CONDITION --</option>
+                        <option value="1"> GOOD </option>
+                        <!-- <option value="2"> NEED CIVIL WORK </option> -->
+                        <option value="2"> NOT FIT FOR USE </option>
+                        <option value="3"> NEED TECHNICAL EVALUATION </option>
+                        <!-- <option value="{{ obj.NEW_DISTRICT_CODE }}" *ngFor="let obj of DistrictList">
+                  {{ obj.NEW_DISTRICT }}
+                </option> -->
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>SAFETY ARRANGEMENTS<sup class="text-danger h6">*</sup></label>
+                    <div class="ah-radio-buttons">
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input class="custom-control-input" type="radio" name="isSafetyArrangements"
+                                id="isSafetyArrangements1" value="1"
+                                [(ngModel)]="BuildingInspectDetails.isSafetyArrangements" autocomplete="off" />
+                            <label class="custom-control-label" for="isSafetyArrangements1">
+                                LOCK & KEY
+                            </label>
+                        </div>
+
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input class="custom-control-input" type="radio" name="isSafetyArrangements"
+                                id="isSafetyArrangements2" value="2"
+                                [(ngModel)]="BuildingInspectDetails.isSafetyArrangements" autocomplete="off" />
+                            <label class="custom-control-label" for="isSafetyArrangements2">
+                               SHUTTER FACILITY 
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>WATER AVAILABILITY<sup class="text-danger h6">*</sup></label>
+                    <div class="ah-radio-buttons">
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input class="custom-control-input" type="radio" name="wateravailability"
+                                id="wateravailability1" value="1" [(ngModel)]="BuildingInspectDetails.wateravailability"
+                                autocomplete="off" />
+                            <label class="custom-control-label" for="wateravailability1">
+                                AVAILABLE
+                            </label>
+                        </div>
+
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input class="custom-control-input" type="radio" name="wateravailability"
+                                id="wateravailability2" value="2" [(ngModel)]="BuildingInspectDetails.wateravailability"
+                                autocomplete="off" />
+                            <label class="custom-control-label" for="wateravailability2">
+                                NOT AVAILABLE
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+          
+
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>AVAILABILITY OF ELECTRICITY
+                        <sup class="text-danger h6">*</sup></label>
+                    <div class="ah-radio-buttons">
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input class="custom-control-input" type="radio" name="isElectricityAvailable"
+                                id="isElectricityAvailable1" value="1"
+                                [(ngModel)]="BuildingInspectDetails.isElectricityAvailable" autocomplete="off" />
+                            <label class="custom-control-label" for="isElectricityAvailable1">
+                                AVAILABLE
+                            </label>
+                        </div>
+
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input class="custom-control-input" type="radio" name="isElectricityAvailable"
+                                id="isElectricityAvailable2" value="2"
+                                [(ngModel)]="BuildingInspectDetails.isElectricityAvailable" autocomplete="off" />
+                            <label class="custom-control-label" for="isElectricityAvailable2">
+                                NOT AVAILABLE
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>DRAINAGE AVAILABILITY
+                        <sup class="text-danger h6">*</sup></label>
+                    <div class="ah-radio-buttons">
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input class="custom-control-input" type="radio" name="Drainageavail" id="Drainageavail1"
+                                value="1" [(ngModel)]="BuildingInspectDetails.Drainageavail" autocomplete="off" />
+                            <label class="custom-control-label" for="Drainageavail1">
+                                AVAILABLE
+                            </label>
+                        </div>
+
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input class="custom-control-input" type="radio" name="Drainageavail" id="Drainageavail2"
+                                value="2" [(ngModel)]="BuildingInspectDetails.Drainageavail" autocomplete="off" />
+                            <label class="custom-control-label" for="isAvailableElectricityEarthed2">
+                                NOT AVAILABLE
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="isAvailableElectricityEarthedUpload">BUILDING IMAGE UPLOAD
+                        <span style="color: red;font-size: small;">* (JPEG and less than 100KB)</span>
+                    </label>
+                    <input type="file" class="form-control p-0" id="buildingImage"
+                        (change)="onBuildingImageChange($event)" accept="image/*" autocomplete="off" />
+                </div>
+            </div>
+
+            <div class="col-md-12" align="center">
+                <button type="button" class="btn btn-success btn-sm" (click)="btnSubmit()">
+                    SUBMIT
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,217 @@
+<div class="card">
+  <div class="card-header p-2">
+    <h5 class="mb-0">SCHEDULE UPDATION</h5>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="rbkId">RSK <span style="color: red">*</span></label>
+          <select
+            id="rbkId"
+            class="form-control"
+            [(ngModel)]="scheduleData.rbkId"
+            (change)="onRbkChange()"
+          >
+            <option value="">-- SELECT RSK --</option>
+            <option value="{{ obj.RBK_ID }}" *ngFor="let obj of rbkList">
+              {{ obj.RBK_NAME }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="villageId"
+            >VILLAGE <span style="color: red">*</span></label
+          >
+          <select
+            id="villageId"
+            class="form-control"
+            [(ngModel)]="scheduleData.villageId"
+            (change)="onVillageChange()"
+          >
+            <option value="">-- SELECT VILLAGE --</option>
+            <option
+              value="{{ obj.VILLAGE_ID }}"
+              *ngFor="let obj of villageList"
+            >
+              {{ obj.VILLAGE_NAME }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div
+        class="col-md-12 table-responsive"
+        [hidden]="meetingList?.length < 1"
+      >
+        <table
+          class="table table-striped ah-table text-center"
+          datatable
+          [dtOptions]="dtOptions"
+          [dtTrigger]="dtTrigger"
+        >
+          <thead class="bg-success text-white">
+            <tr>
+              <th>S.No.</th>
+              <th>MEETING ID</th>
+              <th>MEETING DATE</th>
+              <th>MEETING TIME</th>
+              <th>MEETING VENUE</th>
+              <th>MEETING VENUE ADDRESS</th>
+              <th>MEETING AGENDA</th>
+              <th>ACTION</th>
+            </tr>
+          </thead>
+          <tbody *ngIf="meetingList?.length > 0">
+            <tr *ngFor="let obj of meetingList; let i = index">
+              <td>{{ i + 1 }}</td>
+              <td>
+                <b>{{ obj.MEETING_ID }}</b>
+              </td>
+              <td>{{ obj.MEETING_DATE }}</td>
+              <td>{{ obj.MEETING_TIME }}</td>
+              <td>{{ obj.MEETING_VENUE }}</td>
+              <td>{{ obj.MEETING_VENUE_ADDRESS }}</td>
+              <td>{{ obj.MEETING_AGENDA }}</td>
+              <td>
+                <button
+                  type="button"
+                  class="btn btn-primary btn-sm"
+                  (click)="btnRescheduling(obj)"
+                >
+                  <i
+                    class="far fa-calendar-check-o mr-2"
+                    aria-hidden="true"
+                  ></i>
+                  Re-Schedule
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="popup-modal" *ngIf="updatePopUp">
+  <div class="popup-content" style="min-width: 75%">
+    <div class="popup-header">
+      <h4 class="title">RE-SCHEDULE</h4>
+      <a
+        type="button"
+        class="close"
+        (click)="updatePopUp = false"
+        style="cursor: pointer"
+      >
+        <span>×</span>
+      </a>
+    </div>
+
+    <div class="popup-body">
+      <div class="row justify-content-center align-items-center">
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="meetingVenue"
+              >Meeting Venue <span style="color: red">*</span></label
+            >
+            <input
+              id="meetingVenue"
+              type="text"
+              class="form-control"
+              [(ngModel)]="scheduleData.meetingVenue"
+              placeholder="Please Enter Meeting Venue"
+              maxlength="50"
+              autocomplete="off"
+            />
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="meetingVenueAddress"
+              >Meeting Venue Address <span style="color: red">*</span></label
+            >
+            <input
+              id="meetingVenueAddress"
+              type="text"
+              class="form-control"
+              [(ngModel)]="scheduleData.meetingVenueAddress"
+              placeholder="Please Enter Meeting Venue Address"
+              maxlength="50"
+              autocomplete="off"
+            />
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="meetingDate"
+              >Meeting Date <span style="color: red">*</span></label
+            >
+            <app-date-picker
+              [PlaceHolder]="'Please Select Meeting Date'"
+              [(selectedDate)]="scheduleData.meetingDate"
+              [minDate]="minDate"
+              [maxDate]="maxDate"
+            ></app-date-picker>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="meetingTime"
+              >Meeting Time <span style="color: red">*</span></label
+            >
+            <input
+              id="meetingTime"
+              type="time"
+              class="form-control"
+              [(ngModel)]="scheduleData.meetingTime"
+              placeholder="Please Enter Meeting Time"
+              maxlength="8"
+              autocomplete="off"
+            />
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="meetingAgenda"
+              >Meeting Agenda <span style="color: red">*</span></label
+            >
+            <input
+              id="meetingAgenda"
+              type="text"
+              class="form-control"
+              [(ngModel)]="scheduleData.meetingAgenda"
+              placeholder="Please Enter Meeting Agenda"
+              maxlength="50"
+              autocomplete="off"
+            />
+          </div>
+        </div>
+        <div class="col-md-4"></div>
+      </div>
+    </div>
+
+    <div class="popup-footer justify-content-center">
+      <button
+        type="button"
+        class="btn btn-outline-success btn-sm btn-rounded"
+        (click)="btnScheduleUpdate()"
+      >
+        UPDATE
+      </button>
+      <button
+        type="button"
+        class="btn btn-outline-danger btn-sm btn-rounded"
+        (click)="updatePopUp = false"
+      >
+        Close
+      </button>
+    </div>
+  </div>
+</div>

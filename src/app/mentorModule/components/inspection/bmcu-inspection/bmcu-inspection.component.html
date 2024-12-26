@@ -1,0 +1,218 @@
+<div class="card">
+    <div class="card-header p-2">
+      <h5 class="mb-0">BMCU INSPECTION</h5>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="rbkId">RSK <span style="color: red">*</span></label>
+            <select
+              id="rbkId"
+              class="form-control"
+              [(ngModel)]="inspectionDetails.rbkId"
+              (change)="onRbkChange()"
+            >
+              <option value="">-- SELECT RSK --</option>
+              <option value="{{ obj.RBK_ID }}" *ngFor="let obj of rbkList">
+                {{ obj.RBK_NAME }}
+              </option>
+            </select>
+          </div>
+        </div>
+  
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="villageId"
+              >VILLAGE <span style="color: red">*</span></label
+            >
+            <select
+              id="villageId"
+              class="form-control"
+              [(ngModel)]="inspectionDetails.villageId"
+              (change)="onVillageChange()"
+            >
+              <option value="">-- SELECT VILLAGE --</option>
+              <option
+                value="{{ obj.VILLAGE_ID }}"
+                *ngFor="let obj of villageList"
+              >
+                {{ obj.VILLAGE_NAME }}
+              </option>
+            </select>
+          </div>
+        </div>
+  
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="villageId"
+              >INSPECTION STAGES <span style="color: red">*</span></label
+            >
+            <select
+              id="villageId"
+              class="form-control"
+              [(ngModel)]="inspectionDetails.buildingInspectId"
+              (change)="onInspectStagesChange()"
+            >
+              <option value="">-- SELECT INSPECTION STAGE --</option>
+              <option
+                value="{{ obj.BMCU_BUILD_INSPECT_ID }}"
+                *ngFor="let obj of inspectionStagesList"
+              >
+                {{ obj.BMCU_BUILD_INSPECT_NAME }}
+              </option>
+            </select>
+          </div>
+        </div>
+  
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="villageId"
+              >INSPECTION SUB STAGES <span style="color: red">*</span></label
+            >
+            <select
+              id="villageId"
+              class="form-control"
+              [(ngModel)]="inspectionDetails.buildingInspectInfoId"
+            >
+              <option value="">-- SELECT INSPECTION SUB STAGE --</option>
+              <option
+                value="{{ obj.BMCU_BUILD_INSPECT_INFO_ID }}"
+                *ngFor="let obj of inspectionSubStagesList"
+              >
+                {{ obj.BMCU_BUILD_INSPECT_INFO_NAME }}
+              </option>
+            </select>
+          </div>
+        </div>
+  
+        <div class="col-md-4">
+          <div class="form-group">
+            <label>Is Available <sup class="text-danger h6">*</sup></label>
+            <div class="ah-radio-buttons">
+              <div class="custom-control custom-radio custom-control-inline">
+                <input
+                  class="custom-control-input"
+                  type="radio"
+                  name="isAvailable"
+                  id="isAvailable1"
+                  value="1"
+                  [(ngModel)]="inspectionDetails.isAvailable"
+                  autocomplete="off"
+                />
+                <label class="custom-control-label" for="isAvailable1">
+                  Available
+                </label>
+              </div>
+  
+              <div class="custom-control custom-radio custom-control-inline">
+                <input
+                  class="custom-control-input"
+                  type="radio"
+                  name="isAvailable"
+                  id="isAvailable2"
+                  value="0"
+                  [(ngModel)]="inspectionDetails.isAvailable"
+                  autocomplete="off"
+                />
+                <label class="custom-control-label" for="isAvailable2">
+                  Not Available
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+  
+        <div class="col-md-4" [hidden]="inspectionDetails.isAvailable !== '1'">
+          <div class="form-group">
+            <label for="desktopImgUpload">
+              Photo Upload <span style="color: red">*</span>
+            </label>
+            <input
+              type="file"
+              class="form-control p-0"
+              id="inspectionImgUpload"
+              (change)="onInspectionImageChange($event)"
+              accept="image/*"
+              #inspectionImgUpload
+              autocomplete="off"
+            />
+          </div>
+        </div>
+  
+        <div class="col-md-12" align="center">
+          <button
+            type="button"
+            class="btn btn-success btn-sm"
+            (click)="btnAddRecord()"
+          >
+            ADD
+          </button>
+        </div>
+  
+        <div class="col-md-12 table-responsive" [hidden]="buildingInspectionData.inspectionList?.length < 1">
+          <table
+            class="table table-striped ah-table text-center"
+            datatable
+            [dtOptions]="dtOptions"
+            [dtTrigger]="dtTrigger"
+          >
+            <thead class="bg-primary text-white">
+              <tr>
+                <th>S.No.</th>
+                <th>CATEGORY</th>
+                <th>SUB CATEGORY</th>
+                <th>AVAILABILITY</th>
+                <th>PHOTO</th>
+                <th>REMOVE</th>
+              </tr>
+            </thead>
+            <tbody *ngIf="buildingInspectionData.inspectionList?.length > 0">
+              <tr
+                *ngFor="
+                  let obj of buildingInspectionData.inspectionList;
+                  let i = index
+                "
+              >
+                <td>{{ i + 1 }}</td>
+                <td>{{ obj.buildingInspectName }}</td>
+                <td>{{ obj.buildingInspectInfoName }}</td>
+                <td>
+                  <b *ngIf="obj.isAvailable === '1'">YES</b>
+                  <b *ngIf="obj.isAvailable === '0'">NO</b>
+                </td>
+                <td>
+                  <span
+                    *ngIf="obj.buildingInspectImage !== ''"
+                    (click)="btnViewPhoto(obj.buildingInspectImage)"
+                    style="cursor: pointer; text-decoration: underline;color: blue;"
+                    >VIEW</span
+                  >
+                  <span *ngIf="obj.buildingInspectImage === ''">NA</span>
+                </td>
+                <td>
+                  <a
+                  class="btn btn-danger"
+                  style="cursor: pointer"
+                  (click)="btnRemoveCategory(i)"
+                >
+                  <i class="fa fa-trash fa-lg"></i></a
+                >
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="col-md-12" align="center" *ngIf="buildingInspectionData.inspectionList?.length > 0">
+          <button
+            type="button"
+            class="btn btn-primary btn-sm"
+            (click)="btnSubmit();"
+          >
+            SUBMIT
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  

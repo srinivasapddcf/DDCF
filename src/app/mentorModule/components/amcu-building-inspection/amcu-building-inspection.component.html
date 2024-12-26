@@ -1,0 +1,715 @@
+<div class="card">
+  <div class="card-header p-2">
+    <h5 class="mb-0">AMCU BUILDING INSPECTION</h5>
+  </div>
+  <div class="card-body amulBuildingInspection">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="meetingDate"
+            >Inspection Date <span style="color: red">*</span></label
+          >
+          <app-date-picker
+            [PlaceHolder]="'Please Select Inspection Date'"
+            [(selectedDate)]="buildingInspectionData.inspectionDate"
+            [maxDate]="maxDate"
+          ></app-date-picker>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="meetingTime"
+            >Inspection Time <span style="color: red">*</span></label
+          >
+          <input
+            id="meetingTime"
+            type="time"
+            class="form-control"
+            [(ngModel)]="buildingInspectionData.inspectionTime"
+            placeholder="Please Enter Inspection Time"
+            maxlength="8"
+            autocomplete="off"
+          />
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label>Building Type<sup class="text-danger h6">*</sup></label>
+          <div class="ah-radio-buttons">
+            <div class="custom-control custom-radio custom-control-inline">
+              <input
+                class="custom-control-input"
+                type="radio"
+                name="isAMCUBuilding"
+                id="isAMCUBuilding1"
+                value="1"
+                [(ngModel)]="buildingInspectionData.isAMCUBuilding"
+                autocomplete="off"
+              />
+              <label class="custom-control-label" for="isAMCUBuilding1">
+                Public
+              </label>
+            </div>
+
+            <div class="custom-control custom-radio custom-control-inline">
+              <input
+                class="custom-control-input"
+                type="radio"
+                name="isAMCUBuilding"
+                id="isAMCUBuilding2"
+                value="0"
+                [(ngModel)]="buildingInspectionData.isAMCUBuilding"
+                autocomplete="off"
+              />
+              <label class="custom-control-label" for="isAMCUBuilding2">
+                Private
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label
+            >Is Village Centrally Located ?<sup class="text-danger h6"
+              >*</sup
+            ></label
+          >
+          <div class="ah-radio-buttons">
+            <div class="custom-control custom-radio custom-control-inline">
+              <input
+                class="custom-control-input"
+                type="radio"
+                name="isVillageLocatedInCenter"
+                id="isVillageLocatedInCenter1"
+                value="1"
+                [(ngModel)]="buildingInspectionData.isVillageLocatedInCenter"
+                autocomplete="off"
+              />
+              <label
+                class="custom-control-label"
+                for="isVillageLocatedInCenter1"
+              >
+                Yes
+              </label>
+            </div>
+
+            <div class="custom-control custom-radio custom-control-inline">
+              <input
+                class="custom-control-input"
+                type="radio"
+                name="isVillageLocatedInCenter"
+                id="isVillageLocatedInCenter2"
+                value="0"
+                [(ngModel)]="buildingInspectionData.isVillageLocatedInCenter"
+                autocomplete="off"
+              />
+              <label
+                class="custom-control-label"
+                for="isVillageLocatedInCenter2"
+              >
+                No
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label>Safety Arrangements<sup class="text-danger h6">*</sup></label>
+          <div class="ah-radio-buttons">
+            <div class="custom-control custom-radio custom-control-inline">
+              <input
+                class="custom-control-input"
+                type="radio"
+                name="isSafetyArrangements"
+                id="isSafetyArrangements1"
+                value="1"
+                [(ngModel)]="buildingInspectionData.isSafetyArrangements"
+                autocomplete="off"
+              />
+              <label class="custom-control-label" for="isSafetyArrangements1">
+                Lock&Key
+              </label>
+            </div>
+
+            <div class="custom-control custom-radio custom-control-inline">
+              <input
+                class="custom-control-input"
+                type="radio"
+                name="isSafetyArrangements"
+                id="isSafetyArrangements2"
+                value="0"
+                [(ngModel)]="buildingInspectionData.isSafetyArrangements"
+                autocomplete="off"
+              />
+              <label class="custom-control-label" for="isSafetyArrangements2">
+                Shutter Facility
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="isSafetyArrangementsUpload"
+            >Safety Arrangements Photo Upload <span style="color: red;font-size: small;">* (JPEG and  less than 100KB)</span>
+          </label>
+          <input
+            type="file"
+            class="form-control p-0"
+            id="isSafetyArrangementsUpload"
+            (change)="onisSafetyArrangementsChange($event)"
+            accept="image/*"
+            autocomplete="off"
+          />
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label
+            >Available Of Electricity Connection
+            <sup class="text-danger h6">*</sup></label
+          >
+          <div class="ah-radio-buttons">
+            <div class="custom-control custom-radio custom-control-inline">
+              <input
+                class="custom-control-input"
+                type="radio"
+                name="isElectricityAvailable"
+                id="isElectricityAvailable1"
+                value="1"
+                [(ngModel)]="buildingInspectionData.isElectricityAvailable"
+                autocomplete="off"
+              />
+              <label class="custom-control-label" for="isElectricityAvailable1">
+                Single-Phase
+              </label>
+            </div>
+
+            <div class="custom-control custom-radio custom-control-inline">
+              <input
+                class="custom-control-input"
+                type="radio"
+                name="isElectricityAvailable"
+                id="isElectricityAvailable2"
+                value="2"
+                [(ngModel)]="buildingInspectionData.isElectricityAvailable"
+                autocomplete="off"
+              />
+              <label class="custom-control-label" for="isElectricityAvailable2">
+                Two-Phase
+              </label>
+            </div>
+
+            <div class="custom-control custom-radio custom-control-inline">
+              <input
+                class="custom-control-input"
+                type="radio"
+                name="isElectricityAvailable"
+                id="isElectricityAvailable3"
+                value="0"
+                [(ngModel)]="buildingInspectionData.isElectricityAvailable"
+                autocomplete="off"
+              />
+              <label class="custom-control-label" for="isElectricityAvailable3">
+                No Connection
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="isElectricityAvailableUpload"
+            >Electricity Connection Photo Upload
+            <span style="color: red;font-size: small;">* (JPEG and  less than 100KB)</span>
+          </label>
+          <input
+            type="file"
+            class="form-control p-0"
+            id="isElectricityAvailableUpload"
+            (change)="onisElectricityAvailableChange($event)"
+            accept="image/*"
+            autocomplete="off"
+          />
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label
+            >Availability Of Electrical Earthen Arrangements
+            <sup class="text-danger h6">*</sup></label
+          >
+          <div class="ah-radio-buttons">
+            <div class="custom-control custom-radio custom-control-inline">
+              <input
+                class="custom-control-input"
+                type="radio"
+                name="isAvailableElectricityEarthed"
+                id="isAvailableElectricityEarthed1"
+                value="1"
+                [(ngModel)]="
+                  buildingInspectionData.isAvailableElectricityEarthed
+                "
+                autocomplete="off"
+              />
+              <label
+                class="custom-control-label"
+                for="isAvailableElectricityEarthed1"
+              >
+                Available
+              </label>
+            </div>
+
+            <div class="custom-control custom-radio custom-control-inline">
+              <input
+                class="custom-control-input"
+                type="radio"
+                name="isAvailableElectricityEarthed"
+                id="isAvailableElectricityEarthed2"
+                value="0"
+                [(ngModel)]="
+                  buildingInspectionData.isAvailableElectricityEarthed
+                "
+                autocomplete="off"
+              />
+              <label
+                class="custom-control-label"
+                for="isAvailableElectricityEarthed2"
+              >
+                Not Available
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="isAvailableElectricityEarthedUpload"
+            >Electrical Earthen Arrangements Photo Upload
+            <span style="color: red;font-size: small;">* (JPEG and  less than 100KB)</span>
+          </label>
+          <input
+            type="file"
+            class="form-control p-0"
+            id="isAvailableElectricityEarthedUpload"
+            (change)="onisAvailableElectricEarthedChange($event)"
+            accept="image/*"
+            autocomplete="off"
+          />
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label
+            >Space For Vehicle Movement
+            <sup class="text-danger h6">*</sup></label
+          >
+          <div class="ah-radio-buttons">
+            <div class="custom-control custom-radio custom-control-inline">
+              <input
+                class="custom-control-input"
+                type="radio"
+                name="isAvailbleSpaceForVehicleMovement"
+                id="isAvailbleSpaceForVehicleMovement1"
+                value="1"
+                [(ngModel)]="
+                  buildingInspectionData.isAvailbleSpaceForVehicleMovement
+                "
+                autocomplete="off"
+              />
+              <label
+                class="custom-control-label"
+                for="isAvailbleSpaceForVehicleMovement1"
+              >
+                Yes
+              </label>
+            </div>
+
+            <div class="custom-control custom-radio custom-control-inline">
+              <input
+                class="custom-control-input"
+                type="radio"
+                name="isAvailbleSpaceForVehicleMovement"
+                id="isAvailbleSpaceForVehicleMovement2"
+                value="0"
+                [(ngModel)]="
+                  buildingInspectionData.isAvailbleSpaceForVehicleMovement
+                "
+                autocomplete="off"
+              />
+              <label
+                class="custom-control-label"
+                for="isAvailbleSpaceForVehicleMovement2"
+              >
+                No
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="isAvailbleSpaceForVehicleMovementUpload"
+            >Space For Vehicle Movement Photo Upload
+            <span style="color: red;font-size: small;">* (JPEG and  less than 100KB)</span>
+          </label>
+          <input
+            type="file"
+            class="form-control p-0"
+            id="isAvailbleSpaceForVehicleMovementUpload"
+            (change)="onisAvailableSpaceForVehicleChange($event)"
+            accept="image/*"
+            autocomplete="off"
+          />
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label
+            >Availability Of Road To Approach AMCU Building
+            <sup class="text-danger h6">*</sup></label
+          >
+          <div class="ah-radio-buttons">
+            <div class="custom-control custom-radio custom-control-inline">
+              <input
+                class="custom-control-input"
+                type="radio"
+                name="isAvailbleRaodToApproachAMCU"
+                id="isAvailbleRaodToApproachAMCU1"
+                value="1"
+                [(ngModel)]="
+                  buildingInspectionData.isAvailbleRaodToApproachAMCU
+                "
+                autocomplete="off"
+              />
+              <label
+                class="custom-control-label"
+                for="isAvailbleRaodToApproachAMCU1"
+              >
+                Available
+              </label>
+            </div>
+
+            <div class="custom-control custom-radio custom-control-inline">
+              <input
+                class="custom-control-input"
+                type="radio"
+                name="isAvailbleRaodToApproachAMCU"
+                id="isAvailbleRaodToApproachAMCU2"
+                value="0"
+                [(ngModel)]="
+                  buildingInspectionData.isAvailbleRaodToApproachAMCU
+                "
+                autocomplete="off"
+              />
+              <label
+                class="custom-control-label"
+                for="isAvailbleRaodToApproachAMCU2"
+              >
+                Not Available
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="isHavingNetworkConnectivity"
+            >Network Connectivity <span style="color: red">*</span></label
+          >
+          <select
+            id="isHavingNetworkConnectivity"
+            class="form-control"
+            [(ngModel)]="buildingInspectionData.isHavingNetworkConnectivity"
+          >
+            <option value="">-- SELECT NETWORK --</option>
+            <option value="{{ obj.NAME }}" *ngFor="let obj of networkList">
+              {{ obj.NAME }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="requiredMilkCans">No. Of Milk Cans Required <span style="color: red">*</span></label>
+          <input
+            id="requiredMilkCans"
+            type="text"
+            class="form-control"
+            [(ngModel)]="buildingInspectionData.requiredMilkCans"
+            placeholder="Please Enter required no. of Milk Cans"
+            maxlength="5"
+            autocomplete="off"
+            NumbersOnly
+            [allowDecimals]="false"
+            [allowSign]="false"
+          />
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="buildingAddress"
+            >AMCU Building Door No. <span style="color: red">*</span></label
+          >
+          <input
+            id="buildingAddress"
+            type="text"
+            class="form-control"
+            [(ngModel)]="buildingInspectionData.buildingAddress"
+            placeholder="Please Enter Building Door No."
+            maxlength="10"
+            autocomplete="off"
+          />
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="buildingName"
+            >AMCU Building Name <span style="color: red">*</span></label
+          >
+          <input
+            id="buildingName"
+            type="text"
+            class="form-control"
+            [(ngModel)]="buildingInspectionData.buildingName"
+            placeholder="Please Enter Building Name"
+            maxlength="50"
+            autocomplete="off"
+          />
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="buildingStreet"
+            >Street <span style="color: red">*</span></label
+          >
+          <input
+            id="buildingStreet"
+            type="text"
+            class="form-control"
+            [(ngModel)]="buildingInspectionData.buildingStreet"
+            placeholder="Please Enter Street"
+            maxlength="25"
+            autocomplete="off"
+          />
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="rbkId">RSK <span style="color: red">*</span></label>
+          <select
+            id="rbkId"
+            class="form-control"
+            [(ngModel)]="buildingInspectionData.rbkId"
+            (change)="onRbkChange()"
+          >
+            <option value="">-- SELECT RSK --</option>
+            <option value="{{ obj.RBK_ID }}" *ngFor="let obj of rbkList">
+              {{ obj.RBK_NAME }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="villageId"
+            >Village <span style="color: red">*</span></label
+          >
+          <select
+            id="villageId"
+            class="form-control"
+            [(ngModel)]="buildingInspectionData.villageId"
+            (change)="onVillageChange()"
+          >
+            <option value="">-- SELECT VILLAGE --</option>
+            <option
+              value="{{ obj.VILLAGE_ID }}"
+              *ngFor="let obj of villageList"
+            >
+              {{ obj.VILLAGE_NAME }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="mandalId">Mandal <span style="color: red">*</span></label>
+          <select
+            id="mandalId"
+            class="form-control"
+            [(ngModel)]="buildingInspectionData.mandalId"
+            (change)="onMandalChange()"
+          >
+            <option value="">-- SELECT MANDAL --</option>
+            <option value="{{ obj.MANDAL_ID }}" *ngFor="let obj of mandalList">
+              {{ obj.MANDAL_NAME }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="districtId"
+            >District <span style="color: red">*</span></label
+          >
+          <select
+            id="districtId"
+            class="form-control"
+            [(ngModel)]="buildingInspectionData.districtId"
+          >
+            <option value="">-- SELECT DITRICT --</option>
+            <option
+              value="{{ obj.DITRICT_ID }}"
+              *ngFor="let obj of ditrictList"
+            >
+              {{ obj.DISTRICT_NAME }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="pinCode">Pincode <span style="color: red">*</span></label>
+          <input
+            id="pinCode"
+            type="text"
+            class="form-control"
+            [(ngModel)]="buildingInspectionData.pinCode"
+            placeholder="Please Enter Pincode"
+            maxlength="6"
+            autocomplete="off"
+            NumbersOnly
+            [allowDecimals]="false"
+            [allowSign]="false"
+          />
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="buildingLongitude"
+            >Longitude <span style="color: red">*</span></label
+          >
+          <input
+            id="buildingLongitude"
+            type="text"
+            class="form-control"
+            [(ngModel)]="buildingInspectionData.buildingLongitude"
+            placeholder="Please Enter Longitude"
+            maxlength="8"
+            autocomplete="off"
+            NumbersOnly
+            [allowDecimals]="true"
+            [allowSign]="false"
+          />
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="buildingLatitude"
+            >Latitude <span style="color: red">*</span></label
+          >
+          <input
+            id="buildingLatitude"
+            type="text"
+            class="form-control"
+            [(ngModel)]="buildingInspectionData.buildingLatitude"
+            placeholder="Please Enter Latitude"
+            maxlength="8"
+            autocomplete="off"
+            NumbersOnly
+            [allowDecimals]="true"
+            [allowSign]="false"
+          />
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="buildingInteriorImgUpload"
+            >Building Interior Photo Upload <span style="color: red;font-size: small;">* (JPEG and  less than 100KB)</span>
+          </label>
+          <input
+            type="file"
+            class="form-control p-0"
+            id="buildingInteriorImgUpload"
+            (change)="onbuildingInteriorImgUploadChange($event)"
+            accept="image/*"
+            #buildingInteriorImgUpload
+            autocomplete="off"
+          />
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="buildingExteriorImgUpload"
+            >Building Exterior Photo Upload <span style="color: red;font-size: small;">* (JPEG and  less than 100KB)</span>
+          </label>
+          <input
+            type="file"
+            class="form-control p-0"
+            id="buildingExteriorImgUpload"
+            (change)="onbuildingExteriorImgUploadChange($event)"
+            accept="image/*"
+            #buildingExteriorImgUpload
+            autocomplete="off"
+          />
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="buildingRoadLeadingImgUpload"
+            >Road Leading To Building Photo Upload
+            <span style="color: red;font-size: small;">* (JPEG and  less than 100KB)</span>
+          </label>
+          <input
+            type="file"
+            class="form-control p-0"
+            id="buildingRoadLeadingImgUpload"
+            (change)="onbuildingRoadLeadUploadChange($event)"
+            accept="image/*"
+            #buildingRoadLeadingImgUpload
+            autocomplete="off"
+          />
+        </div>
+      </div>
+
+      <div class="col-md-12" align="center">
+        <button
+          type="button"
+          class="btn btn-success btn-sm"
+          (click)="btnSubmit()"
+        >
+          SUBMIT
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

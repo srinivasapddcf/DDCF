@@ -1,0 +1,1226 @@
+ 
+<div class="row">
+  <!-- PENDING -->
+  <div class="col mb-2">
+    <div
+      class="stats-card pending"
+      (click)="btnDashboardDetails('1')"
+      [ngClass]="reportType === '1' ? 'active' : ''"
+    >   
+      <div class="overlay"></div>
+
+      <div class="card-body">
+        <div class="d-flex justify-content-between">
+          <div class="stats-text">
+            <p class="text-uppercase text-muted mb-1"><small>PENDING</small></p>
+            <h5 class="font-weight-bold mb-0">
+                {{ PENDINGCount }} 
+            </h5>
+          </div>
+          <div class="circle">
+            <i class="fas fa-hourglass-half"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+
+  <!-- APPROVED -->
+  <div class="col mb-2">
+    <div
+      class="stats-card success"
+      (click)="btnDashboardDetails('2')"
+      [ngClass]="reportType === '2' ? 'active' : ''"
+    >
+      <div class="overlay"></div>
+
+      <div class="card-body">
+        <div class="d-flex justify-content-between">
+          <div class="stats-text">
+            <p class="text-uppercase text-muted mb-1">
+              <small>APPROVED</small>
+            </p>
+            <h5 class="font-weight-bold mb-0">
+              {{ APPROVEDCount }}
+            </h5>
+          </div>
+          <div class="circle">
+            <i class="fas fa-check-double"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- REJECTED -->
+  <div class="col mb-2">
+    <div
+      class="stats-card pending"
+      (click)="btnDashboardDetails('3')"
+      [ngClass]="reportType === '3' ? 'active' : ''"
+    >
+      <div class="overlay"></div>
+
+      <div class="card-body">
+        <div class="d-flex justify-content-between">
+          <div class="stats-text">
+            <p class="text-uppercase text-muted mb-1"><small>ROLLBACK</small></p>
+            <h5 class="font-weight-bold mb-0">
+              {{ ROLLBACKCount }}
+            </h5>
+          </div>
+          <div class="circle">
+            <i class="fas fa-icicles fa-spin fa-3x"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+
+  <!-- ROLLBACK  
+  <div class="col mb-2">
+    <div
+      class="stats-card pending"
+      (click)="btnDashboardDetails('4')"
+      [ngClass]="reportType === '4' ? 'active' : ''"
+    >
+      <div class="overlay"></div>
+
+      <div class="card-body">
+        <div class="d-flex justify-content-between">
+          <div class="stats-text">
+            <p class="text-uppercase text-muted mb-1"><small>ROLLBACK</small></p>
+            <h5 class="font-weight-bold mb-0">
+              
+            </h5>
+          </div>
+          <div class="circle">
+            <i class="fas fa-i-cursor fa-pulse fa-spin fa-3x"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+  </div>-->
+
+</div>
+
+ 
+
+<div id="PENDING"   [(ngModel)]="PENDING">  
+  <div class="card"   >
+      <div class="card-header p-12" style="background-color:coral;">
+          <div class="row" >
+            
+              <div class="col-md-12" style="text-align: center;">
+              <h5 class="mb-0 text-uppercase text-muted mb-1"><span style="color:white;">  DLCO PENDING LIST</span> </h5>
+              </div> 
+          </div>
+      </div>    
+
+      <div class="card-body"  > 
+         
+          <div class="row"><div class="col-md-4">
+            <div class="form-group"> </div></div>
+            <div class="col-md-2">
+              <div class="form-group"> <span style="text-align:right;">  Select RSK NAME:  </span>
+              </div></div>
+          <div class="col-md-4">
+              <div class="form-group">  
+
+                 <select
+                id="RBKDDSelected"
+                class="form-control"
+                [(ngModel)]="RBKDDSelected"
+                (change)="RBKDDChange();"
+              >
+               
+                <option value="">-- SELECT RSK NAME--</option>
+                <option value="{{ obj.RBK_CODE }}" *ngFor="let obj of rbkList"  >
+                  {{ obj.RBK_NAME }}
+                </option>
+              </select>  
+
+
+             </div>
+            </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <h5><b>DOCUMENTS</b></h5>
+          <hr style="border-color: red;">
+        </div>
+      </div>
+
+      <div >
+             <div class="row">
+              <div class="col-md-1">
+              </div>
+              <div class="col-md-2" *ngIf="FORM_A_PDF">
+                <button class="btn btn-sm btn-info block" (click)="btnPdf(FORM_A_PDF)"><i class="fa fa-eye"></i> FORM-A</button>
+              </div>
+              <div class="col-md-2" *ngIf="MASUDHA_FORM_PDF">
+                <button class="btn btn-sm btn-info block" (click)="btnPdf(MASUDHA_FORM_PDF)"><i class="fa fa-eye"></i> MASUDHA FORM</button>
+              </div>
+              
+              <div class="col-md-2" *ngIf="BYE_LAW_PDF">
+                <button class="btn btn-sm btn-info block" (click)="btnPdf(BYE_LAW_PDF)"><i class="fa fa-eye"></i> BYE-LAW</button>
+              </div>
+              <div class="col-md-2" *ngIf="FESABILITY_REPORT_PDF">
+                <button class="btn btn-sm btn-info block" (click)="btnPdf(FESABILITY_REPORT_PDF)"><i class="fa fa-eye"></i> FEASIBILITY REPORT</button>
+              </div>
+              <div class="col-md-2">
+                <!-- <button class="btn btn-sm btn-info block" (click)="btnImg(BANK_PASSBOOK_IMAGE)"><i class="fa fa-eye"></i> BANK PASSBOOK</button> -->
+              </div>
+              <div class="col-md-1">
+              </div>
+        
+              <div class="col-md-1">
+              </div>
+              <div class="col-md-2" *ngIf="BANK_REMITTANCE_CERTI_PDF">
+                <button class="btn btn-sm btn-info block" (click)="btnPdf(BANK_REMITTANCE_CERTI_PDF)"><i class="fa fa-eye"></i> BANK REMITTANCE</button>
+              </div>
+              <div class="col-md-2" *ngIf="REQ_LETTER_ADHOCK_COM_PDF">
+                <button class="btn btn-sm btn-info block" (click)="btnPdf(REQ_LETTER_ADHOCK_COM_PDF)"><i class="fa fa-eye"></i> REQUEST LETTER</button>
+              </div>
+              
+              <div class="col-md-2" *ngIf="MEETING_PROCEDINGS_PDF">
+                <button class="btn btn-sm btn-info block" (click)="btnPdf(MEETING_PROCEDINGS_PDF)"><i class="fa fa-eye"></i> MEETING PROCEEDINGS</button>
+              </div>
+              <div class="col-md-2" *ngIf="SWORN_STATEMENT_PDF">
+                <button class="btn btn-sm btn-info block" (click)="btnPdf(SWORN_STATEMENT_PDF)"><i class="fa fa-eye"></i> SWORN STATEMENT</button>
+              </div>
+              <div class="col-md-2" *ngIf="ECONOMIC_VIABILITY_REP_PDF">
+                <button class="btn btn-sm btn-info block" (click)="btnPdf(ECONOMIC_VIABILITY_REP_PDF)"><i class="fa fa-eye"></i> ECONOMIC VIABILITY</button>
+              </div>
+              <div class="col-md-1">
+              </div>
+            </div>  
+
+            <!-- <div class="row">
+              <div class="col-md-1">
+              </div>
+              <div class="col-md-2" *ngIf="FORM_A_PDF">
+                <button class="btn btn-sm btn-info block" (click)="btnPdf('0')"><i class="fa fa-eye"></i> FORM-A</button>
+              </div>
+              <div class="col-md-2" *ngIf="MASUDHA_FORM_PDF">
+                <button class="btn btn-sm btn-info block" (click)="btnPdf('1')"><i class="fa fa-eye"></i> MASUDHA FORM</button>
+              </div>
+              
+              <div class="col-md-2" *ngIf="BYE_LAW_PDF">
+                <button class="btn btn-sm btn-info block" (click)="btnPdf('2')"><i class="fa fa-eye"></i> BYE-LAW</button>
+              </div>
+              <div class="col-md-2" *ngIf="FESABILITY_REPORT_PDF">
+                <button class="btn btn-sm btn-info block" (click)="btnPdf('3')"><i class="fa fa-eye"></i> FEASIBILITY REPORT</button>
+              </div>
+              <div class="col-md-2" *ngIf="BANK_PASSBOOK_IMAGE">
+                <button class="btn btn-sm btn-info block" (click)="btnImg('BANK_PASSBOOK_IMAGE')"><i class="fa fa-eye"></i> BANK PASSBOOK</button>
+              </div>
+              <div class="col-md-1">
+              </div>
+        
+              <div class="col-md-1">
+              </div>
+              <div class="col-md-2" *ngIf="BANK_REMITTANCE_CERTI_PDF">
+                <button class="btn btn-sm btn-info block" (click)="btnPdf('5')"><i class="fa fa-eye"></i> BANK REMITTANCE</button>
+              </div>
+              <div class="col-md-2" *ngIf="REQ_LETTER_ADHOCK_COM_PDF">
+                <button class="btn btn-sm btn-info block" (click)="btnPdf('6')"><i class="fa fa-eye"></i> REQUEST LETTER</button>
+              </div>
+              
+              <div class="col-md-2" *ngIf="MEETING_PROCEDINGS_PDF">
+                <button class="btn btn-sm btn-info block" (click)="btnPdf('7')"><i class="fa fa-eye"></i> MEETING PROCEEDINGS</button>
+              </div>
+              <div class="col-md-2" *ngIf="SWORN_STATEMENT_PDF">
+                <button class="btn btn-sm btn-info block" (click)="btnPdf(SWORN_STATEMENT_PDF)"><i class="fa fa-eye"></i> SWORN STATEMENT</button>
+              </div>
+              <div class="col-md-2" *ngIf="ECONOMIC_VIABILITY_REP_PDF">
+                <button class="btn btn-sm btn-info block" (click)="btnPdf(ECONOMIC_VIABILITY_REP_PDF)"><i class="fa fa-eye"></i> ECONOMIC VIABILITY</button>
+              </div>
+              <div class="col-md-1">
+              </div>
+            </div> -->
+
+
+            <div class="row">
+              <div class="col-md-12">
+                <hr style="border-color: red;">
+              </div></div>
+            <div class="row">
+              <div class="col-md-12 table-responsive" [hidden]="checkList?.length < 1">
+                <table class="table table-striped ah-table text-center" datatable [dtOptions]="dtOptions"
+                  [dtTrigger]="dtTrigger" data-page-length='25'>
+                  <thead class="bg-success text-white">
+                    <tr>
+                      <th>S.No.1</th>
+                      <th>QUESTION</th>
+                      <th>ACTION</th>
+                    </tr>
+                  </thead>
+                  <tbody *ngIf="checkList?.length > 0">
+                    <tr *ngFor="let obj of checkList; let i = index">
+                      <td>{{ i + 1 }}</td>
+                      <td style="text-align: left;">{{ obj.CHECK_LIST_NAME }}</td>
+                      <td style="text-align: center;">
+                        <input type="radio" (change)="onSelectionChange(obj.CHECK_LIST_CODE)"  
+                          name="inputRadio{{ obj.CHECK_LIST_CODE }}" id="inputRadio{{ obj.CHECK_LIST_CODE }}"
+                          value="0,{{ obj.CHECK_LIST_CODE }}" [(ngModel)]="obj.CHECK_LIST_CODE" /> <label>No</label>
+                        <input type="radio" (change)="onSelectionChange(obj.CHECK_LIST_CODE)"  
+                          name="inputRadio{{ obj.CHECK_LIST_CODE }}" id="inputRadio{{ obj.CHECK_LIST_CODE }}"
+                          value="1,{{ obj.CHECK_LIST_CODE }}" [(ngModel)]="obj.CHECK_LIST_CODE" style="margin-left: 40px;" />
+                        Yes
+                      </td>
+                    </tr>
+                  </tbody>
+                </table> 
+        
+                
+                <div  id="divSbmt2"  [(ngModel)]="divSbmt2">
+                  <div class="row">
+                  <div class="col-md-1"  style="text-align: end;margin-top: 10px;">
+                  <input type="checkbox" [(ngModel)]="CheckText" />
+                </div>
+                <div class="col-md-11">
+                   
+                      <p style="size: 6px;font-family: serif;MARGIN-TOP: 16px;">
+                    <!-- Checked the contents of the check list with the details submitted by the Route-in-charges and found  to be in accordance with the statutory and administrative  requirements .  -->
+                    Checked the proposals for registration of the MDSS with reference to check list and found to be correct. It is recommended for registration of the MDSS.
+                    
+                  </p> 
+                </div>
+              </div> <div class="row"> 
+                <div class="col-md-12"   style="text-align: center;">
+                  <button class="btn btn-success" (click)="esignClick();" *ngIf="eSignbtn">eSign </button>
+                  <button class="btn btn-success" (click)="submitClick();" *ngIf="submitbtn">Submit To DCO</button>
+                </div>
+              </div>
+
+                </div> 
+        
+              <div class="col-md-12" [hidden]="checkList?.length > 0">
+                <!-- <h3 class="text-center">
+                  No pending check Lists Available !!!
+                </h3> -->
+              </div>
+            </div>
+        
+          </div>
+
+
+          <div class="col-md-12" *ngIf="tremarks" id="tremarks">
+              <div style="text-align:center;">
+              Remarks:
+              <input type="text" id="txtremarks" name="txtremarks"  [(ngModel)]="txtremarks1" style="width:500px;" placeholder="Remarks" />
+              <button class="btn btn-success" (click)="RejectClick();" >ROLLBACK To RIC</button>
+            </div>
+          </div>
+
+       </div>
+
+      </div>
+       </div> 
+       
+</div>
+
+
+
+  <div id="APPROVED"   [(ngModel)]="APPROVED"> 
+    <div class="card"   >
+    <div class="card-header p-12" style="
+    background-color: mediumseagreen;color: white;">
+        <div class="row">
+            <div class="col-md-12" style="text-align: center;">
+            <h5 class="mb-0"> DLCO APPROVED LIST</h5>
+            </div> 
+        </div>
+    </div>    
+    <div class="card-body"  >   
+        
+        <div>    
+            <div>
+              <div class="row">
+                <div class="col-md-12">
+                  <button
+                    type="button"
+                    class="btn btn-sm btn-success pull-right"
+                    (click)="btnApprovedExcelDownload()"
+                  >
+                    <i class="fa fa-file-excel-o mr-2" aria-hidden="true"></i>
+                    DOWNLOAD EXCEL
+                  </button>
+                </div>
+              </div>
+                
+              <div class=" table-responsive">
+                <table class="table table-striped ah-table text-center tabsdata"
+                  data-page-length='-1'>
+                  <thead class="bg-success text-white table-fixed">
+                    <tr >
+                      <th  >S.No.</th>
+                      <th style="font-size: 11px;" >DISTRICT</th>
+                      <th   style="font-size: 11px;">MANDAL NAME</th>
+                      <th style="font-size: 11px;">DIVISION NAME</th>
+                      <th style="font-size: 11px;">RSK NAME</th>
+                      <th style="font-size: 11px;">RSK CODE</th>
+                      <th style="font-size: 11px;">APPLICATION  DATE</th>
+                      <th style="font-size: 11px;"> RC NO</th>
+                      <th style="font-size: 11px;"> REGISTRATION NO</th>
+                      <th style="font-size: 11px;"> REGISTRATION DATE</th>
+                      
+                      
+                      <th style="font-size: 11px;"> FORM-A</th>
+                      <th style="font-size: 11px;"> SWORN STATEMENT</th>
+                      <th style="font-size: 11px;"> MASUDHA FORM</th>
+                      <th style="font-size: 11px;"> MEETING PROCEEDINGS</th>
+                      <th style="font-size: 11px;"> REQ LETTER ADHOC</th>
+                      <th style="font-size: 11px;"> ECONOMIC VIABILITY</th>
+                      <th style="font-size: 11px;"> BANK REMITTANCE CERTIFICATE</th>
+                      <th style="font-size: 11px;"> FEASIBILITY</th>
+                      <th style="font-size: 11px;"> BYE-LAW</th>
+    
+                      <th style="font-size: 11px;"> DLCO APPROVED CERTIFICATE</th>
+                      <th style="font-size: 11px;"> DCO APPROVED CERTIFICATE</th>
+                      <th style="font-size: 11px;"> AR APPROVED CERTIFICATE</th>
+    
+                      <th style="font-size: 11px;"> REGISTRATION CERTIFICATE</th>
+                      <th style="font-size: 11px;"> BYE-LAW REGISTRATION</th>
+                      <th style="font-size: 11px;"> PROCEEDINGS ORDERS</th>
+                      <th style="font-size: 11px;"> PROCEEDINGS ADHOC</th>
+                      
+                       
+                     
+                      <!-- <th> REMARKS</th>   -->
+                    </tr>
+                  </thead>
+                  <tbody *ngIf="APPROVED_RBKList?.length > 0">
+                    <tr *ngFor="let obj of APPROVED_RBKList; let i = index">
+                      <td >{{ i + 1 }}</td>
+                      <td >{{ obj.DISTRICT }}</td>
+                      <td >{{ obj.MANDAL_NAME }}</td>
+                      <td >{{ obj.DIVISION_NAME }}</td>
+                      <td >{{ obj.RBK_NAME }}</td>
+                        <td >{{ obj.RBK_CODE }}</td> 
+                        <td >{{ obj.CREATED_DATE.substring(0,10) }}</td> 
+                        <td >{{ obj.RC_NO }}</td> 
+                        <td >{{ obj.REG_NO }}</td> 
+                        <td >{{ obj.REGISTERED_DATE.substring(0,10) }}</td> 
+                        
+                      <td >
+                      <button style="background-color: cornflowerblue;color: white;"
+                      type="button"
+                      class="btn btn-link btn-sm"
+                      *ngIf="
+                        obj.FORM_A_PDF !== null &&
+                        obj.FORM_A_PDF !== 'NA' &&
+                        obj.FORM_A_PDF !== undefined
+                      "
+                      (click)="btnPdfView(obj.FORM_A_PDF)"
+                    >
+                    View
+                    </button>
+                    <span
+                      *ngIf="
+                        obj.FORM_A_PDF === null ||
+                        obj.FORM_A_PDF === 'NA' ||
+                        obj.FORM_A_PDF === undefined
+                      "
+                      >NA</span
+                    >
+                  </td>
+                  <td >
+                    <button style="background-color: cornflowerblue;color: white;"
+                    type="button"
+                    class="btn btn-link btn-sm"
+                    *ngIf="
+                      obj.SWORN_STATEMENT_PDF !== null &&
+                      obj.SWORN_STATEMENT_PDF !== 'NA' &&
+                      obj.SWORN_STATEMENT_PDF !== undefined
+                    "
+                    (click)="btnPdfView(obj.SWORN_STATEMENT_PDF)"
+                  >
+                  View
+                  </button>
+                  <span
+                    *ngIf="
+                      obj.SWORN_STATEMENT_PDF === null ||
+                      obj.SWORN_STATEMENT_PDF === 'NA' ||
+                      obj.SWORN_STATEMENT_PDF === undefined
+                    "
+                    >NA</span
+                  >
+                </td>
+                  <td >
+                  <button style="background-color: cornflowerblue;color: white;"
+                  type="button"
+                  class="btn btn-link btn-sm"
+                  *ngIf="
+                    obj.MASUDHA_FORM_PDF !== null &&
+                    obj.MASUDHA_FORM_PDF !== 'NA' &&
+                    obj.MASUDHA_FORM_PDF !== undefined
+                  "
+                  (click)="btnPdfView(obj.MASUDHA_FORM_PDF)"
+                >
+                View
+                </button>
+                <span
+                  *ngIf="
+                    obj.MASUDHA_FORM_PDF === null ||
+                    obj.MASUDHA_FORM_PDF === 'NA' ||
+                    obj.MASUDHA_FORM_PDF === undefined
+                  "
+                  >NA</span
+                >
+              </td>
+                  
+              <td >
+                <button style="background-color: cornflowerblue;color: white;"
+                type="button"
+                class="btn btn-link btn-sm"
+                *ngIf="
+                  obj.MEETING_PROCEDINGS_PDF !== null &&
+                  obj.MEETING_PROCEDINGS_PDF !== 'NA' &&
+                  obj.MEETING_PROCEDINGS_PDF !== undefined
+                "
+                (click)="btnPdfView(obj.MEETING_PROCEDINGS_PDF)"
+              >
+              View
+              </button>
+              <span
+                *ngIf="
+                  obj.MEETING_PROCEDINGS_PDF === null ||
+                  obj.MEETING_PROCEDINGS_PDF === 'NA' ||
+                  obj.MEETING_PROCEDINGS_PDF === undefined
+                "
+                >NA</span
+              >
+            </td> 
+            <td >
+              <button style="background-color: cornflowerblue;color: white;"
+              type="button"
+              class="btn btn-link btn-sm"
+              *ngIf="
+                obj.REQ_LETTER_ADHOCK_COM_PDF !== null &&
+                obj.REQ_LETTER_ADHOCK_COM_PDF !== 'NA' &&
+                obj.REQ_LETTER_ADHOCK_COM_PDF !== undefined
+              "
+              (click)="btnPdfView(obj.REQ_LETTER_ADHOCK_COM_PDF)"
+            >
+            View
+            </button>
+            <span
+              *ngIf="
+                obj.REQ_LETTER_ADHOCK_COM_PDF === null ||
+                obj.REQ_LETTER_ADHOCK_COM_PDF === 'NA' ||
+                obj.REQ_LETTER_ADHOCK_COM_PDF === undefined
+              "
+              >NA</span
+            >
+          </td>  
+          <td >
+            <button style="background-color: cornflowerblue;color: white;"
+            type="button"
+            class="btn btn-link btn-sm"
+            *ngIf="
+              obj.ECONOMIC_VIABILITY_REP_PDF !== null &&
+              obj.ECONOMIC_VIABILITY_REP_PDF !== 'NA' &&
+              obj.ECONOMIC_VIABILITY_REP_PDF !== undefined
+            "
+            (click)="btnPdfView(obj.ECONOMIC_VIABILITY_REP_PDF)"
+          >
+          View
+          </button>
+          <span
+            *ngIf="
+              obj.ECONOMIC_VIABILITY_REP_PDF === null ||
+              obj.ECONOMIC_VIABILITY_REP_PDF === 'NA' ||
+              obj.ECONOMIC_VIABILITY_REP_PDF === undefined
+            "
+            >NA</span
+          >
+        </td>    
+                 
+        <td >
+          <button style="background-color: cornflowerblue;color: white;"
+          type="button"
+          class="btn btn-link btn-sm"
+          *ngIf="
+            obj.BANK_REMITTANCE_CERTI_PDF !== null &&
+            obj.BANK_REMITTANCE_CERTI_PDF !== 'NA' &&
+            obj.BANK_REMITTANCE_CERTI_PDF !== undefined
+          "
+          (click)="btnPdfView(obj.BANK_REMITTANCE_CERTI_PDF)"
+        >
+        View
+        </button>
+        <span
+          *ngIf="
+            obj.BANK_REMITTANCE_CERTI_PDF === null ||
+            obj.BANK_REMITTANCE_CERTI_PDF === 'NA' ||
+            obj.BANK_REMITTANCE_CERTI_PDF === undefined
+          "
+          >NA</span
+        >
+      </td>  
+      <td >
+        <button style="background-color: cornflowerblue;color: white;"
+        type="button"
+        class="btn btn-link btn-sm"
+        *ngIf="
+          obj.FESABILITY_REPORT_PDF !== null &&
+          obj.FESABILITY_REPORT_PDF !== 'NA' &&
+          obj.FESABILITY_REPORT_PDF !== undefined
+        "
+        (click)="btnPdfView(obj.FESABILITY_REPORT_PDF)"
+      >
+      View
+      </button>
+      <span
+        *ngIf="
+          obj.FESABILITY_REPORT_PDF === null ||
+          obj.FESABILITY_REPORT_PDF === 'NA' ||
+          obj.FESABILITY_REPORT_PDF === undefined
+        "
+        >NA</span
+      >
+    </td>  
+    
+    <td >
+      <button style="background-color: cornflowerblue;color: white;"
+      type="button"
+      class="btn btn-link btn-sm"
+      *ngIf="
+        obj.BYE_LAW_PDF !== null &&
+        obj.BYE_LAW_PDF !== 'NA' &&
+        obj.BYE_LAW_PDF !== undefined
+      "
+      (click)="btnPdfView(obj.BYE_LAW_PDF)"
+    >
+    View
+    </button>
+    <span
+      *ngIf="
+        obj.BYE_LAW_PDF === null ||
+        obj.BYE_LAW_PDF === 'NA' ||
+        obj.BYE_LAW_PDF === undefined
+      "
+      >NA</span
+    >
+    </td>  
+    
+    <td >
+      <button style="background-color: cornflowerblue;color: white;"
+      type="button"
+      class="btn btn-link btn-sm"
+      *ngIf="
+        obj.DLCO_CERT !== null &&
+        obj.DLCO_CERT !== 'NA' &&
+        obj.DLCO_CERT !== undefined  && obj.DLCO_CERT !== '0' 
+      "
+      (click)="btnPdfesign(obj.DLCO_CERT)"
+    >
+    View
+    </button>
+    <span
+      *ngIf="
+        obj.DLCO_CERT === null ||
+        obj.DLCO_CERT === 'NA' ||
+        obj.DLCO_CERT === undefined || obj.DLCO_CERT === '0'
+      "
+      >NA</span
+    >
+    </td>  
+    
+    <td >
+      <button style="background-color: cornflowerblue;color: white;"
+      type="button"
+      class="btn btn-link btn-sm"
+      *ngIf="
+        obj.DCO_CERT !== null &&
+        obj.DCO_CERT !== 'NA' &&
+        obj.DCO_CERT !== undefined && obj.DCO_CERT !== '0'
+      "
+      (click)="btnPdfesign(obj.DCO_CERT)"
+    >
+    View
+    </button>
+    <span
+      *ngIf="
+        obj.DCO_CERT === null ||
+        obj.DCO_CERT === 'NA' || obj.DCO_CERT === '0' ||
+        obj.DCO_CERT === undefined
+      "
+      >NA</span
+    >
+    </td>  
+    
+    <td >
+      <button style="background-color: cornflowerblue;color: white;"
+      type="button"
+      class="btn btn-link btn-sm"
+      *ngIf="
+        obj.GM_CERT !== null &&
+        obj.GM_CERT !== 'NA' &&
+        obj.GM_CERT !== undefined && obj.GM_CERT !== '0' 
+      "
+      (click)="btnPdfesign(obj.GM_CERT)"
+    >
+    View
+    </button>
+    <span
+      *ngIf="
+        obj.GM_CERT === null ||
+        obj.GM_CERT === 'NA' || obj.GM_CERT === '0' ||
+        obj.GM_CERT === undefined
+      "
+      >NA</span
+    >
+    </td> 
+    
+    
+                <td >
+                  <button style="background-color: cornflowerblue;color: white;"
+                  type="button"
+                  class="btn btn-link btn-sm"
+                  *ngIf="
+                    obj.COMM_REG_CERT !== null &&
+                    obj.COMM_REG_CERT !== 'NA' &&
+                    obj.COMM_REG_CERT !== undefined && obj.COMM_REG_CERT !=='0'
+                  "
+                  (click)="btnPdfesign(obj.COMM_REG_CERT)"
+                  
+    
+                >
+                View
+                </button>
+                <span
+                  *ngIf="
+                    obj.COMM_REG_CERT === null ||
+                    obj.COMM_REG_CERT === 'NA' ||
+                    obj.COMM_REG_CERT === undefined || obj.COMM_REG_CERT ==='0'
+                  "
+                  >NA</span
+                >
+              </td>  
+    
+              <td >
+                <button style="background-color: cornflowerblue;color: white;"
+                type="button"
+                class="btn btn-link btn-sm"
+                *ngIf="
+                  obj.COMM_BYLAW_CERT !== null &&
+                  obj.COMM_BYLAW_CERT !== 'NA' &&
+                  obj.COMM_BYLAW_CERT !== undefined && obj.COMM_BYLAW_CERT !== '0'
+                "
+                (click)="btnPdfGeneratebylaw(obj.COMM_BYLAW_CERT+','+obj.RBK_CODE+','+obj.DIST_CODE);"
+              >
+              View
+              </button>
+              <span
+                *ngIf="
+                  obj.COMM_BYLAW_CERT === null ||
+                  obj.COMM_BYLAW_CERT === 'NA' ||
+                  obj.COMM_BYLAW_CERT === undefined || obj.COMM_BYLAW_CERT === '0'
+                "
+                >NA</span
+              >
+            </td>
+    
+            <td >
+              <button style="background-color: cornflowerblue;color: white;"
+              type="button"
+              class="btn btn-link btn-sm"
+              *ngIf="
+                obj.COMM_PROC_CERT !== null &&
+                obj.COMM_PROC_CERT !== 'NA' &&
+                obj.COMM_PROC_CERT !== undefined && obj.COMM_PROC_CERT !=='0'
+              "
+              (click)="btnPdfGenerateProcedings(obj.COMM_PROC_CERT+','+obj.RBK_CODE+','+obj.DIST_CODE)"
+            >
+            View
+            </button>
+            <span
+              *ngIf="
+                obj.COMM_PROC_CERT === null ||
+                obj.COMM_PROC_CERT === 'NA' ||
+                obj.COMM_PROC_CERT === undefined || obj.COMM_PROC_CERT === '0'
+              "
+              >NA</span
+            >
+          </td>  
+    
+          <td >
+            <button style="background-color: cornflowerblue;color: white;"
+            type="button"
+            class="btn btn-link btn-sm"
+            *ngIf="
+              obj.COMM_ADHOC_CERT !== null &&
+              obj.COMM_ADHOC_CERT !== 'NA' &&
+              obj.COMM_ADHOC_CERT !== undefined && obj.COMM_ADHOC_CERT !== '0'
+            "
+            (click)="btnPdfGenerateadhok(obj.COMM_ADHOC_CERT+','+obj.RBK_CODE+','+obj.DIST_CODE)"
+          >
+          View
+          </button>
+          <span
+            *ngIf="
+              obj.COMM_ADHOC_CERT === null ||
+              obj.COMM_ADHOC_CERT === 'NA' ||
+              obj.COMM_ADHOC_CERT === undefined ||  obj.COMM_ADHOC_CERT === '0'
+            "
+            >NA</span
+          > 
+          </td>  
+    
+        
+    
+    
+    
+       
+    
+                    </tr>
+                  </tbody>
+                </table>
+            
+              </div>
+    
+              </div>
+              
+    
+        </div> 
+    
+    </div>
+    </div>
+    </div>
+
+  
+  <div  id="REJECTED"   [(ngModel)]="REJECTED" > 
+      <div class="card"   >
+      <div class="card-header p-12" style="
+      background-color: coral;color: white;
+  ">
+          <div class="row">
+              <div class="col-md-12" style="text-align: center;">
+              <h5 class="mb-0">DLCO ROLLBACK LIST</h5>
+              </div> 
+          </div>
+      </div>    
+      <div class="card-body"  > 
+         
+        <div>
+          <div >
+              <div class=" table-responsive" [hidden]="registrationRejectedList?.length < 1">
+               <table class="table table-striped ah-table text-center">
+                <thead class="bg-success text-white table-fixed">
+                  <tr >
+                    <th  >S.No.</th>
+                    <th style="font-size: 11px;" >DISTRICT</th>
+                    <th   style="font-size: 11px;">MANDAL NAME</th>
+                    <th style="font-size: 11px;">DIVISION NAME</th>
+                    <th style="font-size: 11px;">RSK NAME</th>
+                    <th style="font-size: 11px;">RSK CODE</th>
+                    <th style="font-size: 11px;">DOC DATE</th>
+                    <th style="font-size: 11px;">ROLLBACK REASON</th>
+                    <th style="font-size: 11px;">ROLLBACK DATE</th>
+                    <th style="font-size: 11px;">ROLLBACK BY</th>
+                     
+                    
+                    <th style="font-size: 11px;"> FORM-A</th>
+                    <th style="font-size: 11px;"> SWORN STATEMENT</th>
+                    <th style="font-size: 11px;"> MASUDHA FORM</th>
+                    <th style="font-size: 11px;"> MEETING PROCEEDINGS</th>
+                    <th style="font-size: 11px;"> REQ LETTER ADHOC</th>
+                    <th style="font-size: 11px;"> ECONOMIC VIABILITY</th>
+                    <th style="font-size: 11px;"> BANK REMITTANCE CERTIFICATE</th>
+                    <th style="font-size: 11px;"> FEASIBILITY</th>
+                    <th style="font-size: 11px;"> BYE-LAW</th>
+    
+                    
+                  </tr>
+                </thead>
+                <tbody *ngIf="registrationRejectedList?.length > 0">
+                  <tr *ngFor="let obj of registrationRejectedList; let i = index">
+                    <td >{{ i + 1 }}</td>
+                    <td >{{ obj.DISTRICT }}</td>
+                    <td >{{ obj.MANDAL_NAME }}</td>
+                    <td >{{ obj.DIVISION_NAME }}</td>
+                    <td >{{ obj.RBK_NAME }}</td>                
+                    <td >{{ obj.RBK_CODE }}</td> 
+                    <td >{{ obj.CREATED_DATE.substring(0,10) }}</td> 
+                    <td >{{ obj.ROLLBACK_REASON }}</td> 
+                    <td >{{ obj.ROLLBACK_DATE.substring(0,10) }}</td> 
+                    <td >{{ obj.APPLICATION_STATUS }}</td> 
+    
+                    <td >
+                    <button style="background-color: cornflowerblue;color: white;"
+                    type="button"
+                    class="btn btn-link btn-sm"
+                    *ngIf="
+                      obj.FORM_A_PDF !== null &&
+                      obj.FORM_A_PDF !== 'NA' &&
+                      obj.FORM_A_PDF !== undefined
+                    "
+                    (click)="btnPdfView(obj.FORM_A_PDF)"
+                  >
+                  View
+                  </button>
+                  <span
+                    *ngIf="
+                      obj.FORM_A_PDF === null ||
+                      obj.FORM_A_PDF === 'NA' ||
+                      obj.FORM_A_PDF === undefined
+                    "
+                    >NA</span
+                  >
+                </td>
+                <td >
+                  <button style="background-color: cornflowerblue;color: white;"
+                  type="button"
+                  class="btn btn-link btn-sm"
+                  *ngIf="
+                    obj.SWORN_STATEMENT_PDF !== null &&
+                    obj.SWORN_STATEMENT_PDF !== 'NA' &&
+                    obj.SWORN_STATEMENT_PDF !== undefined
+                  "
+                  (click)="btnPdfView(obj.SWORN_STATEMENT_PDF)"
+                >
+                View
+                </button>
+                <span
+                  *ngIf="
+                    obj.SWORN_STATEMENT_PDF === null ||
+                    obj.SWORN_STATEMENT_PDF === 'NA' ||
+                    obj.SWORN_STATEMENT_PDF === undefined
+                  "
+                  >NA</span
+                >
+              </td>
+                <td >
+                <button style="background-color: cornflowerblue;color: white;"
+                type="button"
+                class="btn btn-link btn-sm"
+                *ngIf="
+                  obj.MASUDHA_FORM_PDF !== null &&
+                  obj.MASUDHA_FORM_PDF !== 'NA' &&
+                  obj.MASUDHA_FORM_PDF !== undefined
+                "
+                (click)="btnPdfView(obj.MASUDHA_FORM_PDF)"
+              >
+              View
+              </button>
+              <span
+                *ngIf="
+                  obj.MASUDHA_FORM_PDF === null ||
+                  obj.MASUDHA_FORM_PDF === 'NA' ||
+                  obj.MASUDHA_FORM_PDF === undefined
+                "
+                >NA</span
+              >
+            </td>
+                
+            <td >
+              <button style="background-color: cornflowerblue;color: white;"
+              type="button"
+              class="btn btn-link btn-sm"
+              *ngIf="
+                obj.MEETING_PROCEDINGS_PDF !== null &&
+                obj.MEETING_PROCEDINGS_PDF !== 'NA' &&
+                obj.MEETING_PROCEDINGS_PDF !== undefined
+              "
+              (click)="btnPdfView(obj.MEETING_PROCEDINGS_PDF)"
+            >
+            View
+            </button>
+            <span
+              *ngIf="
+                obj.MEETING_PROCEDINGS_PDF === null ||
+                obj.MEETING_PROCEDINGS_PDF === 'NA' ||
+                obj.MEETING_PROCEDINGS_PDF === undefined
+              "
+              >NA</span
+            >
+          </td> 
+          <td >
+            <button style="background-color: cornflowerblue;color: white;"
+            type="button"
+            class="btn btn-link btn-sm"
+            *ngIf="
+              obj.REQ_LETTER_ADHOCK_COM_PDF !== null &&
+              obj.REQ_LETTER_ADHOCK_COM_PDF !== 'NA' &&
+              obj.REQ_LETTER_ADHOCK_COM_PDF !== undefined
+            "
+            (click)="btnPdfView(obj.REQ_LETTER_ADHOCK_COM_PDF)"
+          >
+          View
+          </button>
+          <span
+            *ngIf="
+              obj.REQ_LETTER_ADHOCK_COM_PDF === null ||
+              obj.REQ_LETTER_ADHOCK_COM_PDF === 'NA' ||
+              obj.REQ_LETTER_ADHOCK_COM_PDF === undefined
+            "
+            >NA</span
+          >
+        </td>  
+        <td >
+          <button style="background-color: cornflowerblue;color: white;"
+          type="button"
+          class="btn btn-link btn-sm"
+          *ngIf="
+            obj.ECONOMIC_VIABILITY_REP_PDF !== null &&
+            obj.ECONOMIC_VIABILITY_REP_PDF !== 'NA' &&
+            obj.ECONOMIC_VIABILITY_REP_PDF !== undefined
+          "
+          (click)="btnPdfView(obj.ECONOMIC_VIABILITY_REP_PDF)"
+        >
+        View
+        </button>
+        <span
+          *ngIf="
+            obj.ECONOMIC_VIABILITY_REP_PDF === null ||
+            obj.ECONOMIC_VIABILITY_REP_PDF === 'NA' ||
+            obj.ECONOMIC_VIABILITY_REP_PDF === undefined
+          "
+          >NA</span
+        >
+      </td>    
+               
+      <td >
+        <button style="background-color: cornflowerblue;color: white;"
+        type="button"
+        class="btn btn-link btn-sm"
+        *ngIf="
+          obj.BANK_REMITTANCE_CERTI_PDF !== null &&
+          obj.BANK_REMITTANCE_CERTI_PDF !== 'NA' &&
+          obj.BANK_REMITTANCE_CERTI_PDF !== undefined
+        "
+        (click)="btnPdfView(obj.BANK_REMITTANCE_CERTI_PDF)"
+      >
+      View
+      </button>
+      <span
+        *ngIf="
+          obj.BANK_REMITTANCE_CERTI_PDF === null ||
+          obj.BANK_REMITTANCE_CERTI_PDF === 'NA' ||
+          obj.BANK_REMITTANCE_CERTI_PDF === undefined
+        "
+        >NA</span
+      >
+    </td>  
+    <td >
+      <button style="background-color: cornflowerblue;color: white;"
+      type="button"
+      class="btn btn-link btn-sm"
+      *ngIf="
+        obj.FESABILITY_REPORT_PDF !== null &&
+        obj.FESABILITY_REPORT_PDF !== 'NA' &&
+        obj.FESABILITY_REPORT_PDF !== undefined
+      "
+      (click)="btnPdfView(obj.FESABILITY_REPORT_PDF)"
+    >
+    View
+    </button>
+    <span
+      *ngIf="
+        obj.FESABILITY_REPORT_PDF === null ||
+        obj.FESABILITY_REPORT_PDF === 'NA' ||
+        obj.FESABILITY_REPORT_PDF === undefined
+      "
+      >NA</span
+    >
+    </td>  
+    
+    <td >
+    <button style="background-color: cornflowerblue;color: white;"
+    type="button"
+    class="btn btn-link btn-sm"
+    *ngIf="
+      obj.BYE_LAW_PDF !== null &&
+      obj.BYE_LAW_PDF !== 'NA' &&
+      obj.BYE_LAW_PDF !== undefined
+    "
+    (click)="btnPdfView(obj.BYE_LAW_PDF)"
+    >
+    View
+    </button>
+    <span
+    *ngIf="
+      obj.BYE_LAW_PDF === null ||
+      obj.BYE_LAW_PDF === 'NA' ||
+      obj.BYE_LAW_PDF === undefined
+    "
+    >NA</span
+    >
+    </td>  
+    
+      
+    
+    
+    
+      
+                  </tr>
+                </tbody>
+              </table>
+              </div>
+            </div>
+            
+    
+      </div>
+
+        <!-- <div class="row"> <div class="col-md-4">
+          <div class="form-group"> </div></div>
+          <div class="col-md-2">
+            <div class="form-group"> <span style="text-align:right;">  Select RBK NAME:  </span>
+            </div></div>
+            <div class="col-md-4">
+                <div class="form-group">   
+
+                   <select
+                  id="RBKDDRejectSelected"
+                  class="form-control"
+                  [(ngModel)]="RBKDDRejectSelected"
+                  (change)="RBKDDRejectChange();"
+                >
+                 
+                  <option value="">-- SELECT RBK NAME--</option>
+                  <option value="{{ obj.RBK_CODE }}" *ngFor="let obj of rbkRejectList"  >
+                    {{ obj.RBK_NAME }}
+                  </option>
+                </select>  
+
+
+               </div>
+              </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <hr style="border-color: red;">
+          </div></div>
+
+          <div class="row">
+            <div class="col-md-12 table-responsive" [hidden]="checkRejectList?.length < 1">
+              <table class="table table-striped ah-table text-center" 
+                >
+                <thead class="bg-success text-white">
+                  <tr>
+                    <th>S.No.</th>
+                    <th>QUESTION</th>
+                    <th>DLCO STATUS</th>
+                    <th>DCO STATUS</th>
+                    <th>GM STATUS</th>
+                    <th>COMM STATUS</th>
+                  </tr>
+                </thead>
+                <tbody *ngIf="checkRejectList?.length > 0">
+                  <tr *ngFor="let obj of checkRejectList; let i = index">
+                    <td>{{ i + 1 }}</td>
+                    <td style="text-align: left;width: 500px;">{{ obj.CHECK_LIST_NAME }}</td>
+                   
+                    <td style="text-align: center;width: 150px;">{{ obj.DLCO_STATUS }} </td>
+                    <td style="text-align: center;width: 150px;">{{ obj.DCO_STATUS }} </td>
+                    <td style="text-align: center;width: 150px;">{{ obj.GM_STATUS }} </td>
+                    <td style="text-align: center;width: 150px;">{{ obj.COMM_STATUS }} </td>
+
+                   
+
+
+                  </tr>
+                </tbody>
+              </table>  
+          </div>
+      
+        </div> -->
+
+       </div>
+      </div>
+  </div>
+
+   
+  <div  id="ROLLBACK"   [(ngModel)]="ROLLBACK" > 
+      <div class="card"   >
+      <div class="card-header p-12" style="
+      background-color: mediumseagreen;color: white;
+  ">
+          <div class="row">
+              <div class="col-md-12" style="text-align: center;">
+              <h5 class="mb-0">DLCO CHECKLIST</h5>
+              </div> 
+          </div>
+      </div>    
+      <div class="card-body"  >
+          
+      </div>
+  </div>
+</div> 
+
+
+
+<div class="popup-modal" *ngIf="esignPopup">
+<div class="popup-content" style="min-width: 75%">
+  <div class="popup-header">
+    <h4 class="title"> eSign-Confirmation</h4>
+    <a
+      type="button"
+      class="close"
+        
+      style="cursor: pointer"
+    >
+      <span (click)="onClear()">×</span>
+    </a>
+  </div>
+
+  <div class="popup-body">
+    <div class="row justify-content-center align-items-center">
+      <div class="col-md-12">
+        <div class="form-group">
+          
+          <label for="finomid">Consent <span style="color: red">*</span></label
+          >
+          <textarea
+          id="fino_id" disabled
+          type="text"
+          class="form-control" placeholder="I accept this acknowledgement and consent for electronic signatures, disclosures and notices form as of the date signed below on behalf of APDDCF Department"
+                         
+          autocomplete="off"
+        ></textarea>
+                </div>
+      </div>
+
+      <div class="col-md-12 row">
+        <div class="col-md-3">
+          <label for="newtetra" 
+            > Consent for Authentication <span style="color: red">*</span></label
+          >
+        </div>
+        <div class="col-md-9">
+        <input type="checkbox" class="otpclass" value="1" checked id="UseingOTP" title="UseingOTP" autocomplete="off" maxlength="30" placeholder="UseingOTP" /> <span class="cb-label-text"> Using OTP</span>
+          
+      </div>
+      </div>
+
+       
+      <div class="col-md-12 text-center my-3">
+        <input type="checkbox" class="" [(ngModel)]="esignCheckText" id="agreeConsent" title="agree" autocomplete="off" maxlength="30" placeholder="agree" /> I Agree
+    </div>
+      
+      
+    </div>
+
+    
+    <div class="popup-footer justify-content-center">
+      <button
+        type="button" (click)="clickbtnsub();"
+        class="btn btn-success btn-sm"
+        
+      >
+      eSign Send
+      </button>
+    </div>
+  </div>
+</div>
+</div> 
+
+
+
+

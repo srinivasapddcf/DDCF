@@ -1,0 +1,43 @@
+
+    <div class="row">
+        <div class="col-md-12 table-responsive" [hidden]="societyapprovalsList?.length < 1">
+          <table class="table table-striped ah-table text-center" datatable [dtOptions]="dtOptions"
+            [dtTrigger]="dtTrigger" data-page-length='-1'>
+            <thead class="bg-success text-white">
+              <tr>
+                <th>S.No.</th>
+                <th>DISTRICT</th>
+                <th>MANDAL</th>
+                <th>DIVISION</th>
+                <th>RSK</th>
+                <th>REQUESTED DATE</th>
+                <th>VIEW PDF</th>
+                <th><input type="checkbox" [checked]="isAllCheckBoxChecked()" (change)="checkAllCheckBox($event)"></th>
+              </tr>
+            </thead>
+            <tbody *ngIf="societyapprovalsList?.length > 0">
+              <tr *ngFor="let obj of societyapprovalsList; let i = index">
+                <td>{{ i + 1 }}</td>
+                <td>{{ obj.DISTRICT }}</td>
+                <td>{{ obj.MANDAL_NAME }}</td>
+                <td>{{ obj.DIVISION_NAME }}</td>
+                <td>{{ obj.RBK_NAME }}</td>
+                <td>{{ obj.INSERTED_DATE }}</td>
+                <td><button class="btn btn-sm btn-info block" (click)="btnPdf(obj.APPLICATION_PDF)"><i class="fa fa-eye"></i></button></td>
+                <td><input type="checkbox" value="{{obj.RBK_CODE}}" (change)="selectsingleCheck(obj.RBK_CODE)" [(ngModel)]="societyapprovalsList[i].checked"></td>
+              </tr>
+            </tbody>
+          </table>
+  
+          <div class="row" [hidden]="!divSbmt">
+          <div class="col-md-12"   style="text-align: center;">
+            <button class="btn btn-success" (click)="SubmitData();">Examin & Process</button>
+          </div>
+          </div>
+        </div>
+        <div class="col-md-12" [hidden]="societyapprovalsList?.length > 0">
+          <!-- <h3 class="text-center">
+            No pending check Lists Available !!!
+          </h3> -->
+        </div>
+      </div>

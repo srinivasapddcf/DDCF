@@ -1,0 +1,239 @@
+<div class="card">
+  <div class="card-header p-2">
+    <h5 class="mb-0">MINUTES OF MEETING</h5>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="rbkId">RSK <span style="color: red">*</span></label>
+          <select
+            id="rbkId"
+            class="form-control"
+            [(ngModel)]="meetingData.rbkId"
+            (change)="onRbkChange()"
+          >
+            <option value="">-- SELECT RSK --</option>
+            <option value="{{ obj.RBK_ID }}" *ngFor="let obj of rbkList">
+              {{ obj.RBK_NAME }}
+            </option>
+          </select>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="villageId"
+            >VILLAGE <span style="color: red">*</span></label
+          >
+          <select
+            id="villageId"
+            class="form-control"
+            [(ngModel)]="meetingData.villageId"
+            (change)="onVillageChange()"
+          >
+            <option value="">-- SELECT VILLAGE --</option>
+            <option
+              value="{{ obj.VILLAGE_ID }}"
+              *ngFor="let obj of villageList"
+            >
+              {{ obj.VILLAGE_NAME }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="meetingId"
+            >MEETING ID <span style="color: red">*</span></label
+          >
+          <select
+            id="meetingId"
+            class="form-control"
+            [(ngModel)]="meetingData.meetingId"
+          >
+            <option value="">-- SELECT MEETING --</option>
+            <option
+              value="{{ obj.MEETING_ID }}"
+              *ngFor="let obj of meetingList"
+            >
+             {{obj.MEETING_DATE}}   {{obj.MEETING_TIME}} ( {{ obj.MEETING_VENUE }} )
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="womenOwnerOfMilchAnimal">
+            NO OF OWNER'S OF MILCH ANIMALS PARTICIPATED
+            <span style="color: red">*</span>
+          </label>
+          <input
+            id="womenOwnerOfMilchAnimal"
+            type="text"
+            class="form-control"
+            [(ngModel)]="meetingData.womenOwnerOfMilchAnimal"
+            placeholder="Please Enter No Of Owner's Of Milch Animals Participated"
+            maxlength="3"
+            NumbersOnly
+            [allowDecimals]="false"
+            [allowSign]="false"
+            autocomplete="off"
+          />
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="womenOfYSRCheyuta">
+            NO OF YSR CHEYUTHA BENEFICIARIES PARTICIPATED
+            <span style="color: red">*</span>
+          </label>
+          <input
+            id="womenOfYSRCheyuta"
+            type="text"
+            class="form-control"
+            [(ngModel)]="meetingData.womenOfYSRCheyuta"
+            placeholder="Please Enter No Of Ysr Cheyutha Beneficiaries Participated"
+            maxlength="3"
+            NumbersOnly
+            [allowDecimals]="false"
+            [allowSign]="false"
+            autocomplete="off"
+          />
+        </div>
+      </div>
+
+      <div class="col-md-12">
+        <div class="form-group">
+          <label for="minutesOfMeeting"
+            >Minute Of Meeting <span style="color: red">*</span></label
+          >
+          <textarea
+            id="minutesOfMeeting"
+            type="text"
+            class="form-control"
+            [(ngModel)]="meetingData.minutesOfMeeting"
+            placeholder="Please Enter Minutes Of Meeting upto 1000 characters"
+            maxlength="500"
+            rows="8"
+          ></textarea>
+        </div>
+      </div>
+
+      <!-- <div class="col-md-4">
+        <div class="form-group">
+          <label for="photoUpload"
+            >Upload Photos <span style="color: red;font-size: small;">* (jpeg and  less than 100KB)</span></label
+          > 
+          <input
+            type="file"
+            class="form-control p-0"
+            id="photoUpload"
+            (change)="onPhotoChange($event)"
+            accept="image/*"
+            #photoUpload
+            autocomplete="off"
+          />
+
+        </div>
+      </div> -->
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="photoUpload"
+            >Upload Photos <span style="color: red">*</span></label
+          >
+          <input
+            type="file"
+            class="form-control p-0"
+            id="photoUpload"
+            (change)="onPhotoChange($event)"
+            accept="image/*"
+            #photoUpload
+            autocomplete="off"
+          />
+        </div>
+      </div>
+
+      <div class="col-md-12">
+        <div
+          class="img-thumb mt-3"
+          *ngFor="let obj of meetingData.photos; let i = index"
+        >
+          <a style="cursor: pointer" (click)="btnImageCancel(i)">
+            <i class="fa fa-times-circle text-black"></i>
+          </a>
+          <img
+            [src]="'data:image/jpeg;base64,' + obj.IMAGE"
+            style="cursor: pointer"
+            class="img-thumbnail mr-3"
+            (click)="btnImage(obj.IMAGE)"
+          />
+        </div>
+      </div>
+
+      <!-- <div class="col-md-12">
+        <div
+          class="img-thumb mt-3"
+          *ngFor="let obj of meetingData.photos; let i = index"
+        >
+          <a style="cursor: pointer" (click)="btnImageCancel(i)">
+            <i class="fa fa-times-circle text-black"></i>
+          </a>
+          <img
+            [src]="'data:image/jpeg;base64,' + obj.IMAGE"
+            style="cursor: pointer"
+            class="img-thumbnail mr-3"
+            (click)="btnImage(obj.IMAGE)"
+          />
+        </div>
+      </div> -->
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="docUpload"
+            >Upload Documents <span style="color: red;font-size: small;">* (pdf and  less than 1MB) </span></label
+          >
+          <input
+            type="file"
+            class="form-control p-0"
+            id="docUpload"
+            (change)="onDocChange($event)"
+            accept="application/pdf"
+            #docUpload
+            autocomplete="off"
+          />
+        </div>
+      </div>
+
+      <div class="col-md-12">
+        <div class="row">
+          <div
+            class="img-thumb col-md-2"
+            *ngFor="let obj of meetingData.docs; let i = index"
+          >
+            <a
+              style="cursor: pointer; color: blue"
+              (click)="btnDoc(obj.DOC, i + 1)"
+              >DOCUMENT-{{ i + 1 }}
+              <span style="cursor: pointer" (click)="btnDocCancel(i)">
+                <i class="fa fa-times-circle text-black"></i>
+              </span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-12" align="center">
+        <button
+          type="button"
+          class="btn btn-success btn-sm"
+          (click)="btnSubmit()"
+        >
+          SUBMIT
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

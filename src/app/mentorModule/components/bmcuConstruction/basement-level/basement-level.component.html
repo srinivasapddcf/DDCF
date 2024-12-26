@@ -1,0 +1,313 @@
+<div class="card">
+  <div class="card-header p-2">
+    <h5 class="mb-0">BASEMENT LEVEL</h5>
+  </div>
+  <div class="card-body amulBuildingInspection">
+    <div class="row">
+      <div class="col-md-3">
+        <div class="form-group">
+          <label for="rbkId">RSK <span style="color: red">*</span></label>
+          <select
+            id="rbkId"
+            class="form-control"
+            [(ngModel)]="basementInputSub.rbkId"
+            (change)="onRbkChange()"
+          >
+            <option value="">-- SELECT RSK --</option>
+            <option value="{{ obj.RBK_ID }}" *ngFor="let obj of rbkList">
+              {{ obj.RBK_NAME }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="form-group">
+          <label for="villageId"
+            >VILLAGE <span style="color: red">*</span></label
+          >
+          <select
+            id="villageId"
+            class="form-control"
+            [(ngModel)]="basementInputSub.villageId"
+            (change)="onVillageChange()"
+          >
+            <option value="">-- SELECT VILLAGE --</option>
+            <option
+              value="{{ obj.VILLAGE_ID }}"
+              *ngFor="let obj of villageList"
+            >
+              {{ obj.VILLAGE_NAME }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="form-group pt-4">
+          <label
+            >WORK ID :
+            <span class="text-success">{{
+              basementInputSub.workId
+            }}</span></label
+          >
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6" *ngIf="basementCheck.markingMDAC">
+        <div class="form-group">
+          <label
+            >MARKING IN THE PRESENCE OF THE MDAC WOMEN :
+            <span
+              class="text-success"
+              *ngIf="basementCheckDetails.MARKING_MDAC_WOMEN === '1'"
+              >YES</span
+            >
+            <span
+              class="text-danger"
+              *ngIf="basementCheckDetails.MARKING_MDAC_WOMEN !== '1'"
+              >NO</span
+            ></label
+          >
+          <br />
+          <span
+            style="color: blue; text-decoration: underline; cursor: pointer"
+            *ngIf="basementCheckDetails.MARKING_MDAC_WOMEN === '1'"
+            (click)="btnViewImage(basementCheckDetails.MARKING_MDAC_WOMEN_IMG)"
+            >VIEW IMAGE</span
+          >
+        </div>
+      </div>
+
+      <div class="col-md-6" *ngIf="basementInput.markingMDAC">
+        <div class="form-group">
+          <label>MARKING IN THE PRESENCE OF THE MDAC WOMEN : </label>
+          <div class="ah-radio-buttons">
+            <div class="custom-control custom-radio custom-control-inline">
+              <input
+                class="custom-control-input"
+                type="radio"
+                name="markingMdacWomen"
+                id="markingMdacWomen1"
+                value="1"
+                [(ngModel)]="basementInputSub.markingMdacWomen"
+                autocomplete="off"
+                (change)="markingMdacWomenChange()"
+              />
+              <label class="custom-control-label" for="markingMdacWomen1">
+                Yes
+              </label>
+            </div>
+
+            <div class="custom-control custom-radio custom-control-inline">
+              <input
+                class="custom-control-input"
+                type="radio"
+                name="markingMdacWomen"
+                id="markingMdacWomen2"
+                value="0"
+                [(ngModel)]="basementInputSub.markingMdacWomen"
+                autocomplete="off"
+                (change)="markingMdacWomenChange()"
+              />
+              <label class="custom-control-label" for="markingMdacWomen2">
+                No
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6" *ngIf="basementInputSub.markingMdacWomen === '1'">
+        <div class="form-group">
+          <label for="markingMdacWomenImage"
+            >MARKING PHOTO :
+            <span style="color: red;font-size: small;">* (JPEG and  less than 100KB) </span>
+          </label>
+          <input
+            type="file"
+            class="form-control p-0"
+            id="markingMdacWomenImageUpload"
+            (change)="markingMdacWomenImageChange($event)"
+            accept="image/*"
+            autocomplete="off"
+            #markingPhotoUpload
+          />
+        </div>
+      </div>
+
+      <div class="col-md-6" *ngIf="basementCheck.foundationConcrete">
+        <div class="form-group">
+          <label
+            >FOUNDATION CONCRETING :
+            <span
+              class="text-success"
+              *ngIf="basementCheckDetails.FOUNDATION_CONCRET === '1'"
+              >YES</span
+            >
+            <span
+              class="text-danger"
+              *ngIf="basementCheckDetails.FOUNDATION_CONCRET !== '1'"
+              >NO</span
+            ></label
+          >
+          <br />
+          <span
+            style="color: blue; text-decoration: underline; cursor: pointer"
+            *ngIf="basementCheckDetails.FOUNDATION_CONCRET === '1'"
+            (click)="btnViewImage(basementCheckDetails.FOUNDATION_CONCRET_IMG)"
+            >VIEW IMAGE</span
+          >
+        </div>
+      </div>
+
+      <div class="col-md-6" *ngIf="basementInput.foundationConcrete">
+        <div class="form-group">
+          <label>FOUNDATION CONCRETING : </label>
+          <div class="ah-radio-buttons">
+            <div class="custom-control custom-radio custom-control-inline">
+              <input
+                class="custom-control-input"
+                type="radio"
+                name="foundationConcret"
+                id="foundationConcret1"
+                value="1"
+                [(ngModel)]="basementInputSub.foundationConcrete"
+                autocomplete="off"
+                (change)="foundationConcretChange()"
+              />
+              <label class="custom-control-label" for="foundationConcret1">
+                Yes
+              </label>
+            </div>
+
+            <div class="custom-control custom-radio custom-control-inline">
+              <input
+                class="custom-control-input"
+                type="radio"
+                name="foundationConcret"
+                id="foundationConcret2"
+                value="0"
+                [(ngModel)]="basementInputSub.foundationConcrete"
+                autocomplete="off"
+                (change)="foundationConcretChange()"
+              />
+              <label class="custom-control-label" for="foundationConcret2">
+                No
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6" *ngIf="basementInputSub.foundationConcrete === '1'">
+        <div class="form-group">
+          <label for="foundationConcreteImage"
+            >FOUNDATION CONCRETE PHOTO :
+            <span style="color: red">*</span>
+          </label>
+          <input
+            type="file"
+            class="form-control p-0"
+            id="foundationConcreteImageUpload"
+            (change)="foundationConcreteImageChange($event)"
+            accept="image/*"
+            autocomplete="off"
+            #foundationPhotoUpload
+          />
+        </div>
+      </div>
+
+      <div class="col-md-6" *ngIf="basementCheck.plinthBeam">
+        <div class="form-group">
+          <label
+            >PLINTH BEAM LEVEL :
+            <span
+              class="text-success"
+              *ngIf="basementCheckDetails.PLINTH_BEAM === '1'"
+              >YES</span
+            >
+            <span
+              class="text-danger"
+              *ngIf="basementCheckDetails.PLINTH_BEAM !== '1'"
+              >NO</span
+            ></label
+          >
+          <br />
+          <span
+            style="color: blue; text-decoration: underline; cursor: pointer"
+            *ngIf="basementCheckDetails.PLINTH_BEAM === '1'"
+            (click)="btnViewImage(basementCheckDetails.PLINTH_BEAM_IMG)"
+            >VIEW IMAGE</span
+          >
+        </div>
+      </div>
+
+      <div class="col-md-6" *ngIf="basementInput.plinthBeam">
+        <div class="form-group">
+          <label>PLINTH BEAM LEVEL : </label>
+          <div class="ah-radio-buttons">
+            <div class="custom-control custom-radio custom-control-inline">
+              <input
+                class="custom-control-input"
+                type="radio"
+                name="plinthBeam"
+                id="plinthBeam1"
+                value="1"
+                [(ngModel)]="basementInputSub.plinthBeam"
+                autocomplete="off"
+                (change)="plinthBeamChange()"
+              />
+              <label class="custom-control-label" for="plinthBeam1">
+                Yes
+              </label>
+            </div>
+
+            <div class="custom-control custom-radio custom-control-inline">
+              <input
+                class="custom-control-input"
+                type="radio"
+                name="plinthBeam"
+                id="plinthBeam2"
+                value="0"
+                [(ngModel)]="basementInputSub.plinthBeam"
+                autocomplete="off"
+                (change)="plinthBeamChange()"
+              />
+              <label class="custom-control-label" for="plinthBeam2"> No </label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6" *ngIf="basementInputSub.plinthBeam === '1'">
+        <div class="form-group">
+          <label for="roadVehicleImg"
+            >PLINTH BEAM PHOTO :
+            <span style="color: red">*</span>
+          </label>
+          <input
+            type="file"
+            class="form-control p-0"
+            id="plinthBeamImageUpload"
+            (change)="plinthBeamImageChange($event)"
+            accept="image/*"
+            autocomplete="off"
+            #beamPhotoUpload
+          />
+        </div>
+      </div>
+
+      <div class="col-md-12" align="center" *ngIf="basementInputSub.submission">
+        <button
+          type="button"
+          class="btn btn-success btn-sm"
+          (click)="btnSubmit()"
+        >
+          SUBMIT
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

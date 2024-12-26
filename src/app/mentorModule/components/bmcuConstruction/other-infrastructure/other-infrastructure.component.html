@@ -1,0 +1,484 @@
+<div class="card">
+  <div class="card-header p-2">
+    <h5 class="mb-0">OTHER INFRASTRUCTURE</h5>
+  </div>
+  <div class="card-body amulBuildingInspection">
+    <div class="row">
+      <div class="col-md-3">
+        <div class="form-group">
+          <label for="rbkId">RSK <span style="color: red">*</span></label>
+          <select
+            id="rbkId"
+            class="form-control"
+            [(ngModel)]="otherInfraInputSub.rbkId"
+            (change)="onRbkChange()"
+          >
+            <option value="">-- SELECT RSK --</option>
+            <option value="{{ obj.RBK_ID }}" *ngFor="let obj of rbkList">
+              {{ obj.RBK_NAME }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="form-group">
+          <label for="villageId"
+            >VILLAGE <span style="color: red">*</span></label
+          >
+          <select
+            id="villageId"
+            class="form-control"
+            [(ngModel)]="otherInfraInputSub.villageId"
+            (change)="onVillageChange()"
+          >
+            <option value="">-- SELECT VILLAGE --</option>
+            <option
+              value="{{ obj.VILLAGE_ID }}"
+              *ngFor="let obj of villageList"
+            >
+              {{ obj.VILLAGE_NAME }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="form-group pt-4">
+          <label
+            >WORK ID :
+            <span class="text-success">{{
+              otherInfraInputSub.workId
+            }}</span></label
+          >
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6" *ngIf="otherInfraCheck.electricPowerSupply">
+        <div class="form-group">
+          <label
+            >ELECTRIC POWER SUPPLY (Light, Fan, Switch borad) :
+            <span
+              class="text-success"
+              *ngIf="otherInfraCheckDetails.ELE_POWER_LIGHT_FAN === '1'"
+              >YES</span
+            >
+            <span
+              class="text-danger"
+              *ngIf="otherInfraCheckDetails.ELE_POWER_LIGHT_FAN !== '1'"
+              >NO</span
+            ></label
+          >
+          <br />
+          <span
+            style="color: blue; text-decoration: underline; cursor: pointer"
+            *ngIf="otherInfraCheckDetails.ELE_POWER_LIGHT_FAN === '1'"
+            (click)="
+              btnViewImage(otherInfraCheckDetails.ELE_POWER_LIGHT_FAN_IMG)
+            "
+            >VIEW IMAGE</span
+          >
+        </div>
+      </div>
+
+      <div class="col-md-6" *ngIf="otherInfraInput.electricPowerSupply">
+        <div class="form-group">
+          <label>ELECTRIC POWER SUPPLY (Light, Fan, Switch borad) : </label>
+          <div class="ah-radio-buttons">
+            <div class="custom-control custom-radio custom-control-inline">
+              <input
+                class="custom-control-input"
+                type="radio"
+                name="electricPowerSupply"
+                id="electricPowerSupply1"
+                value="1"
+                [(ngModel)]="otherInfraInputSub.electricPowerSupply"
+                autocomplete="off"
+                (change)="electricPowerSupplyChange()"
+              />
+              <label class="custom-control-label" for="electricPowerSupply1">
+                Yes
+              </label>
+            </div>
+
+            <div class="custom-control custom-radio custom-control-inline">
+              <input
+                class="custom-control-input"
+                type="radio"
+                name="electricPowerSupply"
+                id="electricPowerSupply2"
+                value="0"
+                [(ngModel)]="otherInfraInputSub.electricPowerSupply"
+                autocomplete="off"
+                (change)="electricPowerSupplyChange()"
+              />
+              <label class="custom-control-label" for="electricPowerSupply2">
+                No
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="col-md-6"
+        *ngIf="otherInfraInputSub.electricPowerSupply === '1'"
+      >
+        <div class="form-group">
+          <label for="electricPowerSupplyImage"
+            >ELECTRICT POWER SUPPLY PHOTO :
+            <span style="color: red;font-size: small;">* (JPEG and  less than 100KB) </span>
+          </label>
+          <input
+            type="file"
+            class="form-control p-0"
+            id="electricPowerSupplyImageUpload"
+            (change)="electricPowerSupplyImageChange($event)"
+            accept="image/*"
+            autocomplete="off"
+            #electricalPowerSupplyPhotoUpload
+          />
+        </div>
+      </div>
+
+      <div class="col-md-6" *ngIf="otherInfraCheck.earthing">
+        <div class="form-group">
+          <label
+            >EARTHING :
+            <span
+              class="text-success"
+              *ngIf="otherInfraCheckDetails.EARTHING === '1'"
+              >YES</span
+            >
+            <span
+              class="text-danger"
+              *ngIf="otherInfraCheckDetails.EARTHING !== '1'"
+              >NO</span
+            ></label
+          >
+          <br />
+          <span
+            style="color: blue; text-decoration: underline; cursor: pointer"
+            *ngIf="otherInfraCheckDetails.EARTHING === '1'"
+            (click)="btnViewImage(otherInfraCheckDetails.EARTHING_IMG)"
+            >VIEW IMAGE</span
+          >
+        </div>
+      </div>
+
+      <div class="col-md-6" *ngIf="otherInfraInput.earthing">
+        <div class="form-group">
+          <label>EARTHING : </label>
+          <div class="ah-radio-buttons">
+            <div class="custom-control custom-radio custom-control-inline">
+              <input
+                class="custom-control-input"
+                type="radio"
+                name="earthing"
+                id="earthing1"
+                value="1"
+                [(ngModel)]="otherInfraInputSub.earthing"
+                autocomplete="off"
+                (change)="earthingChange()"
+              />
+              <label class="custom-control-label" for="earthing1"> Yes </label>
+            </div>
+
+            <div class="custom-control custom-radio custom-control-inline">
+              <input
+                class="custom-control-input"
+                type="radio"
+                name="earthing"
+                id="earthing2"
+                value="0"
+                [(ngModel)]="otherInfraInputSub.earthing"
+                autocomplete="off"
+                (change)="earthingChange()"
+              />
+              <label class="custom-control-label" for="earthing2"> No </label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6" *ngIf="otherInfraInputSub.earthing === '1'">
+        <div class="form-group">
+          <label for="earthingImage"
+            >EARTHING PHOTO :
+            <span style="color: red;font-size: small;">* (JPEG and  less than 100KB) </span>
+          </label>
+          <input
+            type="file"
+            class="form-control p-0"
+            id="earthingImageUpload"
+            (change)="earthingImageChange($event)"
+            accept="image/*"
+            autocomplete="off"
+            #earthingPhotoUpload
+          />
+        </div>
+      </div>
+
+      <div class="col-md-6" *ngIf="otherInfraCheck.waterSupplyBoretap">
+        <div class="form-group">
+          <label
+            >WATER SUPPLY - (BOREWELL,TAP) :
+            <span
+              class="text-success"
+              *ngIf="otherInfraCheckDetails.WATER_SUPPLY_BORETAP === '1'"
+              >YES</span
+            >
+            <span
+              class="text-danger"
+              *ngIf="otherInfraCheckDetails.WATER_SUPPLY_BORETAP !== '1'"
+              >NO</span
+            ></label
+          >
+          <br />
+          <span
+            style="color: blue; text-decoration: underline; cursor: pointer"
+            *ngIf="otherInfraCheckDetails.WATER_SUPPLY_BORETAP === '1'"
+            (click)="
+              btnViewImage(otherInfraCheckDetails.WATER_SUPPLY_BORETAP_IMG)
+            "
+            >VIEW IMAGE</span
+          >
+        </div>
+      </div>
+
+      <div class="col-md-6" *ngIf="otherInfraInput.waterSupplyBoretap">
+        <div class="form-group">
+          <label>WATER SUPPLY - (BOREWELL,TAP) : </label>
+          <div class="ah-radio-buttons">
+            <div class="custom-control custom-radio custom-control-inline">
+              <input
+                class="custom-control-input"
+                type="radio"
+                name="waterSupplyBoretap"
+                id="waterSupplyBoretap1"
+                value="1"
+                [(ngModel)]="otherInfraInputSub.waterSupplyBoretap"
+                autocomplete="off"
+                (change)="waterSupplyBorewellChange()"
+              />
+              <label class="custom-control-label" for="waterSupplyBoretap1">
+                Yes
+              </label>
+            </div>
+
+            <div class="custom-control custom-radio custom-control-inline">
+              <input
+                class="custom-control-input"
+                type="radio"
+                name="waterSupplyBoretap"
+                id="waterSupplyBoretap2"
+                value="0"
+                [(ngModel)]="otherInfraInputSub.waterSupplyBoretap"
+                autocomplete="off"
+                (change)="waterSupplyBorewellChange()"
+              />
+              <label class="custom-control-label" for="waterSupplyBoretap2">
+                No
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="col-md-6"
+        *ngIf="otherInfraInputSub.waterSupplyBoretap === '1'"
+      >
+        <div class="form-group">
+          <label for="roadVehicleImg"
+            >WATER SUPPLY - (BOREWELL,TAP) PHOTO :
+            <span style="color: red;font-size: small;">* (JPEG and  less than 100KB) </span>
+          </label>
+          <input
+            type="file"
+            class="form-control p-0"
+            id="waterSupplyBoretapImageUpload"
+            (change)="waterSupplyImageChange($event)"
+            accept="image/*"
+            autocomplete="off"
+            #waterBoreWellPhotoUpload
+          />
+        </div>
+      </div>
+
+      <div class="col-md-6" *ngIf="otherInfraCheck.sanitation">
+        <div class="form-group">
+          <label
+            >SANITATION (DRINAGE CONNECTION, SOAK PIT) :
+            <span
+              class="text-success"
+              *ngIf="otherInfraCheckDetails.SANITATION === '1'"
+              >YES</span
+            >
+            <span
+              class="text-danger"
+              *ngIf="otherInfraCheckDetails.SANITATION !== '1'"
+              >NO</span
+            ></label
+          >
+          <br />
+          <span
+            style="color: blue; text-decoration: underline; cursor: pointer"
+            *ngIf="otherInfraCheckDetails.SANITATION === '1'"
+            (click)="btnViewImage(otherInfraCheckDetails.SANITATION_IMG)"
+            >VIEW IMAGE</span
+          >
+        </div>
+      </div>
+
+      <div class="col-md-6" *ngIf="otherInfraInput.sanitation">
+        <div class="form-group">
+          <label>SANITATION (DRINAGE CONNECTION, SOAK PIT) : </label>
+          <div class="ah-radio-buttons">
+            <div class="custom-control custom-radio custom-control-inline">
+              <input
+                class="custom-control-input"
+                type="radio"
+                name="sanitation"
+                id="sanitation1"
+                value="1"
+                [(ngModel)]="otherInfraInputSub.sanitation"
+                autocomplete="off"
+                (change)="sanitationChange()"
+              />
+              <label class="custom-control-label" for="sanitation1">
+                Yes
+              </label>
+            </div>
+
+            <div class="custom-control custom-radio custom-control-inline">
+              <input
+                class="custom-control-input"
+                type="radio"
+                name="sanitation"
+                id="sanitation2"
+                value="0"
+                [(ngModel)]="otherInfraInputSub.sanitation"
+                autocomplete="off"
+                (change)="sanitationChange()"
+              />
+              <label class="custom-control-label" for="sanitation2"> No </label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6" *ngIf="otherInfraInputSub.sanitation === '1'">
+        <div class="form-group">
+          <label for="sanitationImage"
+            >SANITAION PHOTO :
+            <span style="color: red;font-size: small;">* (JPEG and  less than 100KB) </span>
+          </label>
+          <input
+            type="file"
+            class="form-control p-0"
+            id="sanitationImageUpload"
+            (change)="sanitationImageChange($event)"
+            accept="image/*"
+            autocomplete="off"
+            #sanitationPhotoUpload
+          />
+        </div>
+      </div>
+
+      <div class="col-md-6" *ngIf="otherInfraCheck.sump">
+        <div class="form-group">
+          <label
+            >SUMP :
+            <span
+              class="text-success"
+              *ngIf="otherInfraCheckDetails.SUMP === '1'"
+              >YES</span
+            >
+            <span
+              class="text-danger"
+              *ngIf="otherInfraCheckDetails.SUMP !== '1'"
+              >NO</span
+            ></label
+          >
+          <br />
+          <span
+            style="color: blue; text-decoration: underline; cursor: pointer"
+            *ngIf="otherInfraCheckDetails.SUMP === '1'"
+            (click)="btnViewImage(otherInfraCheckDetails.SUMP_IMG)"
+            >VIEW IMAGE</span
+          >
+        </div>
+      </div>
+
+      <div class="col-md-6" *ngIf="otherInfraInput.sump">
+        <div class="form-group">
+          <label>SUMP : </label>
+          <div class="ah-radio-buttons">
+            <div class="custom-control custom-radio custom-control-inline">
+              <input
+                class="custom-control-input"
+                type="radio"
+                name="sump"
+                id="sump1"
+                value="1"
+                [(ngModel)]="otherInfraInputSub.sump"
+                autocomplete="off"
+                (change)="sumpChange()"
+              />
+              <label class="custom-control-label" for="sump1"> Yes </label>
+            </div>
+
+            <div class="custom-control custom-radio custom-control-inline">
+              <input
+                class="custom-control-input"
+                type="radio"
+                name="sump"
+                id="sump2"
+                value="0"
+                [(ngModel)]="otherInfraInputSub.sump"
+                autocomplete="off"
+                (change)="sumpChange()"
+              />
+              <label class="custom-control-label" for="sump2"> No </label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6" *ngIf="otherInfraInputSub.sump === '1'">
+        <div class="form-group">
+          <label for="sumpImage"
+            >SUMP PHOTO :
+            <span style="color: red;font-size: small;">* (JPEG and  less than 100KB) </span>
+          </label>
+          <input
+            type="file"
+            class="form-control p-0"
+            id="sumpImageUpload"
+            (change)="sumpImageChange($event)"
+            accept="image/*"
+            autocomplete="off"
+            #sumpPhotoUpload
+          />
+        </div>
+      </div>
+
+      <div
+        class="col-md-12"
+        align="center"
+        *ngIf="otherInfraInputSub.submission"
+      >
+        <button
+          type="button"
+          class="btn btn-success btn-sm"
+          (click)="btnSubmit()"
+        >
+          SUBMIT
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

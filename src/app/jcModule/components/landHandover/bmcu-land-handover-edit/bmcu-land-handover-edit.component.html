@@ -1,0 +1,308 @@
+<div class="row" [hidden]="!landHandoverData.dataRecievedFromAPI">
+  <div class="col-md-12" align="right">
+    <button
+      type="button"
+      class="btn btn-danger btn-sm"
+      (click)="btnPossessionHandOverPopUp()"
+    >
+      DOWNLOAD STATEMENT PDF
+    </button>
+  </div>
+</div>
+<div class="card">
+  <div class="card-header p-2">
+    <h5 class="mb-0">BMCU LAND HANDOVER UPDATE</h5>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="mandalId">MANDAL <span style="color: red">*</span></label>
+          <select
+            id="mandalId"
+            class="form-control"
+            [(ngModel)]="landHandoverData.mandalId"
+            (change)="onMandalChange()"
+          >
+            <option value="">-- SELECT MANDAL --</option>
+            <option
+              value="{{ obj.MANDAL_CODE }}"
+              *ngFor="let obj of mandalList"
+            >
+              {{ obj.MANDAL_NAME }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="rbkId">RSK <span style="color: red">*</span></label>
+          <select
+            id="rbkId"
+            class="form-control"
+            [(ngModel)]="landHandoverData.rbkId"
+            (change)="onRbkChange()"
+          >
+            <option value="">-- SELECT RSK --</option>
+            <option value="{{ obj.RBK_CODE }}" *ngFor="let obj of rbkList">
+              {{ obj.RBK_NAME }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="villageId"
+            >REVENUE VILLAGE (RSK/AMCU/BMCU Location)
+            <span style="color: red">*</span></label
+          >
+          <select
+            id="villageId"
+            class="form-control"
+            [(ngModel)]="landHandoverData.villageId"
+            (change)="onVillageChange()"
+          >
+            <option value="">-- SELECT VILLAGE --</option>
+            <option
+              value="{{ obj.VILLAGECODE }}"
+              *ngFor="let obj of villageList"
+            >
+              {{ obj.VILLAGE_NAME }}
+            </option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="row" [hidden]="!landHandoverData.dataRecievedFromAPI">
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="handOverDate">
+            Hand Over Date <span style="color: red">*</span>
+            <span class="text-success">
+              {{ landHandoverData.handOverDate }}
+            </span>
+          </label>
+          <app-date-picker
+          [PlaceHolder]="'Please Select Hand Over Date'"
+          [(selectedDate)]="landHandoverData.handOverDate"
+          [maxDate]="maxDate"
+        ></app-date-picker>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="positionTakenDate">
+            Possession Taken Date <span style="color: red">*</span>
+            <span class="text-success">
+              {{ landHandoverData.positionTakenDate }}</span
+            >
+          </label>
+          <app-date-picker
+          [PlaceHolder]="'Please Select Possession Taken Date'"
+          [(selectedDate)]="landHandoverData.positionTakenDate"
+          [maxDate]="maxDate"
+        ></app-date-picker>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="landReceivedByName">
+            Possession Taken By Name <span style="color: red">*</span>
+          </label>
+          <h5 style="color: green">
+            {{ landPossessionStatement.possessionTakenName }}
+          </h5>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="landReceivedMobileNo">
+            Possession Taken By Mobile Number
+            <span style="color: red">*</span>
+          </label>
+          <h5 style="color: green">
+            {{ landPossessionStatement.takenOverByMobileNo }}
+          </h5>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="landReceivedByDesig">
+            Possession Taken By Designation <span style="color: red">*</span>
+          </label>
+          <h5 style="color: green">
+            {{ landPossessionStatement.takenOverByDesig }}
+          </h5>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="handOverByName">
+            Possession Handover By Name <span style="color: red">*</span>
+          </label>
+          <h5 style="color: green">{{ landHandoverData.handOverByName }}</h5>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="handOverByMobileNo">
+            Possession Handover Mobile Number
+            <span style="color: red">*</span>
+          </label>
+          <h5 style="color: green">
+            {{ landHandoverData.handOverByMobileNo }}
+          </h5>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="handOverByDesig">
+            Possession Handover By Designation
+            <span style="color: red">*</span>
+          </label>
+          <h5 style="color: green">{{ landHandoverData.handOverByDesig }}</h5>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="positionStatementPdf">
+            Attach Copy Of Possession Statement (PDF)
+            <span style="color: red">*</span>
+          </label>
+          <div
+            *ngIf="
+              landHandoverData.positionStatementPdf !== null &&
+              landHandoverData.positionStatementPdf !== '' &&
+              landHandoverData.positionStatementPdf !== undefined
+            "
+          >
+            <button
+              type="button"
+              class="btn btn-link"
+              (click)="btnViewPDF(landHandoverData.positionStatementPdf)"
+            >
+              VIEW UPLOADED STATEMENT
+            </button>
+          </div>
+          <input
+            type="file"
+            class="form-control p-0"
+            id="positionStatementPdf"
+            (change)="onPositionStatementChange($event)"
+            accept="application/pdf"
+            autocomplete="off"
+            #docUpload
+          />
+        </div>
+      </div>
+
+      <div class="col-md-12" align="center">
+        <button
+          type="button"
+          class="btn btn-success btn-sm"
+          (click)="btnSubmit()"
+        >
+          SUBMIT
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="popup-modal" *ngIf="possessionHandOverPopUp">
+  <div class="popup-content">
+    <div class="popup-header">
+      <h4 class="title">POSSESSION HAND OVER DETAILS</h4>
+      <a
+        type="button"
+        class="close"
+        (click)="possessionHandOverPopUp = false"
+        style="cursor: pointer"
+      >
+        <span>×</span>
+      </a>
+    </div>
+
+    <div class="popup-body">
+      <div class="row justify-content-center align-items-center">
+        <div class="col-md-12">
+          <div class="form-group">
+            <label for="handOverByName">
+              Possession Handover By Name <span style="color: red">*</span>
+            </label>
+            <input
+              id="handOverByName"
+              type="text"
+              class="form-control"
+              [(ngModel)]="landHandoverData.handOverByName"
+              placeholder="Please Enter Possession Handover By Name"
+              maxlength="15"
+              autocomplete="off"
+            />
+          </div>
+          <div class="form-group">
+            <label for="handOverByMobileNo">
+              Possession Handover Mobile Number
+              <span style="color: red">*</span>
+            </label>
+            <input
+              id="handOverByMobileNo"
+              type="text"
+              class="form-control"
+              [(ngModel)]="landHandoverData.handOverByMobileNo"
+              placeholder="Please Enter Possession Handover By Mobile Number"
+              maxlength="10"
+              NumbersOnly
+              [allowDecimals]="false"
+              [allowSign]="false"
+              autocomplete="off"
+            />
+          </div>
+          <div class="form-group">
+            <label for="handOverByDesig">
+              Possession Handover By Designation
+              <span style="color: red">*</span>
+            </label>
+            <input
+              id="handOverByDesig"
+              type="text"
+              class="form-control"
+              [(ngModel)]="landHandoverData.handOverByDesig"
+              placeholder="Please Enter Possession Handover By Designation"
+              maxlength="15"
+              autocomplete="off"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="popup-footer justify-content-center">
+      <button
+        type="button"
+        class="btn btn-outline-success btn-sm btn-rounded"
+        (click)="btnPDFDownload(1)"
+      >
+        UPDATE
+      </button>
+      <button
+        type="button"
+        class="btn btn-outline-danger btn-sm btn-rounded"
+        (click)="possessionHandOverPopUp = false"
+      >
+        Close
+      </button>
+    </div>
+  </div>
+</div>

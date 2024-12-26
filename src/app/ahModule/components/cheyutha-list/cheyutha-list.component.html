@@ -1,0 +1,105 @@
+<div class="row">
+    <div class="col mb-2">
+
+        <div class="stats-card success " (click)="btnDashboardDetails('1')" [ngClass]="reportType === '1' ? 'active' : ''">
+            <div class="overlay"></div>
+            
+            <div class="card-body">
+                <div class="d-flex justify-content-between">
+                    <div class="stats-text">
+                        <p class="text-uppercase text-muted mb-1"><small>COMPLETED</small></p>
+                        <h5 class="font-weight-bold mb-0">{{dashboardDetails.COMPLETED}}</h5>
+                    </div>
+                    <div class="circle">
+                        <i class="fas fa-check-double"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col mb-2">
+        <div class="stats-card pending" (click)="btnDashboardDetails('2')" [ngClass]="reportType === '2' ? 'active' : ''">
+            <div class="overlay"></div>
+            
+            <div class="card-body">
+                <div class="d-flex justify-content-between">
+                    <div class="stats-text">
+                        <p class="text-uppercase text-muted mb-1"><small>CHANGE OF NATURE OF UNIT PENDING DETAILS</small></p>
+                        <h5 class="font-weight-bold mb-0">{{dashboardDetails.PENDING_CHANGE_NATURE_OF_UNIT}}</h5>
+                    </div>
+                    <div class="circle">
+                        <i class="fas fa-hourglass-half"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+    <div class="col mb-2">
+        <div class="stats-card pending" (click)="btnDashboardDetails('3')" [ngClass]="reportType === '3' ? 'active' : ''">
+            <div class="overlay"></div>
+            
+            <div class="card-body">
+                <div class="d-flex justify-content-between">
+                    <div class="stats-text">
+                        <p class="text-uppercase text-muted mb-1"><small>DEPARTMENT GROUND PENDING</small></p>
+                        <h5 class="font-weight-bold mb-0">{{dashboardDetails.DEPARTMENT_GROUNDING_PENDING}}</h5>
+                    </div>
+                    <div class="circle">
+                        <i class="fas fa-hourglass-half"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="row mt-3" [hidden]="personList?.length < 1">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0 secondary-heading pb-0">{{headingText}}</h5>
+            </div>
+            <div class="card-body">
+                <div class="col-md-12 table-responsive" >
+                        <table
+                      class="table table-striped ah-table text-center"
+                      datatable
+                      [dtOptions]="dtOptions"
+                      [dtTrigger]="dtTrigger"
+                    >
+                      <thead class="bg-success text-white">
+                        <tr>
+                          <th>S.No.</th>
+                          <th>BENEFICIARY NAME</th>
+                          <th>BENEFICIARY FATHER NAME</th>
+                          <th>DATE OF BIRTH</th>
+                          <th>MOBILE NUMBER</th>
+                          <th>NATURE OF UNIT</th>
+                          <th [hidden]="reportType === '1'">ACTION</th>
+                        </tr>
+                      </thead>
+                      <tbody [hidden]="personList?.length < 1">
+                        <tr *ngFor="let obj of personList; let i = index">
+                          <td>{{ i + 1 }}</td>
+                          <td>
+                            <b>{{ obj.BEN_NAME }}</b>
+                          </td>
+                          <td>{{ obj.BEN_FATHER_NAME }}</td>
+                          <td>{{ obj.DOB_DT }}</td>
+                          <td>{{ obj.MOBILE_NUMBER }}</td>
+                          <td>{{ obj.NATURE_OF_UINT }} </td>
+                          <td [hidden]="reportType === '1'">
+                              <button type="button" class="btn btn-primary btn-sm" (click)="btnVerify(obj);">VERIFY</button>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+            </div>
+        </div>
+    </div>
+</div>

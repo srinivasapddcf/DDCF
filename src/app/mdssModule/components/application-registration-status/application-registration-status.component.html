@@ -1,0 +1,94 @@
+<div class="card">
+  <div class="card-header p-2">
+    <h5 class="mb-0">REGISTRATION APPLICATIONS STATUS</h5>
+  </div>
+  <div class="card-body">
+    <h5 class="sub-heading pb-0" [hidden]="applicationList?.length < 1">
+      <label>STATUS DETAILS</label>
+    </h5>
+
+    <div class="row px-4">
+      <div
+        class="col-md-12 table-responsive"
+        [hidden]="applicationList?.length < 1"
+      >
+        <table
+          id="promotersList"
+          class="table table-striped ah-table text-center"
+          datatable
+          [dtOptions]="dtOptions"
+          [dtTrigger]="dtTrigger"
+        >
+          <thead class="bg-success text-white">
+            <tr>
+              <th>S.No.</th>
+              <th>DISTRICT</th>
+              <th>MANDAL</th>
+              <th>DIVISION</th>
+              <th>RSK</th>
+              <th>RIC SUBMITTED DATE</th>
+              <th>COMMISSIONER APPROVED DATE</th>
+              <th>STATUS</th>
+              <th>APPLICATION</th>
+            </tr>
+          </thead>
+          <tbody *ngIf="applicationList?.length > 0">
+            <tr *ngFor="let obj of applicationList; let i = index">
+              <td>{{ i + 1 }}</td>
+              <td>{{ obj.DISTRICT }}</td>
+              <td>{{ obj.MANDAL_NAME }}</td>
+              <td>{{ obj.DIVISION_NAME }}</td>
+              <td>
+                <b>{{ obj.RBK_NAME }}</b>
+              </td>
+              <td>{{ obj.RIC_SUBMITTED_DATE }}</td>
+              <td>{{ obj.COMM_APPROVED_DATE }}</td>
+              <td>
+                <span
+                  class="text-success"
+                  *ngIf="obj.STATUS === 'Commissioner approved'"
+                  >{{ obj.STATUS }}</span
+                >
+                <span
+                  class="text-primary"
+                  *ngIf="obj.STATUS === 'Pending at Commissioner'"
+                  >{{ obj.STATUS }}</span
+                >
+                <span
+                  class="text-primary"
+                  *ngIf="obj.STATUS === 'Pending at RIC'"
+                  >{{ obj.STATUS }}</span
+                >
+                <span class="text-danger" *ngIf="obj.STATUS === 'Rejected'">{{
+                  obj.STATUS
+                }}</span>
+              </td>
+              <td>
+                <button
+                  type="button"
+                  class="btn btn-link btn-sm"
+                  *ngIf="
+                    obj.APPLICATION_PDF !== null &&
+                    obj.APPLICATION_PDF !== '' &&
+                    obj.APPLICATION_PDF !== undefined
+                  "
+                  (click)="btnPdfView(obj.APPLICATION_PDF)"
+                >
+                  VIEW
+                </button>
+                <span
+                  *ngIf="
+                    obj.APPLICATION_PDF === null ||
+                    obj.APPLICATION_PDF === '' ||
+                    obj.APPLICATION_PDF === undefined
+                  "
+                  >NA</span
+                >
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

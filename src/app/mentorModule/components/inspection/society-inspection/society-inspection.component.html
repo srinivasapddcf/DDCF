@@ -1,0 +1,132 @@
+<div class="card">
+    <div class="card-header p-2">
+      <h5 class="mb-0">SOCIETY INSPECTION</h5>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="rbkId">RSK <span style="color: red">*</span></label>
+            <select
+              id="rbkId"
+              class="form-control"
+              [(ngModel)]="inspectionData.rbkId"
+              (change)="onRbkChange()"
+            >
+              <option value="">-- SELECT RSK --</option>
+              <option value="{{ obj.RBK_ID }}" *ngFor="let obj of rbkList">
+                {{ obj.RBK_NAME }}
+              </option>
+            </select>
+          </div>
+        </div>
+  
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="villageId"
+              >SOCIETY <span style="color: red">*</span></label
+            >
+            <select
+              id="villageId"
+              class="form-control"
+              [(ngModel)]="inspectionData.villageData"
+              (change)="onSocietyChange()"
+            >
+              <option value="">-- SELECT SOCIETY --</option>
+              <option value="{{ obj | json}}" *ngFor="let obj of societyList">
+                {{ obj.VDCSNAME }}
+              </option>
+            </select>
+          </div>
+        </div>
+  
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="farmerData">EQUIPMENT <span style="color: red">*</span></label>
+            <select
+              id="equipmentId"
+              class="form-control"
+              [(ngModel)]="inspectionData.equipmentId"
+            >
+              <option value="">-- SELECT EQUIPMENT --</option>
+              <option value="{{ obj.EQUIPMENT_ID }}" *ngFor="let obj of equipmentList">
+                {{ obj.EQUIPMENT_NAME }}
+              </option>
+            </select>
+          </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+              <label for="typeOfMilk"> EQUIPMENT IS WORKING  <span style="color: red">*</span></label>
+              <select
+                id="isEquipmentWorking"
+                class="form-control"
+                [(ngModel)]="inspectionData.isEquipmentWorking"
+              >
+                <option value="">-- SELECT --</option>
+                <option value="1">YES</option>
+                <option value="0">NO</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-4" *ngIf = "inspectionData.isEquipmentWorking == '0'">
+            <div class="form-group">
+              <label for="farmerData">REASON <span style="color: red">*</span></label>
+              <select
+                id="preason"
+                class="form-control"
+                [(ngModel)]="inspectionData.reason"
+              >
+                <option value="">-- SELECT REASON --</option>
+                <option value="{{ obj.REASON_ID }}" *ngFor="let obj of reasonsList">
+                  {{ obj.REASON_NAME }}
+                </option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-4" *ngIf = "inspectionData.isEquipmentWorking == '0' && inspectionData.reason == '0'">
+            <div class="form-group">
+              <label for="amount"
+                >REMARKS <span style="color: red">*</span></label
+              >
+              <input
+                id="remarks"
+                type="text"
+                class="form-control"
+                [(ngModel)]="inspectionData.remarks"
+                placeholder="Please Enter Remarks"
+                maxlength="50"
+                autocomplete="off"
+                
+              />
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="inspectionImg"
+                >Inspection Image <span style="color: red;font-size: small;">* (JPEG and  less than 200KB) </span>
+              </label>
+              <input
+                type="file"
+                class="form-control p-0"
+                id="inspectionImg"
+                (change)="onInspectionImageChange($event)"
+                accept="image/*"
+                autocomplete="off"
+              />
+            </div>
+          </div>
+    
+          <div class="col-md-12" align="center">
+            <button
+              type="button"
+              class="btn btn-success btn-sm"
+              (click)="btnSubmit()"
+            >
+              SUBMIT
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    

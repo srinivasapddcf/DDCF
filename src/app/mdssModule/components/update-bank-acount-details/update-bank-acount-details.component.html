@@ -1,0 +1,493 @@
+<div class="card">
+    <div class="card-header p-2">
+      <h5 class="mb-0"> MDSS BANK ACCOUNT</h5>
+    </div>
+    <div class="card-body">
+      <div class="row">
+              
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="rbkId">RSK & MDSS CODE <span style="color: red">*</span></label>
+            <select
+              id="rbkId"
+              class="form-control"
+              [(ngModel)]="accountData.rbkId"
+              (change)="onRbkChange();"
+              
+            >
+              <option value="">-- SELECT RSK --</option>
+              <option value="{{ obj.RBK_CODE }}" *ngFor="let obj of rbkList">
+                {{ obj.MDSS_NAME }}-{{obj.MDSS_CODE}}
+              </option>
+            </select>
+          </div>
+        </div>
+        <div class="col-md-3" *ngIf="AStSecdiv">
+          <div class="form-group">
+            <label for="rbkId">ASSISTANT SECRETARY NAME <span style="color: red">*</span></label>
+            <select
+              id="rbkId"
+              class="form-control"
+              [(ngModel)]="accountData.ASSientSecno" (change)="onASSecChange(accountData.ASSientSecno);"
+              
+              
+            >
+              <option value="">-- SELECT Secretary --</option>
+              <option value="{{ obj.UID_NUM }}" *ngFor="let obj of secretaryList">
+                {{ obj.NAME }}
+              </option>
+            </select>
+          </div>
+        </div>
+        <div class="col-md-3" *ngIf="AStSecdiv">
+          <div class="form-group">
+            <label for="newfelxi"
+              > REMARKS <span style="color: red">*</span></label>
+            <textarea
+            id="acountNo"
+            type="text"
+            class="form-control"
+            [(ngModel)]="accountData.Remarks"
+            maxlength="200"
+            autocomplete="off"
+          ></textarea>
+            
+          </div>
+        </div>
+
+        <div class="col-md-2" *ngIf="AStSecdiv">
+          <div class="form-group">
+            <label></label>
+            <br>
+            <button
+          type="button" 
+          class="btn btn-success btn-sm" (click)="UpdateAst_Details();"       
+        >
+          UPDATE
+        </button>
+          </div>
+        </div>
+
+        <div class=" table-responsive" *ngIf="DetailstableDiv">
+            <table class="table table-striped ah-table text-center tabsdata">
+                              <thead class="bg-success text-white table-fixed">
+                <tr >
+                  <!-- <th  >S.No.</th> -->
+                  <th   style="font-size: 11px;">BANK NAME</th>
+                  <th style="font-size: 11px;" >BRANCH</th>
+                 
+                  <th style="font-size: 11px;">IFSC CODE</th>
+                  <th style="font-size: 11px;">MDAC ACC NAME</th>
+                  <th style="font-size: 11px;">MDSS NAME</th>
+                  <th style="font-size: 11px;">REMARKS</th>
+                  <th style="font-size: 11px;">BANK IMAGE</th>
+                  <th style="font-size: 11px;">STATUS MSG</th>
+                  <th style="font-size: 11px;">ACTION</th>
+                   
+                </tr>
+              </thead>
+              <tbody *ngIf="DetailsList?.length > 0">
+                <tr *ngFor="let obj of DetailsList; let i = index">
+                  <!-- <td >{{ i + 1 }}</td> -->
+                  <td >{{ obj.BANK_NAME }}</td>
+                  <td >{{ obj.BRANCH }}</td>
+                  <td >{{ obj.IFSC_CODE }}</td>
+                  <td >{{ obj.MDAC_ACC_NAME }}</td>
+                    <td >{{ obj.MDSS_NAME }}</td> 
+                    <td >{{ obj.REMARKS }}</td> 
+                    <td >
+                        <button style="background-color: cornflowerblue;color: white;"
+                        type="button"
+                        class="btn btn-link btn-sm"
+                        *ngIf="
+                          obj.BANK_PB_IMAGE !== null &&
+                          obj.BANK_PB_IMAGE !== 'NA' &&
+                          obj.BANK_PB_IMAGE !== undefined
+                        "
+                        (click)="btnimageclick(obj.BANK_PB_IMAGE)"
+                      >
+                      View
+                      </button>
+                      <span
+                        *ngIf="
+                          obj.BANK_PB_IMAGE === null ||
+                          obj.BANK_PB_IMAGE === 'NA' ||
+                          obj.BANK_PB_IMAGE === undefined
+                        "
+                        >NA</span
+                      >
+                    </td>
+                    <td >{{ obj.STATUS_MSG }}</td> 
+                    <td >
+                      <button 
+                      type="button"
+                      class="btn btn-link btn-sm btn-success text-white"
+                      *ngIf="
+                        obj.STATUS_CODE !== null &&
+                        obj.STATUS_CODE !== 'NA' &&
+                        obj.STATUS_CODE !== undefined && obj.STATUS_CODE ==='0' || obj.STATUS_CODE ==='2' || obj.STATUS_CODE ==='3'
+                      "
+                      (click)="Updatebankbtn(obj)"
+                      
+        
+                    >
+                    UPDATE
+                    </button>
+                    <span
+                      *ngIf="
+                        obj.STATUS_CODE === null ||
+                        obj.STATUS_CODE === 'NA' ||
+                        obj.STATUS_CODE === undefined || obj.STATUS_CODE ==='1'
+                      "
+                      >UPDATE DETAILS </span
+                    >
+                  </td> 
+                                     </tr>
+              </tbody>
+            </table>
+        
+          </div>
+
+          <!-- <div class="row col-md-12" *ngIf="Ifsccodediv">
+            <div class="col-md-4">
+              <label>Bank IFSC CODE <span style="color: red">*</span></label>
+
+              <input
+              type="text"
+              class="form-control"
+              [(ngModel)]="accountData.Ifsccode"
+              placeholder="Please Enter IFSC"
+              maxlength="12"
+              autocomplete="off" (input)="onKeypressEvent($event.target.value)"
+              NumbersOnly
+              [allowDecimals]="false"
+              [allowSign]="false"
+            />
+            </div>
+
+          </div> -->
+  <div *ngIf="showeditPopup_edit" class="col-md-12">
+          <div class="row justify-content-center align-items-center">
+            <div class="col-md-2">
+              <div class="form-group">
+                 
+                <label for="finomid">IFSC CODE <span style="color: red">*</span></label
+                >
+                <input
+                id="ifsccode"
+                type="text"
+                class="form-control"  [(ngModel)]="accountData.Ifsccode" maxlength="15" autocomplete="off"/>
+              </div>
+            </div>
+            <div class="col-md-1" style="margin-top: 15px;">
+                        <button
+              type="button" (click)="Ifsccode_Details();"
+              class="btn btn-info btn-sm"
+              
+            >
+              Verify
+            </button>
+            </div>
+    
+            <div class="col-md-5">
+              <div class="form-group">
+                <label for="newtetra"> BANK NAME <span style="color: red">*</span></label
+                >
+                <br>
+                <label><b>{{accountData.bankname}}</b></label>
+                <!-- <textarea disabled
+                id="bankname" 
+                type="text" class="form-control"
+                [(ngModel)]="accountData.bankname" maxlength="50" autocomplete="off"></textarea> -->
+                
+              </div>
+            </div>
+    
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="newfelxi"> BRANCH NAME <span style="color: red">*</span></label>
+                <br>
+                <label><b>{{accountData.branchname}}</b></label>
+                <!-- <textarea
+                id="branchname" disabled
+                type="text"
+                class="form-control" 
+                [(ngModel)]="accountData.branchname"
+                              maxlength="20"
+                autocomplete="off"></textarea> -->
+                
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="newfelxi"
+                  >MDSS ACCOUNT NAME <span style="color: red">*</span></label>
+                  <br>
+                  <label *ngIf="accountname"><b>{{accountData.acountHoldername}}</b></label>
+                 
+                
+              </div>
+            </div>
+            <div class="col-md-2"></div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="newfelxi"
+                  > ACCOUNT NUMBER <span style="color: red">*</span></label
+                >
+                <input
+                id="acountNo"
+                type="text"
+                class="form-control"  
+                NumbersOnly
+                [(ngModel)]="accountData.acountNo"
+                              maxlength="20"
+                autocomplete="off" [allowDecimals]="false"
+                [allowSign]="false"
+              />
+                
+              </div>
+            </div>
+    
+            
+    
+    
+    
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="newfelxi"
+                  > PASS BOOK IMAGE <span style="color: red; font-size: 11px;">* MIN 50KB, MAX 100KB </span></label>
+                <input
+                id="passbook_img"
+                type="file"
+                class="form-control" (change)="BankPassbookPhotoChange($event)"
+                accept="image/*"
+                autocomplete="off"
+                [(ngModel)]="accountData.passbook_img"           
+                autocomplete="off"
+              />
+                
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="newfelxi"
+                  > PAN CARD IMAGE <span style="color: red; font-size: 11px;">* MIN 50KB, MAX 100KB</span></label>
+                <input
+                id="acountpancardimage"
+                type="file"
+                class="form-control" (change)="PANCARDPhotoChange($event)"
+                accept="image/*"
+                autocomplete="off"
+                [(ngModel)]="accountData.acountpancardimage"           
+                autocomplete="off"
+              />
+                
+              </div>
+            </div>
+    
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="newfelxi"
+                  > PAN CARD NUMBER <span style="color: red">*</span></label>
+                <input
+                id="acountNo"
+                type="text"
+                class="form-control" style="text-transform:uppercase"
+                [(ngModel)]="accountData.acountpannumber"
+                maxlength="10"
+                autocomplete="off" onkeypress="return (event.charCode >= 65 && event.charCode <= 90)
+                 || (event.charCode >= 97 && event.charCode <= 122)
+                 || (event.charCode >= 48 && event.charCode <= 57)"
+              />
+                
+              </div>
+            </div>
+    
+            
+            
+            
+          </div>
+<div class="col-md12" style="text-align: center;">
+  <button
+          type="button" (click)="AddBank_Details();"
+          class="btn btn-success btn-sm"         
+        >
+          SUBMIT
+        </button>
+</div>
+        </div>
+
+
+          
+        </div>
+      </div>
+ </div>
+
+ <!-- <div class="popup-modal">
+  <div class="popup-content" style="min-width: 75%">
+    <div class="popup-header">
+      <h4 class="title">EDIT BANK DETAILS </h4>
+      <a
+        type="button"
+        class="close"
+          
+        style="cursor: pointer"
+      >
+        <span (click)="onClear()">×</span>
+      </a>
+    </div>
+
+    <div class="popup-body">
+      <div class="row justify-content-center align-items-center">
+        <div class="col-md-4">
+          <div class="form-group">
+            
+            <label for="finomid">IFSC CODE <span style="color: red">*</span></label
+            >
+            <input
+            id="ifsccode"
+            type="text"
+            class="form-control"  [(ngModel)]="accountData.Ifsccode" maxlength="15" autocomplete="off"/>
+          </div>
+        </div>
+        <div class="col-md-2" style="margin-top: 15px;">
+                    <button
+          type="button" (click)="Ifsccode_Details();"
+          class="btn btn-info btn-sm"
+          
+        >
+          Verify
+        </button>
+        </div>
+
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="newtetra"> BANK NAME <span style="color: red">*</span></label
+            >
+            <textarea disabled
+            id="bankname" 
+            type="text" class="form-control"
+            [(ngModel)]="accountData.bankname" maxlength="50" autocomplete="off"></textarea>
+            
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="newfelxi"> BRANCH NAME <span style="color: red">*</span></label>
+            <textarea
+            id="branchname" disabled
+            type="text"
+            class="form-control" 
+            [(ngModel)]="accountData.branchname"
+                          maxlength="20"
+            autocomplete="off"></textarea>
+            
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="newfelxi"
+              > ACOUNT NUMBER <span style="color: red">*</span></label
+            >
+            <input
+            id="acountNo"
+            type="text"
+            class="form-control"  
+            NumbersOnly
+            [(ngModel)]="accountData.acountNo"
+                          maxlength="20"
+            autocomplete="off"
+          />
+            
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="newfelxi"
+              > ACOUNT HOLDER NAME <span style="color: red">*</span></label>
+            <input
+            id="acountNo"
+            type="text"
+            class="form-control" 
+            [(ngModel)]="accountData.acountHoldername"
+            maxlength="50"
+            autocomplete="off"
+          />
+            
+          </div>
+        </div>
+
+
+
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="newfelxi"
+              > PASS BOOK IMAGE <span style="color: red">*</span></label>
+            <input
+            id="passbook_img"
+            type="file"
+            class="form-control" (change)="BankPassbookPhotoChange($event)"
+            accept="image/*"
+            autocomplete="off"
+            [(ngModel)]="accountData.passbook_img"           
+            autocomplete="off"
+          />
+            
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="newfelxi"
+              > PAN CARD NUMBER <span style="color: red">*</span></label>
+            <input
+            id="acountNo"
+            type="text"
+            class="form-control" 
+            [(ngModel)]="accountData.acountpannumber"
+            maxlength="20"
+            autocomplete="off"
+          />
+            
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="newfelxi"
+              > PAN CARD IMAGE <span style="color: red">*</span></label>
+            <input
+            id="acountpancardimage"
+            type="file"
+            class="form-control" (change)="PANCARDPhotoChange($event)"
+            accept="image/*"
+            autocomplete="off"
+            [(ngModel)]="accountData.acountpancardimage"           
+            autocomplete="off"
+          />
+            
+          </div>
+        </div>
+        
+        
+      </div>
+
+      
+      <div class="popup-footer justify-content-center">
+        <button
+          type="button" (click)="AddBank_Details();"
+          class="btn btn-success btn-sm"         
+        >
+          SUBMIT
+        </button>
+      </div>
+    </div>
+  </div>
+</div>  -->
+
+ 
+  

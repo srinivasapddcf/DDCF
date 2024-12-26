@@ -1,0 +1,301 @@
+<div class="card">
+  <div class="card-header p-2">
+    <h5 class="mb-0">AH NATURE OF UNIT CHANGE</h5>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="BEN_NAME">
+            APPLICANT NAME :
+            <span style="color: green">
+              <b>{{ personDetails.BEN_NAME }}</b>
+            </span>
+          </label>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="BEN_FATHER_NAME">
+            FATHER'S /HUSBAND'S NAME :
+            <span style="color: green">
+              <b>{{ personDetails.BEN_FATHER_NAME }}</b>
+            </span>
+          </label>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="UID_NUM">
+            AADHAR :
+            <span style="color: green">
+              <b>{{ personDetails.UID_NUM }}</b>
+            </span>
+          </label>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="ACCOUNT_NUMBER">
+            SB ACCOUNT NO. :
+            <span style="color: green">
+              <b>{{ personDetails.ACCOUNT_NUMBER }}</b>
+            </span>
+          </label>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="IFSC_CODE">
+            IFSC CODE :
+            <span style="color: green">
+              <b>{{ personDetails.IFSC_CODE }}</b>
+            </span>
+          </label>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="DOB_DT">
+            DATE OF BIRTH :
+            <span style="color: green">
+              <b>{{ personDetails.DOB_DT }}</b>
+            </span>
+          </label>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="NATURE_OF_UINT">
+            NATURE OF UNIT :
+            <span style="color: green">
+              <b>{{ personDetails.NATURE_OF_UINT }}</b>
+            </span>
+          </label>
+          <div class="input-group-append">
+            <button
+              class="btn btn-primary btn-sm m-0 btn-rounded"
+              type="submit"
+              (click)="btnUpdateNOUPopUp()"
+              id="button-addon2"
+            >
+              CHANGE NATURE OF UNIT
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label>
+            IS WILLING BENFICIARIES
+            <sup class="text-danger h6">*</sup>
+          </label>
+          <div class="ah-radio-buttons">
+            <div class="custom-control custom-radio custom-control-inline">
+              <input
+                class="custom-control-input"
+                type="radio"
+                name="willingBenficiary"
+                id="willingBenficiary1"
+                value="1"
+                [(ngModel)]="applicantData.willingBenficiary"
+                autocomplete="off"
+              />
+              <label class="custom-control-label" for="willingBenficiary1">
+                YES
+              </label>
+            </div>
+
+            <div class="custom-control custom-radio custom-control-inline">
+              <input
+                class="custom-control-input"
+                type="radio"
+                name="willingBenficiary"
+                id="willingBenficiary2"
+                value="0"
+                [(ngModel)]="applicantData.willingBenficiary"
+                autocomplete="off"
+              />
+              <label class="custom-control-label" for="willingBenficiary2">
+                NO
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="financeType"
+            >Finance Type <span style="color: red">*</span></label
+          >
+          <select
+            id="financeType"
+            class="form-control"
+            [(ngModel)]="applicantData.financeType"
+          >
+            <option value="">-- SELECT FINANCE TYPE --</option>
+            <option value="1">Bank Linkage</option>
+            <option value="2">Self Finance</option>
+            <option value="3">Unnathi</option>
+            <option value="4">Sthree Nidhi</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="ANIMAL_COST">
+            ANIMAL COST :
+            <span style="color: green">
+              <b>{{ personDetails.ANIMAL_COST }}</b>
+            </span>
+          </label>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="INSURANCE">
+            INSURANCE :
+            <span style="color: green">
+              <b>{{ personDetails.INSURANCE }}</b>
+            </span>
+          </label>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="TRANSPORTATION">
+            TRANSPORTATION :
+            <span style="color: green">
+              <b>{{ personDetails.TRANSPORTATION }}</b>
+            </span>
+          </label>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="TOT_PROJECT_COST">
+            TOTAL PROJECT COST :
+            <span style="color: green">
+              <b>{{ personDetails.TOT_PROJECT_COST }}</b>
+            </span>
+          </label>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="MARGIN">
+            MARGIN :
+            <span style="color: green">
+              <b>{{ personDetails.MARGIN }}</b>
+            </span>
+          </label>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="BANK_LOAN">
+            BANK LOAN :
+            <span style="color: green">
+              <b>{{ personDetails.BANK_LOAN }}</b>
+            </span>
+          </label>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="APP_HARD_COPY_SENT_DATE">
+            APPLICATION HARD COPY SENT TO BANK DATE : <br />
+            <span style="color: green">
+              <b>{{ personDetails.APP_HARD_COPY_SENT_DATE }}</b>
+            </span>
+          </label>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="submissionDate">
+            SUBMISSION DATE
+            <span style="color: red">*</span>
+          </label>
+          <app-date-picker
+            [PlaceHolder]="'Please Select Submission Date'"
+            [(selectedDate)]="applicantData.submissionDate"
+            [maxDate]="maxDate"
+          ></app-date-picker>
+        </div>
+      </div>
+
+      <div class="col-md-12" align="center">
+        <button
+          type="button"
+          class="btn btn-success btn-sm"
+          (click)="btnSubmit()"
+        >
+          SUBMIT
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="popup-modal" *ngIf="showNatureOfUnitPopup">
+  <div class="popup-content">
+    <div class="popup-header">
+      <h4 class="title">NATURE OF UNIT</h4>
+      <a
+        type="button"
+        class="close"
+        (click)="showNatureOfUnitPopup = false"
+        style="cursor: pointer"
+      >
+        <span>×</span>
+      </a>
+    </div>
+
+    <div class="popup-body">
+      <div class="row justify-content-center align-items-center">
+        <div class="col-md-12">
+          <div class="form-group">
+            <label for="natureOfUnit"
+              >NATURE OF UNIT <span style="color: red">*</span></label
+            >
+            <select
+              id="natureOfUnit"
+              class="form-control"
+              [(ngModel)]="applicantData.natureOfUnit"
+            >
+              <option value="">-- SELECT NATURE OF UNIT --</option>
+              <option value="Live Stock-SHEEP">Live Stock-SHEEP</option>
+              <option value="Live Stock-GOAT">Live Stock-GOAT</option>
+              <option value="Live Stock-COW">Live Stock-COW</option>
+              <option value="Live Stock-BUFFALO">Live Stock-BUFFALO</option>
+              <!-- <option *ngFor="let obj in natureOfUnitList" value="obj.NAME"> {{obj.NAME}} </option> -->
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="popup-footer justify-content-center">
+      <button
+        type="button"
+        class="btn btn-outline-success btn-sm btn-rounded"
+        (click)="btnUpdateNatureOfUnit()"
+      >
+        UPDATE
+      </button>
+      <button
+        type="button"
+        class="btn btn-outline-danger btn-sm btn-rounded"
+        (click)="showNatureOfUnitPopup = false"
+      >
+        Close
+      </button>
+    </div>
+  </div>
+</div>

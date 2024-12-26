@@ -1,0 +1,374 @@
+
+  <div class="card">
+    <div class="card-header p-2">
+      <h5 class="mb-0"> AMCU LAND HANDOVER DETAILS </h5>
+    </div>
+    <div class="card-body">
+
+        <div class="row">
+            <div class="col-md-3">
+              <div class="form-group">
+                <label for="mandalId">MANDAL <span style="color: red">*</span></label>
+                <select
+                  id="mandalId"
+                  class="form-control"
+                  [(ngModel)]="LandAllocateData.mandalId"
+                  (change)="onMandalChange()"
+                >
+                  <option value="">-- SELECT MANDAL --</option>
+                  <option
+                    value="{{ obj.MANDAL_CODE }}"
+                    *ngFor="let obj of mandalList"
+                  >
+                    {{ obj.MANDAL_NAME }}
+                  </option>
+                </select>
+              </div>
+            </div>
+      
+            <div class="col-md-3">
+              <div class="form-group">
+                <label for="rbkId">RSK <span style="color: red">*</span></label>
+                <select
+                  id="rbkId"
+                  class="form-control"
+                  [(ngModel)]="LandAllocateData.rbkId"
+                  (change)="onRbkChange()"
+                >
+                  <option value="">-- SELECT RSK --</option>
+                  <option value="{{ obj.RBK_CODE }}" *ngFor="let obj of rbkList">
+                    {{ obj.RBK_NAME }}
+                  </option>
+                </select>
+              </div>
+            </div>
+      
+            <div class="col-md-3">
+              <div class="form-group">
+                <label for="villageId"
+                  >REVENUE VILLAGE (RSK/AMCU Location)
+                  <span style="color: red">*</span></label
+                >
+                <select
+                  id="villageId"
+                  class="form-control"
+                  [(ngModel)]="LandAllocateData.villageId"
+                  (change)="onVillageChange()"
+                >
+                  <option value="">-- SELECT VILLAGE --</option>
+                  <option
+                    value="{{ obj.R_V_CODE }}"
+                    *ngFor="let obj of villageList"
+                  >
+                    {{ obj.R_V_NAME }}
+                  </option>
+                </select>
+              </div>
+            </div>
+
+
+            <div class="col-md-3">
+              <div class="form-group">
+                <label for="villageId"
+                  >AMCU VILLAGE <span style="color: red">*</span></label
+                >
+                <select
+                  id="villageId"
+                  class="form-control"
+                  [(ngModel)]="LandAllocateData.milkPouringVillageId"
+                  (change)="btnPossessionHandOverPopUp()"
+                >
+                 <!-- (change)="onMilkPouringVillageChange()" -->
+                  <option value="">-- SELECT VILLAGE --</option>
+                  <option
+                    value="{{ obj.V_CODE }}"
+                    *ngFor="let obj of milkPouringVillageList"
+                  >
+                    {{ obj.V_NAME }}
+                  </option>
+                </select>
+              </div>
+            </div>
+
+          </div>
+ 
+          <div class="row" >
+            <div class="col-md-3" align="left"  style="display: block;">
+            <div class="form-group">
+            <button
+              type="button"
+              class="btn btn-danger btn-sm"
+              (click)="btnHandOverPopUp()"
+            >
+            EDIT HAND OVER DETAILS
+              <!-- DOWNLOAD STATEMENT PDF -->
+            </button>
+          </div> 
+          </div> 
+        <div class="col-md-3">
+          <div class="form-group">
+            <label for="handOverByName">
+              Possession Handover By Name <span style="color: red">*</span>
+            </label>
+            <h5 style="color: green">{{ LandAllocateData.handOverByName }}</h5>
+          </div>
+        </div>
+  
+        <div class="col-md-3">
+          <div class="form-group">
+            <label for="handOverByMobileNo">
+                Handover Mobile Number <span style="color: red">*</span>
+            </label>
+            <h5 style="color: green">
+              {{ LandAllocateData.handOverByMobileNo }}
+            </h5>
+          </div>
+        </div>
+  
+        <div class="col-md-3">
+          <div class="form-group">
+            <label for="handOverByDesig">
+                Handover By Designation <span style="color: red">*</span>
+            </label>
+            <h5 style="color: green">{{ LandAllocateData.handOverByDesig }}</h5>
+          </div>
+        </div>
+  
+
+      </div>
+ 
+      <div class="row" >
+        <div class="col-md-3">
+          <div class="form-group">
+            
+        <button  style="margin-top: 30px;color: white;size: 15px; "   
+            type="button"
+            class="btn btn-blue btn-sm"
+            (click)="btndownload()"
+          >
+            DOWNLOAD CERTIFICATE
+          </button> 
+        </div>
+      </div> 
+
+
+      <div class="col-md-3">
+        <div class="form-group">
+          <label for="handOverByName">
+            Possession Taken By Name  
+          </label>
+          <h5 style="color: green">{{ landPossessionStatement.possessionTakenName }}</h5>
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="form-group">
+          <label for="handOverByMobileNo">
+              Taken By Mobile Number  
+          </label>
+          <h5 style="color: green">
+            {{ landPossessionStatement.takenOverByMobileNo }}
+          </h5>
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="form-group">
+          <label for="handOverByDesig">
+              Taken By Designation  
+          </label>
+          <h5 style="color: green">{{ landPossessionStatement.takenOverByDesig }}</h5>
+        </div>
+      </div>
+
+      </div>
+ 
+      <div class="row" >
+        <div class="col-md-12">
+          <div class="form-group">
+        <div> <hr style="border-color:rgb(109, 5, 5);border-width:5px;"></div>
+          </div></div>
+
+
+         
+
+  
+        <div class="col-md-3" >
+          <div class="form-group"  *ngIf="divuploadpos" >
+            <label for="positionStatementPdf">
+              Attach AMCU Possession Certificate (PDF)
+              <span style="color: red">*</span>
+            </label>
+            <input
+              type="file" 
+              class="form-control p-0"
+              id="positionStatementPdf"
+              (change)="onPositionStatementChange($event)"
+              accept="application/pdf"
+              autocomplete="off"   
+            />
+          </div>
+        </div>
+
+
+
+        <!-- <div class="col-md-4">
+          <div class="form-group">
+            <label for="allotmentOrderUpload"
+              > Attach AMCU Alienation (PDF) <span style="color: red">*</span>
+            </label>
+            <input
+              type="file"
+              class="form-control p-0"
+              id="allotmentAlienationUpload"
+              (change)="onAlienationStatementChange($event)"
+              accept="application/pdf"
+              autocomplete="off"
+            />
+          </div>
+        </div> -->
+        <!-- (change)="onAllotmentOrderChange($event)" -->
+       
+
+        <div class="col-md-2" style="display:none ;">
+          <div class="form-group"  *ngIf="divchk1">
+        <div> <input type="checkbox"  id="chkRevenu"   name="chkRevenu"  *ngIf="divchk" checked="true"      (change)="ondivchkcentsChange($event)"   /> 
+      <br /> Revenu Record Upload
+        </div>
+        
+   
+    </div>
+  </div> 
+
+        <div class="col-md-3"  *ngIf="divchkrevnuetxt">
+          <div class="form-group">
+            <label for="allotmentOrderUpload"
+              >Attach Revenue Certificate (PDF)  
+            </label>
+            <input
+              type="file"
+              class="form-control p-0"
+              id="allotmentRevenueUpload"
+              (change)="onRevenueStatementChange($event)"
+              accept="application/pdf"
+              autocomplete="off"
+            />
+          </div>
+        </div>
+
+
+
+ 
+        <div class="col-md-2" align="center"  >
+          <button *ngIf="divpossission"
+            type="button"
+            class="btn btn-success btn-sm"
+            (click)="btnSubmit()"  style="margin-top: 30px;"
+          >
+            Submit HandOver
+          </button>
+        </div>
+
+        <div class="col-md-2" align="center"  *ngIf="divall"  >
+          <button
+            type="button"
+            class="btn btn-success btn-sm"
+            (click)="btnallSubmit()"  style="margin-top: 30px;"
+          >
+            Submit All HandOver
+          </button>
+        </div>
+
+
+
+      </div>
+    </div>
+  </div>
+  
+  <div class="popup-modal" *ngIf="possessionHandOverPopUp">
+    <div class="popup-content">
+      <div class="popup-header">
+        <h4 class="title">POSSESSION HAND OVER DETAILS</h4>
+        <a
+          type="button"
+          class="close"
+          (click)="possessionHandOverPopUp = false"
+          style="cursor: pointer"
+        >
+          <span>×</span>
+        </a>
+      </div>
+  
+      <div class="popup-body">
+        <div class="row justify-content-center align-items-center">
+          <div class="col-md-12">
+            <div class="form-group">
+              <label for="handOverByName">
+                Possession Handover By Name <span style="color: red">*</span>
+              </label>
+              <input
+                id="handOverByName"
+                type="text"
+                class="form-control" mdInput 
+                [(ngModel)]="LandAllocateData.handOverByName"
+                placeholder="Please Enter Possession Handover By Name"
+                maxlength="30"
+                autocomplete="off"    (keypress)="keyPressNumbers($event)"
+              />
+            </div>
+            <div class="form-group">
+              <label for="handOverByMobileNo">
+                Possession Handover Mobile Number
+                <span style="color: red">*</span>
+              </label>
+              <input
+                id="handOverByMobileNo"
+                type="text"
+                class="form-control"
+                [(ngModel)]="LandAllocateData.handOverByMobileNo"
+                placeholder="Please Enter Possession Handover By Mobile Number"
+                maxlength="10"
+                NumbersOnly
+                [allowDecimals]="false"
+                [allowSign]="false"
+                autocomplete="off"
+              />
+            </div>
+            <div class="form-group">
+              <label for="handOverByDesig">
+                Possession Handover By Designation
+                <span style="color: red">*</span>
+              </label>
+              <input
+                id="handOverByDesig"
+                type="text"
+                class="form-control"
+                [(ngModel)]="LandAllocateData.handOverByDesig"
+                placeholder="Please Enter Possession Handover By Designation"
+                maxlength="15"
+                autocomplete="off"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <div class="popup-footer justify-content-right">
+        <button
+          type="button"
+          class="btn btn-outline-success btn-sm btn-rounded"
+          (click)="btnPDFDownload()"
+        >
+          UPDATE
+        </button>
+        <button
+          type="button"
+          class="btn btn-outline-danger btn-sm btn-rounded"
+          (click)="possessionHandOverPopUp = false"
+        >
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+  

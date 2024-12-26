@@ -1,0 +1,278 @@
+<div class="card">
+  <div class="card-header p-2">
+    <h5 class="mb-0">REGISTRATION OF THE LAND</h5>
+  </div>
+  <div class="card-body amulBuildingInspection">
+    <div class="row">
+      <div class="col-md-3">
+        <div class="form-group">
+          <label for="rbkId">RSK <span style="color: red">*</span></label>
+          <select
+            id="rbkId"
+            class="form-control"
+            [(ngModel)]="registrationInputSub.rbkId"
+            (change)="onRbkChange()"
+          >
+            <option value="">-- SELECT RSK --</option>
+            <option value="{{ obj.RBK_ID }}" *ngFor="let obj of rbkList">
+              {{ obj.RBK_NAME }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="form-group">
+          <label for="villageId"
+            >VILLAGE <span style="color: red">*</span></label
+          >
+          <select
+            id="villageId"
+            class="form-control"
+            [(ngModel)]="registrationInputSub.villageId"
+            (change)="onVillageChange()"
+          >
+            <option value="">-- SELECT VILLAGE --</option>
+            <option
+              value="{{ obj.VILLAGE_ID }}"
+              *ngFor="let obj of villageList"
+            >
+              {{ obj.VILLAGE_NAME }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="form-group pt-4">
+          <label
+            >WORK ID :
+            <span class="text-success">{{
+              registrationInputSub.workId
+            }}</span></label
+          >
+        </div>
+      </div>
+    </div>
+
+    <div class="row" *ngIf="registrationCheck">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label
+            >WHETHER THE REGISTRATION OF THE LAND IS DONE IN FAVOUR OF THE
+            APDDCF :
+            <span
+              class="text-success"
+              *ngIf="registrationCheckDetails.R_REGIS_LAND_DDCF === '1'"
+              >YES</span
+            >
+            <span
+              class="text-danger"
+              *ngIf="registrationCheckDetails.R_REGIS_LAND_DDCF !== '1'"
+              >NO</span
+            ></label
+          >
+          <br />
+          <span
+            style="color: blue; text-decoration: underline; cursor: pointer"
+            *ngIf="registrationCheckDetails.R_REGIS_LAND_DDCF === '1'"
+            (click)="
+              btnViewImage(registrationCheckDetails.R_REGIS_LAND_DDCF_IMG)
+            "
+            >VIEW IMAGE</span
+          >
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="form-group">
+          <label>REGISTRATION CERTIFICATE PHOTO : </label>
+
+          <span
+            style="color: blue; text-decoration: underline; cursor: pointer"
+            (click)="btnViewImage(registrationCheckDetails.R_REGIS_CERTIFI_IMG)"
+            >VIEW IMAGE</span
+          >
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="form-group">
+          <label
+            >WHETHER THE ALIENATION / HANDING OVER IS DONE:
+            <span
+              class="text-success"
+              *ngIf="registrationCheckDetails.R_ALIENATION_HANDING === '1'"
+              >YES</span
+            >
+            <span
+              class="text-danger"
+              *ngIf="registrationCheckDetails.R_ALIENATION_HANDING !== '1'"
+              >NO</span
+            ></label
+          >
+          <br />
+          <span
+            style="color: blue; text-decoration: underline; cursor: pointer"
+            *ngIf="registrationCheckDetails.R_ALIENATION_HANDING === '1'"
+            (click)="
+              btnViewImage(registrationCheckDetails.R_ALIENATION_HANDING_IMG)
+            "
+            >VIEW IMAGE</span
+          >
+        </div>
+      </div>
+    </div>
+
+    <div class="row" *ngIf="registrationInput">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label
+            >WHETHER THE REGISTRATION OF THE LAND IS DONE IN FAVOUR OF THE
+            APDDCF :
+            <sub class="text-danger h6">*</sub>
+          </label>
+          <div class="ah-radio-buttons">
+            <div class="custom-control custom-radio custom-control-inline">
+              <input
+                class="custom-control-input"
+                type="radio"
+                name="registrationOfLand"
+                id="registrationOfLand1"
+                value="1"
+                [(ngModel)]="registrationInputSub.registrationOfLand"
+                autocomplete="off"
+                (change)="registrationOfLandChange()"
+              />
+              <label class="custom-control-label" for="registrationOfLand1">
+                Yes
+              </label>
+            </div>
+
+            <div class="custom-control custom-radio custom-control-inline">
+              <input
+                class="custom-control-input"
+                type="radio"
+                name="registrationOfLand"
+                id="registrationOfLand2"
+                value="0"
+                [(ngModel)]="registrationInputSub.registrationOfLand"
+                autocomplete="off"
+                (change)="registrationOfLandChange()"
+              />
+              <label class="custom-control-label" for="registrationOfLand2">
+                No
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="col-md-4"
+        *ngIf="registrationInputSub.registrationOfLand === '1'"
+      >
+        <div class="form-group">
+          <label for="registrationOfLandImage"
+            >LAND HANDING OVER DOCUMENT
+            <span style="color: red">*</span>
+          </label>
+          <input
+            type="file"
+            class="form-control p-0"
+            id="registrationOfLandImageUpload"
+            (change)="registrationOfLandImageChange($event)"
+            accept="image/*"
+            autocomplete="off"
+            #registrationLandPhotoUpload
+          />
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label>WHETHER THE ALIENATION / HANDING OVER IS DONE : </label>
+          <sub class="text-danger h6">*</sub>
+          <div class="ah-radio-buttons">
+            <div class="custom-control custom-radio custom-control-inline">
+              <input
+                class="custom-control-input"
+                type="radio"
+                name="alienationHanding"
+                id="alienationHanding1"
+                value="1"
+                [(ngModel)]="registrationInputSub.alienationHanding"
+                autocomplete="off"
+                (change)="alienationHandingChange()"
+              />
+              <label class="custom-control-label" for="alienationHanding1">
+                Yes
+              </label>
+            </div>
+
+            <div class="custom-control custom-radio custom-control-inline">
+              <input
+                class="custom-control-input"
+                type="radio"
+                name="alienationHanding"
+                id="alienationHanding2"
+                value="0"
+                [(ngModel)]="registrationInputSub.alienationHanding"
+                autocomplete="off"
+                (change)="alienationHandingChange()"
+              />
+              <label class="custom-control-label" for="alienationHanding2">
+                No
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="col-md-4"
+        *ngIf="registrationInputSub.alienationHanding === '1'"
+      >
+        <div class="form-group">
+          <label for="alienationHandingImage"
+            >ALIENATION / HANDING OVER PHOTO
+            <span style="color: red">*</span>
+          </label>
+          <input
+            type="file"
+            class="form-control p-0"
+            id="alienationHandingImageUpload"
+            (change)="alienationHandingImageChange($event)"
+            accept="image/*"
+            autocomplete="off"
+            #handingPhotoUpload
+          />
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="registrationCertificateImage"
+            >REGISTRATION CERTIFICATE PHOTO :
+            <span style="color: red;font-size: small;">* (JPEG and  less than 100KB) </span>
+          </label>
+          <input
+            type="file"
+            class="form-control p-0"
+            id="registrationCertificateImageUpload"
+            (change)="registrationCertificateImageChange($event)"
+            accept="image/*"
+            autocomplete="off"
+            #registrationCertificatePhotoUpload
+          />
+        </div>
+      </div>
+      <div class="col-md-12" align="center">
+        <button
+          type="button"
+          class="btn btn-success btn-sm"
+          (click)="btnSubmit()"
+        >
+          SUBMIT
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,122 @@
+<div class="card">
+    <div class="card-header p-2">
+        <h5 class="mb-0">DAIRY ASSETS MACHINERY DETAILS</h5>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-12" align="right">
+                <button type="button" class="btn btn-info btn-sm" (click)="btnBack()">
+                    Back
+                </button>
+            </div>
+        </div>
+
+        <div class="row align-items-center">
+            <div class="col-md-1"></div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="DeviceName">Machinery Name<span style="color: red">*</span></label>
+                    <input type="text" (input)="onDeviceNameChange()" class="form-control" [(ngModel)]="object.DeviceName"
+                        placeholder="Please Ente Machinery Name">
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="PurchaseDate">Purchase Date<span style="color: red">*</span></label>
+                    <app-date-picker [PlaceHolder]="'Please Select Purchase Date'" [(selectedDate)]="object.PurchaseDate"
+                        [minDate]="minDate" [maxDate]="maxDate"></app-date-picker>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="LastOpDate">Last Operation Date<span style="color: red">*</span></label>
+                    <app-date-picker [PlaceHolder]="'Please Select Last Operation Date'" [(selectedDate)]="object.LastOpDate"
+                        [minDate]="minDate" [maxDate]="maxDate"></app-date-picker>
+                </div>
+            </div>
+            <!-- <div class="col-md-2">
+                <div>
+                    <button type="button" class="btn btn-success btn-sm mt-3" (click)="SubmitDeatils()">
+
+                        Submit
+                    </button>
+                </div>
+            </div> -->
+
+        </div>
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-3">
+
+                <div class="form-group">
+                    <label for="DeviceCWS">Machinery Current Working Status<span style="color: red">*</span></label>
+                    <select id="DeviceCWS" class="form-control" [(ngModel)]="object.DeviceCWS" (change)="DataChange()">
+                        <option value="">-- Select --</option>
+                        <option value="{{ obj.STATUS_CODE }}" *ngFor="let obj of DropdownList">
+                            {{ obj.STATUS }}
+                        </option>
+
+                    </select>
+                </div>
+
+            </div>
+            <div class="col-md-3" *ngIf="ReasonHide">
+                <div class="form-group">
+                    <label for="Reason">Reason<span style="color: red">*</span></label>
+                    <textarea type="text" class="form-control" [(ngModel)]="object.Reason"></textarea>
+                </div>
+            </div>
+            <div class="col-md-2 mt-3">
+                <div>
+                    <button type="button" class="btn btn-success btn-sm mt-3" (click)="SubmitDeatils()">
+
+                        Submit
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="tbl-fixed col-md-12 table-responsive mt-5" [hidden]="GridList?.length < 1">
+            <table class="table table-striped ah-table text-center tbl-data" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+                <thead class="bg-success text-white">
+                    <tr>
+                        <th class="tableheader_color">S No</th>
+                        <th class="tableheader_color">Device Name</th>
+                        <th class="tableheader_color">Purchase Date</th>
+                        <th class="tableheader_color">Last Operation Date</th>
+                        <th class="tableheader_color">Device Current Working Status</th>
+                        <th class="tableheader_color">Reason</th>
+
+
+
+
+                    </tr>
+                    <tr>
+                        <th class="tableheader_color">1</th>
+                        <th class="tableheader_color">2</th>
+                        <th class="tableheader_color">3</th>
+                        <th class="tableheader_color">4</th>
+                        <th class="tableheader_color">5</th>
+                        <th class="tableheader_color">6</th>
+
+                    </tr>
+
+                </thead>
+                <tbody *ngIf="GridList?.length > 0">
+                    <tr *ngFor="let obj of GridList; let i = index">
+
+                        <td class="number_align">{{ i + 1 }}</td>
+                        <td style="text-align: left;" class="table_cells_borders">{{obj.DEVICE_NAME}}</td>
+                        <td class="number_align">{{obj.PURCHASE_DATE}}</td>
+                        <td class="number_align">{{obj.LAST_OPERATION_DATE}}</td>
+                        <td style="text-align: left;" class="table_cells_borders">{{obj.WORKING_STATUS}}</td>
+                        <td style="text-align: left;" class="table_cells_borders">{{obj.REASON}}</td>
+
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+
+    </div>
+</div>

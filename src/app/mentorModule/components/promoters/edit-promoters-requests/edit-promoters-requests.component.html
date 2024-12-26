@@ -1,0 +1,66 @@
+<div class="card">
+    <div class="card-header p-2">
+        <h5 class="mb-0">PROMOTERS EDIT REQUESTS</h5>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-12 table-responsive" [hidden]="promotersRequestsList?.length < 1">
+                <table class="table table-striped ah-table text-center" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+                    <thead class="bg-success text-white">
+                        <tr>
+                            <th>S.No.</th>
+                            <th>RSK</th>
+                            <th>VILLAGE</th>
+                            <th>MDAC CODE</th>
+                            <th>PROMOTER NAME</th>
+                            <th>DATE OF BIRTH</th>
+                            <th>AADHAAR NUMBER</th>
+                            <th>MOBILE NUMBER</th>
+                            <th>HUSBAND / SPOUSE NAME</th>
+                            <th>BANK A/C NUMBER</th>
+                            <th>IFSC CODE</th>
+                            <th>BANK NAME</th>
+                            <th>BRANCH NAME</th>
+                            <th>QUALIFICATION</th>
+                            <th>STATUS</th>
+                        </tr>
+                    </thead>
+                    <tbody *ngIf="promotersRequestsList?.length > 0">
+                        <tr *ngFor="let obj of promotersRequestsList; let i = index">
+                            <td>{{ i + 1 }}</td>
+                            <td>{{ obj.RBK_NAME }}</td>
+                            <td>{{ obj.VILLAGE_NAME }}</td>
+                            <td>{{ obj.MPUSS }}</td>
+                            <td>{{ obj.PROMOTERS_NAME }}</td>
+                            <td>{{ obj.DOB }}</td>
+                            <td>XXXX-XXXX-{{ obj.AADHAR | slice: -4 }}</td>
+                            <td>{{ obj.MOBILE }}</td>
+                            <td>{{ obj.DO_OR_WO }} {{ obj.FATHER_SPOUSE_NAME }}</td>
+                            <td>{{ obj.BANK_ACCOUNT_NO }}</td>
+                            <td>{{ obj.IFSC_CODE }}</td>
+                            <td>{{ obj.BANK_NAME }}</td>
+                            <td>{{ obj.BRANCH }}</td>
+                            <td>{{ obj.EDUCATION_QUALIFICATION }}</td>
+                            <td>
+                                <span *ngIf="obj.STATUS === '0'" class="text-primary">
+                                    Pending
+                                </span>
+                                <span *ngIf="obj.STATUS === '1'" class="text-success">
+                                    Completed
+                                </span>
+                                <span *ngIf="obj.STATUS === '2'" class="text-danger">
+                                    Rejected
+                                </span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- <div class="col-md-12" [hidden]="promotersRequestsList?.length > 0">
+        <h3 class="text-center">
+          Promoters edit requests not available for this mentor !!!
+        </h3>
+      </div> -->
+        </div>
+    </div>
+</div>

@@ -1,0 +1,210 @@
+<div class="container-fluidm mt-1">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="card">
+                <div class="panel-group wrap" id="accordion" role="tablist" aria-multiselectable="true">
+                    <div class="panel">
+                        <div class="panel-heading active" role="tab" id="headingOne">
+                            <h4 class="panel-title">
+                                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true"
+                                    aria-controls="collapseOne">
+                                    <h5 class="mb-0 secondary-heading pb-0">Notifications</h5>
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapseOne" class="panel-collapse collapse show" role="tabpanel" aria-labelledby="headingOne">
+                            <div class="panel-body quik-links">
+
+                                <ul class="list-group">
+                                    <li class="list-group-item dropdown">
+                                        <a class="dropbtn">
+                                            <div class="ql-circle">1</div>
+                                            <label>Scientist</label>
+                                        </a>
+                                        <div class="dropdown-content">
+                                            <a title="Click" class="text-dark">Chemical</a>
+                                            <a title="Click" class="text-dark" (click)="ScientistData(1009)">Biological</a>
+
+                                        </div>      
+                                    </li>
+                                    <li class="list-group-item dropdown">
+                                        <a class="dropbtn">
+                                            <div class="ql-circle">2</div>
+                                            <label>Senior Analyst</label>
+                                        </a>
+                                        <div class="dropdown-content">
+                                            <a class="text-dark" title="Click">Chemical</a>
+                                            <a class="text-dark" title="Click">Biological</a>
+                                            <a class="text-dark" title="Click">Instrumentation</a>
+
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item dropdown">
+                                        <a class="dropbtn">
+                                            <div class="ql-circle">3</div>
+                                            <label>Junior Analysts</label>
+                                        </a>
+                                        <div class="dropdown-content">
+                                            <a class="text-dark" title="Click">Chemical</a>
+                                            <a class="text-dark" title="Click">Biological</a>
+                                            <a class="text-dark" title="Click">Instrumentation</a>
+
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item dropdown">
+                                        <a class="dropbtn">
+                                            <div class="ql-circle">4</div>
+                                            <label>Sr. Administrative Manager
+                                                (Accounts, IT, Stores & Purchase)</label>
+                                        </a>
+                                        <div class="dropdown-content">
+                                            <a class="text-dark" title="Click">Accounts, IT, Stores & Purchase</a>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item dropdown">
+                                        <a class="dropbtn">
+                                            <div class="ql-circle">5</div>
+                                            <label>Deputy Manager, Techno-commercial</label>
+                                        </a>
+                                        <div class="dropdown-content">
+                                            <a class="text-dark" title="Click">Deputy Manager, Techno-commercial</a>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item dropdown">
+                                        <a class="dropbtn">
+                                            <div class="ql-circle">6</div>
+                                            <label>Quality Manager</label>
+                                        </a>
+                                        <div class="dropdown-content">
+                                            <a class="text-dark" title="Click">Quality Manager</a>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item dropdown">
+                                        <a class="dropbtn">
+                                            <div class="ql-circle">7</div>
+                                            <label>Asst. Quality Manager</label>
+                                        </a>
+                                        <div class="dropdown-content">
+                                            <a class="text-dark" title="Click">Asst. Quality Manager</a>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="panel-heading active" role="tab" id="headingTwo">
+                            <h4 class="panel-title">
+                                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="true"
+                                    aria-controls="headingTwo">
+                                    <h5 class="mb-0 secondary-heading pb-0">Contact Details</h5>
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapseTwo" class="panel-collapse collapse show" role="tabpanel" aria-labelledby="headingTwo">
+                            <div class="panel-body quik-links">
+                                <div class="card">
+                                    <div class="row">
+                                        <div class="col-md-1"></div>
+                                        <div class="col-md-10 mt-2">
+                                            <h5><b>Mobile Number</b></h5>
+                                            <i class="fa fa-phone">
+
+                                                98678XXXXX
+                                            </i>
+                                        </div>
+
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-1"></div>
+                                        <div class="col-md-10 mt-2">
+                                            <h5><b>Email</b></h5>
+                                            <i class="fa fa-envelope">
+                                                Email.@comXXX
+                                            </i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end of panel -->
+                </div>
+            </div>
+        </div>
+        <div class="col-md-1">
+        </div>
+
+        <div class="col-md-8">
+            <div *ngIf="isexpequalone">
+                <div class="card">
+                    <h3 class="text-center mt-2">Qualification/Experience</h3>
+                    <hr>
+                    <div class="card-body">
+                        <div *ngFor="let obj of DataArray;">
+                            <div class="row">
+                                <div class="col-md-3"></div>
+                                <div class="col-md-2">
+                                    <label for="Qualification">
+                                        <h5><b>Designation:</b></h5>
+                                    </label>
+                                </div>
+                                <div class="col-md-6">
+                                    <h5 class="text-primary">{{obj.Designation}}({{obj.Position}})</h5>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-1"></div>
+                                <div class="col-md-10">
+                                    <label for="Qualification">
+                                        <h5><b>Qualification</b></h5>
+                                    </label>
+
+                                    <h5>
+                                        <ul>
+                                            <li>{{obj.Qualification}}</li>
+                                        </ul>
+                                    </h5>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-1"></div>
+                                <div class="col-md-10">
+                                    <label for="Qualification">
+                                        <h5><b>Experience</b></h5>
+                                    </label>
+                                    <h5>
+                                        <ul>
+                                            <li>{{obj.Experienceone}}</li>
+                                            <li>{{obj.Experiencetwo}}
+                                            </li>
+                                        </ul>
+                                    </h5>
+                                </div>
+                            </div>
+
+                            <div class="row mt-3">
+                                <div class="col-md-1"></div>
+                                <div class="col-md-2">
+                                    <!-- <button title="Click" type="button" class="btn-close" aria-label="Close" data-bs-dismiss="card"
+                                    (click)="closeCard()"></button> -->
+                                    <button type="submit" class="btn btn-danger" (click)="closeCard()">Close</button>
+                                </div>
+                                <div class="col-md-6"></div>
+                                <div class="col-md-2">
+                                    <!-- <a title="Click" style="cursor: pointer; text-decoration: underline" (click)="GoTopage()"><b>Apply For
+                                        Job</b></a> -->
+                                    <button type="submit" class="btn btn-primary" (click)="GoTopage()">Apply</button>
+                                </div>
+                                <div class="col-md-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+    </div>
+
+</div>

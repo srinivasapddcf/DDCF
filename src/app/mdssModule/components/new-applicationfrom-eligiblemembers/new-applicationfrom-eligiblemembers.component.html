@@ -1,0 +1,407 @@
+<div class="card">
+    <div class="card-header row">
+        <h5 class="mb-0">APPLICATION FROM ELIGIBLE MEMBERS</h5> &nbsp;<h6 style="margin-top: 5px;"></h6>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="rbkId"><b>RSK</b> <span style="color: red">*</span></label>
+                    <select id="rbkId" class="form-control" [(ngModel)]="eligiblemenbersData.rbkId" (change)="onRbkChange()">
+                        <option value="" disabled>-- SELECT RSK --</option>
+                        <option value="{{ obj.RBK_ID }}" *ngFor="let obj of rbkList">
+                            {{ obj.RBK_NAME }}
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="farmerId"><b>SELECT NEW MEMBER</b> <span style="color: red">*</span></label>
+                    <select id="farmerId" class="form-control" [(ngModel)]="promoterData.farmerId">
+                        <option value="" disabled>-- SELECT FARMER --</option>
+
+                        <option value="{{ obj.FARMER_CODE }}" *ngFor="let obj of farmerList">
+                            {{ obj.FARMER_NAME }}
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-4" *ngIf="promoterData.aadharNo !== ''">
+                <div class="form-group">
+                    <label><b>AADHAR NO</b></label>
+                    <h6 style="color: green">
+                        <b>XXXX-XXXX-{{ promoterData.aadharNo | slice: -4 }}</b>
+                    </h6>
+                </div>
+            </div>
+
+            <div class="col-md-4" *ngIf="promoterData.mobileNo !== ''">
+                <div class="form-group">
+                    <label><b>MOBILE NO</b> </label>
+                    <h6 style="color: green">
+                        <b>{{ promoterData.mobileNo }}</b>
+                    </h6>
+                </div>
+            </div>
+
+
+            <div class="col-md-4" *ngIf="!promoterData.dobAvailable">
+                <div class="form-group">
+                    <label><b>DATE OF BIRTH </b><span style="color: red">*</span></label>
+                    <div>
+                        <input type="text" placeholder="DD-MM-YYYY" class="form-control" bsDatepicker [(ngModel)]="promotorDetailsdob"
+                            placement="bottom" container="" [bsConfig]="bsDatepickerConfig">
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+
+
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label><b>RELATIONSHIP</b> <span style="color: red">*</span> </label>
+                    <select id="relation" class="form-control" [(ngModel)]="promoterData.relation">
+                        <option value="">-- SELECT RELATIONSHIP --</option>
+                        <option value="D/O">D/O</option>
+                        <option value="W/O">W/O</option>
+                        <option value="Mother">Mother</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label><b>FATHER / HUSBAND / MOTHER NAME </b><span style="color: red">*</span></label>
+                    <input type="text" class="form-control" [(ngModel)]="promoterData.fatherOrHusbandName"
+                        placeholder="Please Enter Father/Spouse Name" maxlength="50" onkeydown="return /[a-z, ]/i.test(event.key)"
+                        onblur="if (this.value == '') {this.value = '';}" onfocus="if (this.value == '') {this.value = '';}"
+                        autocomplete="off" /><!-- onkeydown="return /[a-z]/i.test(event.key)" -->
+                </div>
+            </div>
+
+
+            <div class="col-md-4" *ngIf="promoterData.dobAvailable">
+                <div class="form-group">
+                    <label>Date Of Birth </label>
+                    <h6 style="color: green">
+                        <b>{{ promoterData.dob }}</b>
+                    </h6>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label><b>ADDRESS </b><span style="color: red">*</span></label>
+                    <textarea type="text" class="form-control" [(ngModel)]="promoterData.address" maxlength="60"
+                        placeholder="Please Enter Address" autocomplete="off"></textarea>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label><b> COMMUNITY</b> <span style="color: red">*</span></label>
+                    <select id="caste" class="form-control" [(ngModel)]="promoterData.caste">
+                        <option value="">-- SELECT COMMUNITY --</option>
+                        <option value="SC">SC</option>
+                        <option value="ST">ST</option>
+                        <option value="BC">BC</option>
+                        <option value="OC">OC</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label><b>OCCUPATION </b><span style="color: red">*</span></label>
+                    <input type="text" class="form-control" [(ngModel)]="promoterData.occupation" placeholder="Please enter occupation"
+                        maxlength="50" onkeydown="return /[a-z, ]/i.test(event.key)" onblur="if (this.value == '') {this.value = '';}"
+                        onfocus="if (this.value == '') {this.value = '';}" autocomplete="off" />
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label><b>NO. OF SHARES</b> <span style="color: red">*</span></label>
+                    <input type="text" class="form-control" [(ngModel)]="promoterData.sharesCount" placeholder="Please enter shares Count"
+                        maxlength="5" autocomplete="off" NumbersOnly [allowDecimals]="false" [allowSign]="false"
+                        (input)="onSharesChange()" />
+
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label><b>SHARES AMOUNT</b> <span style="color: red">*</span></label>
+                    <span class="text-success">{{ promoterData.sharesAmount }}</span>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label><b>ENTRANCE FEE </b><span style="color: red">*</span></label>
+                    <span class="text-success">{{ promoterData.entryFee }}</span>
+                </div>
+            </div>
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="imagePath"><b>PHOTO </b><span style="color: red">* <small class="text-danger">(jpg
+                                below 100kb )</small></span>
+                    </label>
+                    <input type="file" class="form-control p-0" id="imagePath" (change)="onPromoterImageChange($event)" accept="image/*"
+                        autocomplete="off" [(ngModel)]="imagePath" />
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="idProof"><b>ID PROOF</b>
+                        <span style="color: red">*<small class="text-danger">
+                                (Ration/Aadhaar/VoterId) (jpg below 100kb )
+                            </small></span>
+                    </label>
+                    <input type="file" id="idProof" (change)="onIdProofChange($event)" accept="image/*" class="form-control p-0"
+                        autocomplete="off" [(ngModel)]="idProofPath" />
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="idProof"><b>SHARES PHOTO</b>
+                        <span style="color: red">*<small class="text-danger">
+                                (Shares Photo) (jpg below 100kb )
+                            </small></span>
+                    </label>
+                    <input type="file" id="ShearecountImage" (change)="onSharesphotoChange($event)" accept="image/*"
+                        class="form-control p-0" autocomplete="off" [(ngModel)]="ShearecountImage" />
+                </div>
+            </div>
+            <br />
+        </div>
+        <div class="row">
+
+            <div class="col-md-12 mt-3">
+                <span>
+
+                    <h3 class="text-center text-heading">NOMINEE DETAILS</h3>
+                    <hr>
+                </span>
+
+            </div>
+
+
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label><b>MEMBER RELATION</b> <span style="color: red">*</span> </label>
+                    <select id="relation" class="form-control" [(ngModel)]="promoterData.NomineeMemberRelation">
+                        <option value="">-- SELECT MEMBER RELATION --</option>
+                        <option *ngFor="let obj of MemberRelation ">{{obj.RELATION}}</option>
+
+
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="Name"><b>NAME </b><span style="color: red">*</span></label>
+                    <input type="text" class="form-control" [(ngModel)]="promoterData.Name" placeholder="Please Enter Name" maxlength="40"
+                        onkeydown="return /[a-z, ]/i.test(event.key)" onblur="if (this.value == '') {this.value = '';}"
+                        onfocus="if (this.value == '') {this.value = '';}"
+                        autocomplete="off" /><!-- onkeydown="return /[a-z]/i.test(event.key)" -->
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label><b>DATE OF BIRTH </b><span style="color: red">*</span></label>
+                    <div>
+                        <input type="text" placeholder="DD-MM-YYYY" class="form-control" bsDatepicker
+                            [(ngModel)]="NomineepromotorDetailsdob" placement="bottom" container="" [bsConfig]="bsDatepickerConfig">
+
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label><b>GENDER</b> <span style="color: red">*</span> </label>
+                    <select id="relation" class="form-control" [(ngModel)]="promoterData.Gender">
+                        <option value="">-- SELECT GENDER --</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Others">Others</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label><b>RELATIONSHIP</b> <span style="color: red">*</span> </label>
+                    <select id="relation" class="form-control" [(ngModel)]="promoterData.NomineeRelation">
+                        <option value="">-- SELECT RELATIONSHIP --</option>
+                        <option value="S/O">S/O</option>
+                        <option value="C/O">C/O</option>
+                        <option value="D/O">D/O</option>
+                        <option value="W/O">W/O</option>
+                        <option value="Mother">Mother</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label><b>FATHER / HUSBAND / MOTHER NAME </b><span style="color: red">*</span></label>
+                    <input type="text" class="form-control" [(ngModel)]="promoterData.NomineefatherOrHusbandName"
+                        placeholder="Please Enter Father/Spouse Name" maxlength="40" onkeydown="return /[a-z, ]/i.test(event.key)"
+                        onblur="if (this.value == '') {this.value = '';}" onfocus="if (this.value == '') {this.value = '';}"
+                        autocomplete="off" /><!-- onkeydown="return /[a-z]/i.test(event.key)" -->
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label><b> COMMUNITY</b> <span style="color: red">*</span></label>
+                    <select id="caste" class="form-control" [(ngModel)]="promoterData.NomineeCommunity">
+                        <option value="">-- SELECT COMMUNITY --</option>
+                        <option value="SC">SC</option>
+                        <option value="ST">ST</option>
+                        <option value="BC">BC</option>
+                        <option value="OC">OC</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label><b>OCCUPATION </b><span style="color: red">*</span></label>
+                    <input type="text" class="form-control" [(ngModel)]="promoterData.Nomineeoccupation"
+                        placeholder="Please enter occupation" maxlength="50" onkeydown="return /[a-z, ]/i.test(event.key)"
+                        onblur="if (this.value == '') {this.value = '';}" onfocus="if (this.value == '') {this.value = '';}"
+                        autocomplete="off" />
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label><b>ADDRESS </b><span style="color: red">*</span></label>
+                    <textarea type="text" class="form-control" [(ngModel)]="promoterData.Nomineeaddress" maxlength="60"
+                        placeholder="Please Enter Address" autocomplete="off"></textarea>
+                </div>
+            </div>
+
+
+            <div class="col-md-12">
+                <div class="row col-md-12"></div>
+            </div>
+            <div class="col-md-12 popup-footer justify-content-center">
+                <button type="button" class="btn btn-outline-success btn-sm btn-rounded" (click)="btnAddPromoter()">
+                    ADD PROMOTER
+                </button>
+
+            </div>
+
+        </div>
+        <h5 class="sub-heading pb-0" [hidden]="submittedPromotersList?.length < 1">
+            <label>FARMER DETAILS</label>
+        </h5>
+
+        <div class="row px-4">
+            <div class="col-md-12 table-responsive" [hidden]="submittedFarmersList?.length < 1">
+                <table id="submittedPromoters" class="table table-striped ah-table text-center">
+                    <thead class="bg-success text-white">
+                        <tr>
+                            <th>S.No.</th>
+                            <th>RSK NAME</th>
+                            <th>MEMBER NAME</th>
+                            <th>FATHER/HUSBAND/ MOTHER NAME</th>
+                            <th>RELATIONSHIP</th>
+                            <th>DATE OF BIRTH</th>
+
+                            <th>ADDRESS</th>
+                            <th>COMMUNITY</th>
+                            <!--  <th>ADHOC DESIGNATION</th>
+                <th>CHIEF PROMOTER</th>
+                <th>Age</th>
+                
+                <th>FARMER ID</th>
+                <th>AADHAAR NUMBER</th> -->
+                            <th>OCCUPATION</th>
+                            <th>NO. OF SHARES</th>
+                            <th>AMOUNT</th>
+                            <th>ENTRANCE FEE</th>
+
+                            <th>MEMBER RELATION</th>
+                            <th>NAME</th>
+                            <th>DATE OF BIRTH</th>
+                            <th>GENDER</th>
+                            <th>RELATIONSHIP</th>
+                            <th>FATHER / HUSBAND / MOTHER NAME</th>
+                            <th>COMMUNITY</th>
+                            <th>OCCUPATION</th>
+                            <th>ADDRESS</th>
+                            <th>PHOTO IMAGE</th>
+                            <th>ID PROOF</th>
+                            <th>SHARES COUNT PHOTO</th>
+                            <th>ACTION</th>
+                        </tr>
+                    </thead>
+                    <tbody *ngIf="submittedFarmersList?.length > 0">
+                        <tr *ngFor="let obj of submittedFarmersList; let i = index">
+                            <td>{{ i + 1 }}</td>
+                            <td>
+                                <b>{{ obj.rbkName }}</b>
+                            </td>
+                            <td>
+                                <b>{{ obj.NAME }}</b>
+                            </td>
+                            <td>{{ obj.relation_name }}</td>
+                            <td>{{ obj.relation }}</td>
+
+
+
+                            <td>{{ obj.dob }}</td>
+
+
+
+                            <td>{{ obj.address }}</td>
+                            <td>{{ obj.community }}</td>
+                            <td>{{ obj.occupation }}</td>
+                            <td>{{ obj.shares_count }}</td>
+                            <td>{{ obj.shares_amount }}</td>
+                            <td>{{ obj.entrance_fee }}</td>
+
+
+                            <td>{{ obj.MemberRelation }}</td>
+                            <td>{{ obj.NomineeName }}</td>
+                            <td>{{ obj.Nomineedob }}</td>
+                            <td>{{ obj.NomineeGender }}</td>
+                            <td>{{ obj.NomineeRelation }}</td>
+
+                            <td>{{ obj.NomineeFatherHusbandMother }}</td>
+                            <td>{{ obj.NomineeCommunity }}</td>
+                            <td>{{ obj.NomineeOccupation }}</td>
+                            <td>{{ obj.NomineeAddress }}</td>
+                            <td><a (click)="Photoshow(obj.photo)" class="btn btn-sm btn-info">View</a></td>
+                            <td><a (click)="Photoshow(obj.id_proof)" class="btn btn-sm btn-info">View</a></td>
+                            <td><a (click)="Photoshow(obj.shares_count_image)" class="btn btn-sm btn-info">View</a></td>
+
+                            <td><input type="button" class="fa fa-trash btn btn-danger" (click)="DeleteApplication(i);" value="Remove" />
+                            </td>
+
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="col-md-12 popup-footer justify-content-center">
+                    <button type="button" class="btn btn-success btn-sm" (click)="btnSubmit()">
+                        SUBMIT
+                    </button>
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+        <div *ngIf="selectedImagePath" class="popup-overlays">
+            <div class="popup-contents">
+
+                <img src="{{ selectedImagePath }}" alt="Selected Image" style="height: 200px; width: auto;">
+                <br>
+                <button (click)="closePopup()">Close</button>
+            </div>
+        </div>
+
+         
+    </div>  
+</div>

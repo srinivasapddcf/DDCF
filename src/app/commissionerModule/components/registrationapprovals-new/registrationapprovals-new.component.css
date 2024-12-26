@@ -1,0 +1,118 @@
+  .stats-card.active{
+    transform: translateY(0px) scale(1.005) translateZ(0) !important;
+    box-shadow: 0 24px 36px rgba(0, 0, 0, 0.11), 0 24px 46px var(--box-shadow-color) !important;
+}
+.stats-card:hover{
+    transform: none !important;
+    box-shadow:none !important;
+   
+}
+.popup-modals {
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.6);
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 9999999;
+    transition: all 0.3s;
+}
+
+.table-responsive{
+    max-height:300px;
+    overflow-y:auto;
+}
+
+.table-fixed{
+    position: sticky;
+    top: 0px;
+    z-index: 9;
+}
+
+table, th, tr, td {
+    border: 2px solid #28a745 !important;
+}
+
+
+.tabsdata thead th:nth-child(1) {
+    position: sticky;
+    left: -5px;
+    background: #28a745;
+    filter: none;
+    border: 1px solid green;
+}
+.tabsdata thead th:nth-child(2) {
+    position: sticky !important;
+    left: 40px;
+    
+    background: #28a745;
+    filter: none;
+}
+.tabsdata thead th:nth-child(3) {
+    position: sticky !important;
+    left: 120px;
+    
+    background: #28a745;
+    filter: none;
+}
+.tabsdata thead th:nth-child(4) {
+    position: sticky !important;
+    left: 220px;
+    
+    background: #28a745;
+    filter: none;
+}
+.tabsdata thead th:nth-child(5) {
+    position: sticky !important;
+    left: 310px;
+    
+    background: #28a745;
+    filter: none;
+}
+.tabsdata thead th:nth-child(6) {
+    position: sticky !important;
+    left: 400px;
+    
+    background: #28a745;
+    filter: none;
+}
+ 
+
+
+
+.tabsdata tbody td:nth-child(1) {
+    position: sticky;
+    left: -5px;
+     
+    background-color: #fff;
+}
+.tabsdata tbody td:nth-child(2){
+    position: sticky !important;
+    left: 40px;
+     
+     background-color: #fff;
+}
+.tabsdata tbody td:nth-child(3){
+    position: sticky !important;
+    left: 120px;
+     
+     background-color: #fff;
+}
+.tabsdata tbody td:nth-child(4){
+    position: sticky !important;
+    left: 220px;
+     
+     background-color: #fff;
+}
+.tabsdata tbody td:nth-child(5){
+    position: sticky !important;
+    left: 310px;
+     
+     background-color: #fff;
+}
+.tabsdata tbody td:nth-child(6){
+    position: sticky !important;
+    left: 400px;
+     
+     background-color: #fff;
+}

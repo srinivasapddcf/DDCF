@@ -1,0 +1,255 @@
+<div class="card">
+  <div class="card-header p-2">
+    <h5 class="mb-0">BANK MANAGER LOAN VERIFICATION</h5>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="BEN_NAME">
+            APPLICANT NAME :
+            <span style="color: green">
+              <b>{{ personDetails.BEN_NAME }}</b>
+            </span>
+          </label>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="BEN_FATHER_NAME">
+            FATHER'S /HUSBAND'S NAME :
+            <span style="color: green">
+              <b>{{ personDetails.BEN_FATHER_NAME }}</b>
+            </span>
+          </label>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="UID_NUM">
+            AADHAR :
+            <span style="color: green">
+              <b>{{ personDetails.UID_NUM }}</b>
+            </span>
+          </label>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="ACCOUNT_NUMBER">
+            SB ACCOUNT NO. :
+            <span style="color: green">
+              <b>{{ personDetails.ACCOUNT_NUMBER }}</b>
+            </span>
+          </label>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="IFSC_CODE">
+            IFSC CODE :
+            <span style="color: green">
+              <b>{{ personDetails.IFSC_CODE }}</b>
+            </span>
+          </label>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="DOB_DT">
+            DATE OF BIRTH :
+            <span style="color: green">
+              <b>{{ personDetails.DOB_DT }}</b>
+            </span>
+          </label>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="NATURE_OF_UINT">
+            NATURE OF UNIT :
+            <span style="color: green">
+              <b>{{ personDetails.NATURE_OF_UINT }}</b>
+            </span>
+          </label>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="ANIMAL_COST">
+            ANIMAL COST :
+            <span style="color: green">
+              <b>{{ personDetails.ANIMAL_COST }}</b>
+            </span>
+          </label>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="INSURANCE">
+            INSURANCE :
+            <span style="color: green">
+              <b>{{ personDetails.INSURANCE }}</b>
+            </span>
+          </label>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="TRANSPORTATION">
+            TRANSPORTATION :
+            <span style="color: green">
+              <b>{{ personDetails.TRANSPORTATION }}</b>
+            </span>
+          </label>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="TOT_PROJECT_COST">
+            TOTAL PROJECT COST :
+            <span style="color: green">
+              <b>{{ personDetails.TOT_PROJECT_COST }}</b>
+            </span>
+          </label>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="MARGIN">
+            MARGIN :
+            <span style="color: green">
+              <b>{{ personDetails.MARGIN }}</b>
+            </span>
+          </label>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="BANK_LOAN">
+            BANK LOAN :
+            <span style="color: green">
+              <b>{{ personDetails.BANK_LOAN }}</b>
+            </span>
+          </label>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="APP_HARD_COPY_SENT_DATE">
+            APPLICATION HARD COPY SENT TO BANK DATE : <br />
+            <span style="color: green">
+              <b>{{ personDetails.APP_HARD_COPY_SENT_DATE }}</b>
+            </span>
+          </label>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="SUBMISSION_DATE">
+            SUBMISSION DATE : <br />
+            <span style="color: green">
+              <b>{{ personDetails.SUBMISSION_DATE }}</b>
+            </span>
+          </label>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="actionTaken">
+            LOAN <sup class="text-danger h6">*</sup></label
+          >
+          <div class="ah-radio-buttons">
+            <div class="custom-control custom-radio custom-control-inline">
+              <input
+                class="custom-control-input"
+                type="radio"
+                name="actionTaken"
+                id="actionTaken1"
+                value="1"
+                [(ngModel)]="applicantData.actionTaken"
+                autocomplete="off"
+              />
+              <label class="custom-control-label" for="actionTaken1">
+                Sanctioned
+              </label>
+            </div>
+
+            <div class="custom-control custom-radio custom-control-inline">
+              <input
+                class="custom-control-input"
+                type="radio"
+                name="actionTaken"
+                id="actionTaken2"
+                value="2"
+                [(ngModel)]="applicantData.actionTaken"
+                autocomplete="off"
+              />
+              <label class="custom-control-label" for="actionTaken2">
+                Rejected
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4" *ngIf="applicantData.actionTaken === '1'">
+        <div class="form-group">
+          <label for="loanSanctionDate">
+            SANCTION DATE
+            <span style="color: red">*</span>
+          </label>
+          <app-date-picker
+          [PlaceHolder]="'Please Select Submission Date'"
+          [(selectedDate)]="applicantData.loanSanctionDate"
+          [maxDate]="maxDate"
+        ></app-date-picker>
+        </div>
+      </div>
+      <div class="col-md-4" *ngIf="applicantData.actionTaken === '1'">
+        <div class="form-group">
+          <label for="loanAmount"
+            >LOAN AMOUNT <span style="color: red">*</span></label
+          >
+          <input
+            id="loanAmount"
+            type="text"
+            class="form-control"
+            [(ngModel)]="applicantData.loanAmount"
+            placeholder="Please Enter Loan Amount"
+            maxlength="7"
+            autocomplete="off"
+            NumbersOnly
+            [allowDecimals]="false"
+            [allowSign]="false"
+          />
+        </div>
+      </div>
+      <div class="col-md-4" *ngIf="applicantData.actionTaken === '2'">
+        <div class="form-group">
+          <label for="remarks">REMARKS <span style="color: red">*</span></label>
+          <input
+            id="remarks"
+            type="text"
+            class="form-control"
+            [(ngModel)]="applicantData.remarks"
+            placeholder="Please Enter Remarks"
+            maxlength="50"
+            autocomplete="off"
+          />
+        </div>
+      </div>
+
+      <div class="col-md-12" align="center">
+        <button
+          type="button"
+          class="btn btn-success btn-sm"
+          (click)="btnSubmit()"
+        >
+          SUBMIT
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

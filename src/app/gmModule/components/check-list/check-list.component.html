@@ -1,0 +1,135 @@
+<div class="card">
+    <div class="card-header p-2">
+      <h5 class="mb-0">GM CHECKLIST</h5>
+    </div>
+    <div class="card-body">
+      <div class="row align-items-center">
+        <div class="col-md-4">
+          <div class="form-group">
+            <label>SELECT RSK ID<span style="color: red">*</span></label>
+          </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <select [(ngModel)]="RBKDDSelected" id="#" class="form-control" (change)="RBKDDChange();">
+                    <option value="">--Select RSK Id--</option>
+                    <option *ngFor="let rbk of rbkList" value="{{rbk.RBK_CODE}}">{{rbk.RBK_NAME}}</option>
+                    </select>
+            </div>
+        </div>  
+      </div>
+
+      <div class="row">
+        <div class="col-md-1">
+        </div>
+        <div class="col-md-2" *ngIf="FORM_A_PDF">
+          <button class="btn btn-sm btn-info block" (click)="btnPdf(FORM_A_PDF)"><i class="fa fa-eye"></i> FORM A</button>
+        </div>
+        <div class="col-md-2" *ngIf="MASUDHA_FORM_PDF">
+          <button class="btn btn-sm btn-info block" (click)="btnPdf(MASUDHA_FORM_PDF)"><i class="fa fa-eye"></i> MASUDHA FORM</button>
+        </div>
+        
+        <div class="col-md-2" *ngIf="BYE_LAW_PDF">
+          <button class="btn btn-sm btn-info block" (click)="btnPdf(BYE_LAW_PDF)"><i class="fa fa-eye"></i> BYE LAW</button>
+        </div>
+        <div class="col-md-2" *ngIf="FESABILITY_REPORT_PDF">
+          <button class="btn btn-sm btn-info block" (click)="btnPdf(FESABILITY_REPORT_PDF)"><i class="fa fa-eye"></i> FEASIBILITY REPORT</button>
+        </div>
+        <div class="col-md-2" *ngIf="BANK_PASSBOOK_IMAGE">
+          <button class="btn btn-sm btn-info block" (click)="btnImg(BANK_PASSBOOK_IMAGE)"><i class="fa fa-eye"></i> BANK PASSBOOK</button>
+        </div>
+        <div class="col-md-1">
+        </div>
+  
+        <div class="col-md-1">
+        </div>
+        <div class="col-md-2" *ngIf="BANK_REMITTANCE_CERTI_PDF">
+          <button class="btn btn-sm btn-info block" (click)="btnPdf(BANK_REMITTANCE_CERTI_PDF)"><i class="fa fa-eye"></i> BANK REMITTANCE</button>
+        </div>
+        <div class="col-md-2" *ngIf="REQ_LETTER_ADHOCK_COM_PDF">
+          <button class="btn btn-sm btn-info block" (click)="btnPdf(REQ_LETTER_ADHOCK_COM_PDF)"><i class="fa fa-eye"></i> REQUEST LETTER</button>
+        </div>
+        
+        <div class="col-md-2" *ngIf="MEETING_PROCEDINGS_PDF">
+          <button class="btn btn-sm btn-info block" (click)="btnPdf(MEETING_PROCEDINGS_PDF)"><i class="fa fa-eye"></i> MEETING PROCEEDINGS</button>
+        </div>
+        <div class="col-md-2" *ngIf="SWORN_STATEMENT_PDF">
+          <button class="btn btn-sm btn-info block" (click)="btnPdf(SWORN_STATEMENT_PDF)"><i class="fa fa-eye"></i> SWORN STATEMENT</button>
+        </div>
+        <div class="col-md-2" *ngIf="ECONOMIC_VIABILITY_REP_PDF">
+          <button class="btn btn-sm btn-info block" (click)="btnPdf(ECONOMIC_VIABILITY_REP_PDF)"><i class="fa fa-eye"></i> ECONOMIC VIABILITY</button>
+        </div>
+        <div class="col-md-1">
+        </div>
+      </div>
+
+
+
+      <div class="row">
+        <div
+          class="col-md-12 table-responsive"
+          [hidden]="checkList?.length < 1"
+        >
+          <table
+            class="table table-striped ah-table text-center"
+            datatable
+            [dtOptions]="dtOptions"
+            [dtTrigger]="dtTrigger" data-page-length='25'
+          >
+            <thead class="bg-success text-white">
+              <tr>
+                <th>S.No.</th>
+                <th>QUESTION</th>
+                <th>DLCO STATUS</th>
+                <th>DCO STATUS</th>
+                <th>ACTION</th>
+              </tr>
+            </thead>
+            <tbody *ngIf="checkList?.length > 0">
+              <tr *ngFor="let obj of checkList; let i = index">
+                <td>{{ i + 1 }}</td>
+                <td style="text-align: left;">{{ obj.CHECK_LIST_NAME }}</td>
+                <td>{{ obj.DLCO_STATUS }}</td>
+                <td>{{ obj.DCO_STATUS }}</td>
+                <td style="text-align: center;">
+                   <input type="radio" (change)="onSelectionChange(obj.CHECK_LIST_CODE)" name="inputRadio{{ obj.CHECK_LIST_CODE }}" id="inputRadio{{ obj.CHECK_LIST_CODE }}" value="0,{{ obj.CHECK_LIST_CODE }}" [(ngModel)]="obj.CHECK_LIST_CODE"/> <label>No</label>
+                   <input type="radio" (change)="onSelectionChange(obj.CHECK_LIST_CODE)" name="inputRadio{{ obj.CHECK_LIST_CODE }}" id="inputRadio{{ obj.CHECK_LIST_CODE }}" value="1,{{ obj.CHECK_LIST_CODE }}"  [(ngModel)]="obj.CHECK_LIST_CODE" style="margin-left: 40px;" /> Yes
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <!-- <div class="col-md-12" [hidden]="!divSbmt">
+            <button class="btn btn-success" (click)="submitClick();">Submit</button>
+          </div> -->
+          <div class="row" [hidden]="!divSbmt">
+            <div class="col-md-1"  style="text-align: end;">
+            <input type="checkbox" [(ngModel)]="CheckText" />
+          </div>
+          <div class="col-md-11">
+             <label>
+              Finally verified  and  recommended for registration.
+            </label>
+          </div>
+          <div class="col-md-12"   style="text-align: center;">
+            <button class="btn btn-success" (click)="submitClick();">Submit</button>
+          </div>
+          </div>
+        </div>
+        <div class="col-md-12" [hidden]="checkList?.length > 0">
+          <!-- <h3 class="text-center">
+            No check Lists Available !!!
+          </h3> -->
+        </div>
+      </div>
+      
+  <!-- <div class="col-md-12" *ngIf="tremarks" >
+    <div style="text-align:center;">
+    Remarks:
+    <input type="text" id="txtremarks" name="txtremarks" style="width:500px;" placeholder="Remarks" [(ngModel)]="txtremarks" />
+    <button class="btn btn-success" (click)="RejectClick();" >Reject</button>
+  </div>
+</div> -->
+    </div>
+
+
+

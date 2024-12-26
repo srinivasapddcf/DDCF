@@ -1,0 +1,92 @@
+<div class="card">
+    <div class="card-header p-2">
+      <h5 class="mb-0">Schedule Creation Approvals Report</h5>
+    </div>
+  
+    <div class="card-body">
+      <div class="row align-items-center">
+        <div class="col-md-12 row">
+  
+          <div class="col-md-3" style="text-align: right;"> <label for="UninonId">Select Schedule Training
+              <span style="color: red">*</span></label></div>
+  
+  
+          <div class="col-md-3">
+            <div class="form-group">
+  
+              <select id="TRAININGID" class="form-control" [(ngModel)]="TRAININGID" (change)="onScheduleChange()">
+               
+                <option disabled selected value="undefined">-- Select Schedule Testing --</option>
+                <option value="{{ obj.TRAININGID }}" *ngFor="let obj of POlist"> {{ obj.TRAININGNAME }} </option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row mt-3" [hidden]="SocietyMilkCollectonList?.length < 1">
+      <div class="col-md-12">
+  
+        <div class="card-body"> 
+          <div class="col-md-12 table-responsive">
+            <table class="table table-striped ah-table text-center tabsdata">
+              <thead class="bg-success text-white table-fixed">
+                <tr >
+                <tr>
+                  <th class="tableheader_color">S No</th>
+                  <th class="tableheader_color">MEETINGID</th>
+                  <th class="tableheader_color" >TRAININGNAME</th>
+                  <th class="tableheader_color"  >MENTOR_PHNO</th>
+                  <th class="tableheader_color"  >RIC_PHNO</th>
+                  <th class="tableheader_color" >TRAINING_DATE</th>
+                  <th class="tableheader_color"  >TRAINING_TIME</th>
+                  <th class="tableheader_color"  >VENUE</th>
+                  <th class="tableheader_color" >ADDRESS</th>                
+                  <th class="tableheader_color">APPROVALSTATUS</th> 
+                </tr>
+                <tr>
+                  <th class="tableheader_color">(1)</th>
+                  <th class="tableheader_color">(2)</th>
+                  <th class="tableheader_color">(3)</th>
+                  <th class="tableheader_color">(4)</th>
+                  <th class="tableheader_color">(5)</th>
+                  <th class="tableheader_color">(6)</th>
+                  <th class="tableheader_color">(7)</th>
+                  <th class="tableheader_color">(8)</th>
+                  <th class="tableheader_color">(9)</th>
+                  <th class="tableheader_color">(10)</th> 
+                </tr>
+              </thead>
+              <tbody [hidden]="SocietyMilkCollectonList?.length < 1">
+                <tr   *ngFor="let obj of SocietyMilkCollectonList; let i = index">
+                    <td class="number_align">{{ i + 1 }}</td>
+                    <td style="text-align: left;" class="table_cells_borders"> {{obj.MEETINGID}}</td>
+                    <td style="text-align: left;" class="table_cells_borders"> {{obj.TRAININGNAME}}</td>
+                    <td style="text-align: left;" class="table_cells_borders"> {{obj.MENTOR_PHNO}}</td>
+                    <td style="text-align: left;" class="table_cells_borders"> {{obj.RIC_PHNO}}</td>
+                    <td style="text-align: left;" class="table_cells_borders"> {{obj.TRAINING_DATE}}</td>
+                    <td style="text-align: left;" class="table_cells_borders"> {{obj.TRAINING_TIME}}</td>
+                    <td style="text-align: left;" class="table_cells_borders"> {{obj.VENUE}}</td>
+                    <td style="text-align: left;" class="table_cells_borders"> {{obj.ADDRESS}}</td>
+                    <td style="text-align: left;" class="table_cells_borders"> {{obj.APPROVALSTATUS}}</td> 
+                   
+  
+                </tr>
+              </tbody>
+            </table>
+          </div>
+  
+          <!-- <div class="col-md-12">
+            <button type="button" class="btn btn-success btn-sm pull-right" (click)="btnSubmit()">
+                <i class="fa fa-1x mr-2" aria-hidden="true"></i>
+               SUBMIT
+            </button>
+        </div> -->
+        </div>
+      </div>
+    </div>
+  </div>
+  
+    
+  
+  

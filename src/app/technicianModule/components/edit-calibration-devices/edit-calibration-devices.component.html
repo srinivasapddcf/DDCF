@@ -1,0 +1,196 @@
+<div class="card">
+  <div class="card-header p-2">
+    <h5 class="mb-0">EDIT CALIBRATION DEVICES OF AMCU</h5>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="routeId">ROUTE <span style="color: red">*</span></label>
+          <select
+            id="routeId"
+            class="form-control"
+            [(ngModel)]="calibrationDeviceDetails.routeId"
+            (change)="onRouteChange()"
+          >
+            <option value="">-- SELECT ROUTE --</option>
+            <option value="{{ obj.ROUTE_ID }}" *ngFor="let obj of routeList">
+              {{ obj.ROUTE_NAME }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="villageId"
+            >VILLAGE <span style="color: red">*</span></label
+          >
+          <select
+            id="villageId"
+            class="form-control"
+            [(ngModel)]="calibrationDeviceDetails.villageId"
+            (change)="onVillageChange()"
+          >
+            <option value="">-- SELECT VILLAGE --</option>
+            <option
+              value="{{ obj.VILLAGE_ID }}"
+              *ngFor="let obj of villageList"
+            >
+              {{ obj.VILLAGE_NAME }} (SOCIETY CODE -
+              <span style="color: green">
+                {{ obj.SOCIETY_CODE }}
+              </span>
+              )
+            </option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <hr />
+    <div
+      class="row"
+      *ngIf="calibrationDeviceDetails.villageId !== '' && clibrationCheck"
+    >
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="deviceId"
+            >DEVICES LIST <span style="color: red">*</span></label
+          >
+          <select
+            id="deviceId"
+            class="form-control"
+            [(ngModel)]="calibrationDeviceDetails.deviceId"
+          >
+            <option value="">-- SELECT DEVICE --</option>
+            <option value="{{ obj.DEVICE_ID }}" *ngFor="let obj of devicesList">
+              {{ obj.DEVICE_NAME }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="col-md-4" *ngIf="calibrationDeviceDetails.deviceId === '13'">
+        <div class="form-group">
+          <label
+            >INTERNET CONNECTIVITY DEVICE
+            <sup class="text-danger h6">*</sup></label
+          >
+          <div class="ah-radio-buttons">
+            <div class="custom-control custom-radio custom-control-inline">
+              <input
+                class="custom-control-input"
+                type="radio"
+                name="internetDevice"
+                id="internetDevice1"
+                value="1"
+                [(ngModel)]="calibrationDeviceDetails.internetDevice"
+                autocomplete="off"
+              />
+              <label class="custom-control-label" for="internetDevice1">
+                Dongle
+              </label>
+            </div>
+
+            <div class="custom-control custom-radio custom-control-inline">
+              <input
+                class="custom-control-input"
+                type="radio"
+                name="internetDevice"
+                id="internetDevice2"
+                value="2"
+                [(ngModel)]="calibrationDeviceDetails.internetDevice"
+                autocomplete="off"
+              />
+              <label class="custom-control-label" for="internetDevice2">
+                Modem
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4" *ngIf="calibrationDeviceDetails.deviceId !== '9'">
+        <div class="form-group">
+          <label>DEVICE MAKER <span style="color: red">*</span></label>
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="calibrationDeviceDetails.deviceMaker"
+            placeholder="Please Enter Device Maker"
+            maxlength="50"
+            autocomplete="off"
+          />
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="manfactureDate"
+            >MANFACTURING DATE <span style="color: red">*</span></label
+          >
+          <app-date-picker
+            [PlaceHolder]="'Please Select Manfacturing Date'"
+            [(selectedDate)]="calibrationDeviceDetails.manfactureDate"
+            [maxDate]="maxDate"
+          ></app-date-picker>
+        </div>
+      </div>
+
+      <div class="col-md-4" *ngIf="calibrationDeviceDetails.deviceId !== '9'">
+        <div class="form-group">
+          <label>DEVICE SERIAL NO <span style="color: red">*</span></label>
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="calibrationDeviceDetails.deviceSerialNo"
+            placeholder="Please Enter Serial No"
+            maxlength="50"
+            autocomplete="off"
+          />
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="deviceImage"
+            >PHOTO UPLOAD <span style="color: red">*</span>
+          </label>
+          <input
+            type="file"
+            class="form-control p-0"
+            id="deviceImage"
+            (change)="onImageChange($event)"
+            accept="image/*"
+            #deviceImage
+            autocomplete="off"
+          />
+        </div>
+      </div>
+
+      <div class="col-md-12" align="center">
+        <button
+          type="button"
+          class="btn btn-success btn-sm"
+          (click)="btnUpdate()"
+        >
+          UPDATE
+        </button>
+      </div>
+    </div>
+    <div
+      class="row"
+      *ngIf="calibrationDeviceDetails.villageId !== '' && !clibrationCheck"
+    >
+      <div
+        class="col-md-12"
+        align="center"
+      >
+        <h3>
+          Calibration Details has not been submitted for the selected village
+        </h3>
+      </div>
+    </div>
+  </div>
+</div>

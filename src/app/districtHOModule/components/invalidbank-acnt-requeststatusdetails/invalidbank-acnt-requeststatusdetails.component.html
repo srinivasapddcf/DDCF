@@ -1,0 +1,56 @@
+
+
+  
+<div class="card">
+
+    <div class="card-header p-2">
+      <h5 class="mb-0">INVALID BANK ACCOUNT APPROVALS</h5>
+    </div>
+
+    <div class="col-md-12 " align="right">
+        <button
+          type="button"
+          class="btn btn-success btn-sm"
+           style="font-size: 14px;"
+           (click)="btnpendingDetails()"
+        >
+          New Approvals
+        </button>
+      </div>
+
+    <div class="col-md-12 table-responsive">
+        <table
+          class="table table-striped ah-table text-center"
+        >
+          <thead class="bg-success text-white">
+            <tr>
+              <th>FARMER ID</th>
+              <th>ACCOUNT NUMBER</th>
+              <th>BANK NAME</th>
+              <th>BRANCH NAME</th>
+              <th>IFSC CODE</th>
+              <th>STATUS</th>
+              <!-- <th>MICRNO</th> -->
+              <th>BANK PINCODE</th>
+              <th>RSK </th>
+              <th>VILLAGE </th>
+            </tr>
+          </thead>
+          <tbody *ngIf="StatusDetails?.length > 0">
+              <tr *ngFor="let obj of StatusDetails; let i = index">
+                <td>{{ obj.FARMER_CODE}}</td>
+                <td>{{ obj.ACCOUNT_NUMBER}}</td>
+                <td>{{ obj.BANK_NAME}} </td>
+                <td>{{ obj.BANK_BRANCH}}</td>
+                <td>{{ obj.IFSC_CODE }}</td>
+                <!-- <td>{{ obj.STATUS_1  }}</td>   -->
+                <td>Pending</td>
+                <!-- <td>{{ obj.MICR_CODE}}</td> -->
+                <td>{{ obj.BANK_PINCODE}}</td>
+                <td>{{ obj.RBK_NAME}}</td>
+                <td>{{ obj.VILLAGE_NAME}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+    </div>

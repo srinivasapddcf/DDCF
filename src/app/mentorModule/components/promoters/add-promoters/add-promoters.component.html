@@ -1,0 +1,288 @@
+<div class="card">
+    <div class="card-header p-2">
+        <h5 class="mb-0">PROMOTERS ADDITION</h5>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="rbkId">RSK <span style="color: red">*</span></label>
+                    <select id="rbkId" class="form-control" [(ngModel)]="rbkId" (change)="onCheckPromoters()">
+                        <option value="">-- SELECT RSK --</option>
+                        <option value="{{ obj.RBK_ID }}" *ngFor="let obj of rbkList">
+                            {{ obj.RBK_NAME }}
+                        </option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-md-3 pt-4 offset-6" align="right">
+                <button type="button" class="btn btn-success btn-sm" (click)="btnshowPromotorsPopup()">
+                    Add Promoters
+                </button>
+            </div>
+
+            <div class="col-md-12 table-responsive" [hidden]="promotorsList?.length < 1">
+                <table class="table table-striped ah-table text-center" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+                    <thead class="bg-success text-white">
+                        <tr>
+                            <th>S.No.</th>
+                            <th>ROUTE NAME</th>
+                            <th>RSK NAME</th>
+                            <th>VILLAGE NAME</th>
+                            <th>CITIZEN NAME</th>
+                            <th>DATE OF BIRTH</th>
+                            <th>AADHAAR NUMBER</th>
+                            <th>MOBILE NUMBER</th>
+                            <th>HUSBAND / SPOUSE NAME</th>
+                            <th>BANK A/C NUMBER</th>
+                            <th>IFSC CODE</th>
+                            <th>BANK NAME</th>
+                            <th>BRANCH NAME</th>
+                            <th>QUALIFICATION</th>
+                        </tr>
+                    </thead>
+                    <tbody *ngIf="promotorsList?.length > 0">
+                        <tr *ngFor="let obj of promotorsList; let i = index">
+                            <td>{{ i + 1 }}</td>
+                            <td>{{ obj.ROUTE_NAME }}</td>
+                            <td>{{ obj.RBK_NAME }}</td>
+                            <td>{{ obj.VILLAGE_NAME }}</td>
+                            <td>
+                                <b>{{ obj.PROMOTERS_NAME }}</b>
+                            </td>
+                            <td>{{ obj.DOB }}</td>
+                            <td> XXXX-XXXX-{{obj.AADHAR | slice: -4}}</td>
+                            <td>{{ obj.MOBILE }}</td>
+                            <td>{{ obj.DO_OR_WO }} {{ obj.FATHER_SPOUSE_NAME }}</td>
+                            <td>{{ obj.BANK_ACCOUNT_NO }}</td>
+                            <td>{{ obj.IFSC_CODE }}</td>
+                            <td>{{ obj.BANK_NAME }}</td>
+                            <td>{{ obj.BRANCH }}</td>
+                            <td>{{ obj.EDUCATION_QUALIFICATION }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="popup-modal" *ngIf="showPromotorsPopup">
+    <div class="popup-content" style="min-width: 50%">
+        <div class="popup-header">
+            <h4 class="title">ADDITION OF PROMOTER</h4>
+            <a type="button" class="close" (click)="showPromotorsPopup = false" style="cursor: pointer">
+                <span>×</span>
+            </a>
+        </div>
+
+        <div class="popup-body addpromoter">
+            <div class="row justify-content-center align-items-center">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="routeId">ROUTE <span style="color: red">*</span></label>
+                        <select id="routeId" class="form-control" [(ngModel)]="promotorDetails.routeId">
+                            <option value="">-- SELECT ROUTE --</option>
+                            <option value="{{ obj.ROUTE_ID }}" *ngFor="let obj of routeList">
+                                {{ obj.ROUTE_NAME }}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="rbkId">RSK <span style="color: red">*</span></label>
+                        <select id="rbkId" class="form-control" [(ngModel)]="promotorDetails.rbkId" (change)="onRbkChange()">
+                            <option value="">-- SELECT RSK --</option>
+                            <option value="{{ obj.RBK_ID }}" *ngFor="let obj of rbkList">
+                                {{ obj.RBK_NAME }}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="villageId">VILLAGE <span style="color: red">*</span></label>
+                        <select id="villageId" class="form-control" [(ngModel)]="promotorDetails.villageId">
+                            <option value="">-- SELECT VILLAGE --</option>
+                            <option value="{{ obj.VILLAGE_ID }}" *ngFor="let obj of villageList">
+                                {{ obj.VILLAGE_NAME }}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Aadhar No </label>
+                        <div class="input-group">
+                            <input id="aadharNo" type="password" class="form-control" [(ngModel)]="aadharNo"
+                                placeholder="Please Enter Aadhar Number" maxlength="12" autocomplete="off"
+                                (keyup)="aadharNomaskIputData($event.target.value)" NumbersOnly />
+
+                            <div class="input-group-append">
+                                <button class="btn btn-primary btn-sm m-0 btn-rounded" type="submit" (click)="btnVerifyAadhar()"
+                                    id="button-addon2">
+                                    Check Aadhar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <hr />
+
+            <div class="row" *ngIf="isAadharChecked">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Pincode</label>
+                        <input type="text" class="form-control" [(ngModel)]="promotorDetails.pinCode" maxlength="6"
+                            placeholder="Please Enter Pincode" autocomplete="off" NumbersOnly [allowDecimals]="false" [allowSign]="false" />
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Promoter Name </label>
+                        <input type="text" class="form-control" [(ngModel)]="promotorDetails.promoterName"
+                            placeholder="Please Enter Promoter Name" maxlength="35" autocomplete="off" />
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Daughter Of /Wife Of </label>
+                        <select id="relation" class="form-control" [(ngModel)]="promotorDetails.daughterOfOrWifeOf">
+                            <option value="">-- SELECT RELATION --</option>
+                            <option value="D/O">D/O</option>
+                            <option value="W/O">W/O</option>
+                            <option value="Mother">Mother</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Father / Spouse Name </label>
+                        <input type="text" class="form-control" [(ngModel)]="promotorDetails.fatherOrSpouseName"
+                            placeholder="Please Enter Father/Spouse Name" maxlength="50" autocomplete="off" />
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Date Of Birth </label>
+                        <input type="text" placeholder="DD-MM-YYYY" class="form-control" bsDatepicker [(ngModel)]="promotorDetailsdob"
+                            [maxDate]="dbmaxdate" placement="bottom" container="" [bsConfig]="bsDatepickerConfig">
+
+                        <!-- <app-date-picker
+              [PlaceHolder]="'Please Select Date Of Birth'"
+              [(selectedDate)]="promotorDetails.dob"
+              [minDate]="minDate"
+              [maxDate]="maxDate"
+            ></app-date-picker> -->
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Father/Spouse Aadhar No </label>
+                        <input id="fatherSpouseAadhar" type="password" class="form-control" [(ngModel)]="promotorDetails.fatherSpouseAadhar"
+                            placeholder="Please Enter Father/Spouse Aadhar" maxlength="12" autocomplete="off" NumbersOnly
+                            [allowDecimals]="false" [allowSign]="false" (keyup)="aadharNomaskIputData1($event.target.value)" />
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Mobile No </label>
+                        <input type="text" class="form-control" [(ngModel)]="promotorDetails.mobileNo" placeholder="Please Enter Mobile No"
+                            maxlength="10" autocomplete="off" NumbersOnly [allowDecimals]="false" [allowSign]="false" />
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Father/Spouse Mobile No </label>
+                        <input type="text" class="form-control" [(ngModel)]="promotorDetails.fatherSpouseMobileNo"
+                            placeholder="Please Enter Mobile No" maxlength="10" autocomplete="off" NumbersOnly [allowDecimals]="false"
+                            [allowSign]="false" />
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Education Qualification </label>
+                        <select id="educationQualification" class="form-control" [(ngModel)]="promotorDetails.educationQualification">
+                            <option value="">-- SELECT EDUCATION --</option>
+                            <option value="{{ obj.ID }}" *ngFor="let obj of qualificationList">
+                                {{ obj.QULIFICATION }}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Bank Account No </label>
+                        <input type="text" class="form-control" [(ngModel)]="promotorDetails.bankAccountNo"
+                            placeholder="Please Enter Bank Account No" maxlength="18" autocomplete="off" NumbersOnly [allowDecimals]="false"
+                            [allowSign]="false" />
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>IFSC Code</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" [(ngModel)]="promotorDetails.ifscCode"
+                                placeholder="Please Enter IFSC Code" maxlength="15" autocomplete="off" />
+                            <div class="input-group-append">
+                                <button class="btn btn-primary btn-sm m-0 btn-rounded" type="submit" (click)="btnVerifyIfscCode()"
+                                    id="button-addon2">
+                                    Verify
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4" *ngIf="promotorDetails.bankName !== ''">
+                    <div class="form-group">
+                        <label>Bank Name</label>
+                        <h5 class="text-success">{{ promotorDetails.bankName }}</h5>
+                    </div>
+                </div>
+                <div class="col-md-4" *ngIf="promotorDetails.branch !== ''">
+                    <div class="form-group">
+                        <label>Branch Name</label>
+                        <h5 class="text-success">{{ promotorDetails.branch }}</h5>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Door No</label>
+                        <input type="text" class="form-control" [(ngModel)]="promotorDetails.doorNo" maxlength="10"
+                            placeholder="Please Enter Door No" autocomplete="off" />
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Street Name</label>
+                        <input type="text" class="form-control" [(ngModel)]="promotorDetails.street" maxlength="50"
+                            placeholder="Please Enter Street Name" autocomplete="off" />
+                    </div>
+                </div>
+
+                <div class="col-md-12" align="center" *ngIf="promotorsList?.length === 11">
+                    <button type="button" class="btn btn-success btn-sm" (click)="btnSubmit()">
+                        SUBMIT
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="popup-footer justify-content-center" *ngIf="isAadharChecked">
+            <button type="button" class="btn btn-outline-success btn-sm btn-rounded" (click)="btnSubmit()">
+                ADD PROMOTER
+            </button>
+            <button type="button" class="btn btn-outline-danger btn-sm btn-rounded" (click)="showPromotorsPopup = false">
+                Close
+            </button>
+        </div>
+    </div>
+</div>

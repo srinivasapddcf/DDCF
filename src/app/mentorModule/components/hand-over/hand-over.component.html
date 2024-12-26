@@ -1,0 +1,732 @@
+<div class="card">
+  <div class="card-header p-2">
+    <h5 class="mb-0">HAND OVER REGISTRATION</h5>
+  </div>
+  <div class="card-body amulBuildingInspection">
+    <div class="row">
+      <div class="col-md-12">
+        <button
+          type="button"
+          class="btn btn-primary btn-sm pull-right"
+          (click)="btnDocumentDownload(handingOverFormUrl)"
+        >
+          HANDING OVER DOCUMENT
+        </button>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="routeId">ROUTE <span style="color: red">*</span></label>
+          <select
+            id="routeId"
+            class="form-control"
+            [(ngModel)]="handoverDetails.routeId"
+            (change)="onRouteChange()"
+          >
+            <option value="">-- SELECT ROUTE --</option>
+            <option value="{{ obj.ROUTE_ID }}" *ngFor="let obj of routeList">
+              {{ obj.ROUTE_NAME }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="rbkId">RSK <span style="color: red">*</span></label>
+          <select
+            id="rbkId"
+            class="form-control"
+            [(ngModel)]="handoverDetails.rbkId"
+            (change)="onRbkChange()"
+          >
+            <option value="">-- SELECT RSK --</option>
+            <option value="{{ obj.RBK_ID }}" *ngFor="let obj of rbkList">
+              {{ obj.RBK_NAME }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="villageId"
+            >VILLAGE <span style="color: red">*</span></label
+          >
+          <select
+            id="villageId"
+            class="form-control"
+            [(ngModel)]="handoverDetails.villageId"
+            (change)="onVillageChange()"
+          >
+            <option value="">-- SELECT VILLAGE --</option>
+            <option
+              value="{{ obj.VILLAGE_ID }}"
+              *ngFor="let obj of villageList"
+            >
+              {{ obj.VILLAGE_NAME }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="meetingDate">
+            INSPECTION DATE <span style="color: red">*</span>
+          </label>
+          <app-date-picker
+            [PlaceHolder]="'Please Select Inspection Date'"
+            [(selectedDate)]="handoverDetails.inspectionDate"
+            [maxDate]="maxDate"
+          ></app-date-picker>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="meetingTime">
+            INSPECTION TIME <span style="color: red">*</span>
+          </label>
+          <input
+            id="meetingTime"
+            type="time"
+            class="form-control"
+            [(ngModel)]="handoverDetails.inspectionTime"
+            placeholder="Please Enter Inspection Time"
+            maxlength="8"
+            autocomplete="off"
+          />
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label>DESKTOP CONDITION <sup class="text-danger h6">*</sup></label>
+          <div class="ah-radio-buttons">
+            <div class="custom-control custom-radio custom-control-inline">
+              <input
+                class="custom-control-input"
+                type="radio"
+                name="isDesktopWorking"
+                id="isDesktopWorking1"
+                value="1"
+                [(ngModel)]="handoverDetails.isDesktopWorking"
+                autocomplete="off"
+              />
+              <label class="custom-control-label" for="isDesktopWorking1">
+                WORKING
+              </label>
+            </div>
+
+            <div class="custom-control custom-radio custom-control-inline">
+              <input
+                class="custom-control-input"
+                type="radio"
+                name="isDesktopWorking"
+                id="isDesktopWorking2"
+                value="0"
+                [(ngModel)]="handoverDetails.isDesktopWorking"
+                autocomplete="off"
+              />
+              <label class="custom-control-label" for="isDesktopWorking2">
+                NOT WORKING
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label>CPU CONDITION <sup class="text-danger h6">*</sup></label>
+          <div class="ah-radio-buttons">
+            <div class="custom-control custom-radio custom-control-inline">
+              <input
+                class="custom-control-input"
+                type="radio"
+                name="isCPUWorking"
+                id="isCPUWorking1"
+                value="1"
+                [(ngModel)]="handoverDetails.isCPUWorking"
+                autocomplete="off"
+              />
+              <label class="custom-control-label" for="isCPUWorking1">
+                WORKING
+              </label>
+            </div>
+
+            <div class="custom-control custom-radio custom-control-inline">
+              <input
+                class="custom-control-input"
+                type="radio"
+                name="isCPUWorking"
+                id="isCPUWorking2"
+                value="0"
+                [(ngModel)]="handoverDetails.isCPUWorking"
+                autocomplete="off"
+              />
+              <label class="custom-control-label" for="isCPUWorking2">
+                NOT WORKING
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label>MOUSE CONDITION <sup class="text-danger h6">*</sup></label>
+          <div class="ah-radio-buttons">
+            <div class="custom-control custom-radio custom-control-inline">
+              <input
+                class="custom-control-input"
+                type="radio"
+                name="isMouseWorking"
+                id="isMouseWorking1"
+                value="1"
+                [(ngModel)]="handoverDetails.isMouseWorking"
+                autocomplete="off"
+              />
+              <label class="custom-control-label" for="isMouseWorking1">
+                WORKING
+              </label>
+            </div>
+
+            <div class="custom-control custom-radio custom-control-inline">
+              <input
+                class="custom-control-input"
+                type="radio"
+                name="isMouseWorking"
+                id="isMouseWorking2"
+                value="0"
+                [(ngModel)]="handoverDetails.isMouseWorking"
+                autocomplete="off"
+              />
+              <label class="custom-control-label" for="isMouseWorking2">
+                NOT WORKING
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label>KEYBOARD CONDITION <sup class="text-danger h6">*</sup></label>
+          <div class="ah-radio-buttons">
+            <div class="custom-control custom-radio custom-control-inline">
+              <input
+                class="custom-control-input"
+                type="radio"
+                name="isKeyBoardWorking"
+                id="isKeyBoardWorking1"
+                value="1"
+                [(ngModel)]="handoverDetails.isKeyBoardWorking"
+                autocomplete="off"
+              />
+              <label class="custom-control-label" for="isKeyBoardWorking1">
+                WORKING
+              </label>
+            </div>
+
+            <div class="custom-control custom-radio custom-control-inline">
+              <input
+                class="custom-control-input"
+                type="radio"
+                name="isKeyBoardWorking"
+                id="isKeyBoardWorking2"
+                value="0"
+                [(ngModel)]="handoverDetails.isKeyBoardWorking"
+                autocomplete="off"
+              />
+              <label class="custom-control-label" for="isKeyBoardWorking2">
+                NOT WORKING
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label>UPS CONDITION <sup class="text-danger h6">*</sup></label>
+          <div class="ah-radio-buttons">
+            <div class="custom-control custom-radio custom-control-inline">
+              <input
+                class="custom-control-input"
+                type="radio"
+                name="isUPSWorking"
+                id="isUPSWorking1"
+                value="1"
+                [(ngModel)]="handoverDetails.isUPSWorking"
+                autocomplete="off"
+              />
+              <label class="custom-control-label" for="isUPSWorking1">
+                WORKING
+              </label>
+            </div>
+
+            <div class="custom-control custom-radio custom-control-inline">
+              <input
+                class="custom-control-input"
+                type="radio"
+                name="isUPSWorking"
+                id="isUPSWorking2"
+                value="0"
+                [(ngModel)]="handoverDetails.isUPSWorking"
+                autocomplete="off"
+              />
+              <label class="custom-control-label" for="isUPSWorking2">
+                NOT WORKING
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label
+            >ELECTRONIC SCALE CONDITION
+            <sup class="text-danger h6">*</sup></label
+          >
+          <div class="ah-radio-buttons">
+            <div class="custom-control custom-radio custom-control-inline">
+              <input
+                class="custom-control-input"
+                type="radio"
+                name="isElectronicScaleWorking"
+                id="isElectronicScaleWorking1"
+                value="1"
+                [(ngModel)]="handoverDetails.isElectronicScaleWorking"
+                autocomplete="off"
+              />
+              <label
+                class="custom-control-label"
+                for="isElectronicScaleWorking1"
+              >
+                WORKING
+              </label>
+            </div>
+
+            <div class="custom-control custom-radio custom-control-inline">
+              <input
+                class="custom-control-input"
+                type="radio"
+                name="isElectronicScaleWorking"
+                id="isElectronicScaleWorking2"
+                value="0"
+                [(ngModel)]="handoverDetails.isElectronicScaleWorking"
+                autocomplete="off"
+              />
+              <label
+                class="custom-control-label"
+                for="isElectronicScaleWorking2"
+              >
+                NOT WORKING
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label
+            >MILK ANALYZER CONDITION <sup class="text-danger h6">*</sup></label
+          >
+          <div class="ah-radio-buttons">
+            <div class="custom-control custom-radio custom-control-inline">
+              <input
+                class="custom-control-input"
+                type="radio"
+                name="isMilkAnalyzerWorking"
+                id="isMilkAnalyzerWorking1"
+                value="1"
+                [(ngModel)]="handoverDetails.isMilkAnalyzerWorking"
+                autocomplete="off"
+              />
+              <label class="custom-control-label" for="isMilkAnalyzerWorking1">
+                WORKING
+              </label>
+            </div>
+
+            <div class="custom-control custom-radio custom-control-inline">
+              <input
+                class="custom-control-input"
+                type="radio"
+                name="isMilkAnalyzerWorking"
+                id="isMilkAnalyzerWorking2"
+                value="0"
+                [(ngModel)]="handoverDetails.isMilkAnalyzerWorking"
+                autocomplete="off"
+              />
+              <label class="custom-control-label" for="isMilkAnalyzerWorking2">
+                NOT WORKING
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label
+            >COW MILK FAT SNF CONDITION
+            <sup class="text-danger h6">*</sup></label
+          >
+          <div class="ah-radio-buttons">
+            <div class="custom-control custom-radio custom-control-inline">
+              <input
+                class="custom-control-input"
+                type="radio"
+                name="cowMilkFatSnfIndicator"
+                id="cowMilkFatSnfIndicator1"
+                value="1"
+                [(ngModel)]="handoverDetails.cowMilkFatSnfIndicator"
+                autocomplete="off"
+              />
+              <label class="custom-control-label" for="cowMilkFatSnfIndicator1">
+                WORKING
+              </label>
+            </div>
+
+            <div class="custom-control custom-radio custom-control-inline">
+              <input
+                class="custom-control-input"
+                type="radio"
+                name="cowMilkFatSnfIndicator"
+                id="cowMilkFatSnfIndicator2"
+                value="0"
+                [(ngModel)]="handoverDetails.cowMilkFatSnfIndicator"
+                autocomplete="off"
+              />
+              <label class="custom-control-label" for="cowMilkFatSnfIndicator2">
+                NOT WORKING
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label
+            >BUFFALO MILK FAT SNF CONDITION
+            <sup class="text-danger h6">*</sup></label
+          >
+          <div class="ah-radio-buttons">
+            <div class="custom-control custom-radio custom-control-inline">
+              <input
+                class="custom-control-input"
+                type="radio"
+                name="buffaloMilkFatSnfIndicator"
+                id="buffaloMilkFatSnfIndicator1"
+                value="1"
+                [(ngModel)]="handoverDetails.buffaloMilkFatSnfIndicator"
+                autocomplete="off"
+              />
+              <label
+                class="custom-control-label"
+                for="buffaloMilkFatSnfIndicator1"
+              >
+                WORKING
+              </label>
+            </div>
+
+            <div class="custom-control custom-radio custom-control-inline">
+              <input
+                class="custom-control-input"
+                type="radio"
+                name="buffaloMilkFatSnfIndicator"
+                id="buffaloMilkFatSnfIndicator2"
+                value="0"
+                [(ngModel)]="handoverDetails.buffaloMilkFatSnfIndicator"
+                autocomplete="off"
+              />
+              <label
+                class="custom-control-label"
+                for="buffaloMilkFatSnfIndicator2"
+              >
+                NOT WORKING
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label>UPS 1KVA CONDITION <sup class="text-danger h6">*</sup></label>
+          <div class="ah-radio-buttons">
+            <div class="custom-control custom-radio custom-control-inline">
+              <input
+                class="custom-control-input"
+                type="radio"
+                name="isUPS1KvaWorking"
+                id="isUPS1KvaWorking1"
+                value="1"
+                [(ngModel)]="handoverDetails.isUPS1KvaWorking"
+                autocomplete="off"
+              />
+              <label class="custom-control-label" for="isUPS1KvaWorking1">
+                WORKING
+              </label>
+            </div>
+
+            <div class="custom-control custom-radio custom-control-inline">
+              <input
+                class="custom-control-input"
+                type="radio"
+                name="isUPS1KvaWorking"
+                id="isUPS1KvaWorking2"
+                value="0"
+                [(ngModel)]="handoverDetails.isUPS1KvaWorking"
+                autocomplete="off"
+              />
+              <label class="custom-control-label" for="isUPS1KvaWorking2">
+                NOT WORKING
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label>BATTERY CONDITION <sup class="text-danger h6">*</sup></label>
+          <div class="ah-radio-buttons">
+            <div class="custom-control custom-radio custom-control-inline">
+              <input
+                class="custom-control-input"
+                type="radio"
+                name="isBatteryInCondition"
+                id="isBatteryInCondition1"
+                value="1"
+                [(ngModel)]="handoverDetails.isBatteryInCondition"
+                autocomplete="off"
+              />
+              <label class="custom-control-label" for="isBatteryInCondition1">
+                WORKING
+              </label>
+            </div>
+
+            <div class="custom-control custom-radio custom-control-inline">
+              <input
+                class="custom-control-input"
+                type="radio"
+                name="isBatteryInCondition"
+                id="isBatteryInCondition2"
+                value="0"
+                [(ngModel)]="handoverDetails.isBatteryInCondition"
+                autocomplete="off"
+              />
+              <label class="custom-control-label" for="isBatteryInCondition2">
+                NOT WORKING
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label
+            >DISPLAY UNIT CONDITION <sup class="text-danger h6">*</sup></label
+          >
+          <div class="ah-radio-buttons">
+            <div class="custom-control custom-radio custom-control-inline">
+              <input
+                class="custom-control-input"
+                type="radio"
+                name="isDisplayUnitWorking"
+                id="isDisplayUnitWorking1"
+                value="1"
+                [(ngModel)]="handoverDetails.isDisplayUnitWorking"
+                autocomplete="off"
+              />
+              <label class="custom-control-label" for="isDisplayUnitWorking1">
+                WORKING
+              </label>
+            </div>
+
+            <div class="custom-control custom-radio custom-control-inline">
+              <input
+                class="custom-control-input"
+                type="radio"
+                name="isDisplayUnitWorking"
+                id="isDisplayUnitWorking2"
+                value="0"
+                [(ngModel)]="handoverDetails.isDisplayUnitWorking"
+                autocomplete="off"
+              />
+              <label class="custom-control-label" for="isDisplayUnitWorking2">
+                NOT WORKING
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label
+            >21PIN 80CL PRINTER CONDITION
+            <sup class="text-danger h6">*</sup></label
+          >
+          <div class="ah-radio-buttons">
+            <div class="custom-control custom-radio custom-control-inline">
+              <input
+                class="custom-control-input"
+                type="radio"
+                name="is24Pin80ClPrinterWorking"
+                id="is24Pin80ClPrinterWorking1"
+                value="1"
+                [(ngModel)]="handoverDetails.is24Pin80ClPrinterWorking"
+                autocomplete="off"
+              />
+              <label
+                class="custom-control-label"
+                for="is24Pin80ClPrinterWorking1"
+              >
+                WORKING
+              </label>
+            </div>
+
+            <div class="custom-control custom-radio custom-control-inline">
+              <input
+                class="custom-control-input"
+                type="radio"
+                name="is24Pin80ClPrinterWorking"
+                id="is24Pin80ClPrinterWorking2"
+                value="0"
+                [(ngModel)]="handoverDetails.is24Pin80ClPrinterWorking"
+                autocomplete="off"
+              />
+              <label
+                class="custom-control-label"
+                for="is24Pin80ClPrinterWorking2"
+              >
+                NOT WORKING
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label
+            >ULTRA SONIC STIRRER CONDITION
+            <sup class="text-danger h6">*</sup></label
+          >
+          <div class="ah-radio-buttons">
+            <div class="custom-control custom-radio custom-control-inline">
+              <input
+                class="custom-control-input"
+                type="radio"
+                name="isUltraSonicStirrerWorking"
+                id="isUltraSonicStirrerWorking1"
+                value="1"
+                [(ngModel)]="handoverDetails.isUltraSonicStirrerWorking"
+                autocomplete="off"
+              />
+              <label
+                class="custom-control-label"
+                for="isUltraSonicStirrerWorking1"
+              >
+                WORKING
+              </label>
+            </div>
+
+            <div class="custom-control custom-radio custom-control-inline">
+              <input
+                class="custom-control-input"
+                type="radio"
+                name="isUltraSonicStirrerWorking"
+                id="isUltraSonicStirrerWorking2"
+                value="0"
+                [(ngModel)]="handoverDetails.isUltraSonicStirrerWorking"
+                autocomplete="off"
+              />
+              <label
+                class="custom-control-label"
+                for="isUltraSonicStirrerWorking2"
+              >
+                NOT WORKING
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label
+            >INTERNET DEVICE CONDITION
+            <sup class="text-danger h6">*</sup></label
+          >
+          <div class="ah-radio-buttons">
+            <div class="custom-control custom-radio custom-control-inline">
+              <input
+                class="custom-control-input"
+                type="radio"
+                name="internetDevice"
+                id="internetDevice1"
+                value="1"
+                [(ngModel)]="handoverDetails.internetDevice"
+                autocomplete="off"
+              />
+              <label class="custom-control-label" for="internetDevice1">
+                WORKING
+              </label>
+            </div>
+
+            <div class="custom-control custom-radio custom-control-inline">
+              <input
+                class="custom-control-input"
+                type="radio"
+                name="internetDevice"
+                id="internetDevice2"
+                value="0"
+                [(ngModel)]="handoverDetails.internetDevice"
+                autocomplete="off"
+              />
+              <label class="custom-control-label" for="internetDevice2">
+                NOT WORKING
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="signedCopyUpload"
+            >SIGNED COPY PDF
+            <!-- <span style="color: red"><small class="text-danger"> (size: 1mb) </small> *</span> -->
+            <span style="color: red;font-size: small;">* (pdf and  less than 1MB) </span>
+          </label>
+          <input
+            type="file"
+            class="form-control p-0"
+            id="signedCopyUpload"
+            (change)="onSignedCopyChange($event)"
+            accept="application/pdf"
+            autocomplete="off"
+          />
+        </div>
+      </div>
+
+      <div class="col-md-12" align="center">
+        <button
+          type="button"
+          class="btn btn-success btn-sm"
+          (click)="btnSubmit()"
+        >
+          SUBMIT
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

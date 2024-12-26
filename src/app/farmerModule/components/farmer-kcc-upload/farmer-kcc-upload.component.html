@@ -1,0 +1,342 @@
+<div class="card">
+  <div class="card-header p-2">
+    <h5 class="mb-0">FARMER KCC UPLOAD</h5>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-5 offset-3">
+        <div class="form-group">
+          <div class="ah-radio-buttons" (change)="onSelectionChange()">
+            <div class="custom-control custom-radio custom-control-inline">
+              <input
+                class="custom-control-input"
+                type="radio"
+                name="inputRadio"
+                id="inputRadio1"
+                value="1"
+                [(ngModel)]="inputRadio"
+              />
+              <label class="custom-control-label" for="inputRadio1">
+                AADHAAR NUMBER
+              </label>
+            </div>
+
+            <div class="custom-control custom-radio custom-control-inline">
+              <input
+                class="custom-control-input"
+                type="radio"
+                name="inputRadio"
+                id="inputRadio2"
+                value="2"
+                [(ngModel)]="inputRadio"
+              />
+              <label class="custom-control-label" for="inputRadio2">
+                FARMER CODE
+              </label>
+            </div>
+          </div>
+          <input
+            id="uidNum"
+            type="password"
+            class="form-control"
+            [(ngModel)]="uidNum"
+            placeholder="{{ inputPlaceHolder }}"
+            maxlength="12"
+            autocomplete="off"
+            NumbersOnly
+            [allowDecimals]="false"
+            [allowSign]="false"
+            (keyup)="uidNummaskIputData($event.target.value)"
+          />
+
+          <input
+          id="frmNum"
+          type="text"
+          class="form-control"
+          [(ngModel)]="frmNum"
+          placeholder="{{ inputPlaceHolder }}"
+          maxlength="15"
+          autocomplete="off"
+          NumbersOnly
+          [allowDecimals]="false"
+          [allowSign]="false"
+        />
+
+        </div>
+      </div>
+
+      <div class="col-md-3 pt-4" align="left">
+        <button
+          type="button"
+          class="btn btn-success btn-sm"
+          (click)="btnUidDetails()"
+        >
+          CHECK STATUS
+        </button>
+      </div>
+    </div>
+
+    <div
+      *ngIf="
+        personDetails.UID_NUM !== null &&
+        personDetails.UID_NUM !== '' &&
+        personDetails.UID_NUM !== undefined
+      "
+    >
+      <h5 class="sub-heading pb-0">
+        <label>Farmer Registration Details</label>
+      </h5>
+
+      <div class="row px-4">
+        <div class="col-md-3">
+          <div class="form-group">
+            <label>
+              NAME :
+              <span class="text-success">
+                <b>{{ personDetails.FARMER_NAME }}</b>
+              </span>
+            </label>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-group">
+            <label>
+              CODE :
+              <span class="text-success">
+                <b>{{ personDetails.FARMER_CODE }}</b>
+              </span>
+            </label>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-group">
+            <label
+              >MOBILE NUMBER :
+              <span class="text-success">
+                <b>{{ personDetails.MOBILE_NUMBER }}</b>
+              </span>
+            </label>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-group">
+            <label
+              >DISTRICT :
+              <span class="text-success">
+                <b>{{ personDetails.DISTRICT }}</b>
+              </span>
+            </label>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-group">
+            <label
+              >MANDAL NAME :
+              <span class="text-success">
+                <b>{{ personDetails.MANDAL_NAME }}</b>
+              </span>
+            </label>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-group">
+            <label
+              >RSK NAME :
+              <span class="text-success">
+                <b>{{ personDetails.RBK_NAME }}</b>
+              </span>
+            </label>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-group">
+            <label
+              >VILLAGE NAME :
+              <span class="text-success">
+                <b>{{ personDetails.VILLAGE_NAME }}</b>
+              </span>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <h5 class="sub-heading pb-0">
+        <label>Bank Details</label>
+      </h5>
+
+      <div class="row px-4" *ngIf="personDetails.STATUS === '0'">
+        <div class="col-md-3">
+          <div class="form-group">
+            <label>IFSC CODE : </label>
+            <div class="input-group">
+              <input
+                type="text"
+                class="form-control"
+                [(ngModel)]="ifscCode"
+                placeholder="Please Enter IFSC Code"
+                maxlength="15"
+                autocomplete="off"
+              />
+              <div class="input-group-append">
+                <button
+                  class="btn btn-primary btn-sm m-0 btn-rounded"
+                  type="submit"
+                  (click)="btnVerifyIfscCode()"
+                  id="button-addon2"
+                >
+                  Verify
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="col-md-3"
+          [hidden]="bankDetails.BANK_NAME === '' && bankDetails.BRANCH === ''"
+        >
+          <div class="form-group">
+            <label
+              >BANK NAME :
+              <span class="text-success">
+                <b>{{ bankDetails.BANK_NAME }}</b>
+              </span>
+            </label>
+          </div>
+        </div>
+        <div
+          class="col-md-3"
+          [hidden]="bankDetails.BANK_NAME === '' && bankDetails.BRANCH === ''"
+        >
+          <div class="form-group">
+            <label
+              >BRANCH NAME :
+              <span class="text-success">
+                <b>{{ bankDetails.BRANCH }}</b>
+              </span>
+            </label>
+          </div>
+        </div>
+        <div
+          class="col-md-3"
+          [hidden]="bankDetails.BANK_NAME === '' && bankDetails.BRANCH === ''"
+        >
+          <div class="form-group">
+            <label>BANK PIN CODE : </label>
+            <input
+              id="bankPinCode"
+              type="text"
+              class="form-control"
+              [(ngModel)]="bankPinCode"
+              placeholder="Please Enter Bank Pincode"
+              maxlength="6"
+              autocomplete="off"
+              NumbersOnly
+              [allowDecimals]="false"
+              [allowSign]="false"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div class="row px-4" *ngIf="personDetails.STATUS === '1'">
+        <div class="col-md-3">
+          <div class="form-group">
+            <label
+              >IFSC CODE :
+              <span class="text-success">
+                <b>{{ personDetails.IFSC_CODE }}</b>
+              </span>
+            </label>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-group">
+            <label
+              >BANK NAME :
+              <span class="text-success">
+                <b>{{ personDetails.BANK_NAME }}</b>
+              </span>
+            </label>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-group">
+            <label
+              >BRANCH NAME :
+              <span class="text-success">
+                <b>{{ personDetails.BRANCH }}</b>
+              </span>
+            </label>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-group">
+            <label
+              >BANK PIN CODE :
+              <span class="text-success">
+                <b>{{ personDetails.PIN_CODE }}</b>
+              </span>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <h5 class="sub-heading pb-0" *ngIf="(personDetails.STATUS === '1') ||  (bankDetails.BANK_NAME !== '' && bankDetails.BRANCH !== '')">
+        <label>KCC</label>
+      </h5>
+
+      <div class="row px-4" *ngIf="personDetails.STATUS === '0'">
+        <div
+          class="col-md-3"
+          [hidden]="bankDetails.BANK_NAME === '' && bankDetails.BRANCH === ''"
+        >
+          <div class="form-group">
+            <label for="kisanCardImgUpload"
+              >Kisan Credit Card Application form
+              <span style="color: red;font-size: small;">* (JPEG and  less than 100KB) </span>
+            </label>
+            <input
+              type="file"
+              class="form-control p-0"
+              id="kisanCardImgUpload"
+              (change)="onKisanCreditCardImageChange($event)"
+              accept="image/*"
+              #kisanCardImgUpload
+              autocomplete="off"
+            />
+          </div>
+        </div>
+        <div
+          class="col-md-12"
+          align="center"
+          [hidden]="bankDetails.BANK_NAME === '' && bankDetails.BRANCH === ''"
+        >
+          <button
+            type="button"
+            class="btn btn-success btn-sm"
+            (click)="btnSubmit()"
+          >
+            SUBMIT
+          </button>
+        </div>
+      </div>
+
+      <div class="row px-4" *ngIf="personDetails.STATUS === '1'">
+        <div class="col-md-3">
+          <label>KISAN CREDIT CARD IMAGE :</label>
+          <img
+            [src]="'data:image/jpeg;base64,' + kisanCreditCardImg"
+            style="cursor: pointer"
+            class="img-thumbnail mr-3"
+            (click)="btnImage(kisanCreditCardImg)"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="row p-3" *ngIf="noDataMessage !== ''">
+      <div class="col-md-12">
+        <h5 class="text-center text-danger">{{ noDataMessage }}</h5>
+      </div>
+    </div>
+  </div>
+</div>

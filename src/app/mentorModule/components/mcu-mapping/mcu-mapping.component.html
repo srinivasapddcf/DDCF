@@ -1,0 +1,398 @@
+<div class="card">
+  <div class="card-header p-2">
+    <h5 class="mb-0">MILK COLLECTION CENTRE - FUNCTIONARIES MAPPING</h5>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="rbkId">RSK <span style="color: red">*</span></label>
+          <select
+            id="rbkId"
+            class="form-control"
+            [(ngModel)]="mcuData.rbkId"
+            (change)="onRbkChange()"
+          >
+            <option value="">-- SELECT RSK --</option>
+            <option value="{{ obj.RBK_ID }}" *ngFor="let obj of rbkList">
+              {{ obj.RBK_NAME }}
+            </option>
+          </select>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="routeId">ROUTE <span style="color: red">*</span></label>
+          <select
+            id="routeId"
+            class="form-control"
+            [(ngModel)]="mcuData.routeId"
+            (change)="onRouteChange()"
+          >
+            <option value="">-- SELECT ROUTE --</option>
+            <option value="{{ obj.ROUTE_ID }}" *ngFor="let obj of routeList_Rbkid">
+              {{ obj.ROUTE_NAME }}
+            </option>
+          </select>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="villageId"
+            >VILLAGE <span style="color: red">*</span></label
+          >
+          <select
+            id="villageId"
+            class="form-control"
+            [(ngModel)]="mcuData.villageId"
+          >
+            <option value="">-- SELECT VILLAGE --</option>
+            <option
+              value="{{ obj.VILLAGE_ID }}"
+              *ngFor="let obj of villageList"
+            >
+              {{ obj.VILLAGE_NAME }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="villageClassification"
+            >VILLAGE CLASSIFICATION <span style="color: red">*</span></label
+          >
+          <select
+            id="villageClassification"
+            class="form-control"
+            [(ngModel)]="mcuData.villageClassification"
+          >
+            <option value="">-- SELECT VILLAGE CLASSIFICATION --</option>
+            <option
+              value="{{ obj.NAME }}"
+              *ngFor="let obj of villageClassificationList"
+            >
+              {{ obj.NAME }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="routePosition"
+            >POSITION IN ROUTE <span style="color: red">*</span></label
+          >
+          <input
+            id="routePosition"
+            type="text"
+            class="form-control"
+            [(ngModel)]="mcuData.routePosition"
+            placeholder="Please Enter Position In Route"
+            maxlength="3"
+            NumbersOnly
+            [allowDecimals]="false"
+            [allowSign]="false"
+            autocomplete="off"
+          />
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="dailyMilkProductionCapacity"
+            >DAILY MILK PRODUCTION CAPACITY
+            <span style="color: red">*</span></label
+          >
+          <input
+            id="dailyMilkProductionCapacity"
+            type="text"
+            class="form-control"
+            [(ngModel)]="mcuData.dailyMilkProductionCapacity"
+            placeholder="Please Enter Daily Milk Production Capacity"
+            maxlength="6"
+            NumbersOnly
+            [allowDecimals]="true"
+            [allowSign]="false"
+            autocomplete="off"
+          />
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="animalHusbAssitName"
+            >ANIMAL HUSBANDRY ASSISTANT NAME
+            <span style="color: red">*</span></label
+          >
+          <!-- <h5 style="color:green;">{{mcuData.animalHusbAssitName}}</h5> -->
+          <input
+            id="animalHusbAssitName"
+            type="text"
+            class="form-control"
+            [(ngModel)]="mcuData.animalHusbAssitName"
+            placeholder="Please Enter Animal Husbandry Assistant Name"
+            maxlength="50"
+            autocomplete="off"
+            onkeypress='return (event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122) ||event.keyCode == 8 || event.keyCode == 32'
+          />
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="animalHusbAssitMobileno"
+            >ANIMAL HUSBANDRY ASSISTANT MOBILE NUMBER
+            <span style="color: red">*</span></label
+          >
+
+          <!-- <h5 style="color:green;">{{mcuData.animalHusbAssitMobileno}}</h5> -->
+          <input
+            id="animalHusbAssitMobileno"
+            type="text"
+            class="form-control"
+            [(ngModel)]="mcuData.animalHusbAssitMobileno"
+            placeholder="Please Enter Animal Husbandry Assistant Mobile Number"
+            maxlength="10"
+            NumbersOnly
+            [allowDecimals]="false"
+            [allowSign]="false"
+            autocomplete="off"
+          />
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="animalHusbAssitUidNum"
+            >ANIMAL HUSBANDRY ASSISTANT AADHAR NUMBER
+            <span style="color: red">*</span></label
+          >
+
+          <!-- <h5 style="color:green;">{{mcuData.animalHusbAssitMobileno}}</h5> -->
+          <input   NumbersOnly
+            id="animalHusbAssitUidNum"
+            type="password"  
+            class="form-control"
+            
+            placeholder="Please Enter Animal Husbandry Assistant Aadhar Number"
+            maxlength="12"  [(ngModel)]="animalHusbAssitUidNum"         
+            (keyup)="husbandrymaskIputData($event.target.value)"
+            autocomplete="off"
+          />
+
+          
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="digitalAssitName"
+            >DIGITAL ASSISTANT NAME <span style="color: red">*</span></label
+          >
+          <!-- <h5 style="color:green;">{{mcuData.digitalAssitName}}</h5> -->
+          <input
+            id="digitalAssitName"
+            type="text"
+            class="form-control"
+            [(ngModel)]="mcuData.digitalAssitName"
+            placeholder="Please Enter Digital Assistant Name"
+            maxlength="50"
+            autocomplete="off"
+            onkeypress='return (event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122) ||event.keyCode == 8 || event.keyCode == 32'
+          />
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="digitalAssitMobileno"
+            >DIGITAL ASSISTANT MOBILE NUMBER
+            <span style="color: red">*</span></label
+          >
+          <!-- <h5 style="color:green;">{{mcuData.digitalAssitMobileno}}</h5> -->
+          <input
+            id="digitalAssitMobileno"
+            type="text"
+            class="form-control"
+            [(ngModel)]="mcuData.digitalAssitMobileno"
+            placeholder="Please Enter Digital Assistant Mobile Number"
+            maxlength="10"
+            NumbersOnly
+            [allowDecimals]="false"
+            [allowSign]="false"
+            autocomplete="off"
+          />
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="digitalAssitUidNum"
+            >DIGITAL ASSISTANT AADHAR NUMBER
+            <span style="color: red">*</span></label
+          >
+          <!-- <h5 style="color:green;">{{mcuData.digitalAssitMobileno}}</h5>   (keyup)="assistantmaskIputData($event.target.value)"-->
+          <input   NumbersOnly
+            id="digitalAssitUidNum"
+            type="password"
+            class="form-control"
+            [(ngModel)]="digitalAssitUidNum"
+            placeholder="Please Enter Digital Assistant Aadhar Number"
+            maxlength="12" 
+            (keyup)="assistantmaskIputData($event.target.value)"
+                        autocomplete="off" 
+               
+          />
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="welfareAssistantName"
+            >WELFARE ASSISTANT NAME <span style="color: red">*</span></label
+          >
+          <!-- <h5 style="color:green;">{{mcuData.welfareAssistantName}}</h5> -->
+          <input
+            id="welfareAssistantName"
+            type="text"
+            class="form-control"
+            [(ngModel)]="mcuData.welfareAssistantName"
+            placeholder="Please Enter Welfare Assistant Name"
+            maxlength="50"
+            autocomplete="off"
+            onkeypress='return (event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122) ||event.keyCode == 8 || event.keyCode == 32'
+          />
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="welfareAssistantMobileno"
+            >WELFARE ASSISTANT MOBILE NUMBER
+            <span style="color: red">*</span></label
+          >
+          <!-- <h5 style="color:green;">{{mcuData.welfareAssistantMobileno}}</h5> -->
+          <input
+            id="welfareAssistantMobileno" 
+            type="text"
+            class="form-control"
+            [(ngModel)]="mcuData.welfareAssistantMobileno"
+            placeholder="Please Enter Welfare Assistant Mobile Number"
+            maxlength="10"
+            NumbersOnly
+            [allowDecimals]="false"
+            [allowSign]="false"
+            autocomplete="off"
+          />
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="welfareAssistantMobileno"
+            >WELFARE ASSISTANT AADHAR NUMBER
+            <span style="color: red">*</span></label
+          >
+          <!-- <h5 style="color:green;">{{mcuData.welfareAssistantMobileno}}</h5>  (keyup)="welfaremaskIputData($event.target.value)"-->
+          <input
+            id="welfareAssistantUidNum" NumbersOnly
+            type="password"
+            class="form-control"
+            [(ngModel)]="welfareAssistantUidNum"
+            placeholder="Please Enter Welfare Assistant Aadhar Number"
+            maxlength="12"
+            (keyup)="welfaremaskIputData($event.target.value)"
+            autocomplete="off"
+          />
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="villageAnimatorName"
+            >VILLAGE ANIMATOR NAME <span style="color: red">*</span></label
+          >
+          <input
+            id="villageAnimatorName"
+            type="text"
+            class="form-control"
+            [(ngModel)]="mcuData.villageAnimatorName"
+            placeholder="Please Enter Village Animator Name"
+            maxlength="50"
+            autocomplete="off"
+            onkeypress='return (event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122) ||event.keyCode == 8 || event.keyCode == 32'
+          />
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="villageAnimatorMobileno"
+            >VILLAGE ANIMATOR MOBILE NUMBER
+            <span style="color: red">*</span></label
+          >
+          <input
+            id="villageAnimatorMobileno"
+            type="text"
+            class="form-control"
+            [(ngModel)]="mcuData.villageAnimatorMobileno"
+            placeholder="Please Enter Village Animator Mobile Number"
+            maxlength="10"
+            NumbersOnly
+            [allowDecimals]="false"
+            [allowSign]="false"
+            autocomplete="off"
+          />
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="villageAnimatorUidNum"
+            >VILLAGE ANIMATOR AADHAR NUMBER
+            <span style="color: red">*</span></label
+          >   
+           <!-- (keyup)="villageAnimatormaskIputData($event.target.value)" -->
+          <input 
+            id="villageAnimatorUidNum" NumbersOnly
+            type="password"
+            class="form-control"
+            [(ngModel)]="villageAnimatorUidNum"
+            placeholder="Please Enter Village Animator Aadhar Number"
+            maxlength="12"
+                        autocomplete="off"  
+                        (keyup)="villageAnimatormaskIputData($event.target.value)"
+          />
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="networkWithMaxCoverage"
+            >NETWORK WITH MAXIMUM COVERAGE
+            <span style="color: red">*</span></label
+          >
+          <select
+            id="networkWithMaxCoverage"
+            class="form-control"
+            [(ngModel)]="mcuData.networkWithMaxCoverage"
+          >
+            <option value="">-- SELECT NETWORK WITH MAXIMUM COVERAGE --</option>
+            <option value="{{ obj.NAME }}" *ngFor="let obj of networkList">
+              {{ obj.NAME }}
+            </option>
+          </select>
+        </div>
+      </div>
+      <div class="col-md-12" align="center">
+        <button
+          type="button"
+          class="btn btn-success btn-sm"
+          (click)="btnSubmit()"
+        >
+          SUBMIT
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

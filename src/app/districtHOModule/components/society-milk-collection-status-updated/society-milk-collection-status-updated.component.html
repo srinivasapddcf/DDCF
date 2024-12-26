@@ -1,0 +1,151 @@
+<div class="card">
+    <div class="card-header p-2">
+        <h5 class="mb-0">SOCIETY MILK COLLECTION STATUS UPDATION</h5>
+    </div>
+    <div class="row mt-2">
+        <div class="col-md-6"></div>
+        <div class="col-md-3"></div>
+        <div class="col-md-3">
+            <button type="button" class="btn btn-success btn-sm pull-right" (click)="btnExcel()">
+                <i class="fa fa-file-excel-o mr-2" aria-hidden="true"></i>
+                Download Excel
+            </button>
+        </div>
+    </div>
+    <div class="row mt-3" [hidden]="SocietyMilkCollectonList?.length < 1">
+        <div class="col-md-12">
+
+            <div class="card-body">
+                <div class="col-md-12 table-responsive">
+                    <table class="table table-striped ah-table text-center" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+                        <thead class="bg-success text-white">
+                            <tr>
+                                <th class="tableheader_color">S NO</th> 
+                                <th class="tableheader_color">DISTRICT NAME</th>
+                                <th class="tableheader_color">MANDAL NAME</th>
+                                <th class="tableheader_color">ROUTE NUMBER</th>
+                                <th class="tableheader_color">RSK NAME</th>
+                                <th class="tableheader_color">SOCIETY NAME</th>
+                                <th class="tableheader_color">SECRETARY / ASSISTANT SECRETARY NAME</th>
+                                <th class="tableheader_color">MOBILE NUMBER</th>
+                                <th class="tableheader_color">LAST MILK POURED DATE</th>
+                                <th class="tableheader_color">STATUS</th>
+                                <th class="tableheader_color">UPDATED DATE</th>
+                                <th class="tableheader_color">UPDATED REMARKS</th>
+                                <th class="tableheader_color">REMARKS</th>
+                                <th class="tableheader_color">ACTION</th>
+                            </tr>
+                            <tr>
+                                <th class="tableheader_color">(1)</th>
+                                <th class="tableheader_color">(2)</th>
+                                <th class="tableheader_color">(3)</th>
+                                <th class="tableheader_color">(4)</th>
+                                <th class="tableheader_color">(5)</th>
+                                <th class="tableheader_color">(6)</th>
+                                <th class="tableheader_color">(7)</th>
+                                <th class="tableheader_color">(8)</th>
+                                <th class="tableheader_color">(9)</th>
+                                <th class="tableheader_color">(10)</th>
+                                <th class="tableheader_color">(11)</th>
+                                <th class="tableheader_color">(12)</th>
+                                <th class="tableheader_color">(13)</th>
+                                <th class="tableheader_color">(14)</th>
+                            </tr>
+                        </thead>
+                        <tbody [hidden]="SocietyMilkCollectonList?.length < 1">
+                            <tr *ngFor="let obj of SocietyMilkCollectonList; let i = index">
+                                <td class="number_align">{{ i + 1 }}</td>
+                                <td style="text-align: left;" class="table_cells_borders"> {{obj.DISTRICT_NAME}}</td>
+                                <td style="text-align: left;" class="table_cells_borders"> {{obj.MANDAL_NAME}}</td>
+                                <td style="text-align: left; white-space: nowrap;" class="table_cells_borders"> {{obj.ROUTE_NO}}</td>
+                                <td style="text-align: left;" class="table_cells_borders"> {{obj.RBK_NAME}}</td>
+                                <td style="text-align: left;" class="table_cells_borders"> {{obj.SOCIETY_NAME}}</td>
+                                <td style="text-align: left;" class="table_cells_borders"> {{obj.EMP_NAME}}</td>
+                                <td class="number_align"> {{obj.MOBILE_NO}}</td>
+                                <td class="number_align" style="white-space: nowrap;"> {{obj.MILK_POUR_LAST_DATE}}</td>
+                                <td *ngIf="obj.STATUS_MSG == 'ACTIVE'" class="table_cells_borders" style="text-align: left;">
+                                    <p class="text-success">{{obj.STATUS_MSG}}</p>
+                                </td>
+                                <td *ngIf="obj.STATUS_MSG == 'INACTIVE'" style="text-align: left;" class="table_cells_borders">
+                                    <p class="text-danger">{{obj.STATUS_MSG}}</p>
+                                </td>
+                                <td class="number_align" style="white-space: nowrap;">
+                                    <a style="cursor: pointer; text-decoration: underline" class="text-primary" (click)="btnGetData(obj)">{{
+                                        obj.UPDATED_DATE }}</a>
+                                </td>
+                                <td style="text-align: left;" class="table_cells_borders"> {{obj.UPDATION_REMARKS | uppercase}}</td>
+                                <td style="text-align: left;" class="table_cells_borders"><input type="text" [(ngModel)]="obj.Remarks"
+                                        placeholder="Please Enter Remarks"></td>
+                                <td *ngIf="obj.STATUS_MSG == 'ACTIVE'">
+                                    <button type="button" style="font-size: 10px" class="btn btn-danger" (click)="btnActiveStatus(obj,'2')">
+                                        INACTIVE
+                                    </button>
+                                </td>
+                                <td *ngIf="obj.STATUS_MSG == 'INACTIVE'">
+                                    <button type="button" style="font-size: 10px" class="btn btn-success"
+                                        (click)="btnActiveStatus(obj,'1')"> ACTIVE
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Popups -->
+<div class="popup-modal" *ngIf="showaprovedPopup">
+    <div class="popup-content" style="min-width: 75%">
+        <div class="popup-header" [ngClass]="{'color-redbg':message=='REJECT','color-greenbg':message=='APPROVE'}">
+            <div class="text-white text-center" style="margin-left: 450px;">UPDATED DETAILS</div>
+            <a type="button" class="close" style="cursor: pointer; margin-left: 360px;">
+                <span (click)="onClear()">×</span>
+            </a>
+        </div>
+        <div class="popup-body" style="max-height:500px; overflow-y: auto;">
+            <div class="row mt-3" [hidden]="SocietyHistoryList?.length < 1">
+                <div class="col-md-12">
+
+                    <div class="card-body">
+                        <div class="col-md-12 table-responsive">
+                            <table class="table table-striped ah-table text-center">
+                                <thead class="bg-success text-white">
+                                    <tr>
+                                        <th class="tableheader_color">S No</th>
+                                        <th class="tableheader_color">Society Name</th>
+                                        <th class="tableheader_color">Updated Status</th>
+                                        <th class="tableheader_color">Updated Date</th>
+                                        <th class="tableheader_color">Updated Remarks</th>
+                                    </tr>
+                                </thead>
+                                <tbody [hidden]="SocietyHistoryList?.length < 1">
+                                    <tr *ngFor="let obj of SocietyHistoryList; let i = index">
+                                        <td>{{ i + 1 }}</td>
+                                        <td> {{obj.SOCIETY_NAME}}-{{obj.SOCIETY_CODE}}</td>
+                                        <td> {{obj.STATUS_MSG}}</td>
+                                        <td> {{obj.STATUS_UPDATED_ON}}</td>
+                                        <td> {{obj.STATUS_REMARKS}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+         
+</div>
+<div class="popup-modal" *ngIf="showPOPup">
+    <div class="popup-content" style="min-width: 75%">
+        <div class="popup-header" [ngClass]="{'color-redbg':message=='REJECT','color-greenbg':message=='APPROVE'}">
+
+
+        </div>
+        <div class="popup-body" style="max-height:500px; overflow-y: auto;">
+
+        </div>
+    </div>
+         
+</div>

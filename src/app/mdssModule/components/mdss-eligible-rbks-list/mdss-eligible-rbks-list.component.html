@@ -1,0 +1,84 @@
+<div class="card">
+    <div class="card-header row">
+      <h5 class="mb-0">ELIGIBLE FARMERS</h5> &nbsp;<h6 style="margin-top: 5px;">( {{todate}} )</h6>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="rbkId"><b>RSK</b> <span style="color: red">*</span></label>
+            <select
+              id="rbkId"
+              class="form-control"
+              [(ngModel)]="meetingData.rbkId"
+              (change)="onRbkChange()"
+            >
+              <option value="">-- SELECT RSK --</option>
+              <option value="{{ obj.RBK_ID }}" *ngFor="let obj of rbkList" >
+                {{ obj.RBK_NAME }}
+              </option>
+            </select>
+          </div>
+        </div>
+ 
+  
+        <div class="col-md-12 table-responsive" [hidden]="personList?.length < 1">
+          <table
+            class="table table-striped ah-table text-center"
+            datatable  
+            [dtOptions]="dtOptions"
+            [dtTrigger]="dtTrigger"
+            >  
+            <thead class="bg-success text-white">
+              <tr>
+                <th>S.No.</th>
+                <th>FARMER NAME</th>
+                <th>VILLAGE NAME</th>
+                <th>NO OF DAYS</th>                
+                <th>MDSS DESIGNATION</th>
+                
+              </tr>
+            </thead>
+            <tbody *ngIf="personList?.length > 0">
+              <tr *ngFor="let obj of personList; let i = index">
+                <td>{{ i + 1 }}</td>
+                <td style="text-align: left;">
+                  <b>{{ obj.FARMER_NAME }}</b>
+                </td>  
+                <td style="text-align: center;">
+                  <b>{{ obj.VILLAGE_NAME }}</b>
+                </td>  
+                <td style="text-align: center;">
+                  <b>{{ obj.DAYSS }}</b>
+                </td> 
+               
+                <!-- <td  style="text-align: center;">
+                  <span *ngIf="obj.STATUS === 'Eligible'" style="color: green">
+                    Eligible
+                  </span>
+                  <span *ngIf="obj.STATUS === 'Not eligible'" style="color: red">
+                    Not eligible
+                  </span>
+                </td> -->
+                <td style="text-align: center;">
+                  <b>{{ obj.PROMOTER_STATUS }}</b>
+                </td> 
+
+              </tr>
+            </tbody>
+          </table>
+  
+          <!-- <div class="col-md-12" align="center">
+              <button
+              type="button"
+              class="btn btn-success btn-sm"
+              (click)="btnMarkAttendance()"
+            >  
+              Mark Attendance
+            </button>
+          </div> -->
+        </div>
+      </div>
+    </div>
+  </div>
+  

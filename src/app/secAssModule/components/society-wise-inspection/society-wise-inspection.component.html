@@ -1,0 +1,306 @@
+<div class="card">
+  <div class="card-header p-2">
+    <h5 class="mb-0">DAILY MILK COLLECTION DATA</h5>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-4" *ngIf="this.desigId === '901'">
+        <div class="form-group">
+          <label for="villageId"
+            >SOCIETY <span style="color: red">*</span></label
+          >
+          <select
+            id="villageId"
+            class="form-control"
+            [(ngModel)]="inspectionData.villageData"
+            (change)="onSocietyChange()"
+          >
+            <option value="">-- SELECT SOCIETY --</option>
+            <option value="{{ obj | json }}" *ngFor="let obj of societyList">
+              {{ obj.VDCSNAME }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="col-md-4" *ngIf="this.desigId === '902'">
+        <div class="form-group">
+          <label for="societyName"
+            >SOCIETY NAME <span style="color: red">*</span></label
+          >
+          <h5 class="text-success">
+            <b>{{ societyName }} </b>
+          </h5>
+        </div>
+      </div>
+
+      <div class="col-md-4" *ngIf="this.desigId === '902'">
+        <div class="form-group">
+          <label for="societyCode"
+            >SOCIETY ID <span style="color: red">*</span></label
+          >
+          <h5 class="text-success">
+            <b>{{ societyCode }} </b>
+          </h5>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="inspectionDate"
+            >MILK COLLECTION DATE <span style="color: red">*</span></label
+          >
+          <app-date-picker
+            [PlaceHolder]="'Please Select Inspection Date'"
+            [(selectedDate)]="inspectionData.inspectionDate"
+            [maxDate]="maxDate"
+          ></app-date-picker>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="inspectionShift"
+            >MILK COLLECTION SHIFT SHIFT
+            <span style="color: red">*</span></label
+          >
+          <select
+            id="inspectionShift"
+            class="form-control"
+            [(ngModel)]="inspectionData.shift"
+          >
+            <option value="">-- SELECT INSPECTION SHIFT --</option>
+            <option value="M">MORNING</option>
+            <option value="E">EVENING</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="typeOfMilk"
+            >TYPE OF MILK <span style="color: red">*</span></label
+          >
+          <select
+            id="typeOfMilk"
+            class="form-control"
+            [(ngModel)]="inspectionData.typeOfMilk"
+          >
+            <option value="">-- SELECT TYPE OF MILK --</option>
+            <option value="B">BUFFALO</option>
+            <option value="C">COW</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="amount">AMOUNT <span style="color: red">*</span></label>
+          <input
+            id="amount"
+            type="text"
+            class="form-control"
+            [(ngModel)]="inspectionData.amount"
+            placeholder="Please Enter Amount"
+            maxlength="7"
+            autocomplete="off"
+            NumbersOnly
+            [allowDecimals]="true"
+            [allowSign]="false"
+            [allowedDecimals]="1"
+          />
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="milkInLtrs"
+            >MILK QUANTITY<span style="color: red">*</span></label
+          >
+          <div class="input-group">
+            <input
+              id="milkQuantity"
+              type="text"
+              class="form-control"
+              [(ngModel)]="inspectionData.milkQuantity"
+              placeholder="Please Enter Milk In Kgs"
+              maxlength="5"
+              autocomplete="off"
+              NumbersOnly
+              [allowDecimals]="true"
+              [allowSign]="false"
+              (input)="onMIlkQuantityChange($event.target.value)"
+              [allowedDecimals]="1"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="milkInLtrs"
+            >MILK IN LITERS <span style="color: red">*</span></label
+          >
+          <span class="text-success">
+            <b>{{ milkInLiters }}</b>
+          </span>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="fat">FAT % <span style="color: red">*</span></label>
+          <input
+            id="fat"
+            type="text"
+            class="form-control"
+            [(ngModel)]="inspectionData.fat"
+            placeholder="Please Enter FAT"
+            maxlength="5"
+            autocomplete="off"
+            NumbersOnly
+            [allowDecimals]="true"
+            [allowSign]="false"
+            [allowedDecimals]="1"
+          />
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="SNF">SNF <span style="color: red">*</span></label>
+          <input
+            id="SNF"
+            type="text"
+            class="form-control"
+            [(ngModel)]="inspectionData.SNF"
+            placeholder="Please Enter SNF"
+            maxlength="5"
+            autocomplete="off"
+            NumbersOnly
+            [allowDecimals]="true"
+            [allowSign]="false"
+            [allowedDecimals]="2"
+          />
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="vehicleNumber"
+            >VEHICLE NUMBER <span style="color: red">*</span></label
+          >
+          <input
+            id="vehicleNumber"
+            type="text"
+            class="form-control"
+            [(ngModel)]="inspectionData.vehicleNumber"
+            placeholder="Please Enter Vehicle Number"
+            maxlength="10"
+            autocomplete="off"
+          />
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="vehicleArrivedTime"
+            >VEHICLE ARRIVED TIME <span style="color: red">*</span></label
+          >
+          <input
+            id="vehicleArrivedTime"
+            type="time"
+            class="form-control"
+            [(ngModel)]="inspectionData.vehicleArrivedTime"
+            placeholder="Please Enter vehicle Arrived  Time"
+            maxlength="8"
+            autocomplete="off"
+          />
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="vehicleDepatureTime"
+            >VEHICLE DEPARTURE TIME <span style="color: red">*</span></label
+          >
+          <input
+            id="vehicleDepatureTime"
+            type="time"
+            class="form-control"
+            [(ngModel)]="inspectionData.vehicleDepatureTime"
+            placeholder="Please Enter Vehicle Departure Time"
+            maxlength="8"
+            autocomplete="off"
+          />
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="noOfCansOfCowmilk"
+            >NO OF CANS FOR COW MILK <span style="color: red">*</span></label
+          >
+          <input
+            id="noOfCansOfCowmilk"
+            type="text"
+            class="form-control"
+            [(ngModel)]="inspectionData.noOfCansOfCowmilk"
+            placeholder="Please Enter No Of Cans For Cow Milk"
+            maxlength="3"
+            autocomplete="off"
+            NumbersOnly
+            [allowDecimals]="true"
+            [allowSign]="false"
+            [allowedDecimals]="false"
+          />
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="noOfCansOfBuffalomilk"
+            >NO OF CANS FOR BUFFALO MILK
+            <span style="color: red">*</span></label
+          >
+          <input
+            id="noOfCansOfBuffalomilk"
+            type="text"
+            class="form-control"
+            [(ngModel)]="inspectionData.noOfCansOfBuffalomilk"
+            placeholder="Please Enter No Of Cans For Buffalo Milk"
+            maxlength="3"
+            autocomplete="off"
+            NumbersOnly
+            [allowDecimals]="true"
+            [allowSign]="false"
+            [allowedDecimals]="false"
+          />
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="inspectionImg"
+            >Summary Image <span style="color: red">*</span>
+          </label>
+          <input
+            type="file"
+            class="form-control p-0"
+            id="inspectionImg"
+            (change)="onSummaryImageChange($event)"
+            accept="image/*"
+            autocomplete="off"
+          />
+        </div>
+      </div>
+
+      <div class="col-md-12" align="center">
+        <button
+          type="button"
+          class="btn btn-success btn-sm"
+          (click)="btnSubmit()"
+        >
+          SUBMIT
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

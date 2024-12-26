@@ -1,0 +1,69 @@
+<div class="card">
+  <div class="card-header p-2">
+    <h5 class="mb-0">APPLICATION FOR REGISTRATION OF MDSS</h5>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-12">
+        <button
+          type="button"
+          class="btn btn-primary btn-sm pull-right"
+          (click)="btnDocumentDownload(registrationFormUrl)"
+        >
+          APPLICATION FORM
+        </button>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="rbkId">RSK <span style="color: red">*</span></label>
+          <select
+            id="rbkId"
+            class="form-control"
+            [(ngModel)]="registrationData.rbkId"
+            (change)="onRbkChange()"
+          >
+            <option value="">-- SELECT RSK --</option>
+            <option value="{{ obj.RBK_ID }}" *ngFor="let obj of rbkList">
+              {{ obj.RBK_NAME }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="applicationUpload"
+            >APPLICATION FORM UPLOAD :
+            <span style="color: red"
+              >* <small class="text-danger"> (PDF,Max 1MB) </small></span
+            >
+          </label>
+          <input
+            type="file"
+            class="form-control p-0"
+            id="applicationUpload"
+            (change)="onApplicationFormChange($event)"
+            accept="application/pdf"
+            #applicationUpload
+            autocomplete="off"
+          />
+        </div>
+      </div>
+
+      <div class="col-md-12" align="center">
+        <button
+          type="button"
+          class="btn btn-success btn-sm"
+          (click)="btnSubmit()"
+        >
+          SUBMIT
+        </button>
+      </div>
+    </div>
+    <div class="row p-3" *ngIf="noDataMessage !== ''">
+      <div class="col-md-12">
+        <h5 class="text-center text-danger">{{ noDataMessage }}</h5>
+      </div>
+    </div>
+  </div>
+</div>

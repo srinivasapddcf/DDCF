@@ -1,0 +1,1186 @@
+<div class="card">
+  <div class="card-header p-2">
+    <h5 class="mb-0">CALIBRATION OF AMCU</h5>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="routeId">ROUTE <span style="color: red">*</span></label>
+          <select
+            id="routeId"
+            class="form-control"
+            [(ngModel)]="calibrationDetails.routeId"
+            (change)="onRouteChange()"
+          >
+            <option value="">-- SELECT ROUTE --</option>
+            <option value="{{ obj.ROUTE_ID }}" *ngFor="let obj of routeList">
+              {{ obj.ROUTE_NAME }}
+            </option>
+          </select>
+        </div>
+      </div>
+      <!-- <div class="col-md-4">
+        <div class="form-group">
+          <label for="rbkId">RBK <span style="color: red">*</span></label>
+          <select
+            id="rbkId"
+            class="form-control"
+            [(ngModel)]="calibrationDetails.rbkId"
+            (change)="onRbkChange()"
+          >
+            <option value="">-- SELECT RBK --</option>
+            <option value="{{ obj.RBK_ID }}" *ngFor="let obj of rbkList">
+              {{ obj.RBK_NAME }}
+            </option>
+          </select>
+        </div>
+      </div> -->
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="villageId"
+            >VILLAGE <span style="color: red">*</span></label
+          >
+          <select
+            id="villageId"
+            class="form-control"
+            [(ngModel)]="calibrationDetails.villageId"
+          >
+            <option value="">-- SELECT VILLAGE --</option>
+            <option
+              value="{{ obj.VILLAGE_ID }}"
+              *ngFor="let obj of villageList"            
+            >
+              {{ obj.VILLAGE_NAME }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+          <div class="form-group">
+            <label for="meetingDate"
+              >INSPECTION DATE <span style="color: red">*</span></label
+            >
+            <app-date-picker
+            [PlaceHolder]="'Please Select Inspection Date'"
+            [(selectedDate)]="calibrationDetails.inspectionDate"
+            [maxDate]="maxDate"
+          ></app-date-picker>
+          </div>
+        </div>
+  
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="meetingTime"
+              >INSPECTION TIME <span style="color: red">*</span></label
+            >
+            <input
+              id="meetingTime"
+              type="time"
+              class="form-control"
+              [(ngModel)]="calibrationDetails.inspectionTime"
+              placeholder="Please Enter Inspection Time"
+              maxlength="8"
+              autocomplete="off"
+            />
+          </div>
+        </div>  
+        
+        <div class="col-md-4">
+          <div class="form-group">
+            <label>Is Desktop Computer Available <sup class="text-danger h6">*</sup></label>
+            <div class="ah-radio-buttons">
+              <div class="custom-control custom-radio custom-control-inline">
+                <input
+                  class="custom-control-input"
+                  type="radio"
+                  name="isDesktopAvailable"
+                  id="isDesktopAvailable1"
+                  value="1"
+                  [(ngModel)]="calibrationDetails.isDesktopAvailable"
+                  autocomplete="off"
+                />
+                <label class="custom-control-label" for="isDesktopAvailable1">
+                  Available
+                </label>
+              </div>
+  
+              <div class="custom-control custom-radio custom-control-inline">
+                <input
+                  class="custom-control-input"
+                  type="radio"
+                  name="isDesktopAvailable"
+                  id="isDesktopAvailable2"
+                  value="0"
+                  [(ngModel)]="calibrationDetails.isDesktopAvailable"
+                  autocomplete="off"
+                />
+                <label class="custom-control-label" for="isDesktopAvailable2">
+                  Not Available
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4" *ngIf="calibrationDetails.isDesktopAvailable === '1'">
+          <div class="form-group">
+            <label>Desktop Maker <span style="color: red">*</span></label>
+            <input type="text"
+            class="form-control"
+            [(ngModel)]="calibrationDetails.desktopMaker"
+            placeholder="Please Enter Desktop Maker"
+            maxlength="50"
+            autocomplete="off">
+          </div>
+        </div>
+
+        <div class="col-md-4" *ngIf="calibrationDetails.isDesktopAvailable === '1'">
+          <div class="form-group">
+            <label>Desktop Serial No <span style="color: red">*</span></label>
+            <input type="text"
+            class="form-control"
+            [(ngModel)]="calibrationDetails.desktopSerialNo"
+            placeholder="Please Enter Desktop Serial No"
+            maxlength="50"
+            autocomplete="off">
+          </div>
+        </div>
+
+        <div class="col-md-4" [hidden]="calibrationDetails.isDesktopAvailable !== '1'">
+            <div class="form-group">
+              <label for="desktopManufactureDate"
+                >DESKTOP Manufacture Date <span style="color: red">*</span></label
+              >
+              <app-date-picker
+              [PlaceHolder]="'Please Select Desktop Manufacture Date'"
+              [(selectedDate)]="calibrationDetails.desktopManufactureDate"
+              [maxDate]="maxDate"
+            ></app-date-picker>
+            </div>
+          </div>
+
+        <div class="col-md-4" [hidden]="calibrationDetails.isDesktopAvailable !== '1'">
+          <div class="form-group">
+            <label for="desktopImgUpload"
+              >Desktop Photo Upload <span style="color: red">*</span>
+            </label>
+            <input
+              type="file"
+              class="form-control p-0"
+              id="desktopImgUpload"
+              (change)="onDesktopImageChange($event)"
+              accept="image/*"
+              #desktopImgUpload
+              autocomplete="off"
+            />
+          </div>
+        </div>
+
+        <div class="col-md-4" *ngIf="calibrationDetails.isDesktopAvailable === '1'">
+          <div class="form-group">
+            <label>CPU Maker <span style="color: red">*</span></label>
+            <input type="text"
+            class="form-control"
+            [(ngModel)]="calibrationDetails.cpuMaker"
+            placeholder="Please Enter CPU Maker"
+            maxlength="50"
+            autocomplete="off">
+          </div>
+        </div>
+
+        <div class="col-md-4" *ngIf="calibrationDetails.isDesktopAvailable === '1'">
+          <div class="form-group">
+            <label>CPU Serial No <span style="color: red">*</span></label>
+            <input type="text"
+            class="form-control"
+            [(ngModel)]="calibrationDetails.cpuSerialNo"
+            placeholder="Please Enter CPU Serial No"
+            maxlength="50"
+            autocomplete="off">
+          </div>
+        </div>
+
+        <div class="col-md-4" [hidden]="calibrationDetails.isDesktopAvailable !== '1'">
+            <div class="form-group">
+              <label for="cpuManufactureDate"
+                >CPU Manufacture Date <span style="color: red">*</span></label
+              >
+              <app-date-picker
+              [PlaceHolder]="'Please Select CPU Manufacture Date'"
+              [(selectedDate)]="calibrationDetails.cpuManufactureDate"
+              [maxDate]="maxDate"
+            ></app-date-picker>
+            </div>
+          </div>
+
+        <div class="col-md-4" [hidden]="calibrationDetails.isDesktopAvailable !== '1'">
+          <div class="form-group">
+            <label for="cpuImgUpload"
+              >CPU Photo Upload <span style="color: red">*</span>
+            </label>
+            <input
+              type="file"
+              class="form-control p-0"
+              id="cpuImgUpload"
+              (change)="onCPUImageChange($event)"
+              accept="image/*"
+              #cpuImgUpload
+              autocomplete="off"
+            />
+          </div>
+        </div>
+
+        <div class="col-md-4" *ngIf="calibrationDetails.isDesktopAvailable === '1'">
+          <div class="form-group">
+            <label>Mouse Maker <span style="color: red">*</span></label>
+            <input type="text"
+            class="form-control"
+            [(ngModel)]="calibrationDetails.mouseMaker"
+            placeholder="Please Enter Mouse Maker"
+            maxlength="50"
+            autocomplete="off">
+          </div>
+        </div>
+
+        <div class="col-md-4" *ngIf="calibrationDetails.isDesktopAvailable === '1'">
+          <div class="form-group">
+            <label>Mouse Serial No <span style="color: red">*</span></label>
+            <input type="text"
+            class="form-control"
+            [(ngModel)]="calibrationDetails.mouseSerialNo"
+            placeholder="Please Enter Mouse Serial No"
+            maxlength="50"
+            autocomplete="off">
+          </div>
+        </div>
+
+        <div class="col-md-4" [hidden]="calibrationDetails.isDesktopAvailable !== '1'">
+            <div class="form-group">
+              <label for="mouseManufactureDate"
+                >MOUSE Manufacture Date <span style="color: red">*</span></label
+              >
+              <app-date-picker
+              [PlaceHolder]="'Please Select Mouse Manufacture Date'"
+              [(selectedDate)]="calibrationDetails.mouseManufactureDate"
+              [maxDate]="maxDate"
+            ></app-date-picker>
+            </div>
+          </div>
+
+
+        <div class="col-md-4" [hidden]="calibrationDetails.isDesktopAvailable !== '1'">
+          <div class="form-group">
+            <label for="mouseImgUpload"
+              >Mouse Photo Upload <span style="color: red">*</span>
+            </label>
+            <input
+              type="file"
+              class="form-control p-0"
+              id="mouseImgUpload"
+              (change)="onMouseImageChange($event)"
+              accept="image/*"
+              #mouseImgUpload
+              autocomplete="off"
+            />
+          </div>
+        </div>
+
+        <div class="col-md-4" *ngIf="calibrationDetails.isDesktopAvailable === '1'">
+          <div class="form-group">
+            <label>Keyboard Maker <span style="color: red">*</span></label>
+            <input type="text"
+            class="form-control"
+            [(ngModel)]="calibrationDetails.keyBoardMaker"
+            placeholder="Please Enter Keyboard Maker"
+            maxlength="50"
+            autocomplete="off">
+          </div>
+        </div>
+
+        <div class="col-md-4" *ngIf="calibrationDetails.isDesktopAvailable === '1'">
+          <div class="form-group">
+            <label>Keyboard Serial No <span style="color: red">*</span></label>
+            <input type="text"
+            class="form-control"
+            [(ngModel)]="calibrationDetails.keyBoardSerialNo"
+            placeholder="Please Enter Keyboard Serial No"
+            maxlength="50"
+            autocomplete="off">
+          </div>
+        </div>
+
+        <div class="col-md-4" [hidden]="calibrationDetails.isDesktopAvailable !== '1'">
+            <div class="form-group">
+              <label for="keyBoardManufactureDate"
+                >Keyboard Manufacture Date <span style="color: red">*</span></label
+              >
+              <app-date-picker
+              [PlaceHolder]="'Please Select KeyBoard Manufacture Date'"
+              [(selectedDate)]="calibrationDetails.keyBoardManufactureDate"
+              [maxDate]="maxDate"
+            ></app-date-picker>
+            </div>
+          </div>
+
+        <div class="col-md-4" [hidden]="calibrationDetails.isDesktopAvailable !== '1'">
+          <div class="form-group">
+            <label for="keyboardImgUpload"
+              >Keyboard Photo Upload <span style="color: red">*</span>
+            </label>
+            <input
+              type="file"
+              class="form-control p-0"
+              id="keyboardImgUpload"
+              (change)="onKeyBoardImageChange($event)"
+              accept="image/*"
+              #keyboardImgUpload
+              autocomplete="off"
+            />
+          </div>
+        </div>
+
+        <div class="col-md-4" *ngIf="calibrationDetails.isDesktopAvailable === '1'">
+          <div class="form-group">
+            <label>UPS Maker <span style="color: red">*</span></label>
+            <input type="text"
+            class="form-control"
+            [(ngModel)]="calibrationDetails.upsMaker"
+            placeholder="Please Enter UPS Maker"
+            maxlength="50"
+            autocomplete="off">
+          </div>
+        </div>
+
+        <div class="col-md-4" *ngIf="calibrationDetails.isDesktopAvailable === '1'">
+          <div class="form-group">
+            <label>UPS Serial No <span style="color: red">*</span></label>
+            <input type="text"
+            class="form-control"
+            [(ngModel)]="calibrationDetails.upsSerialNo"
+            placeholder="Please Enter UPS Serial No"
+            maxlength="50"
+            autocomplete="off">
+          </div>
+        </div>
+
+        <div class="col-md-4" [hidden]="calibrationDetails.isDesktopAvailable !== '1'">
+            <div class="form-group">
+              <label for="upsManufactureDate"
+                >UPS Manufacture Date <span style="color: red">*</span></label
+              >
+              <app-date-picker
+              [PlaceHolder]="'Please Select UPS Manufacture Date'"
+              [(selectedDate)]="calibrationDetails.upsManufactureDate"
+              [maxDate]="maxDate"
+            ></app-date-picker>
+            </div>
+          </div>
+
+        <div class="col-md-4" [hidden]="calibrationDetails.isDesktopAvailable !== '1'">
+          <div class="form-group">
+            <label for="upsImgUpload"
+              >UPS Photo Upload <span style="color: red">*</span>
+            </label>
+            <input
+              type="file"
+              class="form-control p-0"
+              id="upsImgUpload"
+              (change)="onUPSImageChange($event)"
+              accept="image/*"
+              #upsImgUpload
+              autocomplete="off"
+            />
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="form-group">
+            <label>Electronic Weigh Scale-200Kgs (Platform with digital Indicator) <sup class="text-danger h6">*</sup></label>
+            <div class="ah-radio-buttons">
+              <div class="custom-control custom-radio custom-control-inline">
+                <input
+                  class="custom-control-input"
+                  type="radio"
+                  name="isEleWeightScale"
+                  id="isEleWeightScale1"
+                  value="1"
+                  [(ngModel)]="calibrationDetails.isEleWeightScale"
+                  autocomplete="off"
+                />
+                <label class="custom-control-label" for="isEleWeightScale1">
+                  Available
+                </label>
+              </div>
+  
+              <div class="custom-control custom-radio custom-control-inline">
+                <input
+                  class="custom-control-input"
+                  type="radio"
+                  name="isEleWeightScale"
+                  id="isEleWeightScale2"
+                  value="0"
+                  [(ngModel)]="calibrationDetails.isEleWeightScale"
+                  autocomplete="off"
+                />
+                <label class="custom-control-label" for="isEleWeightScale2">
+                  Not Available
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        
+        <div class="col-md-4" *ngIf="calibrationDetails.isEleWeightScale === '1'">
+          <div class="form-group">
+            <label>Electronic Weight Scale Maker <span style="color: red">*</span></label>
+            <input type="text"
+            class="form-control"
+            [(ngModel)]="calibrationDetails.electronicWeightScaleMaker"
+            placeholder="Please Enter Electronic Weight Scaler Maker"
+            maxlength="50"
+            autocomplete="off">
+          </div>
+        </div>
+
+        <div class="col-md-4" *ngIf="calibrationDetails.isEleWeightScale === '1'">
+          <div class="form-group">
+            <label>Electronic Weight Scale Serial No <span style="color: red">*</span></label>
+            <input type="text"
+            class="form-control"
+            [(ngModel)]="calibrationDetails.electronicWeightScaleSerialNo"
+            placeholder="Please Enter Electronic Weight Scaler Serial No"
+            maxlength="50"
+            autocomplete="off">
+          </div>
+        </div>
+
+        <div class="col-md-4" [hidden]="calibrationDetails.isEleWeightScale !== '1'">
+            <div class="form-group">
+              <label for="EleWeightManufactureDate"
+                >Electronic Weigh Scale Manufacture Date <span style="color: red">*</span></label
+              >
+              <app-date-picker
+              [PlaceHolder]="'Please Select Electronic Weigh Scale Manufacture Date'"
+              [(selectedDate)]="calibrationDetails.EleWeightManufactureDate"
+              [maxDate]="maxDate"
+            ></app-date-picker>
+            </div>
+          </div>
+
+        <div class="col-md-4" [hidden]="calibrationDetails.isEleWeightScale !== '1'">
+          <div class="form-group">
+            <label for="electronicWeighImgUpload"
+              >Electronic Weigh Scale Photo Upload <span style="color: red">*</span>
+            </label>
+            <input
+              type="file"
+              class="form-control p-0"
+              id="electronicWeighImgUpload"
+              (change)="onElectronicWeighImageChange($event)"
+              accept="image/*"
+              #electronicWeighImgUpload
+              autocomplete="off"
+            />
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="form-group">
+            <label>UltraSonic Milk Analyser (Ekomilk Electronic Pro) <sup class="text-danger h6">*</sup></label>
+            <div class="ah-radio-buttons">
+              <div class="custom-control custom-radio custom-control-inline">
+                <input
+                  class="custom-control-input"
+                  type="radio"
+                  name="isUltasonicMilkAnalyser"
+                  id="isUltasonicMilkAnalyser1"
+                  value="1"
+                  [(ngModel)]="calibrationDetails.isUltasonicMilkAnalyser"
+                  autocomplete="off"
+                />
+                <label class="custom-control-label" for="isUltasonicMilkAnalyser1">
+                  Available
+                </label>
+              </div>
+  
+              <div class="custom-control custom-radio custom-control-inline">
+                <input
+                  class="custom-control-input"
+                  type="radio"
+                  name="isUltasonicMilkAnalyser"
+                  id="isUltasonicMilkAnalyser2"
+                  value="0"
+                  [(ngModel)]="calibrationDetails.isUltasonicMilkAnalyser"
+                  autocomplete="off"
+                />
+                <label class="custom-control-label" for="isUltasonicMilkAnalyser2">
+                  Not Available
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4" *ngIf="calibrationDetails.isUltasonicMilkAnalyser === '1'">
+          <div class="form-group">
+            <label>Ultrasonic Milk Analyser Maker <span style="color: red">*</span></label>
+            <input type="text"
+            class="form-control"
+            [(ngModel)]="calibrationDetails.ultraSonicMilkAnalyserMaker"
+            placeholder="Please Enter Ultrasonic Milk Analyser Maker"
+            maxlength="50"
+            autocomplete="off">
+          </div>
+        </div>
+
+        <div class="col-md-4" *ngIf="calibrationDetails.isUltasonicMilkAnalyser === '1'">
+          <div class="form-group">
+            <label>Ultrasonic Milk Analyser Serial No <span style="color: red">*</span></label>
+            <input type="text"
+            class="form-control"
+            [(ngModel)]="calibrationDetails.ultraSonicMilkAnalyserSerialNo"
+            placeholder="Please Enter Ultrasonic Milk Analyser Serial No"
+            maxlength="50"
+            autocomplete="off">
+          </div>
+        </div>
+
+        <div class="col-md-4" [hidden]="calibrationDetails.isUltasonicMilkAnalyser !== '1'">
+            <div class="form-group">
+              <label for="ultraSonicMilkAnalyserManufactureDate"
+                >Ultra sonic Milk Analyzer Manufacture Date <span style="color: red">*</span></label
+              >
+              <app-date-picker
+              [PlaceHolder]="'Please Select Ultra sonic Milk Analyzer Manufacture Date'"
+              [(selectedDate)]="calibrationDetails.ultraSonicMilkAnalyserManufactureDate"
+              [maxDate]="maxDate"
+            ></app-date-picker>
+            </div>
+          </div>
+
+        <div class="col-md-4" [hidden]="calibrationDetails.isUltasonicMilkAnalyser !== '1'">
+          <div class="form-group">
+            <label for="ultrasonicMilkAnalyseImgUpload"
+              >UltraSonic Milk Analyser Photo Upload <span style="color: red">*</span>
+            </label>
+            <input
+              type="file"
+              class="form-control p-0"
+              id="ultrasonicMilkAnalyseImgUpload"
+              (change)="onUltrasonicMilkAnalyseImgChange($event)"
+              accept="image/*"
+              #ultrasonicMilkAnalyseImgUpload
+              autocomplete="off"
+            />
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="form-group">
+            <label>Cow Milk Fat <span style="color: red">*</span></label>
+            <input type="text"
+            class="form-control"
+            [(ngModel)]="calibrationDetails.cowMilkFat"
+            placeholder="Please Enter Cow Milk Fat"
+            maxlength="50"
+            autocomplete="off">
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="form-group">
+            <label>Cow Milk SNF <span style="color: red">*</span></label>
+            <input type="text"
+            class="form-control"
+            [(ngModel)]="calibrationDetails.cowMilkSnf"
+            placeholder="Please Enter Cow Milk SNF"
+            maxlength="50"
+            autocomplete="off">
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="form-group">
+            <label>Buffalo Milk Fat <span style="color: red">*</span></label>
+            <input type="text"
+            class="form-control"
+            [(ngModel)]="calibrationDetails.buffaloMilkFat"
+            placeholder="Please Enter Buffalo Milk Fat"
+            maxlength="50"
+            autocomplete="off">
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="form-group">
+            <label>Buffalo Milk SNF <span style="color: red">*</span></label>
+            <input type="text"
+            class="form-control"
+            [(ngModel)]="calibrationDetails.buffaloMilkSnf"
+            placeholder="Please Enter Buffalo Milk SNF"
+            maxlength="50"
+            autocomplete="off">
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="form-group">
+            <label>UPS 1KVA <sup class="text-danger h6">*</sup></label>
+            <div class="ah-radio-buttons">
+              <div class="custom-control custom-radio custom-control-inline">
+                <input
+                  class="custom-control-input"
+                  type="radio"
+                  name="isUps1Kva"
+                  id="isUps1Kva1"
+                  value="1"
+                  [(ngModel)]="calibrationDetails.isUps1Kva"
+                  autocomplete="off"
+                />
+                <label class="custom-control-label" for="isUps1Kva1">
+                  Available
+                </label>
+              </div>
+  
+              <div class="custom-control custom-radio custom-control-inline">
+                <input
+                  class="custom-control-input"
+                  type="radio"
+                  name="isUps1Kva"
+                  id="isUps1Kva2"
+                  value="0"
+                  [(ngModel)]="calibrationDetails.isUps1Kva"
+                  autocomplete="off"
+                />
+                <label class="custom-control-label" for="isUps1Kva2">
+                  Not Available
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4" *ngIf="calibrationDetails.isUps1Kva === '1'">
+          <div class="form-group">
+            <label>UPS 1KVA  Maker <span style="color: red">*</span></label>
+            <input type="text"
+            class="form-control"
+            [(ngModel)]="calibrationDetails.ups1KVAMaker"
+            placeholder="Please Enter UPS 1KVA Maker"
+            maxlength="50"
+            autocomplete="off">
+          </div>
+        </div>
+
+        <div class="col-md-4" *ngIf="calibrationDetails.isUps1Kva === '1'">
+          <div class="form-group">
+            <label>UPS 1KVA Serial No <span style="color: red">*</span></label>
+            <input type="text"
+            class="form-control"
+            [(ngModel)]="calibrationDetails.ups1KVASerialNo"
+            placeholder="Please Enter UPS 1KVA Serial No"
+            maxlength="50"
+            autocomplete="off">
+          </div>
+        </div>
+
+        <div class="col-md-4" [hidden]="calibrationDetails.isUps1Kva !== '1'">
+          <div class="form-group">
+            <label for="ups1KvaManufactureDate"
+              >1KVA UPS Manufacture Date <span style="color: red">*</span></label
+            >
+            <app-date-picker
+              [PlaceHolder]="'Please Select 1KVA UPS Manufacture Date'"
+              [(selectedDate)]="calibrationDetails.ups1KvaManufactureDate"
+              [maxDate]="maxDate"
+            ></app-date-picker>
+          </div>
+        </div>
+
+        <div class="col-md-4" [hidden]="calibrationDetails.isUps1Kva !== '1'">
+          <div class="form-group">
+            <label for="ups1KvaImgUpload"
+              >UPS 1KVA Photo Upload <span style="color: red">*</span>
+            </label>
+            <input
+              type="file"
+              class="form-control p-0"
+              id="ups1KvaImgUpload"
+              (change)="onUPS1KVAImgChange($event)"
+              accept="image/*"
+              #ups1KvaImgUpload
+              autocomplete="off"
+            />
+          </div>
+        </div>
+        
+        <div class="col-md-4">
+          <div class="form-group">
+            <label>Battery <sup class="text-danger h6">*</sup></label>
+            <div class="ah-radio-buttons">
+              <div class="custom-control custom-radio custom-control-inline">
+                <input
+                  class="custom-control-input"
+                  type="radio"
+                  name="isBattery"
+                  id="isBattery1"
+                  value="1"
+                  [(ngModel)]="calibrationDetails.isBattery"
+                  autocomplete="off"
+                />
+                <label class="custom-control-label" for="isBattery1">
+                  Available
+                </label>
+              </div>
+  
+              <div class="custom-control custom-radio custom-control-inline">
+                <input
+                  class="custom-control-input"
+                  type="radio"
+                  name="isBattery"
+                  id="isBattery2"
+                  value="0"
+                  [(ngModel)]="calibrationDetails.isBattery"
+                  autocomplete="off"
+                />
+                <label class="custom-control-label" for="isBattery2">
+                  Not Available
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-md-4" [hidden]="calibrationDetails.isBattery !== '1'">
+          <div class="form-group">
+            <label for="batteryManufactureDate">
+              Battery Manufacture Date 
+              <span style="color: red">*</span>
+              </label>
+              <app-date-picker
+              [PlaceHolder]="'Please Select Battery Manufacture Date'"
+              [(selectedDate)]="calibrationDetails.batteryKvaManufactureDate"
+              [maxDate]="maxDate"
+            ></app-date-picker>
+          </div>
+        </div>
+
+        <div class="col-md-4" [hidden]="calibrationDetails.isBattery !== '1'">
+          <div class="form-group">
+            <label for="batteryImgUpload"
+              >Battery Photo Upload <span style="color: red">*</span>
+            </label>
+            <input
+              type="file"
+              class="form-control p-0"
+              id="batteryImgUpload"
+              (change)="onBatteryImgChange($event)"
+              accept="image/*"
+              #batteryImgUpload
+              autocomplete="off"
+            />
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="form-group">
+            <label>Remote Display Unit <sup class="text-danger h6">*</sup></label>
+            <div class="ah-radio-buttons">
+              <div class="custom-control custom-radio custom-control-inline">
+                <input
+                  class="custom-control-input"
+                  type="radio"
+                  name="isRemoteDispUnit"
+                  id="isRemoteDispUnit1"
+                  value="1"
+                  [(ngModel)]="calibrationDetails.isRemoteDispUnit"
+                  autocomplete="off"
+                />
+                <label class="custom-control-label" for="isRemoteDispUnit1">
+                  Available
+                </label>
+              </div>
+  
+              <div class="custom-control custom-radio custom-control-inline">
+                <input
+                  class="custom-control-input"
+                  type="radio"
+                  name="isRemoteDispUnit"
+                  id="isRemoteDispUnit2"
+                  value="0"
+                  [(ngModel)]="calibrationDetails.isRemoteDispUnit"
+                  autocomplete="off"
+                />
+                <label class="custom-control-label" for="isRemoteDispUnit2">
+                  Not Available
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-md-4" *ngIf="calibrationDetails.isRemoteDispUnit === '1'">
+          <div class="form-group">
+            <label>Remote Display Unit Maker <span style="color: red">*</span></label>
+            <input type="text"
+            class="form-control"
+            [(ngModel)]="calibrationDetails.remoteDisplayUnitMaker"
+            placeholder="Please Enter Remote Display Unit  Maker"
+            maxlength="50"
+            autocomplete="off">
+          </div>
+        </div>
+
+        <div class="col-md-4" *ngIf="calibrationDetails.isRemoteDispUnit === '1'">
+          <div class="form-group">
+            <label>Remote Display Unit Serial No <span style="color: red">*</span></label>
+            <input type="text"
+            class="form-control"
+            [(ngModel)]="calibrationDetails.remoteDisplayUnitSerialNo"
+            placeholder="Please Enter Remote Display Unit  Serial No"
+            maxlength="50"
+            autocomplete="off">
+          </div>
+        </div>
+
+        <div class="col-md-4" [hidden]="calibrationDetails.isRemoteDispUnit !== '1'">
+          <div class="form-group">
+            <label for="remoteDispUnitManufactureDate">
+              Remote Display Unit Manufacture Date 
+              <span style="color: red">*</span>
+              </label>
+              <app-date-picker
+              [PlaceHolder]="'Please Select Remote Diaplay Unit Manufacture Date'"
+              [(selectedDate)]="calibrationDetails.remoteDispUnitManufactureDate"
+              [maxDate]="maxDate"
+            ></app-date-picker>
+          </div>
+        </div>
+
+        <div class="col-md-4" [hidden]="calibrationDetails.isRemoteDispUnit !== '1'">
+          <div class="form-group">
+            <label for="remoteDisplUnitImgUpload"
+              >Remote Diaplay Unit Photo Upload <span style="color: red">*</span>
+            </label>
+            <input
+              type="file"
+              class="form-control p-0"
+              id="remoteDisplUnitImgUpload"
+              (change)="onRemoteDispUnitImgChange($event)"
+              accept="image/*"
+              #remoteDisplUnitImgUpload
+              autocomplete="off"
+            />
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="form-group">
+            <label>24 Pin 80 Column Matrix Printer <sup class="text-danger h6">*</sup></label>
+            <div class="ah-radio-buttons">
+              <div class="custom-control custom-radio custom-control-inline">
+                <input
+                  class="custom-control-input"
+                  type="radio"
+                  name="is24Pin80ColMatrixPrinter"
+                  id="is24Pin80ColMatrixPrinter1"
+                  value="1"
+                  [(ngModel)]="calibrationDetails.is24Pin80ColMatrixPrinter"
+                  autocomplete="off"
+                />
+                <label class="custom-control-label" for="is24Pin80ColMatrixPrinter1">
+                  Available
+                </label>
+              </div>
+  
+              <div class="custom-control custom-radio custom-control-inline">
+                <input
+                  class="custom-control-input"
+                  type="radio"
+                  name="is24Pin80ColMatrixPrinter"
+                  id="is24Pin80ColMatrixPrinter2"
+                  value="0"
+                  [(ngModel)]="calibrationDetails.is24Pin80ColMatrixPrinter"
+                  autocomplete="off"
+                />
+                <label class="custom-control-label" for="is24Pin80ColMatrixPrinter2">
+                  Not Available
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4" *ngIf="calibrationDetails.is24Pin80ColMatrixPrinter === '1'">
+          <div class="form-group">
+            <label>Matrix Printer Maker <span style="color: red">*</span></label>
+            <input type="text"
+            class="form-control"
+            [(ngModel)]="calibrationDetails.matrixPrinterMaker"
+            placeholder="Please Enter Matrix Printer Maker"
+            maxlength="50"
+            autocomplete="off">
+          </div>
+        </div>
+
+        <div class="col-md-4" *ngIf="calibrationDetails.is24Pin80ColMatrixPrinter === '1'">
+          <div class="form-group">
+            <label>Matrix Printer Serial No <span style="color: red">*</span></label>
+            <input type="text"
+            class="form-control"
+            [(ngModel)]="calibrationDetails.matrixPrinterSerialNo"
+            placeholder="Please Enter Matrix Printer Serial No"
+            maxlength="50"
+            autocomplete="off">
+          </div>
+        </div>
+        
+        <div class="col-md-4" *ngIf="calibrationDetails.is24Pin80ColMatrixPrinter === '1'">
+          <div class="form-group">
+            <label for="matrixPrinterManufactureDate">
+              Matrix Printer Manufacture Date 
+              <span style="color: red">*</span>
+              </label>
+              <app-date-picker
+              [PlaceHolder]="'Please Select Matrix Printer Manufacture Date'"
+              [(selectedDate)]="calibrationDetails.matrixPrinterManufactureDate"
+              [maxDate]="maxDate"
+            ></app-date-picker>
+          </div>
+        </div>
+
+        <div class="col-md-4" [hidden]="calibrationDetails.is24Pin80ColMatrixPrinter !== '1'">
+          <div class="form-group">
+            <label for="matrixPrinterImgUpload"
+              >Matrix Printer Photo Upload <span style="color: red">*</span>
+            </label>
+            <input
+              type="file"
+              class="form-control p-0"
+              id="matrixPrinterImgUpload"
+              (change)="onMatrixPrinterImgChange($event)"
+              accept="image/*"
+              #matrixPrinterImgUpload
+              autocomplete="off"
+            />
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="form-group">
+            <label>UltraSonic Stirrer <sup class="text-danger h6">*</sup></label>
+            <div class="ah-radio-buttons">
+              <div class="custom-control custom-radio custom-control-inline">
+                <input
+                  class="custom-control-input"
+                  type="radio"
+                  name="isUltraSonicStirrer"
+                  id="isUltraSonicStirrer1"
+                  value="1"
+                  [(ngModel)]="calibrationDetails.isUltraSonicStirrer"
+                  autocomplete="off"
+                />
+                <label class="custom-control-label" for="isUltraSonicStirrer1">
+                  Available
+                </label>
+              </div>
+  
+              <div class="custom-control custom-radio custom-control-inline">
+                <input
+                  class="custom-control-input"
+                  type="radio"
+                  name="isUltraSonicStirrer"
+                  id="isUltraSonicStirrer2"
+                  value="0"
+                  [(ngModel)]="calibrationDetails.isUltraSonicStirrer"
+                  autocomplete="off"
+                />
+                <label class="custom-control-label" for="isUltraSonicStirrer2">
+                  Not Available
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4" *ngIf="calibrationDetails.isUltraSonicStirrer === '1'">
+          <div class="form-group">
+            <label>UltraSonic Stirrer Maker <span style="color: red">*</span></label>
+            <input type="text"
+            class="form-control"
+            [(ngModel)]="calibrationDetails.ultraSonicStirrerMaker"
+            placeholder="Please Enter UltraSonic Stirrer Maker"
+            maxlength="50"
+            autocomplete="off">
+          </div>
+        </div>
+
+        <div class="col-md-4" *ngIf="calibrationDetails.isUltraSonicStirrer === '1'">
+          <div class="form-group">
+            <label>UltraSonic Stirrer Serial No <span style="color: red">*</span></label>
+            <input type="text"
+            class="form-control"
+            [(ngModel)]="calibrationDetails.ultraSonicStirrerSerialNo"
+            placeholder="Please Enter UltraSonic Stirrer Serial No"
+            maxlength="50"
+            autocomplete="off">
+          </div>
+        </div>
+
+        
+        <div class="col-md-4" *ngIf="calibrationDetails.isUltraSonicStirrer === '1'">
+          <div class="form-group">
+            <label for="ultraSonicManufactureDate">
+              UltraSonic Stirrer Manufacture Date 
+              <span style="color: red">*</span>
+              </label>
+              <app-date-picker
+              [PlaceHolder]="'Please Select UltraSonic Stirrer Manufacture Date'"
+              [(selectedDate)]="calibrationDetails.ultraSonicManufactureDate"
+              [maxDate]="maxDate"
+            ></app-date-picker>
+          </div>
+        </div>
+
+
+        <div class="col-md-4" [hidden]="calibrationDetails.isUltraSonicStirrer !== '1'">
+          <div class="form-group">
+            <label for="ultraSonicStirrerImgUpload"
+              >UltraSonic Stirrer Photo Upload <span style="color: red">*</span>
+            </label>
+            <input
+              type="file"
+              class="form-control p-0"
+              id="ultraSonicStirrerImgUpload"
+              (change)="onUltrasonicStirrerImgChange($event)"
+              accept="image/*"
+              #ultraSonicStirrerImgUpload
+              autocomplete="off"
+            />
+          </div>
+        </div>
+        
+        <div class="col-md-4">
+          <div class="form-group">
+            <label>Internet Connectivity Device <sup class="text-danger h6">*</sup></label>
+            <div class="ah-radio-buttons">
+              <div class="custom-control custom-radio custom-control-inline">
+                <input
+                  class="custom-control-input"
+                  type="radio"
+                  name="internetDevice"
+                  id="internetDevice1"
+                  value="1"
+                  [(ngModel)]="calibrationDetails.internetDevice"
+                  autocomplete="off"
+                />
+                <label class="custom-control-label" for="internetDevice1">
+                  Dongle
+                </label>
+              </div>
+  
+              <div class="custom-control custom-radio custom-control-inline">
+                <input
+                  class="custom-control-input"
+                  type="radio"
+                  name="internetDevice"
+                  id="internetDevice2"
+                  value="2"
+                  [(ngModel)]="calibrationDetails.internetDevice"
+                  autocomplete="off"
+                />
+                <label class="custom-control-label" for="internetDevice2">
+                  Modem
+                </label>
+              </div>
+
+              <div class="custom-control custom-radio custom-control-inline">
+                  <input
+                    class="custom-control-input"
+                    type="radio"
+                    name="internetDevice"
+                    id="internetDevice3"
+                    value="0"
+                    [(ngModel)]="calibrationDetails.internetDevice"
+                    autocomplete="off"
+                  />
+                  <label class="custom-control-label" for="internetDevice3">
+                    Not Available
+                  </label>
+                </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4" *ngIf="calibrationDetails.internetDevice === '1' || calibrationDetails.internetDevice === '2' ">
+          <div class="form-group">
+            <label>Dongle/Modem Maker <span style="color: red">*</span></label>
+            <input type="text"
+            class="form-control"
+            [(ngModel)]="calibrationDetails.internetDevMaker"
+            placeholder="Please Enter Dongle/Modem Maker"
+            maxlength="50"
+            autocomplete="off">
+          </div>
+        </div>
+
+        <div class="col-md-4" *ngIf="calibrationDetails.internetDevice === '1' || calibrationDetails.internetDevice === '2' ">
+          <div class="form-group">
+            <label>Dongle/Modem Serial No <span style="color: red">*</span></label>
+            <input type="text"
+            class="form-control"
+            [(ngModel)]="calibrationDetails.internetDevSerialNo"
+            placeholder="Please Enter Dongle/Modem Serial No"
+            maxlength="50"
+            autocomplete="off">
+          </div>
+        </div>
+
+        
+        <div class="col-md-4" *ngIf="calibrationDetails.internetDevice === '1' || calibrationDetails.internetDevice === '2' ">
+          <div class="form-group">
+            <label for="internetDevManufactureDate">
+              Dongle/Modem Manufacture Date 
+              <span style="color: red">*</span>
+              </label>
+              <app-date-picker
+              [PlaceHolder]="'Please Select Dongle/Modem Manufacture Date'"
+              [(selectedDate)]="calibrationDetails.internetDevManufactureDate"
+              [maxDate]="maxDate"
+            ></app-date-picker>
+          </div>
+        </div>
+
+        <div class="col-md-4" [hidden]="calibrationDetails.internetDevice !== '1' && calibrationDetails.internetDevice !== '2' ">
+          <div class="form-group">
+            <label for="donglrOrModemImgUpload"
+              >Dongle/Modem Photo Upload <span style="color: red">*</span>
+            </label>
+            <input
+              type="file"
+              class="form-control p-0"
+              id="donglrOrModemImgUpload"
+              (change)="ondonglrOrModemImgChange($event)"
+              accept="image/*"
+              #donglrOrModemImgUpload
+              autocomplete="off"
+            />
+          </div>
+        </div>
+
+
+      <div class="col-md-12" align="center">
+        <button
+          type="button"
+          class="btn btn-success btn-sm"
+          (click)="btnSubmit()"
+        >
+          SUBMIT
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

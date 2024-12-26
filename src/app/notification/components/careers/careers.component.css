@@ -1,0 +1,301 @@
+.card {
+    -webkit-box-shadow: 0px 0px 25px -4px rgba(71, 114, 254, 0.3) !important;
+    -moz-box-shadow: 0px 0px 25px -4px rgba(71, 114, 254, 0.3) !important;
+    box-shadow: 0px 0px 25px -4px rgba(71, 114, 254, 0.3) !important;
+    border-radius: 5px;
+}
+
+.card-header {
+    background-color: #fff;
+    border-bottom: 0;
+    padding-left: 10px;
+}
+
+.card-header h5::after {
+    content: '';
+    /* background-color: #000; */
+    width: 15%;
+    height: 2px;
+    display: block;
+    margin-top: 5px;
+}
+
+.stats-card {
+    margin-bottom: 10px;
+}
+
+.stats-card .card-body {
+    padding: 0.9rem 1.25rem;
+}
+
+/*Dashboard Two Styles*/
+.quik-links {
+    padding: 0 !important;
+}
+
+.quik-links .list-group .list-group-item {
+    padding: 2px 8px;
+    border: 0;
+    border-bottom: 1px solid #e7e7e7;
+    background-size: 200% 100%;
+    background-image: linear-gradient(to left, #0060ac 50%, #ffffff 50%);
+    -webkit-transition: background-position 1s;
+    -moz-transition: background-position 1s;
+    transition: background-position 1s;
+}
+
+.quik-links .list-group .list-group-item:hover {
+    background-position: -100% 0;
+}
+
+.quik-links .list-group .list-group-item a {
+    display: flex;
+    align-items: center;
+}
+
+.quik-links .list-group .list-group-item:hover a {
+    color: #fff;
+}
+
+.quik-links .list-group .list-group-item label {
+    margin-bottom: 0;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    cursor: pointer;
+    width: 80%;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.quik-links .list-group .list-group-item img {
+    width: 25px;
+    height: 25px;
+}
+
+.ql-circle {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #f1f1f1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+    margin-right: 10px;
+}
+
+.quik-links .list-group .list-group-item:hover .ql-circle {
+    background-color: #ffffff;
+}
+
+.amul-db-tabs .tab-content {
+    padding: 20px;
+    padding-bottom: 0;
+}
+
+.amul-db-tabs .nav-tabs .nav-item.show .nav-link,
+.amul-db-tabs .nav-tabs .nav-link.active {
+    color: #007bff;
+    background-color: #fff;
+    /* border-color: #dee2e6 #dee2e6 #fff; */
+    border-bottom: 3px solid #007bff;
+    font-weight: bold;
+}
+
+.amul-db-tabs .nav-tabs .nav-link:focus,
+.amul-db-tabs .nav-tabs .nav-link:hover {
+    border-color: unset;
+}
+
+.amul-db-tabs .nav-tabs .nav-link {
+    color: #444444;
+    border: none;
+    border-top-left-radius: .25rem;
+    border-top-right-radius: .25rem;
+}
+
+.counts-card {
+    margin-bottom: 10px;
+    box-shadow: none !important;
+    position: relative;
+    text-align: center;
+}
+
+.amul-db-tabs .tab-content [class*='col-'] {
+    padding: 5px 10px;
+}
+
+.counts-card .overlay {
+    position: absolute;
+    /* background: url(../../../assets/img/milk-bg.png); */
+    width: 100%;
+    bottom: 0;
+    right: 0;
+    z-index: 0;
+    opacity: 0.4;
+}
+
+.counts-card .card-body {
+    z-index: 1;
+}
+
+/* .counts-card::after{
+  content: url(../../../assets/img/milk-bg.png);
+  width: 100%;
+  position: absolute;
+} */
+.counts-card p {
+    margin-bottom: 5px;
+    color: #444444;
+    font-size: 1.0rem;
+}
+
+.counts-card p small {
+    font-weight: 500;
+}
+
+.bg-light-blue {
+    background: #e3f3fc !important;
+}
+
+.bg-light-aqua {
+    background: #cffffb !important;
+}
+
+.bg-light-orange {
+    background: #fffce4 !important;
+}
+
+.bg-light-purple {
+    background: #fdecff !important;
+}
+
+.bg-light-green {
+    background: #e0ffe1 !important;
+}
+
+.bg-light-indigo {
+    background: #f2eaff !important;
+}
+
+.bg-light-grey {
+    background: #fafafa !important
+}
+
+.panel {
+    border-width: 0 0 1px 0;
+    border-style: solid;
+    border-color: #fff;
+    background: none;
+    box-shadow: none;
+}
+
+.panel:last-child {
+    border-bottom: none;
+}
+
+.panel-group>.panel:first-child .panel-heading {
+    border-radius: 4px 4px 0 0;
+}
+
+.panel-group .panel {
+    border-radius: 0;
+}
+
+.panel-group .panel+.panel {
+    margin-top: 0;
+}
+
+.panel-heading {
+    background-color: #009688;
+    border-radius: 0;
+    border: none;
+    color: #fff;
+    padding: 0;
+    transition: all 0.5s;
+}
+
+.panel-title a {
+    display: block;
+    color: #fff;
+    padding: 15px;
+    position: relative;
+}
+
+.panel-title a h5 {
+    color: #fff;
+}
+
+.panel-body {
+    background: #fff;
+}
+
+.panel:last-child .panel-body {
+    border-radius: 0 0 4px 4px;
+}
+
+.panel:last-child .panel-heading {
+    border-radius: 0 0 4px 4px;
+    transition: border-radius 0.3s linear 0.2s;
+}
+
+.panel:last-child .panel-heading.active {
+    border-radius: 0;
+    transition: border-radius linear 0s;
+}
+
+#accordion .panel-heading.active {
+    background-color: #fff;
+    color: #000;
+    transition: all 0.5s;
+}
+
+#accordion .panel-heading.active .panel-title a h5 {
+    color: #000;
+}
+
+#accordion .panel-heading.active .panel-title a h5::after {
+    content: '';
+    background-color: #000;
+    width: 25%;
+    height: 2px;
+    display: block;
+    margin-top: 5px;
+}
+
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    min-width: 100px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    top: 0;
+    left: 100%;
+    /* Adjust this value to determine the gap between button and menu */
+}
+
+
+.dropdown-content a {
+    color: black;
+    padding: 10px 10px;
+    text-decoration: none;
+    display: block;
+}  
+
+.dropdown-content a:hover {
+    background-color: #2eda10;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}

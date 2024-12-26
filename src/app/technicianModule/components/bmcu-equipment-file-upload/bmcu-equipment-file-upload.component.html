@@ -1,0 +1,122 @@
+<div class="card">
+  <div class="card-header p-2">
+    <h5 class="mb-0">INSPECTION OF BMCU'S FILE UPLOAD</h5>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="districtId">DISTRICT<span style="color: red">*</span></label>
+          <select id="districtId" class="form-control" [(ngModel)]="calibrationDeviceDetails.districtId"
+            (change)="onDistrictChange(calibrationDeviceDetails.districtId)">
+            <option value="">-- SELECT DISTRICT --</option>
+            <option value="{{ obj.BMCU_DISTRICT_CODE }}" *ngFor="let obj of DistrictList">
+              {{ obj.BMCU_DISTRICT }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="mandalId">MANDAL <span style="color: red">*</span></label>
+          <select id="mandalId" class="form-control" [(ngModel)]="calibrationDeviceDetails.mandalId"
+            (change)="onMandalChange(calibrationDeviceDetails.mandalId)">
+            <option value="">-- SELECT MANDAL --</option>
+            <option value="{{ obj.BMCU_MANDAL_CODE }}" *ngFor="let obj of MandalList">
+              {{ obj.BMCU_MANDAL }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="bmculocId">BMCU LOCATION <span style="color: red">*</span></label>
+          <select id="bmculocId" class="form-control" [(ngModel)]="calibrationDeviceDetails.bmculocId"
+            (change)="onbmculocchange(calibrationDeviceDetails.bmculocId)">
+            <option value="">-- SELECT BMCU LOCATION --</option>
+            <option value="{{ obj.BMCU_BMCU_CODE }}" *ngFor="let obj of BMCUList">
+              {{ obj.BMCU_BMCU_NAME }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <!-- <div class="col-md-3">
+          <div class="form-group">
+            <label for="bmculocId">BMCU TYPE <span style="color: red">*</span></label>
+            <select id="bmcutype" class="form-control" [(ngModel)]="calibrationDeviceDetails.bmcutype">
+              (change)="onbmcutypechange(calibrationDeviceDetails.bmcutype)" 
+              <option value="">-- SELECT BMCU TYPE --</option>
+              <option value="1"> OLD BMCU </option>
+              <option value="2"> NEW BMCU </option>
+               <option value="{{ obj.BMCU_CODE }}" *ngFor="let obj of BMCUList">
+                  {{ obj.BMCU_NAME }}
+                </option> 
+            </select>
+          </div>
+        </div> -->
+
+    </div>
+
+    <br>
+    <br>
+    <div class="row" *ngIf="bmcufilehide">
+      <div class="col-md-4 button">
+        <div class="form-group">
+          <button type="button" class="btn btn-info btn-sm" (click)="btnPDF()">
+            DOWNLOAD PDF FILE
+          </button>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="remarks">REMARKS <span style="color: red">*</span></label>
+          <!-- <input
+            id="remarks"
+            type="text"
+            class="form-control"
+            [(ngModel)]="calibrationDeviceDetails.remarks"
+            placeholder="ENTER REMARKS"
+            maxlength="3000"
+            autocomplete="off"
+          /> -->
+          <textarea id="remarks" type="text" class="form-control" [(ngModel)]="calibrationDeviceDetails.remarks"
+            placeholder="ENTER REMARKS" maxlength="3000" rows="2"></textarea>
+
+
+
+
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="fileupdforpdf">BMCU EQUIPMENT FILE UPLOAD <span style="color: red; font-size: 10px;">* (MAX 1MB
+              PDF ONLY)</span>
+          </label>
+          <input type="file" class="form-control p-0" id="fileupdforpdf" (change)="onpdffileChange1($event)"
+            accept="pdf/*" autocomplete="off" />
+        </div>
+      </div>
+
+      <!-- <div class="col-md-3"></div> -->
+      <div class="col-md-5"></div>
+      <div class="col-md-2 button">
+        <div class="form-group">
+          <label></label>
+          <button type="button" class="btn btn-success btn-sm" (click)="Certificateupload()">
+            SUBMIT
+          </button>
+        </div>
+      </div>
+
+      <div class="col-md-5"></div>
+
+
+
+    </div>
+
+  </div>
+</div>

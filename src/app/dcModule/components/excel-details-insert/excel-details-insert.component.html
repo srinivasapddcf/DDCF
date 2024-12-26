@@ -1,0 +1,402 @@
+<div class="card">
+    <div class="card-header p-2">
+      <h5 class="mb-0">Farmer Payment Details</h5>
+    </div>
+    <div class="card-body">
+<div class="row">
+
+  <div class="col-md-2 mt-2 mb-4">
+    <div class="form-group">
+        <label for="oldRbkId"
+          ><b>Select Excel Type</b> <span style="color: red">*</span></label
+        >
+        <select
+          id="oldRbkId"
+          class="form-control" [(ngModel)]="PaymentDetails.exceltype" (change)="onChangeexcelType()"
+          
+        >
+          <option value="">-- Select Type --</option>
+          <option value="1"> Farmer Payment Details</option>
+          <option value="2"> Handling Chargers</option>
+          
+        </select>
+      </div>
+</div>
+    <div class="col-md-2 mt-2 mb-4">
+        <div class="form-group">
+            <label for="oldRbkId"
+              >Select Excel File <span style="color: red">*</span></label
+            >
+            
+
+<input type="file" (change)="fileupload($event)" [(ngModel)]="PaymentDetails.Excelfile"   accept=".xls,.xlsx">
+          </div>
+        
+    </div>
+
+    <div class="col-md-3 mt-2 mb-4">
+        <div class="form-group">
+            <button type="button" class="btn btn-info btn-sm" style="margin-top: 31px;" (click)="onbtnExcelData()"><b>Validate</b></button>
+            <button type="button" class="btn btn-success btn-sm" style="margin-top: 31px;" (click)="onbtnSaveData()"><b>Validate File</b></button>
+        </div>
+    </div>
+    <div class="col-md-4 ">
+<div class="row">
+  <div class="col-md-6">
+    <a href="https://apiapddcf.ap.gov.in/jpv/ExcelFiles/August_HANDLINGSExl.xlsx">
+    <button type="button" class="btn btn-light btn-sm" style="margin-top: 31px;"><b>Excel Handling Chargers</b></button></a>
+
+  </div>
+  <div class="col-md-6">
+    <a href="https://apiapddcf.ap.gov.in/jpv/ExcelFiles/Payment_file_uploadExl.xlsx">
+    <button type="button" class="btn btn-light btn-sm" style="margin-top: 31px;"  ><b>Excel Farmer Payment</b></button></a>
+     
+  </div>
+</div>
+     
+    </div>
+    
+    <div class="col-md-3 mt-2 mb-4">
+        <div class="form-group">
+            <label 
+              ><b>Select District</b> <span style="color: red">*</span></label
+            >
+            <select  class="form-control" [(ngModel)]="PaymentDetails.DistrictId"              
+            >
+              <option value="">-- Select District --</option>
+              <option value="{{ obj.DIST_CODE }}" *ngFor="let obj of districtListdata">
+                {{ obj.DIST_NAME }}
+              </option>
+            </select>
+          </div>
+    </div>
+
+    <div class="col-md-3 mt-2 mb-4" *ngIf="Paymentfilediv">
+        <div class="form-group">
+            <label for="oldRbkId"
+              ><b>Payment Type</b> <span style="color: red">*</span></label
+            >
+            <select
+              id="oldRbkId"
+              class="form-control" [(ngModel)]="PaymentDetails.Paymnet_Type" (change)="onChangePaymnetType()"
+              
+            >
+              <option value="">-- Select Type --</option>
+              <option value="1"> Regular Payment File</option>
+              <option value="2"> Return  Payment File</option>
+              
+            </select>
+          </div>
+    </div>
+
+    <div class="col-md-3 mt-2 mb-4" *ngIf="Handlingfilediv">
+      <div class="form-group">
+          <label for="oldRbkId"
+            ><b>Payment Type</b> <span style="color: red">*</span></label
+          >
+          <select
+            id="oldRbkId"
+            class="form-control" [(ngModel)]="PaymentDetails.Paymnet_Type" (change)="onChangehandlingType()"
+            
+          >
+            <option value="">-- Select Type --</option>
+            <option value="10"> Monthly Payment File</option>
+            <option value="20"> Period Payment File </option>
+            
+          </select>
+        </div>
+  </div>
+
+    <div class="col-md-3 mt-2 mb-4" *ngIf="Fromadntodiv">
+      <div class="form-group">
+          <label for="oldRbkId"
+            ><b>From Date</b> <span style="color: red">*</span></label
+          >
+          <app-date-picker
+        [PlaceHolder]="'Please Select From Date'"
+        [(selectedDate)]="PaymentDetails.FormData"
+      ></app-date-picker>
+           
+        </div>
+  </div>
+  <div class="col-md-3 mt-2 mb-4" *ngIf="Fromadntodiv">
+    <div class="form-group">
+        <label for="oldRbkId"
+          ><b>To Date</b> <span style="color: red">*</span></label
+        >
+        <app-date-picker
+        [PlaceHolder]="'Please Select To Date'"
+        [(selectedDate)]="PaymentDetails.ToDate"
+      ></app-date-picker>
+         
+      </div>
+</div>
+
+    <div class="col-md-3 mt-2 mb-4" *ngIf="Cyclediv">
+        <div class="form-group">
+            <label for="oldRbkId"
+              ><b>Select Cycle </b><span style="color: red">*</span></label
+            >
+            <select
+              id="oldRbkId"
+              class="form-control" [(ngModel)]="PaymentDetails.CycleCode"
+              
+            >
+              <option value="">-- Select Cycle --</option>
+              <option value="{{ obj.CYCLE_ID }}" *ngFor="let obj of CycleList">
+                {{ obj.FROM_AND_TO }}
+              </option>
+            </select>
+          </div>
+    </div>
+    <div class="col-md-3 mt-2 mb-4" *ngIf="Monthlediv">
+      <div class="form-group">
+          <label for="oldRbkId"
+            ><b>Select Year </b><span style="color: red">*</span></label
+          >
+          <select
+            id="oldRbkId"
+            class="form-control" [(ngModel)]="PaymentDetails.yearId"
+            
+          >
+            <option value="">-- Select Cycle --</option>
+            <option value="{{ obj.YEAR }}" *ngFor="let obj of YearList">
+              {{ obj.YEAR }}
+            </option>
+          </select>
+        </div>
+  </div>
+  <div class="col-md-3 mt-2 mb-4" *ngIf="Monthlediv">
+    <div class="form-group">
+        <label for="oldRbkId"
+          ><b>Select Month</b><span style="color: red">*</span></label
+        >
+        <select
+          id="oldRbkId"
+          class="form-control" [(ngModel)]="PaymentDetails.Months"
+          
+        >
+          <option value="">-- Select Cycle --</option>
+          <option value="{{ obj.MONTH }}" *ngFor="let obj of MonthList">
+            {{ obj.MONTH_NAME }}
+          </option>
+        </select>
+      </div>
+</div>
+    <div class="col-md-3 mt-2 mb-4" *ngIf="E_Details_Save">
+        <div class="form-group">
+          <button type="button" style="margin-top: 30px;"                       
+                     
+          class="btn btn-success btn-sm"
+          (click)="btnAddDetails()"
+        >
+          Save Data
+      </button>
+          </div>
+    </div>
+    
+
+    
+    
+
+    
+
+</div>
+      <div class="row">
+        
+<div class="col-md-12" style="overflow-x:auto;" *ngIf="FramerTablediv"> 
+   
+     <table
+        class="table table-striped ah-table text-center" 
+        datatable [dtOptions]="dtOptions"
+        [dtTrigger]="dtTrigger"
+        
+      >
+        <thead class="bg-success text-white">
+          <tr>
+            <th>S.No.</th>
+            <th>Society Code</th>
+            <th>Farmer Code</th>
+            <th>Corporate Product</th>
+            <th>Next Working Day Date</th>
+            <th>CRN No</th>
+            <th>Batch No</th>            
+            <th>Payment Method</th>
+            <th>Debit A/c No</th>
+            <th>Corporate Account Description</th>
+            <th>Beneficiary Name</th>
+            <th>Beneficiary A/c NO</th>
+            <th>Amount Payable</th>
+            <th>IFSC Code / MICR Code/IIN</th>
+            <th>UTR/RBI Reference No./Core Ref No</th>
+            <th>Transaction Status</th>
+            <th>Funding Date</th>
+            <th>Paid Date</th>
+            <th>Activation Date</th>
+            
+           
+          </tr>
+        </thead>
+        <tbody *ngIf="excelData?.length > 0">
+          <tr *ngFor="let obj of excelData; let i = index">
+            <td>{{ i + 1 }}</td>
+            <td>{{ obj.Society_Code }}</td>
+            <td>{{ obj.Farmer_Code }}</td>
+            <td>{{ obj.Corporate_Product }}</td>
+            <td>{{ obj.Next_Working_Day_Date }}</td>
+            <td>{{ obj.CRN_No }}</td>           
+            <td>{{ obj.Batch_No }}</td>
+            <td>{{ obj.Payment_Method }}</td>
+            <td>{{ obj.Debit_Ac_No }}</td>
+            <td>{{ obj.Corporate_Account_Description }}</td>
+            <td>{{ obj.Beneficiary_Name }}</td>
+            <td>{{ obj.Beneficiary_Ac_no }}</td>
+            <td>{{ obj.Amount_Payable }}</td>
+            <td>{{ obj.IFSC_Code_MICR_Code_IIN }}</td>
+            <td>{{ obj.UTR_RBI_Reference_No_Core_Ref_No }}</td>
+            <td>{{ obj.Transaction_Status }}</td>
+            <td>{{ obj.Funding_Date }}</td>
+            <td>{{ obj.Paid_Date }}</td>
+            <td>{{ obj.Activation_Date }}</td>
+            
+            
+                
+          </tr>
+        </tbody>
+      </table>
+        
+      </div>
+
+
+      <div class="col-md-12" style="overflow-x:auto;" *ngIf="Sample_milkTablediv"> 
+   
+        <table
+           class="table table-striped ah-table text-center" 
+           datatable [dtOptions]="dtOptions"
+           [dtTrigger]="dtTrigger"
+           
+         >
+           <thead class="bg-success text-white">
+             <tr>
+               <th>S.No.</th>
+               <th>DISTRICT</th>
+               <th>RSK NAME</th>
+               <th>AMCU CODE</th>
+               <th>AMCU NAME</th>
+               <th>PROCUREMENT(QTY LTS)</th>
+               <th>HANDLING CHARGES AMOUNT RECEIVABLE</th>
+               <th>SAMPLE MILK QTY(LTS)</th>            
+               <th>SAMPLE MILK AMOUNT</th>
+               <th>TOTAL AMOUNT RECEIVABLE</th>
+               <th>INTER NET CHARGES</th>
+               <th>SOFTWARE CHARGES</th>
+               <th>Other Material Deduction(Chemicals & Stationary)</th>
+               <th>TDS Deduction</th>
+               <th>	LOSS DUE TO QUALITY VARIATION(Recovery)</th>
+               <th>TS RECOVERY</th>
+               <th>TOTAL DEDUCTIONS</th>
+               <th>AMOUNT CREDITED TO THE MDAC</th>
+               <th>AMOUNT PAYMENT DATE</th>
+               
+              
+               
+              
+             </tr>
+           </thead>
+           <tbody *ngIf="excelDataSample_handling?.length > 0">
+             <tr *ngFor="let obj of excelDataSample_handling; let i = index">
+               <td>{{ i + 1 }}</td>
+               <td>{{ obj.DISTRICT }}</td>
+               <td>{{ obj.RBK_NAME }}</td>
+               <td>{{ obj.AMCU_CODE }}</td>
+               <td>{{ obj.AMCU_NAME }}</td>
+               <td>{{ obj.PROCUREMENT }}</td>           
+               <td>{{ obj.HANDLING_CHARGES_AMOUNT_RECEIVABLE }}</td>
+               <td>{{ obj.SAMPLE_MILK_QTY }}</td>
+               <td>{{ obj.SAMPLE_MILK_AMOUNT }}</td>
+               <td>{{ obj.TOTAL_AMOUNT_RECEIVABLE }}</td>
+               <td>{{ obj.INTERNET_CHARGES }}</td>
+               <td>{{ obj.SOFTWARE_CHARGES }}</td>
+               <td>{{ obj.OTHER_MATERIAL_DEDUCTION }}</td>
+               <td>{{ obj.TDS_DEDUCTION }}</td>
+               <td>{{ obj.LOSS_DUE_TO_QUALITY_VARIATION }}</td>
+               <td>{{ obj.TS_RECOVERY }}</td>
+               <td>{{ obj.TOTAL_DEDUCTIONS }}</td>
+               <td>{{ obj.AMOUNT_CREDITED_TO_THE_MDAC }}</td>
+               <td>{{ obj.AMOUNT_PAYMENT_DATE }}</td>
+                 
+             </tr>
+           </tbody>
+         </table>
+           
+         </div>
+
+         <div class="col-md-12" style="overflow-x:auto;" *ngIf="Handling_ChargersTablediv"> 
+   
+          <table
+             class="table table-striped ah-table text-center" 
+             datatable [dtOptions]="dtOptions"
+             [dtTrigger]="dtTrigger"
+             
+           >
+             <thead class="bg-success text-white">
+               <tr>
+                 <th>S.No.</th>
+                 <th>Society Code</th>
+                 <th>Farmer Code</th>
+                 <th>Corporate Product</th>
+                 <th>Next Working Day Date</th>
+                 <th>CRN No</th>
+                 <th>Batch No</th>            
+                 <th>Payment Method</th>
+                 <th>Debit A/c No</th>
+                 <th>Corporate Account Description</th>
+                 <th>Beneficiary Name</th>
+                 <th>Beneficiary A/c NO</th>
+                 <th>Amount Payable</th>
+                 <th>IFSC Code / MICR Code/IIN</th>
+                 <th>UTR/RBI Reference No./Core Ref No</th>
+                 <th>Transaction Status</th>
+                 <th>Funding Date</th>
+                 <th>Paid Date</th>
+                 <th>Activation Date</th>
+                 
+                
+               </tr>
+             </thead>
+             <tbody *ngIf="excelData?.length > 0">
+               <tr *ngFor="let obj of excelData; let i = index">
+                 <td>{{ i + 1 }}</td>
+                 <td>{{ obj.Society_Code }}</td>
+                 <td>{{ obj.Farmer_Code }}</td>
+                 <td>{{ obj.Corporate_Product }}</td>
+                 <td>{{ obj.Next_Working_Day_Date }}</td>
+                 <td>{{ obj.CRN_No }}</td>           
+                 <td>{{ obj.Batch_No }}</td>
+                 <td>{{ obj.Payment_Method }}</td>
+                 <td>{{ obj.Debit_Ac_No }}</td>
+                 <td>{{ obj.Corporate_Account_Description }}</td>
+                 <td>{{ obj.Beneficiary_Name }}</td>
+                 <td>{{ obj.Beneficiary_Ac_no }}</td>
+                 <td>{{ obj.Amount_Payable }}</td>
+                 <td>{{ obj.IFSC_Code_MICR_Code_IIN }}</td>
+                 <td>{{ obj.UTR_RBI_Reference_No_Core_Ref_No }}</td>
+                 <td>{{ obj.Transaction_Status }}</td>
+                 <td>{{ obj.Funding_Date }}</td>
+                 <td>{{ obj.Paid_Date }}</td>
+                 <td>{{ obj.Activation_Date }}</td>
+                 
+               </tr>
+             </tbody>
+           </table>
+             
+           </div>
+
+      </div>
+    </div>
+ </div>
+ 
+
+
+
+

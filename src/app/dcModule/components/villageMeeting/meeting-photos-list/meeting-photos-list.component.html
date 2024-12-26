@@ -1,0 +1,54 @@
+<div class="card">
+  <div class="card-header p-2">
+    <h5 class="mb-0">VILLAGE MEETING PHOTOS LIST</h5>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-12 table-responsive">
+        <table
+          class="table table-striped ah-table text-center"
+          datatable
+          [dtOptions]="dtOptions"
+          [dtTrigger]="dtTrigger"
+        >
+          <thead class="bg-success text-white">
+            <tr>
+              <th>S.No.</th>
+              <th>DISTRICT</th>
+              <th>MANDAL</th>
+              <th>RSK NAME</th>
+              <th>VILLAGE NAME</th>
+              <th>PHOTO</th>
+              <th>ACTION</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let obj of photosList; let i = index">
+              <td>{{ i + 1 }}</td>
+              <td>{{ obj.DISTRICT }}</td>
+              <td>{{ obj.MANDAL_NAME }}</td>
+              <td>{{ obj.RBK_NAME }}</td>
+              <td>{{ obj.VILLAGE_NAME }}</td>
+              <td>
+                <span
+                  style="cursor: pointer;color: blue;text-decoration: underline;"
+                  (click)="btnViewPhoto(obj.MEETING_IMG)"
+                  >VIEW</span
+                >
+              </td>
+              <td>
+                <button
+                  type="button"
+                  class="btn btn-sm btn-danger"
+                  (click)="btnDeletePhoto(obj.UNIQUE_ID)"
+                >
+                  DELETE
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

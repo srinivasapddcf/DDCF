@@ -1,0 +1,187 @@
+<div class="card">
+  <div class="card-header p-2">
+    <h5 class="mb-0">MEETING ATTENDANCE</h5>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="rbkId"><b>RSK </b><span style="color: red">*</span></label>
+          <select
+            id="rbkId"
+            class="form-control"
+            [(ngModel)]="meetingData.rbkId"
+            (change)="onRbkChange()"
+          >
+            <option value="">-- SELECT RSK --</option>
+            <option value="{{ obj.RBK_ID }}" *ngFor="let obj of rbkList">
+              {{ obj.RBK_NAME }}
+            </option>
+          </select>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="villageId"
+            ><b>MEETING DETAILS </b><span style="color: red">*</span></label
+          >
+          <select
+            id="villageId"
+            class="form-control"
+            [(ngModel)]="meetingData.meetingId"
+            (change)="onMeetingChange()"
+          >
+            <option value="">-- SELECT MEETING --</option>
+            <option
+              value="{{ obj.MEETING_CODE }}"
+              *ngFor="let obj of meetingsList"
+            >
+              {{ obj.MEETING_DATE }},{{ obj.MEETING_TIME }} ({{
+                obj.MEETING_VENUE
+              }})
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <!-- <div class="col-md-4" *ngIf="MeetingStatus">
+        <div class="form-group">
+          <label for="villageId"
+            >  </label
+          >
+          <button type="button" class="btn-sm" style="margin-top: 28px; background-color: #0d47a1; color: white;" title="Cilkc to Update Eligable Farmer List">UPDATE ELIGIBLE FARMERS LIST</button>
+        </div>
+      </div> -->
+
+      <!-- <div class="col-md-12 table-responsive" [hidden]="personList?.length < 1">
+        <table
+          class="table table-striped ah-table text-center"
+          datatable
+          [dtOptions]="dtOptions"
+          [dtTrigger]="dtTrigger"
+        >
+          <thead class="bg-success text-white">
+            <tr>
+              <th>S.No.</th>
+              <th>CITIZEN NAME</th>
+              <th>GENDER</th>
+              <th>MOBILE NUMBER</th>
+              <th>ATTENDANCE STATUS</th>
+              <th>ACTION</th>
+            </tr>
+          </thead>
+          <tbody *ngIf="personList?.length > 0">
+            <tr *ngFor="let obj of personList; let i = index">
+              <td>{{ i + 1 }}</td>
+              <td>
+                <b>{{ obj.FARMER_NAME }}</b>
+              </td>
+              <td>
+                <span *ngIf="obj.GENDER === null"> NA </span>
+                <span *ngIf="obj.GENDER !== null">
+                  {{ obj.GENDER }}
+                </span>
+              </td>
+              <td>{{ obj.MOBILE_NUMBER }}</td>
+              <td>
+                <span *ngIf="obj.STATUS === '1'" style="color: green">
+                  Attendance Taken
+                </span>
+                <span *ngIf="obj.STATUS === '0'" style="color: red">
+                  Pending
+                </span>
+              </td>
+              <td>
+                <input
+                  type="checkbox"
+                  *ngIf="obj.STATUS === '0'"
+                  [(ngModel)]="obj.isAttendance"
+                />
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="col-md-12" align="center">
+          <button
+            type="button"
+            class="btn btn-success btn-sm"
+            (click)="btnMarkAttendance()"
+          >
+            Mark Attendance
+          </button>
+        </div>
+      </div> -->
+
+
+      <div class="col-md-12 table-responsive" [hidden]="personList?.length < 1">
+        <table
+          class="table table-striped ah-table text-center"
+          datatable
+          [dtOptions]="dtOptions"
+          [dtTrigger]="dtTrigger"
+        >
+          <thead class="bg-success text-white">
+            <tr>
+              <th>S.No.</th>
+              <th>FARMER NAME</th>
+               
+              <th>FARMER MOBILE NUM</th>
+              <th>SOCIETY</th>
+              <th>VOLUNTEER NAME</th>
+              <th>VOLUNTEER MOBILE NUM</th>
+              <th>CLUSTER ID</th>
+              <th>INVITATION SMS STATUS</th>
+              <th>VOLUNTEER INVITATION STATUS</th>
+              <th>ATTENDANCE STATUS</th>
+              <th>ACTION</th>
+            </tr>
+          </thead>
+          <tbody *ngIf="personList?.length > 0">
+            <tr *ngFor="let obj of personList; let i = index">
+              <td>{{ i + 1 }}</td>
+              <td>
+                <b>{{ obj.FARMER_NAME }}</b>
+              </td>
+             
+              <td>{{ obj.MOBILE_NUMBER }}</td>
+              <td>{{obj.SOCIETY_NAME}}</td>
+              <td>{{obj.VOLUNTEER_NAME}}</td>
+              <td>{{obj.VOLUNTEER_MOBILE_NO}}</td>
+              <td>{{obj.CLUSTER_ID}}</td>
+              <td>{{obj.INVITATION_STATUS}}</td>
+              <td>{{obj.VOLUNTEER_INVIT_STATUS}}</td>
+              <td >
+                <span *ngIf="obj.STATUS === '1'" style="color: green">
+                  Attendance Taken
+                </span>
+                <span *ngIf="obj.STATUS === '0'" style="color: red">
+                  Pending
+                </span>
+              </td>
+              <td>
+                <input
+                  type="checkbox"
+                  *ngIf="obj.STATUS === '0'"
+                  [(ngModel)]="obj.isAttendance"
+                />
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="col-md-12" align="center" *ngIf="MeetingStatus">
+          <button
+            type="button"
+            class="btn btn-success btn-sm"
+            (click)="btnMarkAttendance()"
+          >
+            Mark Attendance
+          </button>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+</div>

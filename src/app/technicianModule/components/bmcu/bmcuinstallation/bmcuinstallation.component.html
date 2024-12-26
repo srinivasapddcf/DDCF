@@ -1,0 +1,87 @@
+<div class="card">
+    <div class="card-header p-2">
+        <h5 class="mb-0">BMCU</h5>
+    </div>
+    <div class="card-body">
+        <div class="row"><div class="col-md-2"></div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="Districtid">District <span style="color: red">*</span></label>
+                    <select id="Districtid" class="form-control" [(ngModel)]="Districtid">
+                        <option value="">-- SELECT District --</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="BMCUID">BMCU<span style="color: red">*</span></label>
+                    <select id="BMCUID" class="form-control" [(ngModel)]="BMCUID">
+                        <option value="">-- SELECT BMCU --</option>
+                    </select>
+                </div>
+            </div>
+            <!-- <div class="col-md-3">
+                <div class="form-group">
+                    <label for="Invoice">Invoice<span style="color: red">*</span></label>
+                    <input type="text" class="form-control" [(ngModel)]="Invoice">
+                </div>
+            </div> -->
+        
+
+        <div class="col-md-1"><div class="form-group">
+            <button style="margin-top: 30px;" class="btn btn-primary" (click)="DataSub()">Find</button>
+        </div>
+        </div>
+    </div>
+        <div class="row">
+             <div class="col-md-1"></div>
+            <div class="col-md-10">
+               
+                <div class="card-body">
+                    <div class="col-md-12 table-responsive">
+                        <table class="table table-striped ah-table text-center" datatable [dtOptions]="dtOptions"
+                        [dtTrigger]="dtTrigger"  >
+                        <thead class="bg-success text-white">
+                                <tr>
+                                    <th  class="tableheader_color">S NO</th>
+                                    <th  class="tableheader_color">Item</th>
+                                    <th  class="tableheader_color" >Recevied Status</th>
+
+                                </tr>
+                                <tr>
+                                    <th   class="tableheader_color">(1)</th>
+                                    <th  class="tableheader_color">(2)</th>
+                                    <th   class="tableheader_color">(3)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="number_align" style="width: 50px;">1</td>
+                                    <td class="text_alignleft" > Name</td>
+                                    <td class="text_alignleft" style="width: 250px;">
+                                        <select id="DistrictID" class="form-control" [(ngModel)]="ReceviedStatus">
+                                            <option value="">-- Select ReceviedStatus --</option>
+                                            <option value="Yes">Yes</option>
+                                            <option value="No">No</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-1"></div>
+            <div class="col-md-2">
+                <button class="btn btn-primary" (click)="DataSub()">Submit</button>
+            </div>
+            <div class="col-md-1"></div>
+            <div class="col-md-4"></div>
+        </div>
+    </div>
+</div>

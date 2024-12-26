@@ -1,0 +1,212 @@
+<div class="card">
+  <div class="card-header p-2">
+    <h5 class="mb-0">FARMER MILK POURING CERTIFICATE</h5>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-5 offset-3">
+        <div class="form-group">
+          <label> FARMER CODE </label>
+          <input
+            id="farmerId"
+            type="text"
+            class="form-control"
+            [(ngModel)]="farmerId"
+            placeholder="Please Enter Farmer ID"
+            maxlength="8"
+            autocomplete="off"
+            NumbersOnly
+            [allowDecimals]="false"
+            [allowSign]="false"
+          />
+        </div>
+      </div>
+
+      <div class="col-md-3 pt-4" align="left">
+        <button
+          type="button"
+          class="btn btn-success btn-sm"
+          (click)="btnUidDetails()"
+        >
+          GET DETAILS
+        </button>
+      </div>
+    </div>
+
+    <div
+      *ngIf="
+        personDetails.FARMER_CODE !== null &&
+        personDetails.FARMER_CODE !== '' &&
+        personDetails.FARMER_CODE !== undefined
+      "
+    >
+      <h5 class="sub-heading pb-0">
+        <label>Farmer Details</label>
+      </h5>
+
+      <div class="row px-4">
+        <div class="col-md-3">
+          <div class="form-group">
+            <label>
+              NAME :
+              <span class="text-success">
+                <b>{{ personDetails.FARMER_NAME }}</b>
+              </span>
+            </label>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-group">
+            <label>
+              CODE :
+              <span class="text-success">
+                <b>{{ personDetails.FARMER_CODE }}</b>
+              </span>
+            </label>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-group">
+            <label
+              >MANDAL :
+              <span class="text-success">
+                <b>{{ personDetails.MANDAL }}</b>
+              </span>
+            </label>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-group">
+            <label
+              >RSK :
+              <span class="text-success">
+                <b>{{ personDetails.RBK_NAME }}</b>
+              </span>
+            </label>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-group">
+            <label
+              >VILLAGE :
+              <span class="text-success">
+                <b>{{ personDetails.VILLAGE }}</b>
+              </span>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <h5 class="sub-heading pb-0">
+        <label>Milk Pouring Details</label>
+      </h5>
+
+      <div class="row px-4">
+        <div class="col-md-3">
+          <div class="form-group">
+            <label>
+              FROM DATE :
+              <span class="text-success">
+                <b>{{ personDetails.FROM_DATE }}</b>
+              </span>
+            </label>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-group">
+            <label>
+              TO DATE :
+              <span class="text-success">
+                <b>{{ personDetails.TO_DATE }}</b>
+              </span>
+            </label>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-group">
+            <label
+              >TOTAL MILK (IN LTRS) :
+              <span class="text-success">
+                <b>{{ personDetails.MILK_IN_LITRES }}</b>
+              </span>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <h5 class="sub-heading pb-0">
+        <label>Route Details</label>
+      </h5>
+
+      <div class="row px-4">
+        <div class="col-md-3">
+          <div class="form-group">
+            <label
+              >ROUTE INCHARGE :
+              <span class="text-success">
+                <b>{{ personDetails.ROOT_INCHARGE }}</b>
+              </span>
+            </label>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-group">
+            <label
+              >MENTOR :
+              <span class="text-success">
+                <b>{{ personDetails.MENTOR_NAME }}</b>
+              </span>
+            </label>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-group">
+            <label
+              >ROUTE NO :
+              <span class="text-success">
+                <b>{{ personDetails.ROOT_NUM }}</b>
+              </span>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-12" *ngIf="personDetails.STATUS === '1'">
+        <div class="form-group">
+          <h5 class="text-success text-center">
+            <b>{{ personDetails.MSG }}</b>
+          </h5>
+        </div>
+      </div>
+
+      <div class="col-md-12" *ngIf="personDetails.STATUS === '3'">
+        <div class="form-group">
+          <h5 class="text-danger text-center">
+            <b>THE SELECTED FARMER IS NOT A REGULAR MILK POURER, HE IS NOT
+              ELIGIBLE TO RAISE MILK POURING CERTIFICATE REQUEST</b>
+          </h5>
+        </div>
+      </div>
+
+      <div
+        class="col-md-12"
+        align="center"
+        *ngIf="personDetails.STATUS === '0'"
+      >
+        <button
+          class="btn btn-primary m-0 btn-rounded"
+          type="submit"
+          (click)="btnRaiseRequest()"
+          id="button-addon2"
+        >
+          RAISE REQUEST FOR MILK POURING CERTIFICATE
+        </button>
+      </div>
+    </div>
+    <div class="row p-3" *ngIf="noDataMessage !== ''">
+      <div class="col-md-12">
+        <h5 class="text-center text-danger">{{ noDataMessage }}</h5>
+      </div>
+    </div>
+  </div>
+</div>

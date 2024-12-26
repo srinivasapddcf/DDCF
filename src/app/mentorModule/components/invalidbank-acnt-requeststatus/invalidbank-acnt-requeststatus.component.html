@@ -1,0 +1,69 @@
+<div class="card">
+    <div class="card-header p-2">
+      <h5 class="mb-0">INVALID BANK ACCOUNT RAISE REQUEST STATUS</h5>
+    </div>
+
+
+
+    <div class="col-md-12 " align="right">
+      <button
+        type="button"
+        class="btn btn-success btn-sm"
+         style="font-size: 14px;"
+         (click)="btnpendingDetails()"
+      >
+        New Requests
+      </button>
+    </div>
+
+
+
+    <div class="col-md-12 table-responsive">
+        <table
+          class="table table-striped ah-table text-center"
+        >
+          <thead class="bg-success text-white">
+            <tr>
+              <th>FARMER ID</th>
+              <th>ACCOUNT NUMBER</th>
+              <th>BANK NAME</th>
+              <th>BRANCH NAME</th>
+              <th>IFSC CODE</th>
+              <th>STATUS</th>
+              <th>MICRNO</th>
+              <th>BANK PINCODE</th>
+              <th>RSK CODE</th>
+              <th>VILLAGE CODE</th>
+            </tr>
+          </thead>
+          <tbody *ngIf="StatusDetails?.length > 0">
+              <tr *ngFor="let obj of StatusDetails; let i = index" style="padding-bottom: 1px;" >
+                <td>{{ obj.FARMER_CODE}}</td>
+                <td style="text-align:right;">{{ obj.ACCOUNT_NUMBER}}</td>
+                <td  style="text-align:left;">{{ obj.BANK_NAME}} </td>
+                <td  style="text-align:left;">{{ obj.BANK_BRANCH}}</td>
+                <td>{{ obj.IFSC_CODE }}</td>
+
+                <td  style="text-align:left;">
+                    <div *ngIf="obj.STATUS_1 === '0'">
+                        Pending  
+                    </div>
+
+                    <div *ngIf="obj.STATUS_1 === '1'">
+                        Approved  
+                    </div>
+                    
+                
+                
+                </td>
+
+
+                <td>{{ obj.MICR_CODE}}</td>
+                <td>{{ obj.BANK_PINCODE}}</td>
+                <td>{{ obj.RBK_CODE}}</td>
+                <td>{{ obj.VILLAGE_CODE}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+    </div>

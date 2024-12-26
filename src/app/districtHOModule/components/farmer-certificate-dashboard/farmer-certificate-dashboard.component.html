@@ -1,0 +1,471 @@
+<div class="card-header p-1">
+  <h5 class="mb-0">FARMER MILKPOURING CERTIFICATE DASHBOARD</h5>
+</div>
+<div class="row">
+  <div class="col mb-2">
+    <div class="stats-card primary" (click)="btnFarmerDashboardDetails('0')">
+      <div class="overlay"></div>
+      <div class="card-body">
+        <div class="d-flex justify-content-between">
+          <div class="stats-text">
+            <p class="text-uppercase text-muted mb-1">
+              <small>PENDING</small>
+            </p>
+            <h5 class="font-weight-bold mb-0">
+              {{ dashboardCounts.Pending }}
+            </h5>
+          </div>
+          <div class="circle">
+            <i class="fas fa-hourglass-half"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col mb-2">
+    <div class="stats-card success" (click)="btnFarmerDashboardDetails('1')">
+      <div class="overlay"></div>
+
+      <div class="card-body">
+        <div class="d-flex justify-content-between">
+          <div class="stats-text">
+            <p class="text-uppercase text-muted mb-1">
+              <small>APPROVED</small>
+            </p>
+            <h5 class="font-weight-bold mb-0">
+              {{ dashboardCounts.Approve }}
+            </h5>
+          </div>
+          <div class="circle">
+            <i class="fas fa-check-double"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col mb-2">
+    <div class="stats-card reject" (click)="btnFarmerDashboardDetails('2')">
+      <div class="overlay"></div>
+
+      <div class="card-body">
+        <div class="d-flex justify-content-between">
+          <div class="stats-text">
+            <p class="text-uppercase text-muted mb-1">
+              <small>REJECTED</small>
+            </p>
+            <h5 class="font-weight-bold mb-0">
+              {{ dashboardCounts.Reject }}
+            </h5>
+          </div>
+          <div class="circle">
+            <i class="fas fa-times-circle"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col mb-2">
+    <div class="stats-card primary" (click)="btnFarmerDashboardDetails('3')">
+      <div class="overlay"></div>
+      <div class="card-body">
+        <div class="d-flex justify-content-between">
+          <div class="stats-text">
+            <p class="text-uppercase text-muted mb-1">
+              <small>PENDING AT HIGHER LEVEL</small>
+            </p>
+            <h5 class="font-weight-bold mb-0">
+              {{ dashboardCounts.Pending_at_higher_level }}
+            </h5>
+          </div>
+          <div class="circle">
+            <i class="fas fa-hourglass-half"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row mt-3" [hidden]="farmerCertList?.length < 1">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <h5 class="mb-0 secondary-heading pb-0">{{ headingText }}</h5>
+      </div>
+      <div class="card-body">
+        <div class="col-md-12 table-responsive">
+          <table
+            class="table table-striped ah-table text-center"
+            datatable
+            [dtOptions]="dtOptions"
+            [dtTrigger]="dtTrigger"
+          >
+            <thead class="bg-success text-white">
+              <tr>
+                <th>S.No.</th>
+                <th>MANDAL</th>
+                <th>AMCU</th>
+                <th>RSK</th>
+                <th>VILLAGE</th>
+                <th>FARMER</th>
+                <th>FARMER CODE</th>
+                <th>MILK IN LTRS</th>
+                <th [hidden]="requestType !== '0'">ACTION TAKEN</th>
+                <th>REJECTED REASON</th>
+                <th [hidden]="requestType !== '0'">SUBMIT</th>
+              </tr>
+            </thead>
+            <tbody [hidden]="farmerCertList?.length < 1">
+              <tr *ngFor="let obj of farmerCertList; let i = index">
+                <td>{{ i + 1 }}</td>
+                <td>{{ obj.MANDAL }}</td>
+                <td>{{ obj.AMCU }}</td>
+                <td>{{ obj.RBK_NAME }}</td>
+                <td>{{ obj.VILLAGE }}</td>
+                <td>
+                  <b>{{ obj.FARMER_NAME }}</b>
+                </td>
+                <!-- <td>{{ obj.FARMER_CODE }}</td> -->
+                <td><a
+                  style="cursor: pointer; text-decoration: underline"
+                  class="text-primary"
+                  (click)="btnGetDetails(obj)"
+                  >{{ obj.FARMER_CODE }}</a></td>
+                <td>{{ obj.MILK_IN_LITRES }}</td>
+                <td [hidden]="requestType !== '0'">
+                  <select
+                    id="actionTaken"
+                    class="form-control"
+                    [(ngModel)]="obj.STATUS"
+                  >
+                    <option value="">-- SELECT ACTION TAKEN --</option>
+                    <option value="1002">APPROVE</option>
+                    <option value="1003">REJECT</option>
+                  </select>
+                </td>
+                <td>
+                  <select
+                    [hidden]="obj.STATUS !== '1003'"
+                    id="actionTaken"
+                    class="form-control"
+                    [(ngModel)]="obj.REJECTED_REASON"
+                  >
+                    <option value="">-- SELECT REJECT REASON --</option>
+                    <option
+                      value="{{ obj.REMARKS_ID }}"
+                      *ngFor="let obj of rejectedReasonList"
+                    >
+                      {{ obj.REMARKS }}
+                    </option>
+                  </select>
+                  <p [hidden]="requestType !== '2'">
+                    {{ obj.REJECTED_REASON }}
+                  </p>
+                </td>
+                <td [hidden]="requestType !== '0'">
+                  <button
+                    type="button"
+                    class="btn btn-primary btn-sm"
+                    (click)="btnVerify(obj)"
+                  >
+                    VERIFY
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="popup-modal" *ngIf="showeditPopup" style="z-index: 9999 !important;" >
+  <div class="popup-content" style="min-width: 75%">
+    <div class="popup-header">
+      <h4 class="title"> Farmer Code Details</h4>
+      <a
+        type="button"
+        class="close"  
+        style="cursor: pointer"
+      >
+        <span (click)="onClear()">×</span>
+      </a>
+    </div>
+      <div class="row justify-content-center align-items-center">
+      <div class="row col-sm-12" *ngIf="showeditPopup">
+    <br>
+
+<h5 class="sub-heading pb-0" >
+  <label style="margin-left:25px ;">Farmer Registration Details</label>
+</h5>
+
+<div class="row px-4">
+  <div class="col-md-3">
+    <div class="form-group">
+      <label>
+        Name :
+        <span class="text-success">
+          <b>{{ personDetails.FARMER_NAME }}</b>
+        </span>
+      </label>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="form-group">
+      <label>
+        Code :
+        <span class="text-success">
+          <b>{{ personDetails.FARMER_CODE }}</b>
+        </span>
+      </label>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="form-group">
+      <label
+        >Mobile Number :
+        <span class="text-success">
+          <b>{{ personDetails.MOBILE_NUMBER }}</b>
+        </span>
+      </label>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="form-group">
+      <label
+        >District :
+        <span class="text-success">
+          <b>{{ personDetails.DISTRICT }}</b>
+        </span>
+      </label>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="form-group">
+      <label
+        >Mandal Name :
+        <span class="text-success">
+          <b>{{ personDetails.MANDAL_NAME }}</b>
+        </span>
+      </label>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="form-group">
+      <label
+        >RSK Name :
+        <span class="text-success">
+          <b>{{ personDetails.RBK_NAME }}</b>
+        </span>
+      </label>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="form-group">
+      <label
+        >Village Name :
+        <span class="text-success">
+          <b>{{ personDetails.VILLAGE_NAME }}</b>
+        </span>
+      </label>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="form-group">
+      <label
+        >Society Code :
+        <span class="text-success">
+          <b>{{ personDetails.SOCIETY_CODE }}</b>
+        </span>
+      </label>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="form-group">
+      <label
+        >Society Name :
+        <span class="text-success">
+          <b>{{ personDetails.SOCIETY_NAME }}</b>
+        </span>
+      </label>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="form-group">
+      <label>
+        Bank Account Number :
+        <span class="text-success">
+          <b>{{ personDetails.ACCOUNT_NUMBER }}</b>
+        </span>
+      </label>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="form-group">
+      <label
+        >Ifsc Code :
+        <span class="text-success">
+          <b>{{ personDetails.IFSC_CODE }}</b>
+        </span>
+      </label>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="form-group">
+      <label
+        >Bank Name :
+        <span class="text-success">
+          <b>{{ personDetails.BANK_NAME }}</b>
+        </span>
+      </label>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="form-group">
+      <label
+        >Branch Name :
+        <span class="text-success">
+          <b>{{ personDetails.BANK_BRANCH }}</b>
+        </span>
+      </label>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="form-group">
+      <label
+        >Bank PIN Code :
+        <span class="text-success">
+          <b>{{ personDetails.BANK_PINCODE }}</b>
+        </span>
+      </label>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="form-group">
+      <label
+        >No Of Times Back Account Updated :
+        <span class="text-success">
+          <b>{{ personDetails.TOTAL_TIMES_UPDATED }}</b>
+        </span>
+      </label>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="form-group">
+      <label
+        >Pan Card No :
+        <span class="text-success">
+          <b>{{
+            personDetails.PAN_CARD === null
+              ? "NA"
+              : personDetails.PAN_CARD
+          }}</b>
+        </span>
+      </label>
+    </div>
+  </div>
+  <div class="col-md-3" *ngIf="personDetails.PASSBOOK_IMG !== null">
+    <label>Bank Passbook Image :</label>
+    <img
+      [src]="'data:image/jpeg;base64,' + bankImage"
+      style="cursor: pointer"
+      class="img-thumbnail mr-3"
+      (click)="btnImage(bankImage)"
+    />
+  </div>
+
+  <div class="col-md-3" *ngIf="personDetails.PASSBOOK_IMG === null">
+    <div class="form-group">
+      <label
+        >Bank Passbook Image :
+        <span class="text-success">
+          <b>NA</b>
+        </span>
+      </label>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="form-group">
+      <label
+        >No Of Milch Animals :
+        <span class="text-success">
+          <b>{{ personDetails.NO_OF_MILCH_ANIMALS }}</b>
+        </span>
+      </label>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="form-group">
+      <label
+        >Milk In Liters :
+        <span class="text-success">
+          <b>{{ personDetails.MILK_IN_LITRES  }}</b>
+        </span>
+      </label>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="form-group">
+      <label
+        >No Of Days Milk Poured :
+        <span class="text-success">
+          <b>{{ personDetails.NO_OF_DAYS }}</b>
+        </span>
+      </label>
+    </div>
+  </div>
+</div>    
+<h5 class="sub-heading pb-0" >
+  <hr style="width:10px;">
+  <label style="margin-left:25px ;">History Of Milkpouring Certificate</label>
+</h5>
+<div class="row px-4">
+
+  <div class="col-md-3">
+    <div class="form-group">
+      <label
+        >Date Of Apply :<br>
+        <span class="text-success">
+          <b>{{ personDetails.DOA }}</b>
+        </span>
+      </label>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="form-group">
+      <label
+        >Status Of Application :<br>
+        <span class="text-success">
+          <b>{{ personDetails.LEVEL_STATUS }}</b>
+        </span>
+      </label>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="form-group">
+      <label
+        >Approved/Rejected By :<br>
+        <span class="text-success">
+          <b>{{ personDetails.AR_NAME }}</b>
+        </span>
+      </label>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="form-group">
+      <label
+        >Approved/Rejected Date : 
+        <span class="text-success">
+          <b>{{ personDetails.REG_UPDATED_ON }}</b>
+        </span>
+      </label>
+    </div>
+  </div>
+
+</div>      
+      </div>   
+    </div>
+  </div> 
+</div>

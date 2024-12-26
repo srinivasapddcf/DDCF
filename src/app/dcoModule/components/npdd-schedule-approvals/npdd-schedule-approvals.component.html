@@ -1,0 +1,156 @@
+<div class="card">
+  <div class="card-header p-2">
+    <h5 class="mb-0">Schedule Creation Approvals </h5>
+  </div>
+
+  <div class="card-body">
+    <div class="row align-items-center">
+      <div class="col-md-12 row">
+
+        <div class="col-md-2" style="text-align: right;"> <label for="UninonId">Select RSK
+            <span style="color: red">*</span></label></div>
+
+            <div class="col-md-3">
+              <div class="form-group">
+    
+                <select id="rbkID" class="form-control" [(ngModel)]="rbkID" (change)="onScheduleChange()" >
+                 
+                  <option disabled selected value="undefined">-- Select RSK --</option>
+                  <option value="{{ obj.RBK_CODE }}" *ngFor="let obj of rbklist"> {{ obj.RBK_NAME }} </option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-2" style="text-align: right;"> <label for="UninonId">Select Schedule Training
+              <span style="color: red">*</span></label></div>
+
+        <div class="col-md-3">
+          <div class="form-group">
+            <!--  -->
+            <select id="TRAININGID" class="form-control" [(ngModel)]="TRAININGID" (change)="onScheduleChange()">
+             
+              <option disabled selected value="undefined">-- Select Schedule Training --</option>
+              <option value="{{ obj.TRAININGID }}" *ngFor="let obj of POlist"> {{ obj.TRAININGNAME }} </option>
+            </select>
+          </div>
+        </div>
+
+        <div class="col-md-2">
+          <div class="form-group">
+
+            <button
+            type="button"
+            class="btn btn-success btn-sm"
+            (click)="btnFind()"
+          >
+            Find
+          </button>
+
+            </div>
+            </div>
+
+
+      </div>
+    </div>
+  </div>
+  <div class="row mt-3" [hidden]="SocietyMilkCollectonList?.length < 1">
+    <div class="col-md-12">
+
+      <div class="card-body"> 
+        <div class="col-md-12 table-responsive">
+          <table class="table table-striped ah-table text-center tabsdata"> 
+            <thead class="bg-success text-white table-fixed">
+              <tr >
+              <tr>
+                <th class="tableheader_color">S No</th>
+                <!-- <th class="tableheader_color">Training ID</th> -->
+                
+                <th class="tableheader_color" *ngIf="TRAININGID==3 || TRAININGID==4">Name</th>
+                <th class="tableheader_color" *ngIf="TRAININGID==3 || TRAININGID==4">Mobile</th>
+                <th class="tableheader_color" *ngIf="TRAININGID==3 || TRAININGID==4">Designation</th>
+                <th class="tableheader_color" *ngIf="TRAININGID==3 || TRAININGID==4">Email</th>
+                <th class="tableheader_color" *ngIf="TRAININGID==2">Technician Mobile number</th>
+                <th class="tableheader_color" *ngIf="TRAININGID==1">Mentor Mobile Number </th>
+                <th class="tableheader_color" *ngIf="TRAININGID==1 || TRAININGID==2">RIC Mobile Number</th>                
+                <th class="tableheader_color">Training Date</th>
+                <th class="tableheader_color">Training Time</th>
+                <th class="tableheader_color">Venue</th>
+                <th class="tableheader_color">Address</th>
+                <th class="tableheader_color">Farmercount</th>
+                <th class="tableheader_color">Status</th> 
+                <th class="tableheader_color">Action</th>   
+              </tr>
+              <tr>
+                <th class="tableheader_color">(1)</th>
+                <th class="tableheader_color">(2)</th>
+                <th class="tableheader_color">(3)</th>
+                <th class="tableheader_color">(4)</th>
+                <th class="tableheader_color">(5)</th>
+                <th class="tableheader_color">(6)</th>
+                <th class="tableheader_color">(7)</th>
+                <th class="tableheader_color">(8)</th>
+                <th class="tableheader_color">(9)</th>
+                <th class="tableheader_color">(10)</th> 
+               
+                <th class="tableheader_color"*ngIf="TRAININGID==3 || TRAININGID==4">(11)</th>
+                <th class="tableheader_color"*ngIf="TRAININGID==3 || TRAININGID==4">(12)</th>
+                <!-- <th class="tableheader_color">(11)</th> -->
+               
+                
+              </tr>
+            </thead>
+            <tbody [hidden]="SocietyMilkCollectonList?.length < 1">
+              <tr   *ngFor="let obj of SocietyMilkCollectonList; let i = index">
+                <td class="number_align">{{ i + 1 }}</td>
+                <!-- <td class="number_align "> {{obj.TID}}</td> -->
+                 
+                <td style="text-align: left;" class="table_cells_borders" *ngIf="TRAININGID==3 || TRAININGID==4"> {{obj.BMCU_NAME}}</td>
+                <td class="number_align" *ngIf="TRAININGID==3 || TRAININGID==4"> {{obj.BMCU_MOBILENO}}</td>
+                <td style="text-align: left;" class="table_cells_borders" *ngIf="TRAININGID==3 || TRAININGID==4"> {{obj.BMCU_DESIG}}</td>
+                <td style="text-align: left;" class="table_cells_borders" *ngIf="TRAININGID==3 || TRAININGID==4"> {{obj.EMAIL_ID}}</td>
+                <td class="number_align" *ngIf="TRAININGID==2"> {{obj.TECHNICIAN_PHNO}}</td>
+                <td class="number_align" *ngIf="TRAININGID==1"> {{obj.MENTOR_PHNO}}</td>
+                <td class="number_align" *ngIf="TRAININGID==1 || TRAININGID==2"> {{obj.RIC_PHNO}}</td>
+                <td class="number_align"> {{obj.TRAINING_DATE}}</td>
+                <td class="number_align"> {{obj.TRAINING_TIME}}</td>
+                <td style="text-align: left;" class="table_cells_borders"> {{obj.VENUE}}</td>
+                <td style="text-align: left;" class="table_cells_borders"> {{obj.ADDRESS}}</td>
+                
+                <td style="text-align: left;" class="table_cells_borders"> {{obj.FARMER_COUNT}}</td>
+                
+                
+                <td style="text-align: left;" class="table_cells_borders"> 
+                
+                  <select id="Status" class="form-control" [(ngModel)]="obj.Status">
+             
+                    <option selected value="undefined">-- Select Status --</option>
+                    <option value="1"> Approved </option>
+                    <option value="2"> Rejected </option>
+                  </select>
+                </td> 
+
+                <td  class="table_cells_borders">
+                  <button type="button" class="btn btn-success btn-sm pull-right" (click)="btnSubmit(obj)">
+                    <i class="fa fa-1x mr-2" aria-hidden="true"></i>
+                   SUBMIT
+                </button>
+                
+                </td>
+
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- <div class="col-md-12">
+          <button type="button" class="btn btn-success btn-sm pull-right" (click)="btnSubmit()">
+              <i class="fa fa-1x mr-2" aria-hidden="true"></i>
+             SUBMIT
+          </button>
+      </div> -->
+      </div>
+    </div>
+  </div>
+</div>
+
+  
+

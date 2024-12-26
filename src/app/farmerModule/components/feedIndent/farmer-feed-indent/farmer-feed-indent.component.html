@@ -1,0 +1,362 @@
+<div class="card">
+  <div class="card-header p-2">
+    <h5 class="mb-0">FARMER FEED INDENT REQUEST</h5>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-5 offset-3">
+        <div class="form-group">
+          <div class="ah-radio-buttons" (change)="onSelectionChange()">
+            <div class="custom-control custom-radio custom-control-inline">
+              <input
+                class="custom-control-input"
+                type="radio"
+                name="inputRadio"
+                id="inputRadio1"
+                value="1"
+                [(ngModel)]="inputRadio"
+              />
+              <label class="custom-control-label" for="inputRadio1">
+                AADHAAR NUMBER
+              </label>
+            </div>
+
+            <div class="custom-control custom-radio custom-control-inline">
+              <input
+                class="custom-control-input"
+                type="radio"
+                name="inputRadio"
+                id="inputRadio2"
+                value="2"
+                [(ngModel)]="inputRadio"
+              />
+              <label class="custom-control-label" for="inputRadio2">
+                FARMER CODE
+              </label>
+            </div>
+            <div class="custom-control custom-radio custom-control-inline">
+              <input
+                class="custom-control-input"
+                type="radio"
+                name="inputRadio"
+                id="inputRadio3"
+                value="3"
+                [(ngModel)]="inputRadio"
+              />
+              <label class="custom-control-label" for="inputRadio3">
+                BANK ACCOUNT NO
+              </label>
+            </div>
+          </div>
+          <input *ngIf="uidNum1"
+            id="uidNum"
+            type="password"
+            class="form-control"
+            [(ngModel)]="uidNum"
+            placeholder="{{ inputPlaceHolder }}"
+            maxlength="12"
+            autocomplete="off"
+            NumbersOnly
+            [allowDecimals]="false"
+            [allowSign]="false"   (keyup)="uidNummaskIputData($event.target.value)"
+          />
+
+          <input *ngIf="frmNum1"
+          id="frmNum"
+          type="text"
+          class="form-control"
+          [(ngModel)]="frmNum"
+          placeholder="{{ inputPlaceHolder }}"
+          maxlength="15"
+          autocomplete="off"
+          NumbersOnly
+          [allowDecimals]="false"
+          [allowSign]="false"
+        />
+        </div>
+      </div>
+
+      <div class="col-md-3 pt-4" align="left">
+        <button
+          type="button"
+          class="btn btn-success btn-sm"
+          (click)="btnUidDetails()"
+        >
+          CHECK STATUS
+        </button>
+      </div>
+    </div>
+
+    <div
+      *ngIf="
+        personDetails.UID_NUM !== null &&
+        personDetails.UID_NUM !== '' &&
+        personDetails.UID_NUM !== undefined
+      "
+    >
+      <h5 class="sub-heading pb-0">
+        <label>Farmer Registration Details</label>
+      </h5>
+
+      <div class="row px-4">
+        <div class="col-md-3">
+          <div class="form-group">
+            <label>
+              NAME :
+              <span class="text-success">
+                <b>{{ personDetails.FARMER_NAME }}</b>
+              </span>
+            </label>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-group">
+            <label>
+              CODE :
+              <span class="text-success">
+                <b>{{ personDetails.FARMER_CODE }}</b>
+              </span>
+            </label>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-group">
+            <label
+              >MOBILE NUMBER :
+              <span class="text-success">
+                <b>{{ personDetails.MOBILE_NUMBER }}</b>
+              </span>
+            </label>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-group">
+            <label
+              >DISTRICT :
+              <span class="text-success">
+                <b>{{ personDetails.DISTRICT }}</b>
+              </span>
+            </label>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-group">
+            <label
+              >MANDAL NAME :
+              <span class="text-success">
+                <b>{{ personDetails.MANDAL_NAME }}</b>
+              </span>
+            </label>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-group">
+            <label
+              >RSK NAME :
+              <span class="text-success">
+                <b>{{ personDetails.RBK_NAME }}</b>
+              </span>
+            </label>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-group">
+            <label
+              >VILLAGE NAME :
+              <span class="text-success">
+                <b>{{ personDetails.VILLAGE_NAME }}</b>
+              </span>
+            </label>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-group">
+            <label>
+              BANK ACCOUNT NUMBER :
+              <span class="text-success">
+                <b>{{ personDetails.ACCOUNT_NUMBER }}</b>
+              </span>
+            </label>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-group">
+            <label
+              >IFSC CODE :
+              <span class="text-success">
+                <b>{{ personDetails.IFSC_CODE }}</b>
+              </span>
+            </label>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-group">
+            <label
+              >BANK NAME :
+              <span class="text-success">
+                <b>{{ personDetails.BANK_NAME }}</b>
+              </span>
+            </label>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-group">
+            <label
+              >BRANCH NAME :
+              <span class="text-success">
+                <b>{{ personDetails.BANK_BRANCH }}</b>
+              </span>
+            </label>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-group">
+            <label
+              >BANK PIN CODE :
+              <span class="text-success">
+                <b>{{ personDetails.BANK_PINCODE }}</b>
+              </span>
+            </label>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-group">
+            <label
+              >PAN CARD NO :
+              <span class="text-success">
+                <b>{{
+                  personDetails.PAN_CARD === null
+                    ? "NA"
+                    : personDetails.PAN_CARD
+                }}</b>
+              </span>
+            </label>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-group">
+            <label
+              >NO OF MILCH ANIMALS :
+              <span class="text-success">
+                <b>{{ personDetails.NO_OF_MILCH_ANIMALS }}</b>
+              </span>
+            </label>
+          </div>
+        </div>
+
+        <div class="col-md-3" *ngIf="personDetails.FARMER_KISSANCARD !== 'NA'">
+          <label>KISAN CREDIT CARD IMAGE :</label>
+          <img
+            [src]="'data:image/jpeg;base64,' + kisanCreditCardImg"
+            style="cursor: pointer"
+            class="img-thumbnail mr-3"
+            (click)="btnImage(kisanCreditCardImg)"
+          />
+        </div>
+        <div class="col-md-3" *ngIf="personDetails.FARMER_KISSANCARD === 'NA'">
+          <label
+            >KISAN CREDIT CARD IMAGE :
+            <span class="text-success">
+              <b>NA</b>
+            </span>
+          </label>
+        </div>
+        <div class="col-md-3">
+          <div class="form-group">
+            <label
+              >TOTAL AMOUNT :
+              <span class="text-success">
+                <b>{{ personDetails.AMOUNT }}</b>
+              </span>
+            </label>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-group">
+            <label
+              >INDENTS RAISED :
+              <span class="text-success">
+                <b>{{ personDetails.INDENTS_RAISED }}</b>
+              </span>
+            </label>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-group">
+            <label
+              >NO. OF INDENTS CAN BE RAISED :
+              <span class="text-success">
+                <b>{{ personDetails.NO_OF_INDENTS_CAN_BE_RAISED }}</b>
+              </span>
+            </label>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-group">
+            <label
+              >REMAINING INDENTS :
+              <span class="text-success">
+                <b>{{ personDetails.REMAINING_INDENTS }}</b>
+              </span>
+            </label>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-group">
+            <label
+              >REMAINING AMOUNT :
+              <span class="text-success">
+                <b>{{ personDetails.REMAINING_AMOUNT }}</b>
+              </span>
+            </label>
+          </div>
+        </div>
+        <div class="col-md-12" *ngIf="personDetails.INDENT_STATUS !== '1'">
+          <div class="form-group">
+            <h5 class="text-danger text-center">
+              {{ personDetails.INDENT_STATUS_MSG }}
+            </h5>
+          </div>
+        </div>
+
+        <div class="col-md-3" *ngIf="personDetails.INDENT_STATUS === '1'">
+          <div class="form-group">
+            <label>FEED INDENT : </label>
+            <input
+              id="indentFeedInKgs"
+              type="text"
+              class="form-control"
+              [(ngModel)]="indentFeedInKgs"
+              placeholder="Please Enter Feed"
+              maxlength="3"
+              autocomplete="off"
+              NumbersOnly
+              [allowDecimals]="false"
+              [allowSign]="false"
+            />
+          </div>
+        </div>
+        <div
+          class="col-md-12"
+          align="center"
+          *ngIf="personDetails.INDENT_STATUS === '1'"
+        >
+          <button
+            class="btn btn-primary m-0 btn-rounded"
+            type="submit"
+            (click)="btnIndentRequest()"
+            id="button-addon2"
+          >
+            RAISE INDENT REQUEST
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="row p-3" *ngIf="noDataMessage !== ''">
+      <div class="col-md-12">
+        <h5 class="text-center text-danger">{{ noDataMessage }}</h5>
+      </div>
+    </div>
+  </div>
+</div>

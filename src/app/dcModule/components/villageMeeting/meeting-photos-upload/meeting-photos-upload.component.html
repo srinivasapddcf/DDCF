@@ -1,0 +1,86 @@
+<div class="card">
+  <div class="card-header p-2">
+    <h5 class="mb-0">VILLAGE MEETING PHOTOS UPLOAD</h5>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-3">
+        <div class="form-group">
+          <label for="mandalId">MANDAL <span style="color: red">*</span></label>
+          <select
+            class="form-control"
+            [(ngModel)]="photoUploadDetails.mandalId"
+            (change)="onMandalChange()"
+          >
+            <option value="">-- SELECT MANDAL --</option>
+            <option *ngFor="let obj of mandalList" value="{{ obj.MANDAL_ID }}">
+              {{ obj.MANDAL_NAME }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="form-group">
+          <label for="rbkId">RSK <span style="color: red">*</span></label>
+          <select
+            class="form-control"
+            [(ngModel)]="photoUploadDetails.rbkId"
+            (change)="onRBKChange()"
+          >
+            <option value="">-- SELECT RSK --</option>
+            <option *ngFor="let obj of rbkList" value="{{ obj.RBK_ID }}">
+              {{ obj.RBK_NAME }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="form-group">
+          <label for="villageId"
+            >VILLAGE <span style="color: red">*</span></label
+          >
+          <select
+            class="form-control"
+            [(ngModel)]="photoUploadDetails.villageId"
+          >
+            <option value="">-- SELECT VILLAGE --</option>
+            <option
+              *ngFor="let obj of villageList"
+              value="{{ obj.VILLAGE_ID }}"
+            >
+              {{ obj.VILLAGE_NAME }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="form-group">
+          <label for="meetingPhoto">Upload Photo <span style="color: red">*</span> <small class="text-danger">(jpg & below 100kb)</small>
+          </label>
+          <input
+            type="file"
+            class="form-control p-0"
+            id="meetingPhoto"
+            (change)="onMeetingPhotoUpload($event)"
+            accept="image/*"
+            #meetingPhotoUpload
+            autocomplete="off"
+          />
+        </div>
+      </div>
+
+      <div class="col-md-12 pt-4" align="center">
+        <button
+          type="button"
+          class="btn btn-success btn-sm"
+          (click)="btnSubmit()"
+        >
+          SUBMIT
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

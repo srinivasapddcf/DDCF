@@ -1,0 +1,620 @@
+<div class="card">
+  <div class="card-header p-2">
+    <h5 class="mb-0">LAND ALLOTMENT FOR AMCU</h5>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-3">
+        <div class="form-group">
+          <label for="mandalId">MANDAL <span style="color: red">*</span></label>
+          <select
+            id="mandalId"
+            class="form-control"
+            [(ngModel)]="LandAllocateData.mandalId"
+            (change)="onMandalChange()"
+          >
+            <option value="">-- SELECT MANDAL --</option>
+            <option
+              value="{{ obj.MANDAL_CODE }}"
+              *ngFor="let obj of mandalList"
+            >
+              {{ obj.MANDAL_NAME }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="form-group">
+          <label for="rbkId">RSK <span style="color: red">*</span></label>
+          <select
+            id="rbkId"
+            class="form-control"
+            [(ngModel)]="LandAllocateData.rbkId"
+            (change)="onRbkChange()"
+          >
+            <option value="">-- SELECT RSK --</option>
+            <option value="{{ obj.RBK_CODE }}" *ngFor="let obj of rbkList">
+              {{ obj.RBK_NAME }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="form-group">
+          <label for="villageId"
+            >REVENUE VILLAGE (RSK/AMCU Location)
+            <span style="color: red">*</span></label
+          >
+          <select
+            id="villageId"
+            class="form-control"
+            [(ngModel)]="LandAllocateData.villageId"
+            (change)="onVillageChange()"
+          >
+            <option value="">-- SELECT VILLAGE --</option>
+            <option
+              value="{{ obj.R_VILLAGE_CODE }}"
+              *ngFor="let obj of villageList"
+            >
+              {{ obj.REVENUE_NAME }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="form-group">
+          <label for="villageId"
+            >AMCU VILLAGE <span style="color: red">*</span></label
+          >
+          <select
+            id="villageId"
+            class="form-control"
+            [(ngModel)]="LandAllocateData.revVillageId"
+            (change)="onMilkPouringVillageChange()"
+          >
+            <option value="">-- SELECT VILLAGE --</option>
+            <option
+              value="{{ obj.VILLAGECODE }}"
+              *ngFor="let obj of milkPouringVillageList"
+            >
+              {{ obj.VILLAGE_NAME }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+</div>
+<div class="row" *ngIf="divmaintable">
+
+
+
+      <div class="col-md-3">
+        <div class="form-group">
+          <label>Land <sup class="text-danger h6">*</sup></label>
+          <div class="ah-radio-buttons">
+            <div class="custom-control custom-radio custom-control-inline">
+              <input
+                class="custom-control-input"
+                type="radio"
+                name="publicPrivateLand"
+                id="publicPrivateLand1"
+                value="1" 
+                [(ngModel)]="LandAllocateData.publicPrivateLand"
+                autocomplete="off"
+              />
+              <label class="custom-control-label" for="publicPrivateLand1">
+                PUBLIC
+              </label>
+            </div>
+
+            <div class="custom-control custom-radio custom-control-inline">
+              <input
+                class="custom-control-input"
+                type="radio"
+                name="publicPrivateLand"
+                id="publicPrivateLand2"
+                value="0"
+                [(ngModel)]="LandAllocateData.publicPrivateLand"
+                autocomplete="off"
+              />
+              <label class="custom-control-label" for="publicPrivateLand2">
+                DONATE LAND
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-3" *ngIf="LandAllocateData.publicPrivateLand === '0'">
+        <div class="form-group">
+          <label for="giftAndDeedPhotoUpload"
+            >Gift & Deed Document Upload <span style="color: red">*</span>
+          </label>
+          <input
+            type="file"
+            class="form-control p-0"
+            id="giftAndDeedPhotoUpload"
+            (change)="onGiftAndDeedPhotoChange($event)"
+            accept="application/pdf"
+            autocomplete="off"
+          />
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="form-group">
+          <label for="surveyNo"
+            >Survey No <span style="color: red">*</span></label
+          >
+          <input
+            id="surveyNo"
+            type="text"
+            class="form-control"
+            [(ngModel)]="LandAllocateData.surveyNo"
+            placeholder="Please Enter Survey No"
+            maxlength="15"
+            autocomplete="off"
+          />
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="row align-items-center">
+          <div class="col-md-11 pr-0">
+            <div class="form-group">
+              <label for="acres"
+                >Area Acres
+                <span style="color: red">*<small class="text-danger">
+                 (Ex: 0,1)
+                </small></span>
+              </label>
+              <input style="text-align: right;"
+                id="acres"
+                type="text"
+                class="form-control"
+                [(ngModel)]="LandAllocateData.acres"
+                placeholder="Please Enter Area acres"
+                maxlength="2"
+                NumbersOnly
+                [allowDecimals]="false"
+                [allowSign]="false"
+                autocomplete="off" value="0"
+              />
+             
+            </div>
+          </div>
+          <div class="col-md-1 px-0 text-center">
+            <label  style="font-size: 60px;margin-top: -20px;color: blueviolet;">.</label> 
+          </div>
+
+        </div>
+      </div>
+          <div class="col-md-3"   >
+            <div class="row align-items-left">
+          <div class="col-md-11 pl-0">
+            <div class="form-group"  >
+              <label for="cents"
+                >Cents
+                <small class="text-danger">(Minimum 035(3.5) Cents TO 99 Cents)</small>
+                <span style="color: red">*</span></label
+              >
+              <input 
+                id="cents"
+                type="text"
+                class="form-control"
+                [(ngModel)]="LandAllocateData.cents"
+                placeholder="Please Enter cents"
+                maxlength="3"
+                NumbersOnly
+                [allowDecimals]="false"
+                [allowSign]="false"
+                autocomplete="off"
+              />
+              <!-- <small class="text-danger">
+                Ex: 0,1,2 (Only in whole numbers)
+              </small> -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="col-md-3" style="margin-left: -10px;">
+        <div class="form-group">
+          <label for="latitude"
+            >Latitude
+
+            <span style="color: red"
+              >* <small class="text-danger">Ex: (17.926152) </small>
+            </span></label
+          >
+          <input
+            id="latitude"
+            type="text"
+            class="form-control"
+            [(ngModel)]="LandAllocateData.latitude"
+            placeholder="Please Enter Latitude"
+            maxlength="15"
+            NumbersOnly
+            [allowDecimals]="true"
+            [allowSign]="false"
+            autocomplete="off"
+          />
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="form-group">
+          <label for="longitude"
+            >Longitude
+            <span style="color: red"
+              >* <small class="text-danger">Ex: (83.16559) </small>
+            </span></label
+          >
+          <input
+            id="longitude"
+            type="text"
+            class="form-control"
+            [(ngModel)]="LandAllocateData.longtitude"
+            placeholder="Please Enter Longitude"
+            maxlength="15"
+            NumbersOnly
+            [allowDecimals]="true"
+            [allowSign]="false"
+            autocomplete="off"
+          />
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <label for="distFromVillageCenter"
+            >Distance From Village Center
+
+            <span style="color: red">
+              <small class="text-danger"> (In Kms) </small> *
+            </span></label
+          >
+          <input
+            id="distFromVillageCenter"
+            type="text"
+            class="form-control"
+            [(ngModel)]="LandAllocateData.distFromVillageCenter"
+            placeholder="Please Enter Distance From Village Center"
+            maxlength="5"
+            autocomplete="off"
+            NumbersOnly
+            [allowDecimals]="true"
+            [allowSign]="false"
+          />
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <label for="entireLandPhotoUpload"
+            >Photo Covering The Entire Land <span style="color: red;font-size: small;">*  (JPEG and  less than 100KB) </span>
+          </label>
+          <input
+            type="file"
+            class="form-control p-0"
+            id="entireLandPhotoUpload"
+            (change)="onEntireLandPhotoChange($event)"
+            accept="image/*"
+            autocomplete="off"
+          />
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="northBoundary"
+                >North Boundary<span style="color: red">*</span></label>
+              <input
+                id="northBoundary"
+                type="text"
+                class="form-control"
+                [(ngModel)]="LandAllocateData.northBoundary"
+                placeholder="Please Enter North Boundary"
+                maxlength="50"
+                autocomplete="off"
+              />
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="southBoundary"
+                >South Boundary <span style="color: red">*</span></label
+              >
+              <input
+                id="southBoundary"
+                type="text"
+                class="form-control"
+                [(ngModel)]="LandAllocateData.southBoundary"
+                placeholder="Please Enter South Boundary"
+                maxlength="50"
+                autocomplete="off"
+              />
+            </div>
+          </div>
+
+         
+
+
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="eastBoundary"
+                >East Boundary <span style="color: red">*</span></label
+              >
+              <input
+                id="eastBoundary"
+                type="text"
+                class="form-control"
+                [(ngModel)]="LandAllocateData.eastBoundary"
+                placeholder="Please Enter East Boundary"
+                maxlength="50"
+                autocomplete="off"
+              />
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="westBoundary"
+                >West Boundary<span style="color: red">*</span></label
+              >
+              <input
+                id="westBoundary"
+                type="text"
+                class="form-control"
+                [(ngModel)]="LandAllocateData.westBoundary"
+                placeholder="Please Enter West Boundary"
+                maxlength="50"
+                autocomplete="off"
+              />
+            </div>
+          </div>
+
+         
+
+
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="row">
+
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="nothPhotoUpload"
+                >North Boundary Photo <span style="color: red;font-size: small;">* <BR> (JPEG and  less than 100KB) </span>
+              </label>
+              <input
+                type="file"
+                class="form-control p-0"
+                id="nothPhotoUpload"
+                (change)="onNothPhotoChange($event)"
+                accept="image/*"
+                autocomplete="off"
+              />
+            </div>
+          </div>
+         
+
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="southPhotoUpload"
+                >South Boundary Photo <span style="color: red;font-size: small;">* <BR> (JPEG and  less than 100KB) </span>
+              </label>
+              <input
+                type="file"
+                class="form-control p-0"
+                id="southPhotoUpload"
+                (change)="onSouthPhotoChange($event)"
+                accept="image/*"
+                autocomplete="off"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+
+     
+
+      <div class="col-md-6">
+        <div class="row">
+
+         
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="eastPhotoUpload"
+                >East Boundary Photo <span style="color: red;font-size: small;">* <BR> (JPEG and  less than 100KB) </span>
+              </label>
+              <input
+                type="file"
+                class="form-control p-0"
+                id="eastPhotoUpload"
+                (change)="onEastPhotoChange($event)"
+                accept="image/*"
+                autocomplete="off"
+              />
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="westPhotoUpload"
+                >West Boundary Photo 
+                <span style="color: red;font-size: small;">* <BR> (JPEG and  less than 100KB) </span>
+              </label>
+              <input
+                type="file"
+                class="form-control p-0"
+                id="westPhotoUpload"
+                (change)="onWestPhotoChange($event)"
+                accept="image/*"
+                autocomplete="off"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6" style="display: none;">
+        <div class="form-group">
+          <label for="allotmentOrderUpload"
+            >Allotment Order for Apddcf <span style="color: red">*</span>
+          </label>
+          <input
+            type="file"
+            class="form-control p-0"
+            id="allotmentOrderUpload"
+            (change)="onAllotmentOrderChange($event)"
+            accept="application/pdf"
+            autocomplete="off"
+          />
+        </div>
+      </div>
+
+    
+
+      <div class="col-md-12" align="center">
+        <button style="font-size: 15PX;"
+          type="button"
+          class="btn btn-success btn-sm"
+          (click)="btnLandAllotmentSub('1')"
+        >
+        <b>SUBMIT LAND ALLOTTMENT </b>
+        </button>
+        <!-- <button
+          type="button"
+          class="btn btn-danger btn-sm"
+          (click)="btnLandAllotmentSub('2')"
+        >
+          LAND ALLOTEMENT PENDING
+        </button> -->
+      </div>
+    </div>
+
+
+
+
+
+    <div   id="divalienationtable" *ngIf="divalienationtable"> 
+      <hr>
+      <br>
+
+
+      
+      <div class="row" >  
+
+        <div class="col-md-2">
+        <div class="form-group" *ngIf="divchkEditcents">
+          <div style="text-align:right;"><label  style="margin-bottom: 50px;" 
+            >Select to Edit Area <span style="color: red">*</span>
+          </label></div>
+        </div>
+      </div> 
+          <div class="col-md-2">
+            <div class="form-group">
+          <div> <input type="checkbox"  id="chkcents" value="Cents" name="Click Cents"  *ngIf="divchkcents"      (change)="ondivchkcentsChange($event)"   /> 
+          </div>
+          
+     
+      </div>
+    </div> 
+
+      <div class="col-md-4"   *ngIf="divchkcentstxt" >
+        <div class="form-group">
+          <label for="allotmentOrderUpload"
+            > Update Area ( in Cents) <span style="color: red">*   <small class="text-danger"> (Minimum 035(3.5) To 99)</small>   </span>
+             
+             
+
+          </label>
+          <input
+            type="text"
+            class="form-control p-0"
+            id="TXTCENTS"
+            [(ngModel)]="TXTCENTS"
+            accept="application/pdf"
+            maxlength="3"
+            NumbersOnly
+            [allowDecimals]="false"
+            autocomplete="off" />
+        </div>     
+         <!-- (change)="onCENTSChange($event)" -->
+      </div>  
+      <div class="col-md-4"     *ngIf="divchkcentsbtn">
+        <div class="form-group">
+          
+      <button  style="margin-top: 30px;"
+          type="button"
+          class="btn btn-success btn-sm"
+          (click)="btnCENTSupload()"
+        > 
+          UPDATE CENTS
+        </button> 
+      </div>
+    </div> 
+    </div>
+
+
+      <div class="row" >  
+
+        <div class="col-md-4">
+        <div class="form-group">
+          
+      <button  style="margin-top: 30px;color: white;size: 15px; "  *ngIf="divdownload"
+          type="button"
+          class="btn btn-blue btn-sm"
+          (click)="btndownload()"
+        >
+          DOWNLOAD Alienation Certificate
+        </button> 
+      </div>
+    </div> 
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="allotmentOrderUpload"
+            > Attach AMCU Alienation (PDF) <span style="color: red">*</span>
+          </label>
+          <input   [(ngModel)]="allotmentAlienationUpload"
+            type="file"
+            class="form-control p-0"
+            id="allotmentAlienationUpload"
+            (change)="onAlienationStatementChange($event)"
+            accept="application/pdf"
+            autocomplete="off" />
+        </div>
+      </div> 
+
+
+
+      <div class="col-md-4">
+        <div class="form-group">
+          
+      <button  style="margin-top: 30px;"
+          type="button"
+          class="btn btn-success btn-sm"
+          (click)="btnupload()"
+        > 
+          Upload Alienation Certificate
+        </button> 
+      </div>
+    </div> 
+    </div>
+
+    
+  </div> 
+
+
+  </div>
+</div>

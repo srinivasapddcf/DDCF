@@ -1,0 +1,334 @@
+<div class="card">
+  <div class="card-header p-2">
+    <h5 class="mb-0">FARMER SOCIETY CHANGE</h5>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-12">
+        <button
+          type="button"
+          class="btn btn-primary btn-sm pull-right"
+          (click)="btnSocietyChangeRequests()"
+        >
+          VIEW SOCIETY CHANGE REQUESTS
+        </button>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="oldRbkId"
+            >RSK <span style="color: red">*</span></label
+          >
+          <select
+            id="oldRbkId"
+            class="form-control"
+            [(ngModel)]="farmerSocietyData.oldRbkId"
+            (change)="onOldRbkChange()"
+          >
+            <option value="">-- SELECT RSK --</option>
+            <option value="{{ obj.RBK_ID }}" *ngFor="let obj of oldRbkList">
+              {{ obj.RBK_NAME }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="oldVillageId "
+            >VILLAGE <span style="color: red">*</span></label
+          >
+          <select
+            id="oldVillageId "
+            class="form-control"
+            [(ngModel)]="farmerSocietyData.oldVillageId"
+            (change)="onOldVillageChange()"
+          >
+            <option value="">-- SELECT VILLAGE --</option>
+            <option
+              value="{{ obj.VILLAGE_ID }}"
+              *ngFor="let obj of oldVillageList"
+            >
+              {{ obj.VILLAGE_NAME }} (SOCIETY ID - {{ obj.SOCIETY_CODE }})
+            </option>
+          </select>
+        </div>
+      </div>
+      <hr />
+
+      <div class="col-md-12 table-responsive" [hidden]="farmerList?.length < 1">
+        <table
+          class="table table-striped ah-table text-center"
+          datatable
+          [dtOptions]="dtOptions"
+          [dtTrigger]="dtTrigger"
+        >
+          <thead class="bg-success text-white">
+            <tr>
+              <th>S.No.</th>
+              <th>DISTRICT</th>
+              <th>MANDAL</th>
+              <th>RSK</th>
+              <th>VILLAGE</th>
+              <th>SOCIETY</th>
+              <th>FARMER NAME</th>
+              <th>FARMER CODE</th>
+              <th>AADHAR NUMBER</th>
+              <th>MOBILE NUMBER</th>
+              <th>ACTION</th>
+            </tr>
+          </thead>
+          <tbody *ngIf="farmerList?.length > 0">
+            <tr *ngFor="let obj of farmerList; let i = index">
+              <td>{{ i + 1 }}</td>
+              <td>{{ obj.DISTRICT }}</td>
+              <td>{{ obj.MANDAL_NAME }}</td>
+              <td>{{ obj.RBK_NAME }}</td>
+              <td>{{ obj.VILLAGE_NAME }}</td>
+              <td>{{ obj.SOCIETY_NAME }}</td>
+              <td>
+                <b>{{ obj.FARMER_NAME }}</b>
+              </td>
+              <td>{{ obj.FARMER_CODE }}</td>
+              <td>XXXX-XXXX-{{ obj.UID_NUM | slice: -4 }}</td>
+              <td>{{ obj.MOBILE_NUMBER }}</td>
+              <td>
+                <button
+                  *ngIf="obj.STATUS === '0'"
+                  type="button"
+                  class="btn btn-primary btn-sm"
+                  (click)="btnChangeSociety(obj)"
+                >
+                  CHANGE
+                </button>
+                <span *ngIf="obj.STATUS === '1'" class="text-success"
+                  >Pending At HO</span
+                >
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="popup-modal" *ngIf="showSocietyChangePopup">
+  <div class="popup-content" style="min-width: 75%">
+    <div class="popup-header">
+      <h4 class="title">FARMER SOCIETY CHANGE</h4>
+      <a
+        type="button"
+        class="close"
+        (click)="showSocietyChangePopup = false"
+        style="cursor: pointer"
+      >
+        <span>×</span>
+      </a>
+    </div>
+
+    <div class="popup-body">
+
+
+      <div class="row justify-content-center align-items-center">
+        <div class="col-md-3">
+          <div class="form-group">
+            <label for="DistrictCODE"
+              >DISTRICTS <span style="color: red">*</span></label
+            >
+            <select
+              id="DistrictCODE"
+              class="form-control"
+              [(ngModel)]="DistrictCODE"
+              (change)="onNewDISTRICTSChange()"
+            >
+              <option value="">-- SELECT DISTRICT --</option>
+              <option value="{{ obj.DIST_CODE }}" *ngFor="let obj of newDISTRICTList">
+                {{ obj.DISTRICT }}
+              </option>
+            </select>
+          </div>
+        </div>
+
+        <div class="col-md-3">
+          <div class="form-group">
+            <label for="ROUNTENOS"
+              >ROUTE NOs <span style="color: red">*</span></label
+            >
+            <select
+              id="ROUNTENOS"
+              class="form-control"
+              [(ngModel)]="ROUNTENOS"
+              (change)="onNewROUNTENOSChange()"
+            >
+              <option value="">-- SELECT ROUTENOS --</option>
+              <option
+                value="{{ obj.SLNO }}"
+                *ngFor="let obj of newROUNTENOSList"
+              >
+                {{ obj.ROUNTE_NOS }}  
+              </option>
+            </select>
+          </div>
+        </div>
+      <!-- </div>
+
+
+      <div class="row justify-content-center align-items-center"> -->
+        <!-- <div class="col-md-4">
+          <div class="form-group">
+            <label for="newRbkId"
+              >NEW RBK <span style="color: red">*</span></label
+            >
+            <select
+              id="newRbkId"
+              class="form-control"
+              [(ngModel)]="newRbkId"
+              (change)="onNewRbkChange()"
+            >
+              <option value="">-- SELECT RBK --</option>
+              <option value="{{ obj.RBK_ID }}" *ngFor="let obj of newRbkList">
+                {{ obj.RBK_NAME }}
+              </option>
+            </select>
+          </div>
+        </div> -->
+
+        <div class="col-md-3">
+          <div class="form-group">
+            <label for="newRbkId"
+              >NEW RSK <span style="color: red">*</span></label
+            >
+            <select
+              id="newRbkId"
+              class="form-control"
+              [(ngModel)]="newRbkId"
+              (change)="onNewRbkChange()"
+            >
+              <option value="">-- SELECT RSK --</option>
+              <option value="{{ obj.RBK_CODE }}" *ngFor="let obj of newRbkList">
+                {{ obj.RBK_NAME }}
+              </option>
+            </select>
+          </div>
+        </div>
+
+        <!-- <div class="col-md-3">
+          <div class="form-group">
+            <label for="newVillageId1"
+              >NEW VILLAGE <span style="color: red">*</span></label
+            >
+            <select
+              id="newVillageId1"
+              class="form-control"
+              [(ngModel)]="newVillageId1"
+            >
+              <option value="">-- SELECT VILLAGE --</option>
+              <option
+                value="{{ obj.villagecode }}"
+                *ngFor="let obj of newVillageList"
+              >
+                {{ obj.VILLAGE_NAME }} 
+              </option>
+            </select>
+          </div>
+        </div> -->
+
+
+        <div class="col-md-3">
+          <div class="form-group">
+            <label for="newVillageId1"
+              >NEW VILLAGE <span style="color: red">*</span></label
+            >
+            <select
+              id="newVillageId1"
+              class="form-control"
+              [(ngModel)]="newVillageId1"
+               
+            >
+              <option value="">-- SELECT VILLAGE --</option>
+              <option value="{{ obj.VILLAGECODE }}" *ngFor="let obj of newVillageList">
+                {{ obj.VILLAGE_NAME }}
+              </option>
+            </select>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="row">
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="farmerName"
+              >FARMER NAME <span style="color: red">*</span></label
+            >
+            <h6 style="color: green">
+              <b> {{ farmerSocietyData.farmerName }}</b>
+            </h6>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="farmerCode"
+              >FARMER CODE <span style="color: red">*</span></label
+            >
+            <h6 style="color: green">
+              <b>{{ farmerSocietyData.farmerCode }}</b>
+            </h6>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="mobileNumber"
+              >MOBILE NUMBER<span style="color: red">*</span></label
+            >
+            <h6 style="color: green">
+              <b>{{ farmerSocietyData.mobileNumber }}</b>
+            </h6>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="farmerName"
+              >AADHAR<span style="color: red">*</span></label
+            >
+            <h6 style="color: green">
+              <b> XXXX-XXXX-{{ farmerSocietyData.uidNum | slice: -4 }}</b>
+            </h6>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="oldRbk">OLD RSK<span style="color: red">*</span></label>
+            <h6 style="color: green">
+              <b>{{ farmerSocietyData.oldRbkName }}</b>
+            </h6>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="oldVillage"
+              >OLD VILLAGE<span style="color: red">*</span></label
+            >
+            <h6 style="color: green">
+              <b>{{ farmerSocietyData.oldVillageName }}</b>
+            </h6>
+          </div>
+        </div>
+      </div>
+      <div class="popup-footer justify-content-center">
+        <button
+          type="button"
+          class="btn btn-success btn-sm"
+          (click)="btnSubmit()"
+        >
+          SUBMIT
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

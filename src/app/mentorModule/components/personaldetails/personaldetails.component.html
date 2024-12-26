@@ -1,0 +1,1486 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <div *ngIf="receivedObject">
+                <h5>Designation:<span class="text-success">{{receivedObject.Designation}}({{receivedObject.Position}})</span></h5>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="container-fluid mt-4">
+    <div id="myAccordion">
+        <div class="card">
+            <div class="card-header" id="headingOne">
+                <h5 class="mb-0">
+                    <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne">
+                        <b> 1. Personal Details</b>
+                    </button>
+                </h5>
+            </div>
+            <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#myAccordion">
+                <div class="card-body">
+                    <div class="row mt-2">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+
+                                <label for="FirstName">First Name<span style="color: red">*</span></label>
+                                <input type="text" class="form-control" id="FirstName" placeholder="Enter First Name" maxlength="40"
+                                    [(ngModel)]="FirstName">
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="MiddleName">Middle Name<span style="color: red">*</span></label>
+                                <input type="text" class="form-control" id="MiddleName" placeholder="Enter Middle Name " maxlength="40"
+                                    [(ngModel)]="MiddleName">
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="LastName">Last Name <span style="color: red">*</span></label>
+                                <input type="text" class="form-control" id="LastName" placeholder="Enter Last Name" maxlength="40"
+                                    [(ngModel)]="LastName">
+                            </div>
+                        </div>
+                        <div class="col-md-1"></div>
+
+
+                    </div>
+
+                    <div class="row mt-2">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="DOB">Date Of Birth (as per SSC)<span style="color: red">*</span></label>
+                                <app-date-picker [PlaceHolder]="'Select DOB'" [(selectedDate)]="DOB"></app-date-picker>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="EmailID">Email ID<span style="color: red">*</span></label>
+                                <input type="text" class="form-control" id="EmailID" placeholder="Enter Email ID" maxlength="40"
+                                    [(ngModel)]="EmailID">
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="MobileNO">Mobile Number <span style="color: red">*</span></label>
+                                <input type="text" class="form-control" id="MobileNO" placeholder="Enter Mobile Number" maxlength="40"
+                                    [(ngModel)]="MobileNO">
+                            </div>
+                        </div>
+                        <div class="col-md-1"></div>
+
+
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-md-1"></div>
+                        <label for="PermanentAddress"><b>Gender</b><span style="color: red">*</span></label>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-md-1"></div>
+
+                        <div class="col-md-1">
+                            <input type="radio" class="form-check-input" id="Male" value="Male" [(ngModel)]="Gender" (click)="MaleCheck()">
+                            <label class="form-radio-label" class="TopMvove" for="Male">Male<span style="color: red">*</span></label>
+                        </div>
+                        <div class="col-md-1">
+                            <input type="radio" class="form-check-input" id="Female" value="Female" [(ngModel)]="Gender"
+                                (click)="FemaleCheck()">
+                            <label class="form-radio-label" class="TopMvove" for="Female">Female<span style="color: red">*</span></label>
+                        </div>
+                        <div class="col-md-1">
+                            <input type="radio" class="form-check-input" id="Others" value="Others" [(ngModel)]="Gender"
+                                (click)="OthersCheck()">
+                            <label class="form-radio-label" class="TopMvove" for="Others">Others<span style="color: red">*</span></label>
+                        </div>
+                        <div class="col-md-4">
+                            <div *ngIf="isSo">
+                                <label for="so">S/O<span style="color: red">*</span></label>
+                                <input type="text" class="form-control" id="so" placeholder="Enter S/O" [(ngModel)]="so">
+                            </div>
+                            <div *ngIf="isDo">
+                                <label for="do">D/O<span style="color: red">*</span></label>
+                                <input type="text" class="form-control" id="so" placeholder="Enter D/O" [(ngModel)]="so">
+                            </div>
+                            <div *ngIf="isGuardian">
+                                <label for="Guardian">Guardian<span style="color: red">*</span></label>
+                                <input type="text" class="form-control" id="so" placeholder="Enter Guardian" [(ngModel)]="so">
+                            </div>
+                        </div>
+                        <div class="col-md-1"></div>
+
+                    </div>
+
+
+
+                    <div class="row mt-2">
+                        <div class="col-md-1"></div>
+                        <label for="PermanentAddress"><b>Permanent Address</b><span style="color: red">*</span></label>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="DNoP">D.No And Street Name<span style="color: red">*</span></label>
+                                <input type="text" class="form-control" id="DNoP" placeholder="Enter D.No And Street Name"
+                                    [(ngModel)]="DNoP">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+
+                                <label for="CitVill">Village/Area<span style="color: red">*</span></label>
+                                <input type="text" class="form-control" id="CitVill" placeholder="Enter Village/Area" [(ngModel)]="CitVill">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+
+                            <div class="form-group">
+                                <label for="City">City/Mandal</label>
+                                <input type="text" class="form-control" id="City" placeholder="Enter City" [(ngModel)]="City">
+                            </div>
+                        </div>
+                        <div class="col-md-1"></div>
+
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="District">District<span style="color: red">*</span></label>
+                                <select class="form-control" id="District" [(ngModel)]="District">
+                                    <option disabled selected value="undefined">-- Select--</option>
+                                    <option value="{{obj.DISTRICTID}}" *ngFor="let obj of DistList">{{obj.DISTRICTNAME}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="State">State<span style="color: red">*</span></label>
+                                <select class="form-control" id="State" [(ngModel)]="State">
+                                    <option disabled selected value="undefined">-- Select--</option>
+                                    <option value="{{obj.STATEID}}" *ngFor="let obj of StateList">{{obj.STATENAME}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="Pincode">Pincode<span style="color: red">*</span></label>
+                                <input type="text" class="form-control" id="Pincode" placeholder="Enter Pincode" [(ngModel)]="Pincode">
+                            </div>
+                        </div>
+                        <div class="col-md-1"></div>
+
+
+                    </div>
+
+                    <div class="row mt-2">
+                        <div class="col-md-1"></div>
+                        <label for="CurrentAddress"><b>Current Address</b><span style="color: red">*</span></label>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-md-1"></div>
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="isChecked" [(ngModel)]="isChecked"
+                                (click)="addSameAddress()">
+                            <label class="form-check-label" id="checkbot" for="isChecked">Same as Permanent Address</label>
+                        </div>
+
+                    </div>
+                    <div class="row mt-5">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="CuDNoP">D.No And Street Name<span style="color: red">*</span></label>
+                                <input type="text" [disabled]="isChecked" class="form-control" id="CuDNoP"
+                                    placeholder="Enter D.No And Street Name" [(ngModel)]="CuDNoP">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="CuStreet">Village/Area<span style="color: red">*</span></label>
+
+                                <input type="text" [disabled]="isChecked" class="form-control" id="CuCitVill"
+                                    placeholder="Enter Village/Area" [(ngModel)]="CuCitVill">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+
+                            <div class="form-group">
+                                <label for="CuCity">City/Mandal</label>
+                                <input type="text" [disabled]="isChecked" class="form-control" id="CuCity" placeholder="Enter City"
+                                    [(ngModel)]="CuCity">
+                            </div>
+                        </div>
+                        <div class="col-md-1"></div>
+
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="CuDistrict">District<span style="color: red">*</span></label>
+                                <select class="form-control" [disabled]="isChecked" id="CuDistrict" [(ngModel)]="CuDistrict">
+                                    <option disabled selected value="undefined">-- Select--</option>
+                                    <option value="{{obj.DISTRICTID}}" *ngFor="let obj of DistList">{{obj.DISTRICTNAME}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="CUState">State<span style="color: red">*</span></label>
+                                <select class="form-control" id="CUState" [disabled]="isChecked" [(ngModel)]="CuState">
+                                    <option disabled selected value="undefined">-- Select--</option>
+                                    <option value="{{obj.STATEID}}" *ngFor="let obj of StateList">{{obj.STATENAME}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="CuPincode">Pincode<span style="color: red">*</span></label>
+                                <input type="text" [disabled]="isChecked" class="form-control" id="CuPincode" placeholder="Enter Pincode"
+                                    [(ngModel)]="CuPincode">
+                            </div>
+                        </div>
+                        <div class="col-md-1"></div>
+
+
+                    </div>
+                    <div class="row mt-5">
+                        <div class="col-md-5"></div>
+                        <div class="col-md-2">
+                            <button type="submit" class="btn btn-primary" (click)="PersonalDaetailSub()">Save</button>
+                        </div>
+
+                        <div class="col-md-5"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header" id="headingTwo">
+                <h5 class="mb-0">
+                    <button class="btn btn-link" data-toggle="collapse" data-target="#collapseTwo">
+                        <b>2. Qualifications Details</b>
+                    </button>
+                </h5>
+            </div>
+            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#myAccordion">
+                <div class="card-body">
+
+                    <div class="row">
+                        <div class="col-md-1"></div>
+                        <label class="form-radio-label" id="Phd" for="Phd"><b>PhD <span style="color: red">*</span></b></label>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-md-1"></div>
+                        <div class="form-check">
+                            <input type="radio" class="form-check-input" id="PhDYes" value="YesPhD" [(ngModel)]="PhD">
+                            <label class="form-radio-label" class="TopMvove" for="PhDYes">Yes</label>
+                        </div>
+                        <div class="ml-2"></div>
+                        <div class="form-check">
+                            <input type="radio" class="form-check-input" id="PhDNo" value="NoPhD" [(ngModel)]="PhD">
+                            <label class="form-radio-label" class="TopMvove" for="PhDNo">No</label>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-1"></div>
+                        <label class="form-label" id="pg" for="pg"><b>Post Graduation <span style="color: red">*</span></b></label>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-md-1"></div>
+                        <div class="form-check">
+                            <input type="radio" class="form-check-input" id="PGYes" value="YesPG" [(ngModel)]="PG" (change)="PgYChange()">
+                            <label class="form-radio-label" class="TopMvove" for="PGYes">Yes</label>
+                        </div>
+                        <div class="ml-2"></div>
+                        <div class="form-check">
+                            <input type="radio" class="form-check-input" id="PGNo" value="NoPG" [(ngModel)]="PG" (change)="PgNChange()">
+                            <label class="form-radio-label" class="TopMvove" for="PGNo">No</label>
+                        </div>
+                    </div>
+                    <div *ngIf="ispgcheck">
+                        <div class="row mt-2">
+                            <div class="col-md-1"></div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="Course">Course<span style="color: red">*</span></label>
+                                    <input type="text" class="form-control" id="Course" placeholder="Enter Course" [(ngModel)]="Course">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="BraSpl">Branch/Specialization<span style="color: red">*</span></label>
+                                    <input type="text" class="form-control" id="BraSpl" placeholder="Enter Branch/Specialization"
+                                        [(ngModel)]="BraSpl">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="PCollege">College<span style="color: red">*</span></label>
+                                    <input type="text" class="form-control" id="PCollege" placeholder="Enter College"
+                                        [(ngModel)]="PCollege">
+                                </div>
+                            </div>
+                            <div class="col-md-1"></div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-md-1"></div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="YearOfPassout">Year Of Passout<span style="color: red">*</span></label>
+                                    <input type="text" class="form-control" id="YearOfPassout" placeholder="Enter Year Of Passout"
+                                        [(ngModel)]="YearOfPassout">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="MaGra">Marks/Grade<span style="color: red">*</span></label>
+                                    <input type="text" class="form-control" id="BraSpl" placeholder="Enter Marks/Grade" [(ngModel)]="MaGra">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="UploadDocuments">Upload Documents<span style="color: red">*</span></label>
+                                    <input type="file" class="form-control" id="UploadDocuments" placeholder="Enter Upload Documents"
+                                        (change)="PGUploadDocumentsChange($event)" accept="application/pdf" autocomplete="off"
+                                        [(ngModel)]="UploadDocuments">
+
+
+
+                                </div>
+                            </div>
+                            <div class="col-md-1"></div>
+                        </div>
+                    </div>
+
+                    <div class="row mt-3">
+                        <div class="col-md-1"></div>
+                        <label class="form-label" id="pg" for="pg"><b>Graduation/Degree</b><span style="color: red">*</span></label>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="GdCourse">Course<span style="color: red">*</span></label>
+                                <input type="text" class="form-control" id="Course" placeholder="Enter Course" [(ngModel)]="GdCourse">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="GDBraSpl">Branch/Specialization<span style="color: red">*</span></label>
+                                <input type="text" class="form-control" id="GDBraSpl" placeholder="Enter Branch/Specialization"
+                                    [(ngModel)]="GDBraSpl">
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="GDPCollege">College<span style="color: red">*</span></label>
+                                <input type="text" class="form-control" id="GDPCollege" placeholder="Enter College"
+                                    [(ngModel)]="GDPCollege">
+                            </div>
+                        </div>
+                        <div class="col-md-1"></div>
+                    </div>
+
+                    <div class="row mt-2">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="GdYearOfPassout">Year Of Passout<span style="color: red">*</span></label>
+                                <input type="text" class="form-control" id="GdYearOfPassout" placeholder="Enter Year Of Passout"
+                                    [(ngModel)]="GdYearOfPassout">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="GDMaGra">Marks/Grade<span style="color: red">*</span></label>
+                                <input type="text" class="form-control" id="GDBraSpl" placeholder="Enter Marks/Grade" [(ngModel)]="GDMaGra">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="GDUploadDocuments">Upload Documents<span style="color: red">*</span></label>
+                                <input type="file" class="form-control" id="GDUploadDocuments" placeholder="Enter Upload Documents"
+                                    [(ngModel)]="GDUploadDocuments" (change)="GDUploadDocumentsChange($event)">
+                            </div>
+                        </div>
+                        <div class="col-md-1"></div>
+                    </div>
+
+                    <div class="row mt-3">
+                        <div class="col-md-1"></div>
+                        <label class="form-label" id="pg" for="pg"><b>Inter/Diploma</b><span style="color: red">*</span></label>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="IdCourse">Course<span style="color: red">*</span></label>
+                                <input type="text" class="form-control" id="IdCourse" placeholder="Enter Course" [(ngModel)]="IdCourse">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="IPCollege">College<span style="color: red">*</span></label>
+                                <input type="text" class="form-control" id="IPCollege" placeholder="Enter College" [(ngModel)]="IPCollege">
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="IdYearOfPassout">Year Of Passout<span style="color: red">*</span></label>
+                                <input type="text" class="form-control" id="IdYearOfPassout" placeholder="Enter Year Of Passout"
+                                    [(ngModel)]="IdYearOfPassout">
+                            </div>
+                        </div>
+                        <div class="col-md-1"></div>
+                    </div>
+
+                    <div class="row mt-2">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="IMaGra">Marks/Grade<span style="color: red">*</span></label>
+                                <input type="text" class="form-control" id="IMaGra" placeholder="Enter Marks/Grade" [(ngModel)]="IMaGra">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="IUploadDocuments">Upload Documents<span style="color: red">*</span></label>
+                                <input type="file" class="form-control" id="IUploadDocuments" placeholder="Enter Upload Documents"
+                                    [(ngModel)]="IUploadDocuments" (change)="IUploadDocumentsChange($event)">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+
+                        </div>
+                        <div class="col-md-1"></div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-1"></div>
+                        <label class="form-label" id="pg" for="pg"><b>SSC</b><span style="color: red">*</span></label>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="cbseState">CBSE/State Syllabus<span style="color: red">*</span></label>
+                                <input type="text" class="form-control" id="cbseState" placeholder="Enter CBSE/State Syllabus"
+                                    [(ngModel)]="cbseState">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="SSchool">School<span style="color: red">*</span></label>
+                                <input type="text" class="form-control" id="SSchool" placeholder="Enter School" [(ngModel)]="SSchool">
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="SYearOfPassout">Year Of Passout<span style="color: red">*</span></label>
+                                <input type="text" class="form-control" id="SYearOfPassout" placeholder="Enter Year Of Passout"
+                                    [(ngModel)]="SYearOfPassout">
+                            </div>
+                        </div>
+                        <div class="col-md-1"></div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="SMaGra">Marks/Grade<span style="color: red">*</span></label>
+                                <input type="text" class="form-control" id="SMaGra" placeholder="Enter Marks/Grade" [(ngModel)]="SMaGra">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="SUploadDocuments">Upload Documents<span style="color: red">*</span></label>
+                                <input type="file" class="form-control" id="SUploadDocuments" placeholder="Enter Upload Documents"
+                                    [(ngModel)]="SUploadDocuments" (change)="SUploadDocumentsChange($event)">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+
+                        </div>
+                        <div class="col-md-1"></div>
+                    </div>
+                    <div class="row mt-5">
+                        <div class="col-md-5"></div>
+                        <div class="col-md-2">
+                            <button type="submit" class="btn btn-primary" (click)="QualificationDaetailSub()">Save</button>
+                        </div>
+
+                        <div class="col-md-5"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header" id="headingThree">
+                <h5 class="mb-0">
+                    <button class="btn btn-link" data-toggle="collapse" data-target="#collapseThree">
+                        <b>3.Experience details</b>
+                    </button>
+                </h5>
+            </div>
+            <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#myAccordion">
+                <div class="card-body">
+
+
+                    <div class="row mt-2">
+                        <div class="col-md-1"></div>
+                        <div class="form-check">
+                            <input type="radio" class="form-check-input" id="Fresher" value="Fresher" [(ngModel)]="Fresher"
+                                (change)="FresherData()">
+                            <label class="form-radio-label" class="TopMvove" for="Fresher"><b>Fresher</b><span
+                                    style="color: red">*</span></label>
+                        </div>
+                        <div class="ml-2"></div>
+                        <div class="form-check">
+                            <input type="radio" class="form-check-input" id="Experience" value="Experience" [(ngModel)]="Experience"
+                                (change)="ExperienceData()">
+                            <label class="form-radio-label" class="TopMvove" for="Experience"><b>Experience</b><span
+                                    style="color: red">*</span></label>
+                        </div>
+                    </div>
+
+                    <div *ngIf="isexperience">
+
+                        <div class="row mt-4">
+                            <div class="col-md-1"></div>
+                            <div class="ttchange">
+                                <label class="form-label">
+                                    <b>Total Experience:</b>
+                                </label>
+                            </div>
+
+                            <div class="col-md-2">
+                                <div class="form-group">
+
+                                    <label for="Years">Years<span style="color: red">*</span></label>
+                                    <input type="text" class="form-control" id="Years" placeholder="Enter Years" [(ngModel)]="Years">
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+
+                                    <label for="Months">Months<span style="color: red">*</span></label>
+                                    <input type="text" class="form-control" id="Months" placeholder="Enter Months" [(ngModel)]="Months">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+
+                            </div>
+                        </div>
+
+                        <div class="row mt-4">
+                            <div class="col-md-1"></div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <div class="form-group">
+                                        <label for="OrganiCom">Organization Name<span style="color: red">*</span></label>
+                                        <input type="text" class="form-control" id="OrganiCom" placeholder="Enter Organization Name"
+                                            [(ngModel)]="OrganiCom">
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="Role">Role<span style="color: red">*</span></label>
+                                    <input type="text" class="form-control" id="Role" placeholder="Enter Role" [(ngModel)]="Role">
+                                </div>
+                            </div>
+
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="Duties">Duties<span style="color: red">*</span></label>
+                                    <textarea class="form-control" id="Duties" placeholder="Enter Duties" [(ngModel)]="Duties"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+
+                                    <label for="FromDate">From Date<span style="color: red">*</span></label>
+                                    <app-date-picker [PlaceHolder]="'Select From Date'" [(selectedDate)]="FromDate"></app-date-picker>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+
+                                    <label for="ToDate">To Date<span style="color: red">*</span></label>
+                                    <app-date-picker [PlaceHolder]="'Select To Date'" [(selectedDate)]="ToDate"></app-date-picker>
+                                </div>
+                            </div>
+                            <!-- <div class="col-md-1">
+                                <button id=buttonHC class="btn btn-primary" (click)="CommercialAdd()"><i class="fa fa-plus"></i></button>
+                            </div> -->
+                        </div>
+
+                        <!-- <div *ngIf="isTable">
+                            <div class="row mt-2">
+                                <div class="col-md-1"></div>
+                                <div class="col-md-10">
+                                    <table class="table mt-5">
+                                        <thead>
+                                            <tr>
+                                                <th>Organization Name</th>
+                                                <th>Role</th>
+                                                <th>Duties</th>
+                                                <th>From Date</th>
+                                                <th>To Date</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let row of experTotal; let i = index">
+                                                <td>{{ row.ORGANIZATION_NAME}}</td>
+                                                <td>{{ row.ROLE}}</td>
+                                                <td>{{ row.DUTIES}}</td>
+                                                <td>{{ row.FROM_DATE}}</td>
+                                                <td>{{ row.TO_DATE}}</td>
+                                                <td><button class="btn btn-danger" (click)="CommercialremoveData(i)"><i
+                                                            class="fa fa-minus"></i></button></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="col-md-1"></div>
+                            </div>
+                         
+                        </div> -->
+
+
+
+                        <div class="row mt-4">
+                            <div class="col-md-1"></div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label *ngIf="IsWorking" for="ExperienceLatter">Upload Current Organization Offer Letter<span
+                                            style="color: red">*</span></label>
+                                    <label *ngIf="isNotWorking" for="ExperienceLatter">Upload Current Organization Experience
+                                        Letter<span style="color: red">*</span></label>
+                                    <input type="file" class="form-control" id="ExperienceLatter" [(ngModel)]="ExperienceLatter"
+                                        (change)="ExperienceLatterUploadDocumentsChange($event)">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="CvUpload">Upload CV<span style="color: red">*</span></label>
+                                    <input type="file" (change)="UploadDocumentsChange($event)" class="form-control" id="CvUpload"
+                                        [(ngModel)]="CvUpload">
+                                </div>
+                            </div>
+                            <div class="col-md-5">
+
+                            </div>
+                        </div>
+
+
+
+                        <div class="row mt-5">
+                            <div class="col-md-5"></div>
+                            <div class="col-md-2">
+                                <button type="submit" class="btn btn-primary" (click)="ExperienceDaetailSub()">Save</button>
+                            </div>
+
+                            <div class="col-md-5"></div>
+                        </div>
+
+                        <div class="row mt-5">
+                            <div class="col-md-2"></div>
+                            <div class="col-md-2">
+
+                            </div>
+                            <div class="col-md-2">
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+                                    Preview
+                                </button>
+                            </div>
+
+                        </div>
+                        <div class="row mt-5">
+                            <!-- <div class="col-md-2"></div>
+                                                    <div class="col-md-2">
+                                                        <button type="submit" class="btn btn-warning" data-dismiss="modal">Edit</button>
+                                                    </div>
+                                                    <div class="col-md-1"></div>
+                                                    <div class="col-md-2">
+                                                        <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#myModalone">Submit</button>
+                                                    </div>
+                                                
+                                                    <div class="col-md-5"></div> -->
+                            <div class="col-md-5"></div>
+                            <div class="col-md-2">
+                                <button type="submit" class="btn btn-primary" (click)="FinalSub()">Submit</button>
+                            </div>
+
+                            <div class="col-md-5"></div>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div *ngIf="isfresher">
+
+                    <div class="row mt-2">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-5">
+                            <div class="form-group">
+
+                                <label for="Skills">Skills<span style="color: red">*</span></label>
+                                <textarea class="form-control" id="Skills" [(ngModel)]="Skills" placeholder="Enter Skills"> </textarea>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+
+                                <label for="CvUploadFresher">Upload CV<span style="color: red">*</span></label>
+                                <input type="file" class="form-control" id="CvUploadFresher" [(ngModel)]="CvUploadFresher"
+                                    (change)="CvUploadFresherDocumentsChange($event)">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+
+                        </div>
+                        <div class="col-md-1"></div>
+
+
+                    </div>
+
+                    <div class="row mt-5">
+                        <div class="col-md-5"></div>
+                        <div class="col-md-2">
+                            <button type="submit" class="btn btn-primary" (click)="FresherDaetailSub()">Save</button>
+                        </div>
+
+                        <div class="col-md-5"></div>
+                    </div>
+                    <div class="row mt-5">
+                        <div class="col-md-2"></div>
+                        <div class="col-md-2">
+
+                        </div>
+                        <div class="col-md-2">
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+                                Preview
+                            </button>
+                        </div>
+
+                    </div>
+
+                    <div class="row mt-5">
+                        <!-- <div class="col-md-2"></div>
+                            <div class="col-md-2">
+                                <button type="submit" class="btn btn-warning" data-dismiss="modal">Edit</button>
+                            </div>
+                            <div class="col-md-1"></div>
+                            <div class="col-md-2">
+                                <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#myModalone">Submit</button>
+                            </div>
+                        
+                            <div class="col-md-5"></div> -->
+                        <div class="col-md-5"></div>
+                        <div class="col-md-2">
+                            <button type="submit" class="btn btn-primary" (click)="FinalSub()">Submit</button>
+                        </div>
+
+                        <div class="col-md-5"></div>
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Popups -->
+<div class="container">
+    <div class="modal large-modal" id="myModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <!-- <h4 class="modal-title">Modal Heading</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button> -->
+                </div>
+
+                <!-- Modal body -->
+
+                <div class="row mt-3">
+                    <div class="col-md-5"></div>
+                    <label for="personaldetails"><b class="text-primary">PERSONAL DETAILS</b>
+                    </label>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+
+                            <label for="FirstName">First Name</label>
+
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="MiddleName">Middle Name</label>
+
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="LastName">Last Name </label>
+
+                        </div>
+                    </div>
+                    <div class="col-md-1"></div>
+
+
+                </div>
+                <div class="row mt-2">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="DOB">Date Of Birth (as per SSC)</label>
+
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="EmailID">Email ID</label>
+
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="MobileNO">Mobile Number</label>
+
+                        </div>
+                    </div>
+                    <div class="col-md-1"></div>
+
+
+                </div>
+                <div class="row mt-2">
+                    <div class="col-md-1"></div>
+                    <label for="PermanentAddress"><b>Gender</b></label>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-md-1"></div>
+
+                    <div class="col-md-1">
+
+                        <label class="form-radio-label" class="TopMvove" for="Male">Male</label>
+                    </div>
+
+                    <div class="col-md-4">
+
+
+                        <label for="Guardian">Guardian</label>
+
+
+                    </div>
+                    <div class="col-md-1"></div>
+
+                </div>
+                <div class="row mt-2">
+                    <div class="col-md-1"></div>
+                    <label for="PermanentAddress"><b>Permanent Address</b></label>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="DNoP">D.No And Street Name</label>
+
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+
+                            <label for="CitVill">Village/Area</label>
+
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+
+                        <div class="form-group">
+                            <label for="City">City/Mandal</label>
+
+                        </div>
+                    </div>
+                    <div class="col-md-1"></div>
+
+                </div>
+                <div class="row mt-2">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="District">District</label>
+
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="State">State</label>
+
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="Pincode">Pincode</label>
+
+                        </div>
+                    </div>
+                    <div class="col-md-1"></div>
+
+
+                </div>
+                <div class="row mt-2">
+                    <div class="col-md-1"></div>
+                    <label for="CurrentAddress"><b>Current Address</b></label>
+                </div>
+                <div class="row mt-5">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="CuDNoP">D.No And Street Name</label>
+
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="CuStreet">Village/Area</label>
+
+
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+
+                        <div class="form-group">
+                            <label for="CuCity">City/Mandal</label>
+
+                        </div>
+                    </div>
+                    <div class="col-md-1"></div>
+
+                </div>
+                <div class="row mt-2">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="CuDistrict">District</label>
+
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="CUState">State</label>
+
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="CuPincode">Pincode</label>
+
+                        </div>
+                    </div>
+                    <div class="col-md-1"></div>
+
+
+                </div>
+                <div class="row mt-5">
+                    <div class="col-md-5"></div>
+                    <label class="form-radio-label"><b class="text-primary">QUALIFICATIONS
+                            DETAILS</b></label>
+                </div>
+                <div class="row">
+                    <div class="col-md-1"></div>
+                    <label class="form-radio-label" id="Phd" for="Phd"><b>PhD</b></label>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-1"></div>
+                    <label class="form-label" id="pg" for="pg"><b>Post Graduation</b></label>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="Course">Course</label>
+
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="BraSpl">Branch/Specialization</label>
+
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="PCollege">College</label>
+
+                        </div>
+                    </div>
+                    <div class="col-md-1"></div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="YearOfPassout">Year Of Passout</label>
+
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="MaGra">Marks/Grade</label>
+
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="UploadDocuments">Upload Documents</label>
+                        </div>
+                    </div>
+                    <div class="col-md-1"></div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-1"></div>
+                    <label class="form-label" id="pg" for="pg"><b>Graduation/Degree</b></label>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="GdCourse">Course</label>
+
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="GDBraSpl">Branch/Specialization</label>
+
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="GDPCollege">College</label>
+
+                        </div>
+                    </div>
+                    <div class="col-md-1"></div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="GdYearOfPassout">Year Of Passout</label>
+
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="GDMaGra">Marks/Grade</label>
+
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="GDUploadDocuments">Upload Documents</label>
+
+                        </div>
+                    </div>
+                    <div class="col-md-1"></div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-1"></div>
+                    <label class="form-label" id="pg" for="pg"><b>Inter/Diploma</b></label>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="IdCourse">Course</label>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="IPCollege">College</label>
+
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="IdYearOfPassout">Year Of Passout</label>
+
+                        </div>
+                    </div>
+                    <div class="col-md-1"></div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="IMaGra">Marks/Grade</label>
+
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="IUploadDocuments">Upload Documents</label>
+
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+
+                    </div>
+                    <div class="col-md-1"></div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-1"></div>
+                    <label class="form-label" id="pg" for="pg"><b>SSC</b></label>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="cbseState">CBSE/State Syllabus</label>
+
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="SSchool">School</label>
+
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="SYearOfPassout">Year Of Passout</label>
+
+                        </div>
+                    </div>
+                    <div class="col-md-1"></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="SMaGra">Marks/Grade</label>
+
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="SUploadDocuments">Upload Documents</label>
+
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+
+                    </div>
+                    <div class="col-md-1"></div>
+                </div>
+
+
+
+                <div class="row mt-5">
+                    <div class="col-md-6"></div>
+                    <label class="form-label"><b class="text-primary">EXPERIENCE</b></label>
+                </div>
+
+                <div *ngIf="isexperience">
+                    <div class="row mt-4">
+                        <div class="col-md-1"></div>
+                        <label class="form-label" id="pg" for="pg"><b>Total Experience</b></label>
+                    </div>
+                    <div *ngFor="let obj of DistData">
+                        <div class="row mt-1">
+                            <div class="col-md-1"></div>
+                            <div class="col-md-1">
+                                <div class="form-group">
+
+                                    <label for="Years">Years</label>
+                                    <div class="text-success">{{obj.YEARS}}</div>
+
+                                </div>
+                            </div>
+                            <div class="col-md-1">
+                                <div class="form-group">
+
+                                    <label for="Months">Months</label>
+                                    <div class="text-success">{{obj.MONTH}}</div>
+
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+
+                            </div>
+                        </div>
+                        <div class="row mt-1">
+                            <div class="col-md-1"></div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <div class="form-group">
+                                        <label for="OrganiCom">Organization Name</label>
+                                        <div class="text-success">{{obj.ORGANIZATION_NAME}}</div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="Role">Role</label>
+                                    <div class="text-success">{{obj.ROLE}}</div>
+
+                                </div>
+                            </div>
+
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="Duties">Duties</label>
+                                    <div class="text-success">{{obj.DUTIES}}</div>
+
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+
+                                    <label for="FromDate">From Date</label>
+                                    <div class="text-success">{{obj.FROM_DATE}}</div>
+
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+
+                                    <label for="ToDate">To Date</label>
+                                    <div class="text-success">{{obj.TO_DATE}}</div>
+
+                                </div>
+                            </div>
+                            <div class="col-md-1">
+
+                            </div>
+                        </div>
+
+                        <div class="row mt-1">
+                            <div class="col-md-1"></div>
+                            <div class="col-md-5">
+                                <div class="form-group">
+                                    <label>Current Organization Experience/Current Organization Offer Letter
+                                    </label>
+                                    <div class="text-success">{{obj.EXPERIENCE_LTR_UPLOAD}}</div>
+
+                                </div>
+                            </div>
+                            <div class="col-md-5">
+                                <div class="form-group">
+                                    <label for="CvUpload">Upload CV</label>
+                                    <div class="text-success">{{obj.CV_UPLOAD}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div *ngIf="isfresher">
+                    <div class="row mt-2">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-5">
+
+                            <div class="form-group">
+
+                                <label for="Skills">Skills</label>
+
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+
+                                <label for="CvUploadFresher">Upload CV</label>
+
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                        </div>
+                        <div class="col-md-1"></div>
+
+
+
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- <div class="container"> -->
+
+    <!-- Trigger the modal with a button -->
+    <!-- <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModalone">Open Modal</button> -->
+
+    <!-- Modal -->
+    <!-- <div class="modal fade small-modal" id="myModalone" role="dialog">
+        <div class="modal-dialog"> -->
+
+    <!-- Modal content-->
+    <!-- <div class="modal-content">
+                <div class="modal-header"> -->
+    <!-- <button type="button" class="close"
+                                                                            data-dismiss="modal">&times;</button>
+                                                                        <h4 class="modal-title">Modal Header</h4> -->
+    <!-- </div> -->
+    <!-- <div class="modal-body">
+                    <div class="card-body login-form-body">
+                        <div class="row mt-1">
+                            <div class="col-md-1"></div>
+                            <div class="col-md-10">
+                                <label for="MobileNum" class="form-label"><b>OTP Send to
+                                        the Registerd Mobile Number </b><b class="text-primary">9875582852</b>
+                                </label>
+
+                            </div>
+                            <div class="col-md-1"></div>
+                        </div>
+
+                        <div class="row mt-1">
+                            <div class="col-md-1"></div>
+                            <div class="col-md-10">
+                                <label for="OTP" class="form-label">Enter OTP for Submit
+                                    the Application</label>
+                                <input type="text" class="form-control" id="OTP" [(ngModel)]="OTP" placeholder="Enter OTP" />
+                            </div>
+                            <div class="col-md-1"></div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-md-1"></div>
+                            <div class="col-md-3">
+                                <button type="submit" class="btn btn-primary offset-1">Resend OTP</button>
+                            </div>
+
+                            <div class="col-md-3">
+                                <div class="justify-content-center">
+                                    <button type="submit" class="btn btn-success offset-1" data-toggle="modal"
+                                        data-target="#myModaltwo">Submit</button>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div> -->
+
+    <!-- </div>
+
+        </div>
+    </div>
+
+</div> -->
+    <!-- 
+<div class="container"> -->
+
+    <!-- Trigger the modal with a button -->
+    <!-- <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModalone">Open Modal</button> -->
+
+    <!-- Modal -->
+    <!-- <div class="modal fade short-modal" id="myModaltwo" role="dialog">
+        <div class="modal-dialog"> -->
+
+    <!-- Modal content-->
+    <!-- <div class="modal-content">
+                <div class="modal-header"> -->
+    <!-- <button type="button" class="close"
+                                                                                                                                data-dismiss="modal">&times;</button>
+                                                                                                                            <h4 class="modal-title">Modal Header</h4> -->
+    <!-- </div> -->
+    <!-- <div class="modal-body">
+                    <div class="card-body login-form-body">
+                        <div class="row mt-1">
+                            <div class="col-md-1"></div>
+                            <div class="col-md-10">
+                                <label for="MobileNum" class="form-label"><b>Your
+                                        Application is Successfully Submitted</b>
+                                </label>
+
+                            </div>
+                            <div class="col-md-1"></div>
+                        </div>
+                        <div class="row mt-1">
+                            <div class="col-md-1"></div>
+                            <div class="col-md-10">
+                                <label for="MobileNum" class="form-label"><b>
+                                        Registration ID: </b> <b class="text-primary">RESI5855</b>
+                                </label>
+
+                            </div>
+                            <div class="col-md-1"></div>
+                        </div>
+                        <div class="row mt-1">
+                            <div class="col-md-1"></div>
+                            <div class="col-md-10">
+                                <label for="MobileNum" class="form-label"><b>
+                                        Application ID:</b> <b class="text-success">
+                                        APLI15555 </b>
+                                </label>
+
+                            </div>
+                            <div class="col-md-1"></div>
+                        </div>
+
+
+
+
+
+
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div> -->
+
+    <!-- </div>
+
+        </div>
+    </div>
+</div> -->
+
+
+
+    <!-- Add more accordion items here -->

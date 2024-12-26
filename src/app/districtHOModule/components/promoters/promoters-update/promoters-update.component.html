@@ -1,0 +1,166 @@
+<div class="card">
+  <div class="card-header p-2">
+    <h5 class="mb-0">PROMOTERS UPDATE</h5>
+  </div>
+  <div class="card-body">
+    <div class="row px-4">
+      <div class="col-md-3">
+        <div class="form-group">
+          <label
+            >MANDAL :
+            <span class="text-success">
+              <b>{{ personDetails.MANDAL_NAME }}</b>
+            </span>
+          </label>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <label
+            >RSK :
+            <span class="text-success">
+              <b>{{ personDetails.RBK_NAME }}</b>
+            </span>
+          </label>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <label>
+            MDAC CODE :
+            <span class="text-success">
+              <b>{{ personDetails.MPUSS }}</b>
+            </span>
+          </label>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <label
+            >PROMOTER NAME :
+            <span class="text-success">
+              <b>{{ personDetails.PROMOTERS_NAME }}</b>
+            </span>
+          </label>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <label
+            >PROMOTER MOBILE NO :
+            <span class="text-success">
+              <b>{{ personDetails.MOBILE }}</b>
+            </span>
+          </label>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <label
+            >PROMOTER AADHAR :
+            <span class="text-success">
+              <b>XXXX-XXXX-{{ personDetails.AADHAR | slice: -4 }}</b>
+            </span>
+          </label>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <label>
+            QUALIFICATION :
+            <span class="text-success">
+              <b>{{ personDetails.EDUCATION_QUALIFICATION }}</b>
+            </span>
+          </label>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <label
+            >HUSBAND / SPOUSE NAME :
+            <span class="text-success">
+              <b>{{ personDetails.DO_OR_WO }} {{ personDetails.FATHER_SPOUSE_NAME }}</b>
+            </span>
+          </label>
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="form-group">
+          <label>
+            BANK :
+            <span class="text-success">
+              <b>{{ personDetails.BANK_NAME }}</b>
+            </span>
+          </label>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <label
+            >BRANCH :
+            <span class="text-success">
+              <b>{{ personDetails.BRANCH }}</b>
+            </span>
+          </label>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <label>
+            ACCOUNT NO :
+            <span class="text-success">
+              <b>{{ personDetails.BANK_ACCOUNT_NO }}</b>
+            </span>
+          </label>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <label>
+            IFSC CODE :
+            <span class="text-success">
+              <b>{{ personDetails.IFSC_CODE }}</b>
+            </span>
+          </label>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <label>
+            PINCODE :
+            <span class="text-success">
+              <b>{{ personDetails.PIN_CODE }}</b>
+            </span>
+          </label>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <label>
+            REMARKS :
+            <span class="text-success">
+              <b>{{ personDetails.REMARKS }}</b>
+            </span>
+          </label>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-12" align="center">
+      <button
+        type="button"
+        class="btn btn-success btn-sm"
+        (click)="btnPromotersUpdate('1')"
+      >
+        Approve
+      </button>
+      <button
+        type="button"
+        class="btn btn-danger btn-sm"
+        (click)="btnPromotersUpdate('2')"
+      >
+        Reject
+      </button>
+    </div>
+  </div>
+</div>

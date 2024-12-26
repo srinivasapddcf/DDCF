@@ -1,0 +1,254 @@
+<div class="card">
+  <div class="card-header p-2">
+    <h5 class="mb-0">FARMER BANK DETAILS REGISTRATION</h5>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-3">
+        <div class="form-group">
+          <label for="rbkId">RSK <span style="color: red">*</span></label>
+          <select
+            id="rbkId"
+            class="form-control"
+            [(ngModel)]="personDetails.rbkId"
+            (change)="onRbkChange()"
+          >
+            <option value="">-- SELECT RSK --</option>
+            <option value="{{ obj.RBK_ID }}" *ngFor="let obj of rbkList">
+              {{ obj.RBK_NAME }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="form-group">
+          <label for="villageId"
+            >VILLAGE <span style="color: red">*</span></label
+          >
+          <select
+            id="villageId"
+            class="form-control"
+            [(ngModel)]="personDetails.villageId"
+          >
+            <option value="">-- SELECT VILLAGE --</option>
+            <option
+              value="{{ obj.VILLAGE_ID }}"
+              *ngFor="let obj of villageList"
+            >
+              {{ obj.VILLAGE_NAME }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="form-group">
+          <label for="uidNum"
+            >AADHAAR NUMBER <span style="color: red">*</span></label >
+          <input
+            id="uidNum"
+            type="password"
+            class="form-control"
+            [(ngModel)]="uidNum"
+            placeholder="Please Enter Aadhaar Number"
+            maxlength="12"
+            autocomplete="off" (keyup)="personDetailsmaskIputData($event.target.value)"
+            NumbersOnly
+          />
+        </div>
+      </div>
+
+      <div class="col-md-3 pt-4">
+        <div class="form-group">
+          <button
+            type="button"
+            class="btn btn-success btn-sm"
+            (click)="btnSearchByUid()"
+          >
+            SEARCH
+          </button>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="citizenName">
+            CITIZEN NAME
+            <span style="color: red">*</span>
+          </label>
+          <h6 *ngIf="serviceChecker.citizenName === '1'" style="color: green">
+            <b>{{ personDetails.citizenName }}</b>
+          </h6>
+          <input
+            *ngIf="serviceChecker.citizenName === '2'"
+            id="citizenName"
+            type="text"
+            class="form-control"
+            [(ngModel)]="personDetails.citizenName"
+            placeholder="Please Enter Citizen Name"
+            maxlength="50"
+            autocomplete="off"
+          />
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="mobileNum"
+            >MOBILE NUMBER <span style="color: red">*</span></label
+          >
+          <input
+            id="mobileNum"
+            type="text"
+            class="form-control"
+            [(ngModel)]="personDetails.mobileNum"
+            placeholder="Please Enter Mobile Number"
+            maxlength="10"
+            autocomplete="off"
+            NumbersOnly
+            [allowDecimals]="false"
+            [allowSign]="false"
+          />
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="accountNo"
+            >BANK ACCOUNT NUMBER <span style="color: red">*</span></label
+          >
+          <!-- <h6 *ngIf="serviceChecker.accountNo === '1'" style="color: green;">
+            <b>{{ personDetails.accountNo }}</b>
+          </h6> -->
+          <input
+            id="accountNo"
+            type="text"
+            class="form-control"
+            [(ngModel)]="personDetails.accountNo"
+            placeholder="Please Enter BANK ACCOUNT NUMBER"
+            maxlength="20"
+            autocomplete="off"
+            NumbersOnly
+            [allowDecimals]="false"
+            [allowSign]="false"
+          />
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label>IFSC CODE</label>
+          <h6 *ngIf="serviceChecker.ifscCode === '1' && !cheyuthaDetails" style="color: green">
+            <b>{{ personDetails.ifscCode }}</b>
+          </h6>
+          <div class="input-group" *ngIf="serviceChecker.ifscCode === '2' || cheyuthaDetails">
+            <input
+              type="text"
+              class="form-control"
+              [(ngModel)]="personDetails.ifscCode"
+              placeholder="Please Enter IFSC Code"
+              maxlength="11"
+              autocomplete="off"
+            />
+            <div class="input-group-append">
+              <button
+                class="btn btn-primary btn-sm m-0 btn-rounded"
+                type="submit"
+                (click)="btnVerifyIfscCode()"
+                id="button-addon2"
+              >
+                Verify
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="bankName"
+            >BANK NAME <span style="color: red">*</span></label
+          >
+          <h6 style="color: green">
+            <b>{{ personDetails.bankName }}</b>
+          </h6>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="branchName"
+            >BRANCH NAME <span style="color: red">*</span></label
+          >
+          <h6 style="color: green">
+            <b>{{ personDetails.branchName }}</b>
+          </h6>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="panNo">PAN CARD NUMBER</label>
+          <input
+            id="panNo"
+            type="text"
+            class="form-control"
+            [(ngModel)]="personDetails.panNo"
+            placeholder="Please Enter PAN CARD NUMBER"
+            maxlength="10"
+            autocomplete="off"
+          />
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="bankPinCode"
+            >BANK PINCODE <span style="color: red">*</span></label
+          >
+          <input
+            id="bankPinCode"
+            type="text"
+            class="form-control"
+            [(ngModel)]="personDetails.bankPinCode"
+            placeholder="Please Enter BANK PINCODE"
+            maxlength="6"
+            autocomplete="off"
+            NumbersOnly
+            [allowDecimals]="false"
+            [allowSign]="false"
+          />
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="bankPassBookUpload"
+            >Bank PassBook Front Page Photo Upload
+            <span style="color: red">*</span><small class="text-danger">(jpg & below 200kb)</small>
+          </label>
+          <input
+            type="file"
+            class="form-control p-0"
+            id="bankPassBookUpload"
+            (change)="onBankPassBookChange($event)"
+            accept="image/*"
+            #bankPassBookUpload
+            autocomplete="off"
+          />
+        </div>
+      </div>
+
+      <div class="col-md-12" align="center">
+        <button
+          type="button"
+          class="btn btn-success btn-sm"
+          (click)="btnSubmit()"
+        >
+          SUBMIT
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

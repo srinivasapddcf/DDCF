@@ -1,0 +1,107 @@
+<div class="card">
+    <div class="card-header p-2">
+      <h5 class="mb-0">ISSUE DETAILS</h5>
+    </div>
+    <div class="card-body">
+      <div class="row" *ngIf="issueDetails !== null">
+        <div class="col-md-3">
+            <div class="form-group">
+              <label
+                >ISSUE ID :
+                <span class="text-success">
+                  <b>{{ issueDetails.ISSUE_ID }}</b>
+                </span>
+              </label>
+            </div>
+            
+          </div>
+          <div class="col-md-3"> 
+            <div class="form-group">
+                <label
+                  >DESCRIPTION :
+                  <span class="text-success">
+                    <b>{{ issueDetails.DESCRIPTION }}</b>
+                  </span>
+                </label>
+              </div>
+          </div>
+          <div class="col-md-3"> 
+            <div class="form-group">
+                <label
+                  >ISSUE STATUS :
+                  <span class="text-success">
+                    <b>{{ issueDetails.ISSUE_STATUS }}</b>
+                  </span>
+                </label>
+              </div>
+          </div>
+          <div class="col-md-3"> 
+            <div class="form-group">
+                <label
+                  >ISSUE TITLE :
+                  <span class="text-success">
+                    <b>{{ issueDetails.ISSUE_TITLE }}</b>
+                  </span>
+                </label>
+              </div>
+          </div>
+          <div class="col-md-3"> 
+            <div class="form-group">
+                <label
+                  >REGISTERED DATE :
+                  <span class="text-success">
+                    <b>{{ issueDetails.REGISTERD_ON }}</b>
+                  </span>
+                </label>
+              </div>
+          </div>
+          <div class="col-md-3"> 
+            <div class="form-group">
+                <label
+                  >ISSUE MODULE NAME :
+                  <span class="text-success">
+                    <b>{{ issueDetails.ISSUE_MODULE_NAME }}</b>
+                  </span>
+                </label>
+              </div>
+          </div>
+          <div class="col-md-3" *ngIf="issueDetails.ISSUE_IMG !== null">
+            <label
+            >IMAGE :</label>
+            <img
+          [src]="'data:image/jpeg;base64,' + issueImage"
+          style="cursor: pointer"
+          class="img-thumbnail mr-3"
+          (click)="btnImage(issueImage)"
+        />
+          </div>
+          <div class="col-md-12"> 
+            <div class="form-group">
+                <label for="remarks"
+                  >REMARKS <span style="color: red">*</span></label
+                >
+                <textarea
+                  id="remarks"
+                  type="text"
+                  class="form-control"
+                  [(ngModel)]="remarks"
+                  placeholder="Please Enter  Remarks"
+                  maxlength="500"
+                  rows="8"
+                ></textarea>
+              </div>
+          </div>
+          <div class="col-md-12" align="center">
+            <button
+              type="button"
+              class="btn btn-success btn-sm"
+              (click)="btnUpdate()"
+            >
+              SUBMIT
+            </button>
+          </div>
+      </div>
+    </div>
+  </div>
+  
+  

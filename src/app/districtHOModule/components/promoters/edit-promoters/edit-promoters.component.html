@@ -1,0 +1,155 @@
+<div class="card">
+  <div class="card-header p-2">
+    <h5 class="mb-0">EDIT PROMOTERS</h5>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="rbkId">MANDAL <span style="color: red">*</span></label>
+          <select
+            id="rbkId"
+            class="form-control"
+            [(ngModel)]="mandalId"
+            (change)="onMandalChange()"
+          >
+            <option value="">-- SELECT MANDAL --</option>
+            <option value="{{ obj.MANDAL_ID }}" *ngFor="let obj of mandalList">
+              {{ obj.MANDAL_NAME }}
+            </option>
+          </select>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="rbkId">RSK <span style="color: red">*</span></label>
+          <select
+            id="rbkId"
+            class="form-control"
+            [(ngModel)]="rbkId"
+            (change)="onCheckPromoters()"
+          >
+            <option value="">-- SELECT RSK --</option>
+            <option value="{{ obj.RBK_ID }}" *ngFor="let obj of rbkList">
+              {{ obj.RBK_NAME }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div
+        class="col-md-12 table-responsive"
+        [hidden]="promotorsList?.length < 1"
+      >
+        <table
+          class="table table-striped ah-table text-center"
+          datatable
+          [dtOptions]="dtOptions"
+          [dtTrigger]="dtTrigger"
+        >
+          <thead class="bg-success text-white">
+            <tr>
+              <th>S.No.</th>
+              <th>VILLAGE NAME</th>
+              <th>CITIZEN NAME</th>
+              <th>DATE OF BIRTH</th>
+              <th>AADHAAR NUMBER</th>
+              <th>MOBILE NUMBER</th>
+              <th>HUSBAND / SPOUSE NAME</th>
+              <th>BANK A/C NUMBER</th>
+              <th>IFSC CODE</th>
+              <th>BANK NAME</th>
+              <th>BRANCH NAME</th>
+              <th>QUALIFICATION</th>
+              <th>DELETE</th>
+            </tr>
+          </thead>
+          <tbody *ngIf="promotorsList?.length > 0">
+            <tr *ngFor="let obj of promotorsList; let i = index">
+              <td>{{ i + 1 }}</td>
+              <td>{{ obj.VILLAGE_NAME }}</td>
+              <td>
+                <b>{{ obj.PROMOTERS_NAME }}</b>
+              </td>
+              <td>{{ obj.DOB }}</td>
+              <td>XXXX-XXXX-{{ obj.AADHAR | slice: -4 }}</td>
+              <td>{{ obj.MOBILE }}</td>
+              <td>{{ obj.DO_OR_WO }} {{ obj.FATHER_SPOUSE_NAME }}</td>
+              <td>{{ obj.BANK_ACCOUNT_NO }}</td>
+              <td>{{ obj.IFSC_CODE }}</td>
+              <td>{{ obj.BANK_NAME }}</td>
+              <td>{{ obj.BRANCH }}</td>
+              <td>{{ obj.EDUCATION_QUALIFICATION }}</td>
+              <td>
+                <span
+                  (click)="btnDelete(obj)"
+                  *ngIf="obj.STATUS === 'NA'"
+                  style="cursor: pointer"
+                  ><i class="fa fa-trash text-danger" aria-hidden="true"></i
+                ></span>
+                <span class="text-success" *ngIf="obj.STATUS !== 'NA'"
+                  >MDAC PROMOTER</span
+                >
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="popup-modal" *ngIf="remarksPopup">
+  <div class="popup-content">
+    <div class="popup-header">
+      <h4 class="title">REMARKS</h4>
+      <a
+        type="button"
+        class="close"
+        (click)="remarksPopup = false"
+        style="cursor: pointer"
+      >
+        <span>×</span>
+      </a>
+    </div>
+
+    <div class="popup-body">
+      <div class="row justify-content-center align-items-center">
+        <div class="col-md-12">
+          <div class="form-group">
+            <label for="remarks"
+              >REMARKS <span style="color: red">*</span></label
+            >
+            <textarea
+              id="remarks"
+              type="text"
+              class="form-control"
+              [(ngModel)]="deleteReqSub.remarks"
+              placeholder="Please Enter Remarks"
+              maxlength="300"
+              autocomplete="off"
+              rows="3"
+            ></textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="popup-footer justify-content-center">
+      <button
+        type="button"
+        class="btn btn-outline-success btn-sm btn-rounded"
+        (click)="btnSubmit()"
+      >
+        SUBMIT
+      </button>
+      <button
+        type="button"
+        class="btn btn-outline-danger btn-sm btn-rounded"
+        (click)="remarksPopup = false"
+      >
+        Close
+      </button>
+    </div>
+  </div>
+</div>
